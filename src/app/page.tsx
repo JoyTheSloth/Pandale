@@ -112,26 +112,38 @@ export default function HomePage() {
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
       {/* 1. HERO SECTION - LUXURY EDITORIAL EXPERIENCE WITH PUJA PATTERN & LOGO */}
-      <section className="relative pt-6 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      {/* 1. HERO SECTION - IMMERSIVE DURGA PUJA EXPERIENCE */}
+      <section className="relative min-h-[580px] sm:min-h-[660px] md:min-h-[720px] rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden max-w-7xl mx-auto w-full flex flex-col justify-center items-center px-4 sm:px-8 py-12 sm:py-16 shadow-2xl border border-[#FED7AA]/60">
         
-        {/* Subtle Puja architectural grid pattern background with soft radial mask */}
-        <div className="absolute inset-0 bg-[url('/brand/pujo-pattern-bg.jpg')] bg-repeat bg-[length:520px_auto] opacity-20 pointer-events-none -z-10 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_85%)]" />
+        {/* Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
+        <div className="absolute inset-0 -z-20">
+          <Image
+            src="/brand/hero-bg.jpg"
+            alt="Durga Puja Kolkata at Howrah Bridge Ghat"
+            fill
+            priority
+            className="object-cover object-[center_30%] sm:object-[center_35%]"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+          />
+        </div>
 
-        {/* Subtle festive decorative ambient warm glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-[radial-gradient(ellipse_at_top,_rgba(245,158,11,0.22),_rgba(216,38,28,0.12)_45%,_transparent_75%)] blur-2xl -z-10 pointer-events-none" />
+        {/* Ambient Dark/Warm Vignette Scrim that preserves the photo's vibrant colors while framing the content */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/50 -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.5)_100%)] -z-10 pointer-events-none" />
 
-        <div className="text-center max-w-4xl mx-auto space-y-6">
+        {/* Frosted Glass Content Centerpiece Card */}
+        <div className="relative z-10 text-center max-w-3xl mx-auto space-y-5 p-6 sm:p-10 rounded-[2.5rem] bg-[#FFFDF9]/92 backdrop-blur-xl border border-white/80 shadow-2xl">
           
           {/* Luxury Heritage Seal Tag */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#FDE68A] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-[#FDE68A] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span className="tracking-wider uppercase text-[11px]">ESTD. 2026 • THE DEFINITIVE KOLKATA PUJO COMPANION</span>
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
           </div>
 
-          {/* Hero Centerpiece: Official Logo Typography Used Directly Over Pattern Background */}
-          <div className="flex flex-col items-center justify-center py-2">
-            <div className="relative w-full max-w-[340px] sm:max-w-[520px] md:max-w-[660px] h-24 sm:h-36 md:h-44 transition-transform duration-300 hover:scale-[1.02] cursor-pointer">
+          {/* Hero Centerpiece: Official Logo Typography */}
+          <div className="flex flex-col items-center justify-center py-1">
+            <div className="relative w-full max-w-[300px] sm:max-w-[460px] md:max-w-[540px] h-20 sm:h-32 md:h-38 transition-transform duration-300 hover:scale-[1.02]">
               <Image
                 src="/brand/pandale-logo.png"
                 alt="Pandalé — Kolkata Durga Puja & Metro Guide"
@@ -143,16 +155,15 @@ export default function HomePage() {
           </div>
 
           {/* Supporting Text */}
-          <p className="text-base sm:text-lg md:text-xl text-[#57534E] max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-sm sm:text-base md:text-lg text-[#57534E] max-w-xl mx-auto leading-relaxed font-normal">
             Discover the city’s most iconic pandals, navigate via Kolkata Metro with exact walking minutes, and open verified Google Maps locations instantly.
           </p>
 
-
           {/* Quick Action Badges / CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
             <Link
               href="/pandals"
-              className="px-6 py-3 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-2 shadow-md shadow-[#D8261C]/30 transition-transform active:scale-95 hover:scale-102"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-md shadow-[#D8261C]/30 transition-transform active:scale-95 hover:scale-102"
             >
               <Compass className="w-4 h-4 text-[#FDE047]" />
               <span>Explore All Pandals</span>
@@ -160,7 +171,7 @@ export default function HomePage() {
 
             <Link
               href="/metro"
-              className="px-6 py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
             >
               <Train className="w-4 h-4 text-blue-600" />
               <span>Explore by Metro</span>
@@ -168,7 +179,7 @@ export default function HomePage() {
 
             <Link
               href="/wishlist"
-              className="px-6 py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
             >
               <Heart className="w-4 h-4 text-[#D8261C] fill-[#D8261C]" />
               <span>My Wishlist ({wishlistCount})</span>
@@ -176,7 +187,7 @@ export default function HomePage() {
 
             <button
               onClick={handleNearMe}
-              className="px-6 py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
             >
               <LocateFixed className={`w-4 h-4 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
               <span>{userLocation ? 'Near Me Active' : 'Near Me'}</span>
@@ -188,10 +199,11 @@ export default function HomePage() {
           )}
 
         </div>
+      </section>
 
         {/* 4-Pillar Luxury Festival Pulse Metric Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-5xl mx-auto">
-          <div className="p-4 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
             <div className="w-11 h-11 rounded-2xl bg-amber-50 text-[#D8261C] border border-[#FDE68A] flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🏛️
             </div>
@@ -201,7 +213,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
+          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
             <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🚇
             </div>
@@ -211,7 +223,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
+          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
             <div className="w-11 h-11 rounded-2xl bg-rose-50 text-[#D8261C] border border-rose-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🚶
             </div>
@@ -221,7 +233,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
+          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
             <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               📍
             </div>
@@ -231,8 +243,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-      </section>
 
       {/* 2. EXPLORE BY NEIGHBORHOODS (REFERENCE DESIGN WITH ARCHED DOME CARDS) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
