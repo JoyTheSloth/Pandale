@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { 
   Sparkles, 
-  Search, 
   Train, 
   Heart, 
   MapPin, 
@@ -31,8 +30,6 @@ import { Pandal } from '@/types';
 export default function HomePage() {
   const { count: wishlistCount } = useWishlist();
   
-  // Hero Search state
-  const [heroSearch, setHeroSearch] = useState('');
   
   // Metro interactive explorer state on Homepage
   const [selectedMetroId, setSelectedMetroId] = useState('shyambazar');
@@ -60,18 +57,6 @@ export default function HomePage() {
     return list.slice(0, 8);
   }, []);
 
-  // Filter pandals based on hero search if user types
-  const searchResults = useMemo(() => {
-    if (!heroSearch.trim()) return [];
-    const q = heroSearch.toLowerCase().trim();
-    return PANDALS_DATA.filter((p) =>
-      p.name.toLowerCase().includes(q) ||
-      p.locality.toLowerCase().includes(q) ||
-      p.area.toLowerCase().includes(q) ||
-      p.nearest_metro.toLowerCase().includes(q) ||
-      p.theme.toLowerCase().includes(q)
-    ).slice(0, 5);
-  }, [heroSearch]);
 
   // Selected Metro station details & nearby pandals
   const selectedMetroStation = useMemo(() => {
@@ -162,84 +147,6 @@ export default function HomePage() {
             Discover the city’s most iconic pandals, navigate via Kolkata Metro with exact walking minutes, and open verified Google Maps locations instantly.
           </p>
 
-          {/* Luxury Hero Search Bar */}
-          <div className="relative max-w-2xl mx-auto pt-3">
-            <div className="relative flex items-center p-1.5 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-luxe focus-within:border-[#D8261C] transition-all">
-              <div className="pl-4 pr-2 flex items-center justify-center text-[#B45309]">
-                <Search className="w-5 h-5" />
-              </div>
-              <input
-                type="text"
-                value={heroSearch}
-                onChange={(e) => setHeroSearch(e.target.value)}
-                placeholder="Search pandals (e.g. Sree Bhumi, Bagbazar, Maddox Square)..."
-                className="w-full py-3.5 text-sm sm:text-base text-[#1C1917] placeholder-[#A8A29E] bg-transparent focus:outline-none"
-              />
-              <Link
-                href="/pandals"
-                className="shrink-0 px-5 sm:px-6 py-3 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#D8261C]/25 flex items-center gap-1.5 transition-all"
-              >
-                <span>Discover</span>
-                <ArrowRight className="w-4 h-4 text-[#FDE047]" />
-              </Link>
-            </div>
-
-            {/* Quick Keyword Suggestion Pills */}
-            <div className="flex items-center justify-center gap-2 pt-3 flex-wrap text-xs text-[#78716C]">
-              <span className="font-mono text-[11px] text-[#A8A29E] uppercase tracking-wider">Quick:</span>
-              {[
-                { label: 'Sree Bhumi', q: 'Sree Bhumi' },
-                { label: 'Bagbazar', q: 'Bagbazar' },
-                { label: 'Maddox Square', q: 'Maddox Square' },
-                { label: 'Suruchi Sangha', q: 'Suruchi' },
-                { label: 'College Square', q: 'College Square' }
-              ].map((pill) => (
-                <button
-                  key={pill.label}
-                  onClick={() => setHeroSearch(pill.q)}
-                  className="px-3 py-1 rounded-full bg-white/80 hover:bg-[#FFFBEB] border border-[#FED7AA]/70 text-[#1C1917] hover:text-[#D8261C] text-[11px] font-medium transition-colors shadow-2xs"
-                >
-                  {pill.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Instant Search Results Dropdown */}
-            {heroSearch.trim() && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-3xl border border-[#FED7AA] shadow-2xl p-2 z-30 text-left overflow-hidden">
-                {searchResults.length > 0 ? (
-                  searchResults.map((p) => (
-                    <Link
-                      key={p.id}
-                      href={`/pandal/${p.slug}`}
-                      className="p-3.5 rounded-2xl hover:bg-[#FFFBEB] flex items-center justify-between transition-colors group"
-                    >
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-12 h-12 rounded-xl overflow-hidden relative shrink-0 border border-[#FED7AA]">
-                          <Image src={p.featured_image} alt={p.name} fill className="object-cover" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-[#1C1917] group-hover:text-[#D8261C] transition-colors font-editorial">
-                            {p.name}
-                          </div>
-                          <div className="text-xs text-[#78716C] flex items-center gap-1.5 mt-0.5">
-                            <span className="font-semibold text-[#D8261C]">{p.locality}</span>
-                            <span>•</span>
-                            <span>Metro: {p.nearest_metro} ({p.walking_distance.split(' ')[0]})</span>
-                          </div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-[#A8A29E] group-hover:text-[#D8261C] group-hover:translate-x-1 transition-all" />
-                    </Link>
-                  ))
-                ) : (
-                  <div className="p-5 text-xs text-center text-[#78716C]">
-                    No matching pandals found for &ldquo;{heroSearch}&rdquo;. Try searching another landmark or locality.
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
 
           {/* Quick Action Badges / CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
