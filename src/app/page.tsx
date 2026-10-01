@@ -319,126 +319,132 @@ export default function HomePage() {
 
       </section>
 
-      {/* 2. EXPLORE KOLKATA PUJO BY ZONE */}
+      {/* 2. EXPLORE BY NEIGHBORHOODS (REFERENCE DESIGN WITH ARCHED DOME CARDS) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-3 border-b border-[#E7E5E4]">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#D8261C] font-bold">
-              <span className="w-2 h-2 rounded-full bg-[#D8261C]" />
-              <span>Kolkata Circuit</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-bold font-editorial text-[#1C1917] mt-1">
-              Explore by Neighbourhood
-            </h2>
-          </div>
-          <Link
-            href="/pandals"
-            className="text-xs font-bold text-[#D8261C] hover:underline flex items-center gap-1 mt-2 sm:mt-0"
-          >
-            <span>View All Zones</span>
-            <ChevronRight className="w-4 h-4" />
-          </Link>
+        
+        {/* Centered Editorial Header exactly like the reference */}
+        <div className="text-center max-w-xl mx-auto mb-10 sm:mb-12">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#D8261C] font-bold block mb-2">
+            Kolkata Pujo Circuits
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1C1917] leading-[1.15]">
+            Explore by <br />
+            <span className="font-editorial italic font-normal text-4xl sm:text-6xl text-[#1C1917]">
+              Neighborhoods
+            </span>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#78716C] mt-3 max-w-md mx-auto">
+            Swipe through Kolkata’s iconic puja zones, each defined by distinct traditions, heritage, and transit corridors.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Arched Dome Cards Grid & Horizontal Snap on Mobile */}
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 sm:px-0 pb-4">
           
-          <Link
-            href="/pandals?zone=North+Kolkata"
-            className="group relative h-56 sm:h-64 rounded-3xl overflow-hidden border border-[#FED7AA]/70 shadow-luxe shadow-luxe-hover"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=600&q=80"
-              alt="North Kolkata Durga Puja"
-              fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#FDE047] font-bold block mb-1">
-                Heritage & Sabeki
-              </span>
-              <h3 className="text-xl font-bold font-editorial text-white group-hover:text-[#FEF08A] transition-colors">
-                North Kolkata
-              </h3>
-              <p className="text-xs text-[#E7E5E4] line-clamp-1 mt-0.5">
-                Bagbazar, Kumartuli, Sovabazar
-              </p>
-            </div>
-          </Link>
+          {[
+            {
+              id: 'north',
+              title: 'North Kolkata',
+              subtitle: 'Heritage, Sabeki & River Ghats',
+              metro: 'Blue Line (Shyambazar)',
+              pandalsCount: '6 Iconic Pandals',
+              landmarks: 'Bagbazar • Kumartuli • Sovabazar',
+              zoneQuery: 'North+Kolkata',
+              image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
+              accentColor: 'from-[#FDE68A] via-[#FEF3C7] to-[#FEF2F2]'
+            },
+            {
+              id: 'south',
+              title: 'South Kolkata',
+              subtitle: 'Theme Powerhouses & Night Adda',
+              metro: 'Blue Line (Kalighat)',
+              pandalsCount: '6 Iconic Pandals',
+              landmarks: 'Maddox Square • Suruchi • Tridhara',
+              zoneQuery: 'South+Kolkata',
+              image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
+              accentColor: 'from-[#FED7AA] via-[#FFFBEB] to-[#FEF2F2]'
+            },
+            {
+              id: 'central',
+              title: 'Central Kolkata',
+              subtitle: 'Lakeside Lights & Heritage Squares',
+              metro: 'Blue & Green (Central / MG Road)',
+              pandalsCount: '3 Iconic Pandals',
+              landmarks: 'College Square • Santosh Mitra',
+              zoneQuery: 'Central+Kolkata',
+              image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
+              accentColor: 'from-[#FDE047]/40 via-[#FEF3C7] to-[#FEF2F2]'
+            },
+            {
+              id: 'east',
+              title: 'East Kolkata',
+              subtitle: 'Salt Lake & Tech Corridors',
+              metro: 'Green Line (Sector V / Karunamoyee)',
+              pandalsCount: '2 Iconic Pandals',
+              landmarks: 'Salt Lake FD Block • Sree Bhumi',
+              zoneQuery: 'East+Kolkata',
+              image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
+              accentColor: 'from-[#FEF08A]/60 via-[#FFFBEB] to-[#FEF2F2]'
+            }
+          ].map((zone) => (
+            <Link
+              key={zone.id}
+              href={`/pandals?zone=${zone.zoneQuery}`}
+              className="group min-w-[280px] sm:min-w-0 flex-1 snap-center bg-white rounded-[2.5rem] border border-[#E7E5E4] p-5 sm:p-6 shadow-luxe shadow-luxe-hover hover:border-[#F59E0B] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+            >
+              {/* Card Header: Arrow ↗ top-right & Centered Title */}
+              <div>
+                <div className="flex items-center justify-end mb-2">
+                  <div className="w-8 h-8 rounded-full bg-[#FAF8F5] group-hover:bg-[#D8261C] group-hover:text-white text-[#1C1917] flex items-center justify-center transition-all duration-300 shadow-2xs">
+                    <ArrowRight className="w-4 h-4 -rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </div>
 
-          <Link
-            href="/pandals?zone=South+Kolkata"
-            className="group relative h-56 sm:h-64 rounded-3xl overflow-hidden border border-[#FED7AA]/70 shadow-luxe shadow-luxe-hover"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=600&q=80"
-              alt="South Kolkata Durga Puja"
-              fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#FDE047] font-bold block mb-1">
-                Theme Hubs & Adda
-              </span>
-              <h3 className="text-xl font-bold font-editorial text-white group-hover:text-[#FEF08A] transition-colors">
-                South Kolkata
-              </h3>
-              <p className="text-xs text-[#E7E5E4] line-clamp-1 mt-0.5">
-                Maddox Square, Kalighat, Gariahat
-              </p>
-            </div>
-          </Link>
+                {/* Centered Neighborhood Title */}
+                <h3 className="text-2xl sm:text-3xl font-bold font-editorial text-center text-[#1C1917] tracking-tight group-hover:text-[#D8261C] transition-colors">
+                  {zone.title}
+                </h3>
+                <p className="text-[11px] text-[#78716C] text-center mt-1 font-medium">
+                  {zone.subtitle}
+                </p>
+              </div>
 
-          <Link
-            href="/pandals?zone=Central+Kolkata"
-            className="group relative h-56 sm:h-64 rounded-3xl overflow-hidden border border-[#FED7AA]/70 shadow-luxe shadow-luxe-hover"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=600&q=80"
-              alt="Central Kolkata Durga Puja"
-              fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#FDE047] font-bold block mb-1">
-                Lights & Grandeur
-              </span>
-              <h3 className="text-xl font-bold font-editorial text-white group-hover:text-[#FEF08A] transition-colors">
-                Central Kolkata
-              </h3>
-              <p className="text-xs text-[#E7E5E4] line-clamp-1 mt-0.5">
-                College Square, Santosh Mitra
-              </p>
-            </div>
-          </Link>
+              {/* The Iconic Arched Dome Artwork / Photo Window */}
+              <div className="relative w-full aspect-[4/5] rounded-t-[5.5rem] sm:rounded-t-[6.5rem] overflow-hidden bg-gradient-to-b from-[#FEF3C7] via-[#FFFBEB] to-[#FEF2F2] border border-[#FED7AA]/60 mt-5 mb-4 shadow-inner">
+                {/* Arched image */}
+                <Image
+                  src={zone.image}
+                  alt={zone.title}
+                  fill
+                  sizes="(max-width: 768px) 80vw, 25vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                />
+                {/* Subtle soft gradient fade at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
 
-          <Link
-            href="/pandals?zone=East+Kolkata"
-            className="group relative h-56 sm:h-64 rounded-3xl overflow-hidden border border-[#FED7AA]/70 shadow-luxe shadow-luxe-hover"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80"
-              alt="East Kolkata Durga Puja"
-              fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#FDE047] font-bold block mb-1">
-                Modern & Green Line
-              </span>
-              <h3 className="text-xl font-bold font-editorial text-white group-hover:text-[#FEF08A] transition-colors">
-                East Kolkata
-              </h3>
-              <p className="text-xs text-[#E7E5E4] line-clamp-1 mt-0.5">
-                Salt Lake FD Block, Sector V
-              </p>
-            </div>
-          </Link>
+                {/* Floating pill badge inside arch */}
+                <div className="absolute bottom-3 left-3 right-3 text-center">
+                  <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold bg-white/95 backdrop-blur-md text-[#B45309] border border-[#FED7AA] shadow-xs">
+                    {zone.pandalsCount}
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Footer Details */}
+              <div className="pt-2 border-t border-[#F5F5F4] text-center space-y-1">
+                <div className="text-[11px] font-semibold text-[#1C1917] truncate">
+                  {zone.landmarks}
+                </div>
+                <div className="text-[10px] text-[#78716C] flex items-center justify-center gap-1">
+                  <Train className="w-3 h-3 text-blue-600" />
+                  <span className="truncate">{zone.metro}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
 
         </div>
+
       </section>
 
       {/* 3. FEATURED MUST-VISIT PANDALS */}

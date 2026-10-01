@@ -20,6 +20,17 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full glass-nav border-b border-[#FEE2E2] transition-all duration-200 shadow-xs">
+      {/* Top Announcement Bar (like reference image) */}
+      <div className="bg-[#FFFBEB] text-[#92400E] border-b border-[#FED7AA]/60 text-[11px] font-medium py-1.5 px-4 text-center overflow-hidden">
+        <div className="flex items-center justify-center gap-2 truncate">
+          <span className="font-bold text-[#D8261C]">✨ Pujo 2026 Live:</span>
+          <span className="truncate">Night Metro Special Schedules & 14+ Pandals with Exact Google Maps Coordinates</span>
+          <Link href="/metro" className="underline font-bold text-[#D8261C] hover:text-[#B91C1C] shrink-0">
+            View Metro Guide →
+          </Link>
+        </div>
+      </div>
+
       {/* Top Festive Red & Marigold Ribbon */}
       <div className="h-1 w-full bg-gradient-to-r from-[#D8261C] via-[#F59E0B] to-[#D8261C]" />
 
