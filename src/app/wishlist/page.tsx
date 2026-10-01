@@ -121,19 +121,19 @@ export default function WishlistPage() {
                 <div className="p-4 pt-0 border-t border-[#FAF8F5] flex items-center gap-2">
                   <Link
                     href={`/pandal/${pandal.slug}`}
-                    className="flex-1 py-2 px-3 rounded-xl bg-[#181513] hover:bg-[#2A2623] text-white text-xs font-semibold text-center flex items-center justify-center gap-1"
+                    className="flex-1 py-2 px-3 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-semibold text-center flex items-center justify-center gap-1 shadow-xs transition-colors"
                   >
                     <span>View Pandal</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-amber-300" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-amber-200" />
                   </Link>
 
                   <a
                     href={exactMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-2 px-3 rounded-xl border border-[#D8CEBF] bg-[#FAF8F5] hover:bg-white text-[#181513] text-xs font-semibold flex items-center justify-center gap-1"
+                    className="py-2 px-3 rounded-xl border border-[#D8CEBF] bg-[#FFFDF9] hover:bg-white text-[#1C1917] text-xs font-semibold flex items-center justify-center gap-1 shadow-2xs"
                   >
-                    <MapPin className="w-3.5 h-3.5 text-[#D43827]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#D8261C]" />
                     <span>Maps</span>
                   </a>
                 </div>
@@ -142,21 +142,21 @@ export default function WishlistPage() {
           })}
         </div>
       ) : (
-        <div className="max-w-md mx-auto text-center py-20 px-4 space-y-4 bg-white rounded-3xl border border-[#E9E2D8]">
-          <div className="w-16 h-16 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
+        <div className="max-w-md mx-auto text-center py-20 px-4 space-y-4 bg-white rounded-3xl border border-[#E9E2D8] shadow-xs">
+          <div className="w-16 h-16 rounded-full bg-rose-50 text-[#D8261C] flex items-center justify-center mx-auto">
             <Heart className="w-8 h-8" />
           </div>
-          <h2 className="text-xl font-bold font-editorial text-[#181513]">
+          <h2 className="text-xl font-bold font-editorial text-[#1C1917]">
             Your wishlist is empty
           </h2>
-          <p className="text-xs text-[#5C554E] leading-relaxed">
+          <p className="text-xs text-[#57534E] leading-relaxed">
             Click the heart icon (♡) on any pandal card or detail page to curate your personal Kolkata Pujo 2026 tour.
           </p>
           <Link
             href="/pandals"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#181513] text-white text-xs font-semibold hover:bg-[#2A2623] transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D8261C] text-white text-xs font-semibold hover:bg-[#B91C1C] transition-all shadow-sm"
           >
-            <Compass className="w-4 h-4 text-amber-300" />
+            <Compass className="w-4 h-4 text-amber-200" />
             <span>Discover Pandals</span>
           </Link>
         </div>

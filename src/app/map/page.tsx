@@ -54,8 +54,8 @@ export default function MapPage() {
               onClick={() => setSelectedZone(z)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedZone === z
-                  ? 'bg-[#181513] text-white'
-                  : 'bg-[#FAF8F5] text-[#5C554E] hover:text-[#181513]'
+                  ? 'bg-[#D8261C] text-white shadow-xs'
+                  : 'bg-[#FFFDF9] border border-[#E7E5E4] text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
               }`}
             >
               {z === 'All' ? 'All Kolkata' : z}

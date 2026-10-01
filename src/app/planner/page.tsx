@@ -188,7 +188,7 @@ export default function RoutePlannerPage() {
                 
                 <div className="flex items-start gap-4">
                   {/* Step Number Badge */}
-                  <div className="w-10 h-10 rounded-2xl bg-[#181513] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#D8261C] to-[#B91C1C] text-white flex items-center justify-center font-bold text-sm shrink-0 border border-[#FDE047]/40 shadow-xs">
                     {index + 1}
                   </div>
 

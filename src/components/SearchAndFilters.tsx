@@ -158,34 +158,34 @@ export default function SearchAndFilters({
           
           <button
             onClick={onNearMetroToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               nearMetroOnly
                 ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                : 'bg-white text-[#5C554E] border-[#E2DAD0] hover:border-blue-400'
+                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-blue-500 hover:text-blue-600'
             }`}
           >
-            <Train className="w-3.5 h-3.5" />
+            <Train className="w-3.5 h-3.5 text-blue-600" />
             <span>Near Metro (&lt;10m walk)</span>
           </button>
 
           <button
             onClick={onMustVisitToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
               mustVisitOnly
                 ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
-                : 'bg-white text-[#57534E] border-[#FED7AA] hover:border-[#D8261C]'
+                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>Must Visit</span>
           </button>
 
           <button
             onClick={onTrendingToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
               trendingOnly
                 ? 'bg-[#F59E0B] text-white border-[#F59E0B] shadow-md shadow-[#F59E0B]/25'
-                : 'bg-white text-[#57534E] border-[#FED7AA] hover:border-amber-400'
+                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-amber-500 hover:text-amber-700'
             }`}
           >
             <Flame className="w-3.5 h-3.5 text-[#F59E0B]" />
@@ -194,25 +194,25 @@ export default function SearchAndFilters({
 
           <button
             onClick={onLessCrowdedToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               lessCrowdedOnly
                 ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                : 'bg-white text-[#5C554E] border-[#E2DAD0] hover:border-emerald-400'
+                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-emerald-500 hover:text-emerald-700'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
             <span>Less Crowded</span>
           </button>
 
           <button
             onClick={onWishlistToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               wishlistOnly
-                ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
-                : 'bg-white text-[#5C554E] border-[#E2DAD0] hover:border-rose-400'
+                ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-sm'
+                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
-            <Heart className="w-3.5 h-3.5" />
+            <Heart className="w-3.5 h-3.5 text-[#D8261C]" />
             <span>My Wishlist</span>
           </button>
 
@@ -289,12 +289,12 @@ export default function SearchAndFilters({
                       onClick={() => onSortChange(s.id)}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between ${
                         sortBy === s.id
-                          ? 'bg-[#181513] text-white'
-                          : 'bg-white border border-[#E2DAD0] text-[#181513]'
+                          ? 'bg-[#D8261C] text-white shadow-xs'
+                          : 'bg-white border border-[#E7E5E4] text-[#1C1917]'
                       }`}
                     >
                       <span>{s.label}</span>
-                      {sortBy === s.id && <Check className="w-4 h-4 text-amber-300" />}
+                      {sortBy === s.id && <Check className="w-4 h-4 text-amber-200" />}
                     </button>
                   ))}
                 </div>

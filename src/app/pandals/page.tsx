@@ -190,13 +190,13 @@ function PandalsContent() {
         </div>
 
         {/* View Switcher: Grid vs Map vs Split */}
-        <div className="flex items-center gap-1.5 p-1 bg-white border border-[#E2DAD0] rounded-2xl shadow-xs self-start sm:self-auto">
+        <div className="flex items-center gap-1.5 p-1 bg-white border border-[#E7E5E4] rounded-2xl shadow-xs self-start sm:self-auto">
           <button
             onClick={() => setViewMode('grid')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
               viewMode === 'grid'
-                ? 'bg-[#181513] text-white shadow-xs'
-                : 'text-[#5C554E] hover:text-[#181513]'
+                ? 'bg-[#D8261C] text-white shadow-sm'
+                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
             }`}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -207,8 +207,8 @@ function PandalsContent() {
             onClick={() => setViewMode('map')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
               viewMode === 'map'
-                ? 'bg-[#181513] text-white shadow-xs'
-                : 'text-[#5C554E] hover:text-[#181513]'
+                ? 'bg-[#D8261C] text-white shadow-sm'
+                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
             }`}
           >
             <Map className="w-3.5 h-3.5" />
@@ -219,8 +219,8 @@ function PandalsContent() {
             onClick={() => setViewMode('split')}
             className={`hidden lg:flex px-3 py-1.5 rounded-xl text-xs font-semibold items-center gap-1.5 transition-all ${
               viewMode === 'split'
-                ? 'bg-[#181513] text-white shadow-xs'
-                : 'text-[#5C554E] hover:text-[#181513]'
+                ? 'bg-[#D8261C] text-white shadow-sm'
+                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -350,7 +350,7 @@ function EmptyState({ onReset }: { onReset: () => void }) {
       </p>
       <button
         onClick={onReset}
-        className="px-4 py-2 rounded-xl bg-[#181513] text-white text-xs font-semibold hover:bg-[#2A2623] transition-colors"
+        className="px-5 py-2.5 rounded-xl bg-[#D8261C] text-white text-xs font-semibold hover:bg-[#B91C1C] transition-all shadow-sm"
       >
         Reset All Filters
       </button>

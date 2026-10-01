@@ -275,8 +275,8 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                         onClick={() => setActiveGalleryTab(tab.id as any)}
                         className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                           isSelected
-                            ? 'bg-[#181513] text-white shadow-xs'
-                            : 'bg-[#FAF8F5] text-[#5C554E] hover:text-[#181513]'
+                            ? 'bg-[#D8261C] text-white shadow-xs'
+                            : 'bg-[#FFFDF9] text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
                         }`}
                       >
                         {tab.label}

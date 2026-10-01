@@ -55,10 +55,10 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative px-4 py-2 rounded-full text-xs font-bold transition-all duration-150 flex items-center gap-1.5 ${
+                className={`relative px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 flex items-center gap-1.5 ${
                   isActive
-                    ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25'
-                    : 'text-[#44403C] hover:text-[#D8261C] hover:bg-[#FEF3C7]/50'
+                    ? 'bg-gradient-to-r from-[#D8261C] to-[#B91C1C] text-white shadow-crimson-glow border border-[#FDE047]/30 scale-102'
+                    : 'text-[#44403C] hover:text-[#D8261C] hover:bg-[#FFFBEB] border border-transparent hover:border-[#FED7AA]/50'
                 }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#FDE047]' : 'text-[#D8261C]'}`} />

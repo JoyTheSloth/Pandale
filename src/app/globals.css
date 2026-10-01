@@ -64,9 +64,64 @@
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Luxury aesthetic card shadows & glows */
+.shadow-luxe {
+  box-shadow: 0 10px 30px -4px rgba(28, 25, 23, 0.04), 0 4px 12px -2px rgba(216, 38, 28, 0.03);
+}
+
+.shadow-luxe-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.shadow-luxe-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -8px rgba(28, 25, 23, 0.08), 0 8px 20px -4px rgba(216, 38, 28, 0.08);
+}
+
+.shadow-crimson-glow {
+  box-shadow: 0 8px 24px -4px rgba(216, 38, 28, 0.32);
+}
+
+.shadow-gold-glow {
+  box-shadow: 0 8px 24px -4px rgba(245, 158, 11, 0.28);
+}
+
+/* Subtle festive ornamental pattern background */
+.festive-radial-ambient {
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(254, 243, 199, 0.6) 0%, rgba(254, 242, 242, 0.3) 35%, rgba(255, 253, 249, 0) 70%),
+    radial-gradient(circle at 10% 20%, rgba(253, 230, 138, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(254, 202, 202, 0.25) 0%, transparent 40%);
+}
+
+.shimmer-gold {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-gold::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg);
+  animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
 }
 
 /* Leaflet map custom pin styles */

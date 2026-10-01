@@ -71,8 +71,8 @@ export default function MetroGuidePage() {
               onClick={() => setSelectedLine(line.id as any)}
               className={`px-4 py-2.5 rounded-2xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
                 isSelected
-                  ? 'bg-[#181513] text-white shadow-sm'
-                  : 'bg-white border border-[#E2DAD0] text-[#5C554E] hover:text-[#181513]'
+                  ? 'bg-[#D8261C] text-white shadow-sm'
+                  : 'bg-white border border-[#E7E5E4] text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
               }`}
             >
               {line.color && <span className={`w-2.5 h-2.5 rounded-full ${line.color}`} />}
@@ -249,7 +249,7 @@ export default function MetroGuidePage() {
                           <div className="flex items-center gap-2">
                             <Link
                               href={`/pandal/${pandal.slug}`}
-                              className="py-2 px-3 rounded-xl bg-[#181513] hover:bg-[#2A2623] text-white text-xs font-semibold"
+                              className="py-2 px-3 rounded-xl bg-white border border-[#E7E5E4] hover:border-[#D8261C] text-[#1C1917] hover:text-[#D8261C] text-xs font-semibold shadow-2xs transition-colors"
                             >
                               Details
                             </Link>

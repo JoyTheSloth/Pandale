@@ -86,6 +86,7 @@ export interface Pandal {
   latest_images: InstagramPost[];
   trending_score: number;
   saves_count: number;
+  is_must_visit?: boolean;
   entry_fee?: string;
   created_at: string;
   updated_at: string;

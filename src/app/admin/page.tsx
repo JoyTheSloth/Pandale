@@ -180,13 +180,13 @@ export default function AdminPage() {
                   onClick={() => handleSelectPandal(p.id)}
                   className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between ${
                     isSelected
-                      ? 'bg-[#181513] text-white'
-                      : 'bg-stone-50 hover:bg-[#FAF8F5] text-[#181513]'
+                      ? 'bg-[#D8261C] text-white shadow-xs'
+                      : 'bg-[#FFFDF9] border border-[#E7E5E4] hover:bg-[#FEF2F2] text-[#1C1917]'
                   }`}
                 >
                   <div className="truncate">
                     <div className="text-xs font-bold truncate">{p.name}</div>
-                    <div className={`text-[10px] truncate ${isSelected ? 'text-amber-200' : 'text-[#8E857B]'}`}>
+                    <div className={`text-[10px] truncate ${isSelected ? 'text-amber-200' : 'text-[#78716C]'}`}>
                       {p.area} • {p.nearest_metro}
                     </div>
                   </div>
@@ -201,16 +201,16 @@ export default function AdminPage() {
         <div className="col-span-12 lg:col-span-8 space-y-6">
           
           {/* Edit Form */}
-          <form onSubmit={handleSave} className="bg-white rounded-3xl border border-[#E9E2D8] p-6 sm:p-8 shadow-xs space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E9E2D8]">
-              <h2 className="text-xl font-bold font-editorial text-[#181513]">
+          <form onSubmit={handleSave} className="bg-white rounded-3xl border border-[#E7E5E4] p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E7E5E4]">
+              <h2 className="text-xl font-bold font-editorial text-[#1C1917]">
                 Edit: {formData.name}
               </h2>
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl bg-[#181513] hover:bg-[#2A2623] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm"
+                className="px-5 py-2.5 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-colors"
               >
-                <Save className="w-4 h-4 text-amber-300" />
+                <Save className="w-4 h-4 text-amber-200" />
                 <span>Save Changes</span>
               </button>
             </div>
