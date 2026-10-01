@@ -112,7 +112,7 @@ export default function HomePage() {
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
       {/* 1. HERO SECTION - UNCONFINED 100DVH IMMERSIVE EXPERIENCE FOR PHONE UI */}
-      <section className="relative w-full h-[100dvh] sm:min-h-[800px] flex flex-col justify-end pb-8 sm:pb-12 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
+      <section className="relative w-full h-[100dvh] sm:min-h-[800px] flex flex-col justify-end pb-20 sm:pb-12 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
         
         {/* Full Bleed 9:16 Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
         <div className="absolute inset-0 -z-20">
