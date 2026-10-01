@@ -28,7 +28,8 @@ import {
   ChevronDown,
   ChevronRight,
   ArrowRight,
-  ArrowUpRight
+  ArrowUpRight,
+  Users
 } from 'lucide-react';
 import { calculateDistanceKm, formatDistance, buildGoogleMapsUrl } from '@/lib/geo';
 import { ZoneArea, Pandal } from '@/types';
@@ -495,156 +496,212 @@ export default function RoutePlannerPage() {
 
             return (
               <React.Fragment key={pandal.id}>
-                {/* Redesigned Pandal Stop Card */}
-                <div className="group relative bg-white dark:bg-[#1A1218] rounded-[2rem] border border-stone-200/90 dark:border-white/10 p-4 sm:p-5 shadow-luxe hover:shadow-xl hover:border-amber-400/50 dark:hover:border-amber-400/30 transition-all duration-300">
-                  <div className="flex flex-col sm:flex-row sm:items-stretch gap-4 sm:gap-5">
+                {/* Redesigned Pandal Stop Card (Matching Mockup Aesthetic) */}
+                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-[2.5rem] border border-[#EFE8DD] dark:border-white/10 p-4 sm:p-5 lg:p-6 shadow-luxe hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                  
+                  {/* Subtle Botanical Left Vine */}
+                  <svg
+                    className="absolute -left-2 top-4 w-10 h-32 pointer-events-none z-10 hidden sm:block opacity-80"
+                    viewBox="0 0 48 144"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2 C16 35, 8 70, 14 110" stroke="#C9A070" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+                    <path d="M14 15 C24 8, 38 12, 42 22 C34 26, 20 25, 14 15 Z" fill="#C9A070" opacity="0.85" />
+                    <path d="M12 38 C4 30, -2 40, 2 52 C8 48, 11 44, 12 38 Z" fill="#9B2C2C" opacity="0.9" />
+                    <path d="M11 65 C22 60, 32 68, 35 78 C26 80, 16 76, 11 65 Z" fill="#D4AF37" opacity="0.85" />
+                    <path d="M13 92 C5 86, 0 98, 4 108 C10 104, 13 98, 13 92 Z" fill="#881337" opacity="0.9" />
+                  </svg>
+
+                  {/* Corner Floral Bouquet */}
+                  <svg
+                    className="absolute -bottom-3 -left-3 w-24 sm:w-28 h-24 sm:h-28 pointer-events-none z-20 drop-shadow-sm"
+                    viewBox="0 0 128 128"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M50 85 C65 72, 85 75, 95 88 C82 96, 62 95, 50 85 Z" fill="#C9A070" opacity="0.85" />
+                    <g transform="translate(14, 60)">
+                      <path d="M32 32 C15 15, 10 38, 22 52 C26 44, 30 38, 32 32 Z" fill="#78111A" />
+                      <path d="M32 32 C38 12, 58 14, 56 32 C48 34, 40 33, 32 32 Z" fill="#991B1B" />
+                      <path d="M32 32 C50 30, 60 48, 48 58 C42 50, 36 42, 32 32 Z" fill="#881337" />
+                      <path d="M32 32 C30 52, 44 62, 34 66 C28 56, 30 44, 32 32 Z" fill="#A31D1D" />
+                      <circle cx="32" cy="32" r="5" fill="#4C0519" />
+                      <circle cx="32" cy="32" r="2.5" fill="#F59E0B" />
+                    </g>
+                  </svg>
+
+                  <div className="flex flex-col md:flex-row gap-5 lg:gap-6">
                     
-                    {/* 1. Artwork Thumbnail + Floating STOP Pill */}
-                    <div className="relative w-full sm:w-48 md:w-56 h-48 sm:h-auto rounded-2xl overflow-hidden shrink-0 bg-stone-100 dark:bg-stone-900 border border-stone-200/80 dark:border-white/10 shadow-sm">
+                    {/* 1. Left Artwork Container (Organic Pebble Shape) */}
+                    <div
+                      className="relative w-full md:w-[40%] min-h-[220px] sm:min-h-[260px] md:min-h-[270px] shrink-0 overflow-hidden shadow-inner group/media"
+                      style={{ borderRadius: '2.8rem 1.8rem 2.8rem 2.2rem' }}
+                    >
                       <Image
                         src={pandal.featured_image}
                         alt={pandal.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, 240px"
+                        sizes="(max-width: 768px) 100vw, 40vw"
                         className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/35" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/30 pointer-events-none" />
 
-                      {/* Floating Stop Badge on Image */}
+                      {/* Top Floating Badge on Image: STOP Pill */}
                       <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
                         <span className="px-3 py-1 rounded-full bg-gradient-to-r from-[#D8261C] to-[#B91C1C] text-white text-[11px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-md flex items-center gap-1">
                           <span>{isBn ? `স্টপ ${index + 1}` : `STOP ${String(index + 1).padStart(2, '0')}`}</span>
                         </span>
                       </div>
 
-                      {/* Must Visit Pill if applicable */}
-                      {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                        <div className="absolute top-3 right-3 z-10">
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold backdrop-blur-md bg-amber-500/90 text-white shadow-xs">
-                            👑 Must Visit
-                          </span>
-                        </div>
-                      )}
+                      {/* Top-Right Arrow button */}
+                      <Link
+                        href={`/pandal/${pandal.slug}`}
+                        className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-md flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
+                        aria-label="View pandal details"
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </Link>
 
-                      {/* Locality Micro Tag on Bottom of Image */}
-                      <div className="absolute bottom-2.5 left-3 right-3 z-10 flex items-center gap-1 text-[11px] text-amber-200 font-semibold drop-shadow-sm truncate">
-                        <MapPin className="w-3 h-3 text-[#F59E0B] shrink-0" />
-                        <span className="truncate">{pandal.locality}</span>
+                      {/* Bottom Floating Badges Row (Area + Must Visit) */}
+                      <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center gap-2 flex-wrap">
+                        <span className="px-3 py-1 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-xs font-semibold shadow-md flex items-center gap-1.5 backdrop-blur-md border border-white/40 dark:border-white/10">
+                          <span className="w-2 h-2 rounded-full bg-[#D8261C]" />
+                          <span>{pandal.area}</span>
+                        </span>
+
+                        {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
+                          <span className="px-2.5 py-1 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-xs font-bold shadow-md flex items-center gap-1 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
+                            <span>👑</span>
+                            <span>{isBn ? 'দর্শনীয়' : 'Must Visit'}</span>
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    {/* 2. Middle Content Area */}
-                    <div className="flex-1 flex flex-col justify-between space-y-3 min-w-0">
+                    {/* 2. Middle & Right Content Area */}
+                    <div className="flex-1 flex flex-col justify-between space-y-3.5 py-1">
+                      
+                      {/* Header: Theme & Architecture, Title, Underline */}
                       <div>
-                        {/* Top Badges: Area & Crowd Status */}
-                        <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-stone-100 dark:bg-stone-900 text-[#D8261C] dark:text-red-400 border border-red-100 dark:border-white/10 flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D8261C]" />
-                            {pandal.area}
-                          </span>
+                        <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] text-[#9C7A5B] dark:text-amber-400 font-bold block mb-1">
+                          {isBn ? 'থিম এবং স্থাপত্য' : 'THEME & ARCHITECTURE'}
+                        </span>
 
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border flex items-center gap-1.5 ${getCrowdBadge(pandal.crowd_status.level)}`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${pandal.crowd_status.level === 'heavy' ? 'bg-rose-500 animate-pulse' : pandal.crowd_status.level === 'moderate' ? 'bg-amber-500' : 'bg-emerald-500'}`} />
-                            <span>{pandal.crowd_status.level.toUpperCase()} CROWD</span>
-                          </span>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Link
+                            href={`/pandal/${pandal.slug}`}
+                            className="font-editorial text-2xl sm:text-3xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors"
+                          >
+                            {pandal.name}
+                          </Link>
+
+                          {/* Decorative Leaf Sprig */}
+                          <svg className="w-5 h-5 text-[#C9A070] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 20 C8 14, 14 8, 20 4" stroke="#C9A070" strokeWidth="1.5" strokeLinecap="round" />
+                            <path d="M12 12 C14 8, 18 8, 20 10 C18 13, 14 13, 12 12 Z" fill="#C9A070" />
+                            <path d="M16 8 C17 5, 20 5, 21 7 C20 9, 17 9, 16 8 Z" fill="#991B1B" />
+                            <path d="M8 16 C9 13, 13 13, 14 15 C13 17, 10 17, 8 16 Z" fill="#D4AF37" />
+                          </svg>
                         </div>
 
-                        {/* Pandal Title */}
-                        <Link
-                          href={`/pandal/${pandal.slug}`}
-                          className="group/title inline-flex items-center gap-1.5 text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-50 hover:text-[#D8261C] dark:hover:text-amber-400 transition-colors line-clamp-1"
-                        >
-                          <span>{pandal.name}</span>
-                          <ArrowUpRight className="w-4 h-4 opacity-0 group-hover/title:opacity-100 -translate-x-1 group-hover/title:translate-x-0 transition-all text-[#D8261C] dark:text-amber-400" />
-                        </Link>
+                        {/* Red Accent Underline */}
+                        <div className="w-12 h-0.5 bg-[#881337] dark:bg-rose-500 rounded-full mt-1.5 mb-2" />
 
                         {/* Theme Description */}
-                        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 line-clamp-1 sm:line-clamp-2 mt-1 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-medium leading-relaxed line-clamp-2">
                           {pandal.theme}
                         </p>
                       </div>
 
-                      {/* Transit & Walking Corridor Pill */}
-                      <div className="p-2.5 sm:p-3 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/80 dark:border-white/5 flex items-center justify-between gap-3 text-xs flex-wrap sm:flex-nowrap">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
-                            M
-                          </div>
-                          <div className="truncate">
-                            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-400 dark:text-stone-500 block leading-none">
-                              {isBn ? 'নিকটবর্তী মেট্রো' : 'Nearest Metro'}
+                      {/* Metro Transit Card */}
+                      <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/70 dark:border-white/5 flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-[#0052FF] text-white font-bold flex items-center justify-center text-sm shadow-xs shrink-0">
+                          M
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white truncate">
+                            {pandal.nearest_metro} {isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}
+                          </h4>
+                          <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-300 mt-0.5 flex-wrap">
+                            <span className="flex items-center gap-1 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>{pandal.walking_time_mins} min</span>
                             </span>
-                            <span className="font-bold text-stone-800 dark:text-stone-200 truncate block text-xs mt-0.5">
-                              {pandal.nearest_metro}
+                            <span className="text-stone-300 dark:text-stone-600">•</span>
+                            <span className="font-semibold text-stone-700 dark:text-stone-300 shrink-0">
+                              {pandal.walking_distance.split(' ')[0]} m
+                            </span>
+                            <span className="text-stone-300 dark:text-stone-600">•</span>
+                            <span className="flex items-center gap-1 text-stone-600 dark:text-stone-300 font-medium shrink-0">
+                              <Footprints className="w-3.5 h-3.5 text-[#D8261C]" />
+                              <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
                             </span>
                           </div>
                         </div>
+                      </div>
 
+                      {/* Crowd & Controls Bar */}
+                      <div className="flex items-center justify-between gap-3 pt-1 flex-wrap">
+                        {/* Crowd Pill */}
+                        <div className="px-3 py-1.5 rounded-xl bg-[#F9EDE6] dark:bg-rose-950/30 text-[#8C4A32] dark:text-rose-300 border border-[#F3DACF] dark:border-rose-900/30 flex items-center gap-2 text-xs font-semibold shadow-2xs">
+                          <Users className="w-4 h-4 text-[#8C4A32] dark:text-rose-300 shrink-0" />
+                          <span>{pandal.crowd_status.level.toUpperCase()} CROWD</span>
+                          <span className="text-[10px] opacity-75 font-normal">
+                            ({isBn ? 'কমিউনিটি রিপোর্ট' : 'Community reported'})
+                          </span>
+                        </div>
+
+                        {/* Itinerary Re-ordering & Maps Controls */}
                         <div className="flex items-center gap-2 shrink-0">
-                          <span className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 font-bold text-[#D8261C] dark:text-red-400 text-xs shadow-2xs">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>{pandal.walking_time_mins} min walk</span>
-                          </span>
+                          {/* Reorder Arrows Pill */}
+                          <div className="flex items-center gap-1 bg-white dark:bg-white/[0.06] p-1 rounded-2xl border border-stone-200 dark:border-white/10 shadow-2xs">
+                            <button
+                              type="button"
+                              onClick={() => handleMoveUp(index)}
+                              disabled={isFirst}
+                              className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed"
+                              title="Move earlier in route"
+                              aria-label="Move up"
+                            >
+                              <ArrowUp className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleMoveDown(index)}
+                              disabled={isLast}
+                              className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed"
+                              title="Move later in route"
+                              aria-label="Move down"
+                            >
+                              <ArrowDown className="w-4 h-4" />
+                            </button>
+                          </div>
 
-                          <span className="hidden md:flex items-center gap-1 px-2.5 py-1 rounded-xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 font-semibold text-amber-700 dark:text-amber-400 text-xs shadow-2xs">
-                            <Footprints className="w-3.5 h-3.5 text-amber-600" />
-                            <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
-                          </span>
+                          {/* Google Maps Button */}
+                          <a
+                            href={exactMapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] flex items-center justify-center transition-all shadow-2xs cursor-pointer"
+                            title="Open exact location in Google Maps"
+                            aria-label="View in Maps"
+                          >
+                            <MapPin className="w-4 h-4 text-[#D8261C]" />
+                          </a>
+
+                          {/* Remove Stop Button */}
+                          <button
+                            type="button"
+                            onClick={() => handleRemovePandal(pandal.id)}
+                            className="w-10 h-10 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 flex items-center justify-center transition-all shadow-2xs cursor-pointer"
+                            title="Remove from itinerary"
+                            aria-label="Remove stop"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
                       </div>
-                    </div>
-
-                    {/* 3. Right Action Dock (Controls & Navigation) */}
-                    <div className="flex sm:flex-col items-center justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 sm:border-l border-stone-100 dark:border-white/5 sm:pl-4 shrink-0">
-                      
-                      {/* Reorder Arrows Pill */}
-                      <div className="flex sm:flex-col items-center gap-1 bg-stone-100 dark:bg-white/[0.04] p-1 rounded-2xl border border-stone-200 dark:border-white/10 shadow-2xs">
-                        <button
-                          type="button"
-                          onClick={() => handleMoveUp(index)}
-                          disabled={isFirst}
-                          className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed"
-                          title="Move earlier in route"
-                          aria-label="Move up"
-                        >
-                          <ArrowUp className="w-4 h-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleMoveDown(index)}
-                          disabled={isLast}
-                          className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed"
-                          title="Move later in route"
-                          aria-label="Move down"
-                        >
-                          <ArrowDown className="w-4 h-4" />
-                        </button>
-                      </div>
-
-                      {/* Directions in Google Maps */}
-                      <a
-                        href={exactMapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3.5 py-2 sm:p-2.5 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1218] hover:border-[#D8261C] hover:bg-[#D8261C]/5 dark:hover:border-[#D8261C]/40 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] transition-all shadow-2xs flex items-center gap-1.5 text-xs font-bold"
-                        title="Open exact location in Google Maps"
-                        aria-label="View in Maps"
-                      >
-                        <MapPin className="w-4 h-4 text-[#D8261C]" />
-                        <span className="sm:hidden">{isBn ? 'ম্যাপ' : 'Map'}</span>
-                      </a>
-
-                      {/* Remove Stop Button */}
-                      <button
-                        type="button"
-                        onClick={() => handleRemovePandal(pandal.id)}
-                        className="px-3.5 py-2 sm:p-2.5 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1218] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 transition-all shadow-2xs flex items-center gap-1.5 text-xs font-bold cursor-pointer"
-                        title="Remove from itinerary"
-                        aria-label="Remove stop"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                        <span className="sm:hidden">{isBn ? 'মুছুন' : 'Remove'}</span>
-                      </button>
 
                     </div>
 

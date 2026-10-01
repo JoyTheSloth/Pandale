@@ -224,9 +224,9 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {featuredPandals.map((pandal, idx) => (
-            <PandalCard key={pandal.id} pandal={pandal} priority={idx < 3} />
+            <PandalCard key={pandal.id} pandal={pandal} priority={idx < 2} />
           ))}
         </div>
       </section>
