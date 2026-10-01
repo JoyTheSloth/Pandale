@@ -18,6 +18,16 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
   );
 }
 
+function InstagramIcon({ className = "w-3 h-3" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
 export default function CreatorConnectModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -190,7 +200,7 @@ export default function CreatorConnectModal() {
               <span>Chat on WhatsApp</span>
             </a>
 
-            {/* Quick Secondary Contact Drawer (Email & GitHub) */}
+            {/* Quick Secondary Contact Drawer (Email & Instagram) */}
             <div className="pt-1 flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400">
               <button
                 type="button"
@@ -204,13 +214,15 @@ export default function CreatorConnectModal() {
               </button>
 
               <a
-                href="https://github.com/JoyTheSloth"
+                href="https://www.instagram.com/jethalal.das/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 hover:text-stone-800 dark:hover:text-stone-200 transition-colors btn-jiggle"
+                className="flex items-center gap-1 hover:text-stone-800 dark:hover:text-stone-200 transition-colors btn-jiggle group"
+                title="Connect on Instagram"
               >
-                <span>GitHub (@JoyTheSloth)</span>
-                <ExternalLink className="w-2.5 h-2.5" />
+                <InstagramIcon className="w-3.5 h-3.5 text-pink-500 group-hover:scale-110 transition-transform" />
+                <span className="font-medium">@jethalal.das</span>
+                <ExternalLink className="w-2.5 h-2.5 text-stone-400" />
               </a>
             </div>
           </div>
