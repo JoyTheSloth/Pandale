@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/context/ThemeContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -77,14 +78,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sansFont.variable} ${editorialFont.variable} scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#181513] selection:bg-[#D43827]/20 selection:text-[#D43827]">
-        <WishlistProvider>
-          <Header />
-          <main className="flex-1 pb-16 md:pb-0">{children}</main>
-          <Footer />
-          <BottomNav />
-        </WishlistProvider>
+    <html lang="en" suppressHydrationWarning className={`${sansFont.variable} ${editorialFont.variable} scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-[#FAF8F5] dark:bg-[#0C0A09] text-[#181513] dark:text-[#FAF8F5] selection:bg-[#D43827]/20 selection:text-[#D43827]">
+        <ThemeProvider>
+          <WishlistProvider>
+            <Header />
+            <main className="flex-1 pb-16 md:pb-0">{children}</main>
+            <Footer />
+            <BottomNav />
+          </WishlistProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

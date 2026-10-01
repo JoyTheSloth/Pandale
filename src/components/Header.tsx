@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useWishlist } from '@/context/WishlistContext';
+import { useTheme } from '@/context/ThemeContext';
 import { 
   Heart, 
   Compass, 
@@ -16,12 +17,15 @@ import {
   Menu, 
   X, 
   ArrowRight,
-  PhoneCall
+  PhoneCall,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export default function Header() {
   const pathname = usePathname();
   const { count } = useWishlist();
+  const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Close menu drawer when route changes
@@ -114,36 +118,56 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right: Floating Circular Hamburger Menu Button (exactly matching reference image) */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation menu"
-            className={`pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group ${
-              pathname === '/'
-                ? 'bg-black/45 backdrop-blur-md border border-white/20 text-white hover:border-white/40'
-                : 'bg-white border border-[#1C1917] text-[#1C1917] hover:border-[#D8261C]'
-            }`}
-          >
-            {menuOpen ? (
-              <X className="w-5 h-5 text-[#D8261C] transition-transform duration-200" />
-            ) : (
-              <Menu className={`w-5 h-5 ${pathname === '/' ? 'text-white' : 'text-[#1C1917]'}`} />
-            )}
-          </button>
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Theme Toggle Button (Light & Dark Mode) */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              className={`pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group ${
+                pathname === '/'
+                  ? 'bg-black/45 backdrop-blur-md border border-white/20 text-white hover:border-white/40'
+                  : 'bg-white dark:bg-[#1C1917] border border-[#1C1917] dark:border-white/20 text-[#1C1917] dark:text-white hover:border-[#D8261C]'
+              }`}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-amber-300 transition-transform group-hover:rotate-45" />
+              ) : (
+                <Moon className="w-5 h-5 text-amber-500 transition-transform group-hover:-rotate-12" />
+              )}
+            </button>
+
+            {/* Right: Floating Circular Hamburger Menu Button (exactly matching reference image) */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle navigation menu"
+              className={`pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group ${
+                pathname === '/'
+                  ? 'bg-black/45 backdrop-blur-md border border-white/20 text-white hover:border-white/40'
+                  : 'bg-white dark:bg-[#1C1917] border border-[#1C1917] dark:border-white/20 text-[#1C1917] dark:text-white hover:border-[#D8261C]'
+              }`}
+            >
+              {menuOpen ? (
+                <X className="w-5 h-5 text-[#D8261C] transition-transform duration-200" />
+              ) : (
+                <Menu className={`w-5 h-5 ${pathname === '/' ? 'text-white' : 'text-[#1C1917] dark:text-white'}`} />
+              )}
+            </button>
+          </div>
 
         </div>
       </header>
 
       {/* FULL-SCREEN LUXURY OVERLAY MENU WHEN CIRCULAR BUTTON IS CLICKED */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#FFFDF9]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 overflow-y-auto animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 bg-[#FFFDF9]/98 dark:bg-[#0C0A09]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 overflow-y-auto animate-in fade-in duration-200 text-[#1C1917] dark:text-[#FAF8F5]">
           
           {/* Top Bar inside Overlay */}
-          <div className="max-w-5xl mx-auto w-full flex items-center justify-between pb-8 border-b border-[#FED7AA]/60">
+          <div className="max-w-5xl mx-auto w-full flex items-center justify-between pb-8 border-b border-[#FED7AA]/60 dark:border-white/10">
             <Link 
               href="/" 
               onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-[#1C1917] shadow-xs"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-[#1C1917] border border-[#1C1917] dark:border-white/20 shadow-xs"
             >
               <Image
                 src="/brand/pandale-icon.png"
@@ -152,23 +176,33 @@ export default function Header() {
                 height={24}
                 className="w-5 h-5 object-contain"
               />
-              <span className="text-base font-bold font-editorial text-[#1C1917]">
+              <span className="text-base font-bold font-editorial text-[#1C1917] dark:text-white">
                 Pandal<span className="text-[#D8261C]">é</span>
               </span>
             </Link>
 
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-              className="w-11 h-11 rounded-full bg-white border border-[#1C1917] shadow-xs flex items-center justify-center text-[#1C1917] hover:text-[#D8261C] active:scale-95 transition-all"
-            >
-              <X className="w-5 h-5 text-[#D8261C]" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="w-11 h-11 rounded-full bg-white dark:bg-[#1C1917] border border-[#1C1917] dark:border-white/20 shadow-xs flex items-center justify-center text-[#1C1917] dark:text-white hover:text-[#D8261C] active:scale-95 transition-all"
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-300" /> : <Moon className="w-5 h-5 text-amber-500" />}
+              </button>
+
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="w-11 h-11 rounded-full bg-white dark:bg-[#1C1917] border border-[#1C1917] dark:border-white/20 shadow-xs flex items-center justify-center text-[#1C1917] dark:text-white hover:text-[#D8261C] active:scale-95 transition-all"
+              >
+                <X className="w-5 h-5 text-[#D8261C]" />
+              </button>
+            </div>
           </div>
 
           {/* Menu Navigation Links */}
           <div className="max-w-5xl mx-auto w-full py-8 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#B45309] font-bold block mb-4">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#B45309] dark:text-amber-400 font-bold block mb-4">
               Explore Pandalé 2026
             </span>
 
@@ -185,7 +219,7 @@ export default function Header() {
                     className={`group p-4 sm:p-5 rounded-3xl border transition-all flex items-center justify-between ${
                       isActive
                         ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-lg shadow-[#D8261C]/25'
-                        : 'bg-white border-[#FED7AA]/80 text-[#1C1917] hover:border-[#D8261C] hover:bg-[#FFFBEB] shadow-luxe'
+                        : 'bg-white dark:bg-[#1C1917] border-[#FED7AA]/80 dark:border-white/10 text-[#1C1917] dark:text-white hover:border-[#D8261C] hover:bg-[#FFFBEB] dark:hover:bg-[#291B0B] shadow-luxe'
                     }`}
                   >
                     <div className="flex items-start gap-4">

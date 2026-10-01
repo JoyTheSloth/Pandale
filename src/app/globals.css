@@ -27,6 +27,32 @@
     --border-yellow: #FED7AA;
   }
 
+  html.dark {
+    --bg-warm: #0C0A09;
+    --bg-card: #1C1917;
+    --bg-surface: #14100E;
+    --text-primary: #FAF8F5;
+    --text-secondary: #D6D3D1;
+    --text-muted: #A8A29E;
+
+    /* Festive Pujo Red in Dark Mode */
+    --pujo-red: #EF4444;
+    --pujo-red-dark: #DC2626;
+    --pujo-red-deep: #7F1D1D;
+    --pujo-red-light: #2A1215;
+
+    /* Festive Pujo Yellow in Dark Mode */
+    --pujo-yellow: #F59E0B;
+    --pujo-yellow-bright: #FBBF24;
+    --pujo-yellow-light: #3D2808;
+    --pujo-yellow-cream: #291B0B;
+
+    /* Pujo White & Border accents in Dark Mode */
+    --pujo-white: #1C1917;
+    --border-subtle: #2D1E1F;
+    --border-yellow: #4D3319;
+  }
+
   body {
     background-color: var(--bg-warm);
     color: var(--text-primary);
@@ -34,12 +60,35 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   h1, h2, h3, .font-editorial {
     font-family: var(--font-editorial), Georgia, 'Times New Roman', serif;
     letter-spacing: -0.015em;
   }
+}
+
+html.dark body {
+  background-color: #0C0A09;
+  color: #FAF8F5;
+}
+
+html.dark .glass-nav {
+  background: rgba(18, 14, 13, 0.90);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.dark .glass-card {
+  background: rgba(28, 25, 23, 0.90);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Silky smooth transitions across all UI elements */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 350ms;
 }
 
 /* Custom festive ribbon */

@@ -19,7 +19,7 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto z-50 rounded-[2.2rem] bg-black/80 backdrop-blur-2xl border border-white/10 shadow-2xl p-1.5">
+    <nav className="md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto z-50 rounded-[2.2rem] bg-white/95 dark:bg-black/85 backdrop-blur-2xl border border-[#FED7AA] dark:border-white/10 shadow-2xl p-1.5 transition-colors">
       <div className="flex items-center justify-between px-1">
         {navItems.map((item) => {
           const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
@@ -31,19 +31,19 @@ export default function BottomNav() {
               href={item.href}
               className={`flex flex-col items-center justify-center transition-all active:scale-95 ${
                 isActive 
-                  ? 'bg-[#3B1516] border border-[#D8261C]/50 text-[#D8261C] px-3.5 py-1.5 rounded-2xl shadow-inner'
-                  : 'text-[#A8A29E] hover:text-white px-2.5 py-1.5'
+                  ? 'bg-[#FEF2F2] dark:bg-[#3B1516] border border-[#D8261C]/30 dark:border-[#D8261C]/50 text-[#D8261C] px-3.5 py-1.5 rounded-2xl shadow-inner'
+                  : 'text-[#78716C] dark:text-[#A8A29E] hover:text-[#D8261C] dark:hover:text-white px-2.5 py-1.5'
               }`}
             >
               <div className="relative">
-                <Icon className={`w-5 h-5 ${isActive ? 'text-[#D8261C]' : 'text-[#A8A29E]'}`} />
+                <Icon className={`w-5 h-5 ${isActive ? 'text-[#D8261C]' : 'text-[#78716C] dark:text-[#A8A29E]'}`} />
                 {item.badge !== undefined && item.badge > 0 && (
                   <span className="absolute -top-1.5 -right-2 bg-[#D8261C] text-white text-[9px] font-bold h-3.5 w-3.5 rounded-full flex items-center justify-center shadow-xs">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-[#D8261C] font-bold' : 'text-[#A8A29E] font-medium'}`}>
+              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-[#D8261C] font-bold' : 'text-[#78716C] dark:text-[#A8A29E] font-medium'}`}>
                 {item.label}
               </span>
               {isActive && (

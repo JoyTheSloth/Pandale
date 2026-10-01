@@ -216,43 +216,43 @@ export default function HomePage() {
 
         {/* 4-Pillar Luxury Festival Pulse Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
-            <div className="w-11 h-11 rounded-2xl bg-amber-50 text-[#D8261C] border border-[#FDE68A] flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
+          <div className="p-4 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#FED7AA]/80 dark:border-white/10 shadow-luxe flex items-center gap-3.5 text-left">
+            <div className="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-[#D8261C] border border-[#FDE68A] dark:border-amber-700/40 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🏛️
             </div>
             <div>
-              <div className="text-sm font-bold text-[#1C1917] font-editorial">14+ Iconic Pandals</div>
-              <div className="text-[11px] text-[#78716C] leading-snug">North heritage & South theme powerhouses</div>
+              <div className="text-sm font-bold text-[#1C1917] dark:text-[#FAF8F5] font-editorial">14+ Iconic Pandals</div>
+              <div className="text-[11px] text-[#78716C] dark:text-[#A8A29E] leading-snug">North heritage & South theme powerhouses</div>
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
-            <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
+          <div className="p-4 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#FED7AA]/80 dark:border-white/10 shadow-luxe flex items-center gap-3.5 text-left">
+            <div className="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🚇
             </div>
             <div>
-              <div className="text-sm font-bold text-[#1C1917] font-editorial">3 Metro Lines</div>
-              <div className="text-[11px] text-[#78716C] leading-snug">Blue, Green & Purple station-connected</div>
+              <div className="text-sm font-bold text-[#1C1917] dark:text-[#FAF8F5] font-editorial">3 Metro Lines</div>
+              <div className="text-[11px] text-[#78716C] dark:text-[#A8A29E] leading-snug">Blue, Green & Purple station-connected</div>
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
-            <div className="w-11 h-11 rounded-2xl bg-rose-50 text-[#D8261C] border border-rose-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
+          <div className="p-4 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#FED7AA]/80 dark:border-white/10 shadow-luxe flex items-center gap-3.5 text-left">
+            <div className="w-11 h-11 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-[#D8261C] dark:text-rose-400 border border-rose-200 dark:border-rose-800/40 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               🚶
             </div>
             <div>
-              <div className="text-sm font-bold text-[#1C1917] font-editorial">Walk-Verified</div>
-              <div className="text-[11px] text-[#78716C] leading-snug">Precise minute & meter footpaths</div>
+              <div className="text-sm font-bold text-[#1C1917] dark:text-[#FAF8F5] font-editorial">Walk-Verified</div>
+              <div className="text-[11px] text-[#78716C] dark:text-[#A8A29E] leading-snug">Precise minute & meter footpaths</div>
             </div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-[#FED7AA]/80 shadow-luxe flex items-center gap-3.5 text-left">
-            <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
+          <div className="p-4 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#FED7AA]/80 dark:border-white/10 shadow-luxe flex items-center gap-3.5 text-left">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-center font-bold text-lg shrink-0 shadow-2xs">
               📍
             </div>
             <div>
-              <div className="text-sm font-bold text-[#1C1917] font-editorial">Exact GPS Nav</div>
-              <div className="text-[11px] text-[#78716C] leading-snug">Direct 1-tap Google Maps coordinates</div>
+              <div className="text-sm font-bold text-[#1C1917] dark:text-[#FAF8F5] font-editorial">Exact GPS Nav</div>
+              <div className="text-[11px] text-[#78716C] dark:text-[#A8A29E] leading-snug">Direct 1-tap Google Maps coordinates</div>
             </div>
           </div>
         </div>
@@ -262,16 +262,16 @@ export default function HomePage() {
         
         {/* Centered Editorial Header exactly like the reference */}
         <div className="text-center max-w-xl mx-auto mb-10 sm:mb-12">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#D8261C] font-bold block mb-2">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#D8261C] dark:text-amber-400 font-bold block mb-2">
             Kolkata Pujo Circuits
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1C1917] leading-[1.15]">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1C1917] dark:text-[#FAF8F5] leading-[1.15]">
             Explore by <br />
-            <span className="font-editorial italic font-normal text-4xl sm:text-6xl text-[#1C1917]">
+            <span className="font-editorial italic font-normal text-4xl sm:text-6xl text-[#1C1917] dark:text-white">
               Neighborhoods
             </span>
           </h2>
-          <p className="text-xs sm:text-sm text-[#78716C] mt-3 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A8A29E] mt-3 max-w-md mx-auto">
             Swipe through Kolkata’s iconic puja zones, each defined by distinct traditions, heritage, and transit corridors.
           </p>
         </div>
