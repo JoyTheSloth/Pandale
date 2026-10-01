@@ -3,7 +3,6 @@ import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { WishlistProvider } from '@/context/WishlistContext';
 import Header from '@/components/Header';
-import BottomNav from '@/components/BottomNav';
 import Footer from '@/components/Footer';
 
 const sansFont = Plus_Jakarta_Sans({
@@ -81,9 +80,8 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#181513] selection:bg-[#D43827]/20 selection:text-[#D43827]">
         <WishlistProvider>
           <Header />
-          <main className="flex-1 pb-16 md:pb-0">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
-          <BottomNav />
         </WishlistProvider>
       </body>
     </html>
