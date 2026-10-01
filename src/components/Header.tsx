@@ -78,7 +78,9 @@ export default function Header() {
   return (
     <>
       {/* PURE FLOATING HEADER: NO SOLID NAVBAR, JUST THE PILL & CIRCULAR HAMBURGER BUTTON */}
-      <header className="sticky top-0 z-40 w-full pt-4 sm:pt-6 pb-2 px-4 sm:px-8 pointer-events-none transition-all duration-200">
+      <header className={`z-40 w-full pt-4 sm:pt-6 pb-2 px-4 sm:px-8 pointer-events-none transition-all duration-200 ${
+        pathname === '/' ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
+      }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Left: Floating Brand Pill Badge (exactly matching reference image) */}

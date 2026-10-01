@@ -111,8 +111,8 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
-      {/* 1. HERO SECTION - UNCONFINED 9:16 IMMERSIVE EXPERIENCE FOR PHONE UI */}
-      <section className="relative w-full aspect-[9/16] sm:aspect-auto sm:min-h-[750px] md:min-h-[820px] flex flex-col justify-end -mt-20 sm:-mt-24 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
+      {/* 1. HERO SECTION - UNCONFINED 100DVH IMMERSIVE EXPERIENCE FOR PHONE UI */}
+      <section className="relative w-full h-[100dvh] sm:min-h-[800px] flex flex-col justify-end pb-8 sm:pb-12 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
         
         {/* Full Bleed 9:16 Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
         <div className="absolute inset-0 -z-20">
@@ -126,44 +126,32 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Ambient Gradient Scrim: Clear at the top so Durga, Moon & Howrah Bridge shine through, dark at bottom for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent via-50% to-black/95 -z-10" />
+        {/* Ambient Gradient Scrim: Clear at the top and middle so Durga, Lion, Moon & Howrah Bridge are 100% visible, dark at bottom for text */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 via-35% to-transparent -z-10" />
 
-        {/* Hero Content anchored elegantly in the lower portion */}
-        <div className="relative z-10 text-center max-w-2xl mx-auto space-y-4 sm:space-y-5">
+        {/* Hero Content anchored cleanly at the very bottom (over the floor/diyas) */}
+        <div className="relative z-10 text-center max-w-xl mx-auto space-y-3 sm:space-y-4">
           
-          {/* Luxury Heritage Seal Tag */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 shadow-md text-[10px] sm:text-xs font-mono font-bold text-amber-300">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/30 shadow-md text-[10px] sm:text-xs font-mono font-bold text-amber-300">
             <Sparkles className="w-3 h-3 text-[#F59E0B]" />
             <span className="tracking-wider uppercase">ESTD. 2026 • KOLKATA PUJO COMPANION</span>
             <Sparkles className="w-3 h-3 text-[#F59E0B]" />
           </div>
 
-          {/* Hero Centerpiece: Official Logo in Sleek Glass Capsule */}
-          <div className="flex flex-col items-center justify-center">
-            <div className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-white/95 backdrop-blur-md shadow-2xl border border-white/80 transition-transform hover:scale-[1.02]">
-              <div className="relative w-44 sm:w-60 md:w-72 h-10 sm:h-14">
-                <Image
-                  src="/brand/pandale-logo.png"
-                  alt="Pandalé — Kolkata Durga Puja & Metro Guide"
-                  fill
-                  priority
-                  className="object-contain"
-                />
-              </div>
-            </div>
+          <div className="space-y-1">
+            <h1 className="text-3xl sm:text-5xl font-bold font-editorial text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              Kolkata Pujo 2026
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-200 max-w-md mx-auto leading-relaxed drop-shadow font-normal px-2">
+              Discover iconic pandals, nearest Metro exits, and verified Google Maps walking routes.
+            </p>
           </div>
-
-          {/* Supporting Text */}
-          <p className="text-xs sm:text-sm md:text-base text-stone-200 max-w-lg mx-auto leading-relaxed drop-shadow font-normal px-2">
-            Discover the city’s most iconic pandals, navigate via Kolkata Metro with exact walking minutes, and open verified Google Maps locations instantly.
-          </p>
 
           {/* Quick Action Badges / CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 pt-1">
             <Link
               href="/pandals"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg shadow-[#D8261C]/40 transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg shadow-[#D8261C]/50 transition-transform active:scale-95"
             >
               <Compass className="w-3.5 h-3.5 text-[#FDE047]" />
               <span>Explore Pandals</span>
@@ -171,7 +159,7 @@ export default function HomePage() {
 
             <Link
               href="/metro"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
               <Train className="w-3.5 h-3.5 text-blue-600" />
               <span>Metro Routes</span>
@@ -179,7 +167,7 @@ export default function HomePage() {
 
             <Link
               href="/wishlist"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
               <Heart className="w-3.5 h-3.5 text-[#D8261C] fill-[#D8261C]" />
               <span>Wishlist ({wishlistCount})</span>
@@ -187,7 +175,7 @@ export default function HomePage() {
 
             <button
               onClick={handleNearMe}
-              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
               <LocateFixed className={`w-3.5 h-3.5 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
               <span>{userLocation ? 'Near Me Active' : 'Near Me'}</span>
