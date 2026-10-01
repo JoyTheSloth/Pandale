@@ -143,10 +143,10 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
               toggleWishlist(pandal.id);
             }}
             aria-label={saved ? 'Remove from wishlist' : 'Save to wishlist'}
-            className={`w-7 h-7 rounded-full backdrop-blur-md transition-all flex items-center justify-center cursor-pointer shadow-sm ${
+            className={`w-7 h-7 rounded-full backdrop-blur-md transition-all flex items-center justify-center cursor-pointer shadow-sm btn-jiggle ${
               saved
                 ? 'bg-[#D8261C] text-white border border-[#FDE047]'
-                : 'bg-black/60 text-white/90 hover:scale-110'
+                : 'bg-black/60 text-white/90'
             }`}
           >
             <Heart className={`w-3.5 h-3.5 ${saved ? 'fill-[#FDE047] text-[#FDE047]' : ''}`} />
@@ -154,7 +154,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
 
           <Link
             href={`/pandal/${pandal.slug}`}
-            className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white/90 shadow-sm flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
+            className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white/90 shadow-sm flex items-center justify-center btn-jiggle cursor-pointer"
             aria-label="View pandal details"
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -266,7 +266,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
           {/* Primary CTA Button */}
           <Link
             href={`/pandal/${pandal.slug}`}
-            className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#7B0D11] hover:bg-[#680A0E] text-white font-editorial font-bold flex items-center justify-center gap-1.5 shadow-sm shadow-[#7B0D11]/20 hover:shadow-md transition-all text-xs sm:text-sm active:scale-98 relative overflow-hidden group/btn"
+            className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#7B0D11] hover:bg-[#680A0E] text-white font-editorial font-bold flex items-center justify-center gap-1.5 shadow-sm shadow-[#7B0D11]/20 hover:shadow-md transition-all text-xs sm:text-sm active:scale-98 relative overflow-hidden group/btn btn-jiggle"
           >
             <span className="relative z-10">{isBn ? 'প্যান্ডেল দেখুন' : 'Explore Pandal'}</span>
             <ArrowRight className="w-3.5 h-3.5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
@@ -278,7 +278,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             target="_blank"
             rel="noopener noreferrer"
             title={isBn ? 'গুগল ম্যাপসে দেখুন' : 'Open in Google Maps'}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] flex items-center justify-center text-[#D8261C] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-all shadow-2xs shrink-0 cursor-pointer"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] flex items-center justify-center text-[#D8261C] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-all shadow-2xs shrink-0 cursor-pointer btn-jiggle"
           >
             <MapPin className="w-4 h-4 text-[#D8261C]" />
           </a>
@@ -288,7 +288,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             type="button"
             onClick={handleShare}
             title={isBn ? 'শেয়ার করুন' : 'Share'}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] hover:bg-stone-50 dark:hover:bg-white/5 transition-all shadow-2xs shrink-0 cursor-pointer"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] hover:bg-stone-50 dark:hover:bg-white/5 transition-all shadow-2xs shrink-0 cursor-pointer btn-jiggle"
           >
             <ExternalLink className="w-4 h-4" />
           </button>

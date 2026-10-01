@@ -56,8 +56,7 @@ export default function CreatorConnectModal() {
           type="button"
           onClick={() => setIsOpen(true)}
           title="Who is behind this? Connect with Creator"
-          aria-label="Connect with Creator"
-          className="relative group flex items-center gap-2 p-3 sm:p-3.5 rounded-full bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-white shadow-xl shadow-emerald-950/60 border-2 border-white/20 hover:scale-108 active:scale-95 transition-all duration-300 cursor-pointer"
+          className="relative group flex items-center gap-2 p-3 sm:p-3.5 rounded-full bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-white shadow-xl shadow-emerald-950/60 border-2 border-white/20 hover:scale-110 active:scale-90 transition-all duration-300 cursor-pointer animate-periodic-jiggle btn-jiggle"
         >
           {/* Subtle Ambient Pulse Ring */}
           <span className="absolute -inset-1 rounded-full bg-emerald-400 opacity-40 animate-ping pointer-events-none" />
@@ -142,7 +141,7 @@ export default function CreatorConnectModal() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-95 transition-all"
+                className="w-full py-3 px-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 btn-jiggle"
               >
                 <WhatsAppIcon className="w-4 h-4 text-white" />
                 <span>Connect on WhatsApp</span>
@@ -152,7 +151,7 @@ export default function CreatorConnectModal() {
               <div className="flex items-center gap-2">
                 <a
                   href={`mailto:${email}?subject=Project%20Inquiry%20from%20Pandalé`}
-                  className="flex-1 py-2.5 px-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/15 transition-all truncate"
+                  className="flex-1 py-2.5 px-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/15 btn-jiggle truncate"
                 >
                   <Mail className="w-4 h-4 text-amber-300 shrink-0" />
                   <span className="truncate">{email}</span>
@@ -162,7 +161,7 @@ export default function CreatorConnectModal() {
                   type="button"
                   onClick={handleCopyEmail}
                   title="Copy email to clipboard"
-                  className="p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-stone-300 hover:text-white border border-white/15 transition-all shrink-0"
+                  className="p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-stone-300 hover:text-white border border-white/15 btn-jiggle shrink-0 cursor-pointer"
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
