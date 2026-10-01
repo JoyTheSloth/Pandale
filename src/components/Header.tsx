@@ -1,15 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useWishlist } from '@/context/WishlistContext';
-import { Heart, Compass, Train, MapPin, Route, ShieldCheck, Sparkles } from 'lucide-react';
+import { 
+  Heart, 
+  Compass, 
+  Train, 
+  MapPin, 
+  Route, 
+  ShieldCheck, 
+  Sparkles, 
+  Menu, 
+  X, 
+  ArrowRight,
+  PhoneCall
+} from 'lucide-react';
 
 export default function Header() {
   const pathname = usePathname();
   const { count } = useWishlist();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const navLinks = [
     { href: '/pandals', label: 'Pandals', icon: Compass },
@@ -20,9 +38,12 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-nav border-b border-[#FEE2E2] transition-all duration-200 shadow-xs">
+    <header className="sticky top-0 z-40 w-full glass-nav border-b border-[#FEE2E2] transition-all duration-200 shadow-xs relative">
+      {/* Pattern background overlay behind navbar matching reference image */}
+      <div className="absolute inset-0 bg-[url('/brand/pujo-pattern-bg.jpg')] bg-repeat bg-[length:320px_auto] opacity-15 pointer-events-none -z-10" />
+
       {/* Top Announcement Bar (like reference image) */}
-      <div className="bg-[#FFFBEB] text-[#92400E] border-b border-[#FED7AA]/60 text-[11px] font-medium py-1.5 px-4 text-center overflow-hidden">
+      <div className="bg-[#FFFBEB]/90 backdrop-blur-xs text-[#92400E] border-b border-[#FED7AA]/60 text-[11px] font-medium py-1.5 px-4 text-center overflow-hidden">
         <div className="flex items-center justify-center gap-2 truncate">
           <span className="font-bold text-[#D8261C]">✨ Pujo 2026 Live:</span>
           <span className="truncate">Night Metro Special Schedules & 14+ Pandals with Exact Google Maps Coordinates</span>
@@ -37,8 +58,8 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
-        {/* Brand Logo with Official Icon used directly without any box */}
-        <Link href="/" className="group flex items-center gap-3 transition-transform active:scale-95">
+        {/* DESKTOP BRAND LOGO */}
+        <Link href="/" className="hidden md:flex items-center gap-3 transition-transform active:scale-95 group">
           <Image
             src="/brand/pandale-icon.png"
             alt="Pandalé Official Icon"
@@ -62,7 +83,25 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* MOBILE BRAND PILL BADGE (MATCHING USER REFERENCE SCREENSHOT) */}
+        <Link 
+          href="/" 
+          className="md:hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#1C1917] shadow-xs active:scale-95 transition-transform"
+        >
+          <Image
+            src="/brand/pandale-icon.png"
+            alt="Pandalé"
+            width={24}
+            height={24}
+            className="w-5 h-5 object-contain shrink-0"
+            priority
+          />
+          <span className="text-base font-bold font-editorial tracking-tight text-[#1C1917]">
+            Pandal<span className="text-[#D8261C]">é</span>
+          </span>
+        </Link>
+
+        {/* DESKTOP NAVIGATION */}
         <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
           {navLinks.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -103,22 +142,100 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Mobile Header Actions */}
+        {/* MOBILE CIRCULAR HAMBURGER BUTTON (MATCHING USER REFERENCE SCREENSHOT) */}
         <div className="flex items-center gap-2 md:hidden">
           <Link
             href="/wishlist"
-            className="relative p-2.5 rounded-full bg-white border border-[#FED7AA] text-[#1C1917] shadow-xs active:scale-95"
+            className="relative p-2 rounded-full bg-white border border-[#1C1917]/20 text-[#1C1917] shadow-xs active:scale-95"
+            aria-label="Wishlist"
           >
             <Heart className="w-5 h-5 text-[#D8261C] fill-[#D8261C]/20" />
             {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#D8261C] text-[#FEF3C7] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white shadow-xs">
+              <span className="absolute -top-1 -right-1 bg-[#D8261C] text-[#FEF3C7] text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white shadow-xs">
                 {count}
               </span>
             )}
           </Link>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+            className="w-10 h-10 rounded-full bg-white border border-[#1C1917] shadow-xs flex items-center justify-center text-[#1C1917] active:scale-95 transition-transform"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-5 h-5 text-[#D8261C]" />
+            ) : (
+              <Menu className="w-5 h-5 text-[#1C1917]" />
+            )}
+          </button>
         </div>
 
       </div>
+
+      {/* MOBILE FULL-SCREEN / SLIDE DRAWER MENU */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-x-0 top-[calc(100%+1px)] bg-white/98 backdrop-blur-xl border-b-2 border-[#FED7AA] shadow-2xl p-6 space-y-6 z-50 animate-in fade-in slide-in-from-top-4 duration-200 max-h-[85vh] overflow-y-auto">
+          
+          <div className="space-y-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#B45309] font-bold block mb-1">
+              Navigate Kolkata Pujo
+            </span>
+            <div className="grid grid-cols-1 gap-2">
+              {navLinks.map((item) => {
+                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+                const Icon = item.icon;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center justify-between p-3.5 rounded-2xl transition-all ${
+                      isActive
+                        ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25'
+                        : 'bg-[#FFFDF9] border border-[#FED7AA]/70 text-[#1C1917] hover:bg-[#FEF3C7]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-5 h-5 ${isActive ? 'text-[#FDE047]' : 'text-[#D8261C]'}`} />
+                      <span className="font-bold text-sm">{item.label}</span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {item.badge !== undefined && item.badge > 0 && (
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                          isActive ? 'bg-[#FEF3C7] text-[#92400E]' : 'bg-[#D8261C] text-white'
+                        }`}>
+                          {item.badge}
+                        </span>
+                      )}
+                      <ArrowRight className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#A8A29E]'}`} />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Quick Puja Help & Emergency Helplines inside drawer */}
+          <div className="p-4 rounded-2xl bg-[#FFFBEB] border border-[#FED7AA] space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1C1917]">
+              <PhoneCall className="w-3.5 h-3.5 text-[#D8261C]" />
+              <span>Kolkata Police Puja Helpline</span>
+            </div>
+            <div className="text-[#92400E] font-mono text-xs font-bold">
+              100 / 1090 / 033-2214-3230
+            </div>
+          </div>
+
+          <div className="pt-2 text-center text-xs text-[#78716C]">
+            <Link href="/admin" className="font-semibold hover:text-[#D8261C] underline">
+              Admin & Data Portal
+            </Link>
+          </div>
+
+        </div>
+      )}
+
     </header>
   );
 }
