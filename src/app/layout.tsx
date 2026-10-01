@@ -26,12 +26,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Pujo 2026 | Kolkata Durga Puja Pandal & Metro Navigation Guide',
+  title: 'Pandalé | Kolkata Durga Puja Pandal & Metro Navigation Guide',
   description:
-    'Discover Kolkata’s most iconic 2026 Durga Puja pandals, real-time metro walking routes, latest authorized Instagram photos, exact Google Maps locations, and personal Puja itinerary planner.',
+    'Discover Kolkata’s most iconic 2026 Durga Puja pandals, real-time metro walking routes, latest authorized Instagram photos, exact Google Maps locations, and personal Puja itinerary planner on Pandalé.',
   keywords: [
+    'Pandalé',
+    'Pandalé 2026',
     'Kolkata Durga Puja 2026',
-    'Pujo 2026',
     'Kolkata Metro pandal guide',
     'Durga Puja route planner',
     'Bagbazar Sarbojanin',
@@ -42,15 +43,15 @@ export const metadata: Metadata = {
     'North Kolkata Pujo',
     'South Kolkata Pujo'
   ],
-  authors: [{ name: 'Pujo 2026 Kolkata Guide' }],
+  authors: [{ name: 'Pandalé Kolkata' }],
   openGraph: {
-    title: 'Pujo 2026 — Kolkata Durga Puja & Metro Guide',
+    title: 'Pandalé — Kolkata Durga Puja & Metro Guide',
     description: 'The definitive companion for exploring Kolkata Durga Puja 2026 by Metro with exact Google Maps coordinates.',
-    url: 'https://pujo2026.kolkata.in',
-    siteName: 'Pujo 2026',
+    url: 'https://pandale.in',
+    siteName: 'Pandalé',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
         width: 1200,
         height: 630,
         alt: 'Kolkata Durga Puja Pandal Illumination 2026'

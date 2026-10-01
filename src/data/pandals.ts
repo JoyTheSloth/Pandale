@@ -47,11 +47,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Queue moves steadily along VIP Road service lane.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
     images: [
       {
         id: 'sb-1',
-        url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
         caption: 'Towering facade illuminated under the midnight Kolkata sky',
         category: 'official',
         author: 'Kolkata Pujo Archives',
@@ -81,7 +81,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'calcutta_stories',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'The golden reflections at Sree Bhumi never fail to take our breath away. Ready for 2026 Puja preparations! #Pujo2026 #SreeBhumi #KolkataDurgaPuja',
-        media_url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=800&q=80',
+        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
         permalink: 'https://instagram.com/p/C-sreebhumi1',
         timestamp: '2026-09-28T18:40:00Z',
         media_type: 'IMAGE',
@@ -529,11 +529,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Direct straight boulevard walk from Kalighat metro Gate 3.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
     images: [
       {
         id: 'dp-1',
-        url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
         caption: 'Front facade taking shape under modern architectural geometry',
         category: 'official',
         author: 'Deshapriya Media'
@@ -546,7 +546,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'rashbehari_diaries',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'Just 5 mins walk from Kalighat metro! The scale of Deshapriya Park 2026 is truly monumental. #DeshapriyaPark #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=800&q=80',
+        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
         permalink: 'https://instagram.com/p/C-deshapriya1',
         timestamp: '2026-09-30T12:00:00Z',
         media_type: 'IMAGE',
@@ -810,11 +810,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Expansive open park grounds with very comfortable walking paths.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
     images: [
       {
         id: 'fd-1',
-        url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
         caption: 'Grand architectural setup across the wide FD block park grounds',
         category: 'official',
         author: 'FD Block Media'
@@ -827,7 +827,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'saltlake_vibes',
         user_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
         caption: 'Taking the Green Line metro straight to Karunamoyee made visiting FD Block puja effortless! #GreenLineMetro #SaltLake #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=800&q=80',
+        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
         permalink: 'https://instagram.com/p/C-fdblock1',
         timestamp: '2026-09-30T18:15:00Z',
         media_type: 'IMAGE',

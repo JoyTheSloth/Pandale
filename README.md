@@ -1,4 +1,4 @@
-# 🪔 Pujo 2026 — Kolkata Durga Puja Pandal & Metro Guide
+# 🪔 Pandalé — Kolkata Durga Puja Pandal & Metro Guide
 
 > **“Kolkata Pujo, One Guide.”**  
 > Discover the city’s most iconic pandals, plan your route by Metro, check exact walking times, view latest 2026 preview photography, open exact Google Maps coordinates, and curate your personalized Puja wishlist.

@@ -36,7 +36,7 @@ export function normalizeInstagramMedia(
     instagram_media_id: raw.id,
     username: raw.username || 'authorized_pujo_creator',
     caption: raw.caption || 'Kolkata Durga Puja 2026 glimpse',
-    media_url: raw.media_url || raw.thumbnail_url || 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=800&q=80',
+    media_url: raw.media_url || raw.thumbnail_url || 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
     thumbnail_url: raw.thumbnail_url || raw.media_url,
     permalink: raw.permalink || 'https://instagram.com',
     timestamp: raw.timestamp || new Date().toISOString(),

@@ -16,7 +16,7 @@ export default function Footer() {
                 <Sparkles className="w-4 h-4 text-amber-200" />
               </div>
               <span className="text-xl font-bold font-editorial text-white tracking-wide">
-                PUJO 2026
+                Pandalé 2026
               </span>
             </div>
             <p className="text-sm text-[#A69E94] leading-relaxed">
@@ -127,7 +127,7 @@ export default function Footer() {
 
         {/* Bottom copyright and notes */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#8E857B] gap-4">
-          <p>© 2026 Pujo 2026 Kolkata. Built for festival explorers and pilgrims.</p>
+          <p>© 2026 Pandalé Kolkata. Built for festival explorers and pilgrims.</p>
           <div className="flex items-center gap-4">
             <Link href="/admin" className="hover:text-white transition-colors">
               Data & Admin Management

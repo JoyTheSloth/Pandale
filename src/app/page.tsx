@@ -137,7 +137,7 @@ export default function HomePage() {
           {/* Subtle Tagline Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E9E2D8] shadow-xs text-xs font-mono font-medium text-[#181513]">
             <span className="w-2 h-2 rounded-full bg-[#D43827] animate-ping" />
-            <span>Kolkata Durga Puja 2026 Season Edition</span>
+            <span>Pandalé • Kolkata Durga Puja 2026 Edition</span>
           </div>
 
           {/* Hero Main Headline */}
@@ -341,7 +341,7 @@ export default function HomePage() {
             className="group relative h-48 sm:h-56 rounded-2xl overflow-hidden border border-[#E9E2D8] shadow-sm"
           >
             <Image
-              src="https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=600&q=80"
+              src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80"
               alt="East Kolkata Durga Puja"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"

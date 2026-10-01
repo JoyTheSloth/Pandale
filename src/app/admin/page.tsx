@@ -99,7 +99,7 @@ export default function AdminPage() {
         last_updated: 'Just now'
       },
       recommended_days: ['Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-      featured_image: 'https://images.unsplash.com/photo-1601659972322-263a48e65e6d?auto=format&fit=crop&w=1200&q=80',
+      featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
       images: [],
       latest_images: [],
       trending_score: 85,
@@ -140,7 +140,7 @@ export default function AdminPage() {
             <span>Admin & Content Management Portal</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold font-editorial text-[#181513]">
-            Pujo 2026 Data Hub
+            Pandalé Data Hub
           </h1>
           <p className="text-xs sm:text-sm text-[#5C554E] mt-1">
             Add or edit pandals, update themes, adjust metro walking times, and trigger authorized Instagram sync.

@@ -30,7 +30,7 @@ export default function Header() {
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
               <span className="text-xl sm:text-2xl font-bold tracking-tight text-[#181513] font-editorial">
-                PUJO
+                Pandalé
               </span>
               <span className="text-xs px-1.5 py-0.5 rounded font-mono font-semibold bg-[#D43827]/10 text-[#D43827] border border-[#D43827]/20">
                 2026
