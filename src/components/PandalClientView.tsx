@@ -182,9 +182,9 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={exactMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl bg-[#D43827] hover:bg-[#B52819] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#D43827]/40 transition-all active:scale-95"
+                className="px-6 py-3.5 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#D8261C]/40 transition-all active:scale-95"
               >
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-4 h-4 text-[#FDE047]" />
                 <span>Open in Google Maps</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
@@ -239,7 +239,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 {pandal.tags.map((t) => (
                   <span
                     key={t}
-                    className="px-3 py-1 rounded-full bg-[#FAF8F5] border border-[#EBE3D8] text-xs font-medium text-[#181513]"
+                    className="px-3 py-1 rounded-full bg-[#FFFBEB] border border-[#FED7AA] text-xs font-bold text-[#B45309]"
                   >
                     #{t}
                   </span>
@@ -334,16 +334,16 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
               </h3>
 
               <div className="space-y-3">
-                <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#EBE3D8] flex items-center justify-between">
+                <div className="p-3.5 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                      <Train className="w-4 h-4" />
+                    <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+                      M
                     </div>
                     <div>
-                      <span className="text-[10px] text-[#8E857B] block font-semibold uppercase">
+                      <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
                         Nearest Metro
                       </span>
-                      <span className="text-xs font-bold text-[#181513]">
+                      <span className="text-xs font-bold text-[#1C1917]">
                         {pandal.nearest_metro}
                       </span>
                     </div>
@@ -351,20 +351,20 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#EBE3D8]">
-                    <span className="text-[10px] text-[#8E857B] block font-semibold uppercase">
+                  <div className="p-3 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A]">
+                    <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
                       Distance
                     </span>
-                    <span className="text-sm font-bold text-[#D43827]">
+                    <span className="text-sm font-bold text-[#D8261C]">
                       {pandal.walking_distance.split(' ')[0]}
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#EBE3D8]">
-                    <span className="text-[10px] text-[#8E857B] block font-semibold uppercase">
+                  <div className="p-3 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A]">
+                    <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
                       Estimated Walk
                     </span>
-                    <span className="text-sm font-bold text-[#181513]">
+                    <span className="text-sm font-bold text-[#1C1917]">
                       {pandal.walking_time_mins} min
                     </span>
                   </div>
@@ -376,7 +376,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={exactMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-4 rounded-2xl bg-[#D43827] hover:bg-[#B52819] text-white text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 shadow-lg shadow-[#D43827]/30 transition-all active:scale-98"
+                className="w-full py-4 px-4 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 shadow-lg shadow-[#D8261C]/35 transition-all active:scale-98"
               >
                 <span>CHECK OUT IN GOOGLE MAPS →</span>
               </a>
@@ -385,9 +385,9 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={metroDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-3 rounded-xl border border-[#D8CEBF] bg-[#FAF8F5] hover:bg-white text-xs font-semibold text-center flex items-center justify-center gap-1.5 text-[#181513]"
+                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] bg-white hover:bg-[#FFFBEB] text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917]"
               >
-                <Footprints className="w-3.5 h-3.5 text-[#8E857B]" />
+                <Footprints className="w-3.5 h-3.5 text-[#F59E0B]" />
                 <span>Walking Route from Metro Station</span>
               </a>
 

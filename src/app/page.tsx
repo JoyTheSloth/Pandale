@@ -129,21 +129,21 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="relative pt-6 sm:pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         
-        {/* Subtle decorative background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-b from-[#D43827]/8 via-[#C99726]/5 to-transparent blur-3xl -z-10 pointer-events-none" />
+        {/* Subtle festive decorative background glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-b from-[#D8261C]/20 via-[#F59E0B]/15 to-transparent blur-3xl -z-10 pointer-events-none" />
 
         <div className="text-center max-w-3xl mx-auto space-y-5">
           
           {/* Subtle Tagline Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E9E2D8] shadow-xs text-xs font-mono font-medium text-[#181513]">
-            <span className="w-2 h-2 rounded-full bg-[#D43827] animate-ping" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#FED7AA] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D8261C] animate-ping" />
             <span>Pandalé • Kolkata Durga Puja 2026 Edition</span>
           </div>
 
           {/* Hero Main Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-editorial text-[#181513] tracking-tight leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-editorial text-[#1C1917] tracking-tight leading-[1.08]">
             Kolkata Pujo, <br className="hidden sm:inline" />
-            <span className="text-[#D43827] italic font-normal">One Guide.</span>
+            <span className="text-[#D8261C] italic font-normal">One Guide.</span>
           </h1>
 
           {/* Supporting Text */}
@@ -203,15 +203,15 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
             <Link
               href="/pandals"
-              className="px-5 py-2.5 rounded-full bg-[#181513] hover:bg-[#2A2623] text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
+              className="px-5 py-2.5 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-[#D8261C]/30 transition-transform active:scale-95"
             >
-              <Compass className="w-4 h-4 text-amber-300" />
+              <Compass className="w-4 h-4 text-[#FDE047]" />
               <span>Explore Pandals</span>
             </Link>
 
             <Link
               href="/metro"
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FAF8F5] border border-[#D8CEBF] text-[#181513] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
+              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] text-xs font-bold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
             >
               <Train className="w-4 h-4 text-blue-600" />
               <span>Explore by Metro</span>
@@ -219,17 +219,17 @@ export default function HomePage() {
 
             <Link
               href="/wishlist"
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FAF8F5] border border-[#D8CEBF] text-[#181513] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
+              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] text-xs font-bold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
             >
-              <Heart className="w-4 h-4 text-[#D43827]" />
+              <Heart className="w-4 h-4 text-[#D8261C] fill-[#D8261C]" />
               <span>My Wishlist ({wishlistCount})</span>
             </Link>
 
             <button
               onClick={handleNearMe}
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FAF8F5] border border-[#D8CEBF] text-[#181513] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
+              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] text-xs font-bold flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
             >
-              <LocateFixed className={`w-4 h-4 ${geoLoading ? 'animate-spin text-amber-500' : 'text-emerald-600'}`} />
+              <LocateFixed className={`w-4 h-4 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
               <span>{userLocation ? 'Near Me Active' : 'Near Me'}</span>
             </button>
           </div>
@@ -392,24 +392,24 @@ export default function HomePage() {
 
       {/* 4. "START FROM YOUR METRO STATION" - DEDICATED METRO DISCOVERY WIDGET */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="bg-gradient-to-br from-[#181513] to-[#25211E] rounded-3xl p-6 sm:p-10 text-white shadow-xl border border-[#332E2A]">
+        <div className="bg-gradient-to-br from-[#7F1D1D] via-[#991B1B] to-[#450A0A] rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-[#F59E0B]/30 relative overflow-hidden">
           
-          <div className="max-w-2xl mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-mono mb-3 border border-blue-500/30">
-              <Train className="w-3.5 h-3.5" />
+          <div className="max-w-2xl mb-8 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] text-xs font-mono mb-3 border border-[#FDE68A] font-bold">
+              <Train className="w-3.5 h-3.5 text-[#B45309]" />
               <span>Smart Kolkata Transit</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-bold font-editorial text-white mb-3">
               Start From Your Metro Station
             </h2>
-            <p className="text-sm text-stone-300 leading-relaxed">
+            <p className="text-sm text-[#FEF3C7]/90 leading-relaxed">
               Select your boarding or destination station. Instantly discover all nearby iconic pandals, exact walking distances, minutes on foot, and direct Google Maps directions.
             </p>
           </div>
 
           {/* Station Selector Bar */}
-          <div className="mb-8">
-            <span className="text-xs uppercase font-mono tracking-wider text-stone-400 block mb-3">
+          <div className="mb-8 relative z-10">
+            <span className="text-xs uppercase font-mono tracking-wider text-[#FDE68A] font-bold block mb-3">
               Select Station:
             </span>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
@@ -419,16 +419,16 @@ export default function HomePage() {
                   <button
                     key={station.id}
                     onClick={() => setSelectedMetroId(station.id)}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
                       isSelected
-                        ? 'bg-[#D43827] text-white shadow-lg shadow-[#D43827]/30 scale-102'
-                        : 'bg-[#2E2925] text-stone-300 hover:bg-[#3D3732] hover:text-white'
+                        ? 'bg-[#F59E0B] text-[#450A0A] shadow-lg shadow-[#F59E0B]/40 scale-102 border-2 border-white'
+                        : 'bg-[#450A0A]/70 text-[#FEF3C7] hover:bg-[#450A0A] hover:text-white border border-[#F87171]/20'
                     }`}
                   >
-                    <span className={`w-2 h-2 rounded-full ${station.line_code === 'blue' ? 'bg-blue-400' : 'bg-emerald-400'}`} />
+                    <span className={`w-2 h-2 rounded-full ${station.line_code === 'blue' ? 'bg-blue-300' : 'bg-emerald-300'}`} />
                     <span>{station.name}</span>
                     {station.bengali_name && (
-                      <span className="text-[10px] opacity-75">({station.bengali_name})</span>
+                      <span className="text-[10px] opacity-80">({station.bengali_name})</span>
                     )}
                   </button>
                 );
@@ -612,31 +612,31 @@ export default function HomePage() {
 
       {/* 7. PLANNER & WISHLIST CTA HERO */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-8">
-        <div className="relative rounded-3xl overflow-hidden bg-[#FAF3EA] border border-[#E8DEC8] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#FFFBEB] via-[#FEF3C7] to-[#FEE2E2] border border-[#FED7AA] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
           
           <div className="max-w-xl space-y-4">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#D43827]/10 text-[#D43827] inline-block font-mono">
+            <span className="px-3.5 py-1 rounded-full text-xs font-bold bg-[#D8261C] text-white inline-block font-mono shadow-xs">
               Effortless Pandal Hopping
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-editorial text-[#181513]">
+            <h2 className="text-3xl sm:text-4xl font-bold font-editorial text-[#1C1917]">
               Ready to craft your custom Pujo Itinerary?
             </h2>
-            <p className="text-sm text-[#5C554E] leading-relaxed">
+            <p className="text-sm text-[#57534E] leading-relaxed">
               Select multiple pandals across Kolkata, let our planner generate your sequential transit hops by Metro and walking, and open the complete route directly in Google Maps.
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <Link
                 href="/planner"
-                className="px-6 py-3 rounded-2xl bg-[#D43827] hover:bg-[#B52819] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all active:scale-95"
+                className="px-6 py-3.5 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-2 shadow-md shadow-[#D8261C]/30 transition-all active:scale-95"
               >
-                <Route className="w-4 h-4" />
+                <Route className="w-4 h-4 text-[#FDE047]" />
                 <span>Launch Route Planner</span>
               </Link>
               <Link
                 href="/wishlist"
-                className="px-6 py-3 rounded-2xl bg-white hover:bg-stone-50 border border-[#D8CEBF] text-[#181513] text-xs font-bold flex items-center gap-2 shadow-xs transition-all active:scale-95"
+                className="px-6 py-3.5 rounded-2xl bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] text-xs font-bold flex items-center gap-2 shadow-xs transition-all active:scale-95"
               >
-                <Heart className="w-4 h-4 text-[#D43827]" />
+                <Heart className="w-4 h-4 text-[#D8261C] fill-[#D8261C]" />
                 <span>View Saved Wishlist ({wishlistCount})</span>
               </Link>
             </div>

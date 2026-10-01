@@ -90,7 +90,7 @@ export default function SearchAndFilters({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search pandals by name, metro station, theme, or locality..."
-            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white border border-[#E2DAD0] text-sm text-[#181513] placeholder-[#8E857B] focus:outline-none focus:ring-2 focus:ring-[#D43827]/30 focus:border-[#D43827] shadow-sm transition-all"
+            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white border border-[#FED7AA] text-sm text-[#1C1917] placeholder-[#78716C] focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] shadow-xs transition-all"
           />
           {searchQuery && (
             <button
@@ -107,13 +107,13 @@ export default function SearchAndFilters({
           type="button"
           onClick={onNearMeToggle}
           title="Show pandals nearest to your current location"
-          className={`px-3.5 py-3.5 rounded-2xl text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm shrink-0 border ${
+          className={`px-3.5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 border ${
             isNearMeActive
-              ? 'bg-[#D43827] text-white border-[#D43827]'
-              : 'bg-white text-[#181513] border-[#E2DAD0] hover:bg-[#FAF8F5]'
+              ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
+              : 'bg-white text-[#1C1917] border-[#FED7AA] hover:bg-[#FFFBEB]'
           }`}
         >
-          <LocateFixed className={`w-4 h-4 ${isNearMeActive ? 'text-amber-200 animate-spin' : 'text-[#D43827]'}`} />
+          <LocateFixed className={`w-4 h-4 ${isNearMeActive ? 'text-[#FDE047] animate-spin' : 'text-[#D8261C]'}`} />
           <span className="hidden sm:inline">Near Me</span>
         </button>
 
@@ -140,10 +140,10 @@ export default function SearchAndFilters({
             <button
               key={zone}
               onClick={() => onZoneChange(zone)}
-              className={`px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                 isSelected
-                  ? 'bg-[#181513] text-white shadow-sm'
-                  : 'bg-white border border-[#E2DAD0] text-[#5C554E] hover:text-[#181513] hover:border-[#8E857B]'
+                  ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25 border border-[#FDE047]/40'
+                  : 'bg-white border border-[#FED7AA] text-[#57534E] hover:text-[#D8261C] hover:border-[#D8261C]'
               }`}
             >
               {zone === 'All' ? 'All Zones' : zone}
@@ -170,25 +170,25 @@ export default function SearchAndFilters({
 
           <button
             onClick={onMustVisitToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all ${
               mustVisitOnly
-                ? 'bg-[#D43827] text-white border-[#D43827] shadow-sm'
-                : 'bg-white text-[#5C554E] border-[#E2DAD0] hover:border-[#D43827]'
+                ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
+                : 'bg-white text-[#57534E] border-[#FED7AA] hover:border-[#D8261C]'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
             <span>Must Visit</span>
           </button>
 
           <button
             onClick={onTrendingToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all ${
               trendingOnly
-                ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
-                : 'bg-white text-[#5C554E] border-[#E2DAD0] hover:border-amber-400'
+                ? 'bg-[#F59E0B] text-white border-[#F59E0B] shadow-md shadow-[#F59E0B]/25'
+                : 'bg-white text-[#57534E] border-[#FED7AA] hover:border-amber-400'
             }`}
           >
-            <Flame className="w-3.5 h-3.5" />
+            <Flame className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>Trending</span>
           </button>
 

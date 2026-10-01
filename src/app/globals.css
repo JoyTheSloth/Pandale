@@ -2,19 +2,29 @@
 
 @layer base {
   :root {
-    --bg-warm: #FAF8F5;
+    --bg-warm: #FFFDF9;
     --bg-card: #FFFFFF;
-    --bg-surface: #F5EFEB;
-    --text-primary: #181513;
-    --text-secondary: #5C554E;
-    --text-muted: #8E857B;
-    --vermillion: #D43827;
-    --vermillion-dark: #B52819;
-    --vermillion-light: #FDF1EE;
-    --gold: #C99726;
-    --gold-light: #FAF4E5;
-    --border-subtle: #E9E2D8;
-    --border-medium: #D8CEBF;
+    --bg-surface: #FEF8EE;
+    --text-primary: #1C1917;
+    --text-secondary: #57534E;
+    --text-muted: #78716C;
+    
+    /* Festive Pujo Red (Sindoor / Alta) */
+    --pujo-red: #D8261C;
+    --pujo-red-dark: #B91C1C;
+    --pujo-red-deep: #881337;
+    --pujo-red-light: #FEF2F2;
+
+    /* Festive Pujo Yellow (Marigold / Genda Phool / Halud) */
+    --pujo-yellow: #F59E0B;
+    --pujo-yellow-bright: #FBBF24;
+    --pujo-yellow-light: #FEF3C7;
+    --pujo-yellow-cream: #FFFBEB;
+
+    /* Pujo White & Border accents */
+    --pujo-white: #FFFFFF;
+    --border-subtle: #FEE2E2;
+    --border-yellow: #FED7AA;
   }
 
   body {
@@ -32,6 +42,11 @@
   }
 }
 
+/* Custom festive ribbon */
+.pujo-ribbon {
+  background: linear-gradient(90deg, #D8261C 0%, #F59E0B 50%, #D8261C 100%);
+}
+
 /* Custom Scrollbar for smooth horizontal scrolling on mobile trays */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -41,15 +56,15 @@
   scrollbar-width: none;
 }
 
-/* Glassmorphic utilities */
+/* Glassmorphic utilities with warm festive white glow */
 .glass-nav {
-  background: rgba(250, 248, 245, 0.88);
+  background: rgba(255, 253, 249, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -58,7 +73,7 @@
 .leaflet-container {
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   z-index: 10;
 }
 
@@ -67,7 +82,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(212, 56, 39, 0.35);
+  box-shadow: 0 4px 12px rgba(216, 38, 28, 0.35);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .custom-pandal-pin:hover {
