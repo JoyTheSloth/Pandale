@@ -16,14 +16,13 @@ export default function Footer() {
           {/* Brand info */}
           <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl overflow-hidden relative border border-[#FED7AA] shadow-sm shrink-0">
-                <Image
-                  src="/brand/pandale-icon.png"
-                  alt="Pandalé Official Icon"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <Image
+                src="/brand/pandale-icon.png"
+                alt="Pandalé Official Icon"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain shrink-0 drop-shadow-xs"
+              />
               <span className="text-2xl font-bold font-editorial text-[#1C1917] tracking-wide">
                 Pandal<span className="text-[#D8261C]">é</span> 2026
               </span>

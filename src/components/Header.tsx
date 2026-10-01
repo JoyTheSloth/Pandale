@@ -37,17 +37,16 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
-        {/* Brand Logo with Official Icon */}
+        {/* Brand Logo with Official Icon used directly without any box */}
         <Link href="/" className="group flex items-center gap-3 transition-transform active:scale-95">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl overflow-hidden relative shadow-md shadow-[#D8261C]/25 border border-[#FED7AA] shrink-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-[#D8261C]/35 transition-all duration-300">
-            <Image
-              src="/brand/pandale-icon.png"
-              alt="Pandalé Official Icon"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          <Image
+            src="/brand/pandale-icon.png"
+            alt="Pandalé Official Icon"
+            width={44}
+            height={44}
+            className="w-10 h-10 sm:w-11 sm:h-11 object-contain shrink-0 group-hover:scale-108 transition-transform duration-300 drop-shadow-sm"
+            priority
+          />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1917] font-editorial leading-none">

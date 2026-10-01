@@ -144,24 +144,9 @@ export default function HomePage() {
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
           </div>
 
-          {/* Hero Centerpiece: Icon + Official Logo Typography */}
-          <div className="flex flex-col items-center justify-center space-y-3 pt-1">
-            {/* Floating App Icon with Golden Glow and Micro-Interaction */}
-            <div className="relative group cursor-pointer">
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#D8261C] via-[#F59E0B] to-[#D8261C] opacity-35 blur-md group-hover:opacity-75 transition-opacity duration-500 animate-pulse" />
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden relative shadow-2xl border-2 border-[#FED7AA] bg-white group-hover:scale-108 group-hover:-rotate-2 transition-all duration-300">
-                <Image
-                  src="/brand/pandale-icon.png"
-                  alt="Pandalé Emblem"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Official Typographic Logo Image */}
-            <div className="relative w-full max-w-[340px] sm:max-w-[500px] md:max-w-[620px] h-20 sm:h-28 md:h-32 transition-transform duration-300 hover:scale-[1.02]">
+          {/* Hero Centerpiece: Official Logo Typography Used Directly Over Pattern Background */}
+          <div className="flex flex-col items-center justify-center py-2">
+            <div className="relative w-full max-w-[340px] sm:max-w-[520px] md:max-w-[660px] h-24 sm:h-36 md:h-44 transition-transform duration-300 hover:scale-[1.02] cursor-pointer">
               <Image
                 src="/brand/pandale-logo.png"
                 alt="Pandalé — Kolkata Durga Puja & Metro Guide"
