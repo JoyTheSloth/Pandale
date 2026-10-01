@@ -13,7 +13,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5976,
     longitude: 88.3978,
     google_place_id: 'ChIJX9XqO9V4AjoRz7971Z6P5fI',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5976,88.3978&query_place_id=Sree+Bhumi+Sporting+Club+Kolkata',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Sree%20Bhumi%20Sporting%20Club%2C%20Kolkata',
     nearest_metro: 'Belgachia Metro Station',
     walking_distance: '1.4 km (Auto/E-Rickshaw available 4 mins)',
     walking_time_mins: 15,
@@ -25,7 +25,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '1.4 km',
         walking_time_mins: 15,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=22.5976,88.3978'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Sree%20Bhumi%20Sporting%20Club%2C%20Kolkata'
       },
       {
         station_id: 'dum-dum',
@@ -34,7 +34,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '2.1 km',
         walking_time_mins: 22,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=22.5976,88.3978'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Sree%20Bhumi%20Sporting%20Club%2C%20Kolkata'
       }
     ],
     tags: ['Popular', 'Must Visit', 'Trending', 'Monumental', 'Night Friendly'],
@@ -121,7 +121,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.6025,
     longitude: 88.3662,
     google_place_id: 'ChIJG7hP6_t3AjoRj6V7v1u85fA',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.6025,88.3662&query_place_id=Bagbazar+Sarbojanin+Durgotsav',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata',
     nearest_metro: 'Shyambazar Metro Station',
     walking_distance: '650m',
     walking_time_mins: 8,
@@ -133,7 +133,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=22.6025,88.3662'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       },
       {
         station_id: 'shovabazar',
@@ -142,7 +142,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '950m',
         walking_time_mins: 12,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=22.6025,88.3662'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Heritage', 'Traditional', 'Near Metro', 'Popular'],
@@ -205,7 +205,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5991,
     longitude: 88.3639,
     google_place_id: 'ChIJ5Zl4pON3AjoR18R3Zq-6hW8',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5991,88.3639&query_place_id=Kumartuli+Park+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Kumartuli%20Park%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Shovabazar Sutanuti Metro Station',
     walking_distance: '450m',
     walking_time_mins: 5,
@@ -217,7 +217,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '450m',
         walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=22.5991,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli%20Park%20Sarbojanin%2C%20Kolkata'
       }
     ],
     tags: ['Near Metro', 'Must Visit', 'Art & Theme', 'Heritage', 'Trending'],
@@ -273,7 +273,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5312,
     longitude: 88.3571,
     google_place_id: 'ChIJh8t-1x13AjoR1M8Tq14b0P8',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5312,88.3571&query_place_id=Maddox+Square+Kolkata',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Maddox%20Square%2C%20Kolkata',
     nearest_metro: 'Netaji Bhavan Metro Station',
     walking_distance: '850m',
     walking_time_mins: 10,
@@ -285,7 +285,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '850m',
         walking_time_mins: 10,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=22.5312,88.3571'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Maddox%20Square%2C%20Kolkata'
       },
       {
         station_id: 'jatin-das-park',
@@ -294,7 +294,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '900m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=22.5312,88.3571'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Maddox%20Square%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Popular', 'Trending', 'Night Friendly', 'Near Metro'],
@@ -350,7 +350,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5744,
     longitude: 88.3639,
     google_place_id: 'ChIJQ-H7eXp3AjoRR7eS28dZ0jI',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5744,88.3639&query_place_id=College+Square+Sarbojanin+Durgotsav',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=College%20Square%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Central Metro Station',
     walking_distance: '500m',
     walking_time_mins: 6,
@@ -362,7 +362,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '500m',
         walking_time_mins: 6,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       },
       {
         station_id: 'mg-road',
@@ -371,7 +371,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Mahatma+Gandhi+Road+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Mahatma+Gandhi+Road+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       }
     ],
     tags: ['Popular', 'Must Visit', 'Near Metro', 'Night Friendly', 'Trending'],
@@ -427,7 +427,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5097,
     longitude: 88.3283,
     google_place_id: 'ChIJG6V1m8h3AjoRbzQy2mX3XfE',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5097,88.3283&query_place_id=Suruchi+Sangha+New+Alipore',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Suruchi%20Sangha%2C%20Kolkata',
     nearest_metro: 'Kalighat Metro Station',
     walking_distance: '1.6 km (E-Rickshaw/Auto 5 mins)',
     walking_time_mins: 18,
@@ -439,7 +439,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '1.6 km',
         walking_time_mins: 18,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5097,88.3283'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Suruchi%20Sangha%2C%20Kolkata'
       },
       {
         station_id: 'taratala',
@@ -448,7 +448,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'purple',
         walking_distance: '1.2 km',
         walking_time_mins: 14,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=22.5097,88.3283'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=Suruchi%20Sangha%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Art & Theme', 'Popular', 'Trending'],
@@ -504,7 +504,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5186,
     longitude: 88.3542,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1g',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5186,88.3542&query_place_id=Deshapriya+Park+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Deshapriya%20Park%2C%20Kolkata',
     nearest_metro: 'Kalighat Metro Station',
     walking_distance: '450m',
     walking_time_mins: 5,
@@ -516,7 +516,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '450m',
         walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5186,88.3542'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Deshapriya%20Park%2C%20Kolkata'
       }
     ],
     tags: ['Near Metro', 'Must Visit', 'Popular', 'Trending'],
@@ -572,7 +572,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5205,
     longitude: 88.3582,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1h',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5205,88.3582&query_place_id=Tridhara+Sammilani+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Tridhara%20Sammilani%2C%20Kolkata',
     nearest_metro: 'Kalighat Metro Station',
     walking_distance: '650m',
     walking_time_mins: 8,
@@ -584,7 +584,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5205,88.3582'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Tridhara%20Sammilani%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Art & Theme', 'Near Metro', 'Trending'],
@@ -640,7 +640,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5121,
     longitude: 88.3512,
     google_place_id: 'ChIJj7x4bL93AjoROf-9R2o3r1k',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5121,88.3512&query_place_id=Mudiali+Club+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Mudiali%20Club%2C%20Kolkata',
     nearest_metro: 'Rabindra Sarobar Metro Station',
     walking_distance: '600m',
     walking_time_mins: 7,
@@ -652,7 +652,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '600m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=22.5121,88.3512'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Mudiali%20Club%2C%20Kolkata'
       }
     ],
     tags: ['Near Metro', 'Heritage', 'Less Crowded', 'Traditional', 'Must Visit'],
@@ -708,7 +708,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5198,
     longitude: 88.3687,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1m',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5198,88.3687&query_place_id=Ekdalia+Evergreen+Club+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Ekdalia%20Evergreen%20Club%2C%20Kolkata',
     nearest_metro: 'Kalighat Metro Station',
     walking_distance: '1.5 km (Auto available right outside metro)',
     walking_time_mins: 17,
@@ -720,7 +720,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '1.5 km',
         walking_time_mins: 17,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5198,88.3687'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Ekdalia%20Evergreen%20Club%2C%20Kolkata'
       }
     ],
     tags: ['Popular', 'Heritage', 'Must Visit', 'Traditional'],
@@ -776,7 +776,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5786,
     longitude: 88.4112,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1n',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5786,88.4112&query_place_id=FD+Block+Durga+Puja+Salt+Lake',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Karunamoyee Metro Station',
     walking_distance: '750m',
     walking_time_mins: 9,
@@ -788,7 +788,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'green',
         walking_distance: '750m',
         walking_time_mins: 9,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=22.5786,88.4112'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata'
       },
       {
         station_id: 'central-park',
@@ -797,7 +797,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'green',
         walking_distance: '900m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=22.5786,88.4112'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata'
       }
     ],
     tags: ['Near Metro', 'Popular', 'Art & Theme', 'Night Friendly', 'Trending'],
@@ -853,7 +853,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5165,
     longitude: 88.3375,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1p',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5165,88.3375&query_place_id=Chetla+Agrani+Club+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Chetla%20Agrani%20Club%2C%20Kolkata',
     nearest_metro: 'Kalighat Metro Station',
     walking_distance: '950m',
     walking_time_mins: 11,
@@ -865,7 +865,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '950m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5165,88.3375'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Chetla%20Agrani%20Club%2C%20Kolkata'
       },
       {
         station_id: 'netaji-bhavan',
@@ -874,7 +874,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '1.2 km',
         walking_time_mins: 14,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=22.5165,88.3375'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Chetla%20Agrani%20Club%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Art & Theme', 'Popular', 'Trending'],
@@ -930,7 +930,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5691,
     longitude: 88.3698,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1q',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5691,88.3698&query_place_id=Santosh+Mitra+Square+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Santosh%20Mitra%20Square%20(Lebutala)%2C%20Kolkata',
     nearest_metro: 'Sealdah Metro Station',
     walking_distance: '550m',
     walking_time_mins: 7,
@@ -942,7 +942,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'green',
         walking_distance: '550m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5691,88.3698'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Santosh%20Mitra%20Square%20(Lebutala)%2C%20Kolkata'
       },
       {
         station_id: 'central',
@@ -951,7 +951,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'blue',
         walking_distance: '850m',
         walking_time_mins: 10,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=22.5691,88.3698'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=Santosh%20Mitra%20Square%20(Lebutala)%2C%20Kolkata'
       }
     ],
     tags: ['Must Visit', 'Near Metro', 'Popular', 'Trending', 'Night Friendly'],
@@ -1007,7 +1007,7 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4975,
     longitude: 88.3182,
     google_place_id: 'ChIJz2x4bL93AjoROf-9R2o3r1r',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4975,88.3182&query_place_id=Behala+Natun+Dal+Durga+Puja',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Behala%20Natun%20Dal%2C%20Kolkata',
     nearest_metro: 'Behala Chowrasta Metro Station',
     walking_distance: '500m',
     walking_time_mins: 6,
@@ -1019,7 +1019,7 @@ export const PANDALS_DATA: Pandal[] = [
         line_code: 'purple',
         walking_distance: '500m',
         walking_time_mins: 6,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=22.4975,88.3182'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Behala%20Natun%20Dal%2C%20Kolkata'
       }
     ],
     tags: ['Art & Theme', 'Near Metro', 'Must Visit', 'Trending'],
@@ -1078,11 +1078,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5681,
     longitude: 88.3695,
     google_place_id: 'sealdah-athletic-club-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5681,88.3695',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Sealdah%20Athletic%20Club%2C%20Kolkata',
     nearest_metro: 'Sealdah Metro Station',
     walking_distance: '550m',
     walking_time_mins: 7,
-    metro_details: [{ station_id: 'sealdah', station_name: 'Sealdah', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '550m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5681,88.3695' }],
+    metro_details: [{ station_id: 'sealdah', station_name: 'Sealdah', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '550m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Sealdah%20Athletic%20Club%2C%20Kolkata' }],
     tags: ['Traditional', 'Heritage', 'Walk-Friendly'],
     puja_committee: 'Sealdah Athletic Club Puja Committee',
     best_time: 'Ashtami morning or Navami evening',
@@ -1109,11 +1109,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5673,
     longitude: 88.3702,
     google_place_id: '37-pally-sealdah-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5673,88.3702',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=37%20Pally%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Sealdah Metro Station',
     walking_distance: '600m (Auto available)',
     walking_time_mins: 8,
-    metro_details: [{ station_id: 'sealdah', station_name: 'Sealdah', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '600m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5673,88.3702' }],
+    metro_details: [{ station_id: 'sealdah', station_name: 'Sealdah', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '600m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=37%20Pally%20Sarbojanin%2C%20Kolkata' }],
     tags: ['Artistic', 'Popular'],
     puja_committee: '37 Pally Sarbojanin Durgotsav Committee',
     best_time: 'Evening after 7 PM',
@@ -1139,11 +1139,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5810,
     longitude: 88.4138,
     google_place_id: 'bj-block-salt-lake-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5810,88.4138',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=BJ%20Block%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Karunamoyee Metro Station',
     walking_distance: '650m',
     walking_time_mins: 8,
-    metro_details: [{ station_id: 'karunamoyee', station_name: 'Karunamoyee', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '650m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=22.5810,88.4138' }],
+    metro_details: [{ station_id: 'karunamoyee', station_name: 'Karunamoyee', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '650m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=BJ%20Block%20Sarbojanin%2C%20Kolkata' }],
     tags: ['Must Visit', 'Popular', 'Trending', 'Night Friendly'],
     puja_committee: 'BJ Block Sarbojanin Durgotsav',
     best_time: 'Late evening (9 PM – midnight)',
@@ -1170,11 +1170,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5848,
     longitude: 88.4175,
     google_place_id: 'ae-block-salt-lake-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5848,88.4175',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=AE%20Block%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Central Park Metro Station',
     walking_distance: '700m (Auto available)',
     walking_time_mins: 9,
-    metro_details: [{ station_id: 'central-park', station_name: 'Central Park', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '700m', walking_time_mins: 9, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=22.5848,88.4175' }],
+    metro_details: [{ station_id: 'central-park', station_name: 'Central Park', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '700m', walking_time_mins: 9, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=AE%20Block%20Sarbojanin%2C%20Kolkata' }],
     tags: ['Must Visit', 'Popular', 'Night Friendly'],
     puja_committee: 'AE Block Sarbojanin Durgotsav',
     best_time: 'Evening or midnight pandal hop',
@@ -1201,11 +1201,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5771,
     longitude: 88.4641,
     google_place_id: 'new-town-sarbojanin-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5771,88.4641',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=New%20Town%20Sarbojanin%2C%20Kolkata',
     nearest_metro: 'Salt Lake Sector V Metro Station',
     walking_distance: '2.5 km (Auto 8 mins)',
     walking_time_mins: 30,
-    metro_details: [{ station_id: 'salt-lake-sector-v', station_name: 'Salt Lake Sector V', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '2.5 km', walking_time_mins: 30, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Sector+V+Metro+Station&destination=22.5771,88.4641' }],
+    metro_details: [{ station_id: 'salt-lake-sector-v', station_name: 'Salt Lake Sector V', line: 'Green Line (East-West)', line_code: 'green', walking_distance: '2.5 km', walking_time_mins: 30, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Sector+V+Metro+Station&destination=New%20Town%20Sarbojanin%2C%20Kolkata' }],
     tags: ['Must Visit', 'Popular', 'Trending'],
     puja_committee: 'New Town Sarbojanin Durgotsav Committee',
     best_time: 'Ashtami or Nabami evening',
@@ -1234,11 +1234,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4952,
     longitude: 88.3925,
     google_place_id: 'santoshpur-lake-pally-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4952,88.3925',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Santoshpur%20Lake%20Pally%2C%20Kolkata',
     nearest_metro: 'Satyajit Ray Metro Station',
     walking_distance: '1.8 km (Auto 6 mins)',
     walking_time_mins: 22,
-    metro_details: [{ station_id: 'satyajit-ray', station_name: 'Satyajit Ray', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '1.8 km', walking_time_mins: 22, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=22.4952,88.3925' }],
+    metro_details: [{ station_id: 'satyajit-ray', station_name: 'Satyajit Ray', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '1.8 km', walking_time_mins: 22, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Santoshpur%20Lake%20Pally%2C%20Kolkata' }],
     tags: ['Must Visit', 'Popular', 'Night Friendly', 'Scenic'],
     puja_committee: 'Santoshpur Lake Pally Durgotsav Committee',
     best_time: 'After 9 PM when lake reflections are magical',
@@ -1266,11 +1266,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5098,
     longitude: 88.3842,
     google_place_id: 'bosepukur-sitala-mandir-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5098,88.3842',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Bosepukur%20Sitala%20Mandir%2C%20Kolkata',
     nearest_metro: 'VIP Bazar Metro Station',
     walking_distance: '1.2 km (Auto 4 mins)',
     walking_time_mins: 15,
-    metro_details: [{ station_id: 'vip-bazar', station_name: 'VIP Bazar', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '1.2 km', walking_time_mins: 15, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=22.5098,88.3842' }],
+    metro_details: [{ station_id: 'vip-bazar', station_name: 'VIP Bazar', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '1.2 km', walking_time_mins: 15, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=Bosepukur%20Sitala%20Mandir%2C%20Kolkata' }],
     tags: ['Must Visit', 'Artistic', 'Popular', 'Heritage'],
     puja_committee: 'Bosepukur Sitala Mandir Durgotsav Committee',
     best_time: 'Evening 8 PM onwards',
@@ -1297,11 +1297,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5112,
     longitude: 88.3858,
     google_place_id: 'milan-tirtha-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5112,88.3858',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Milan%20Tirtha%2C%20Kolkata',
     nearest_metro: 'VIP Bazar Metro Station',
     walking_distance: '450m',
     walking_time_mins: 6,
-    metro_details: [{ station_id: 'vip-bazar', station_name: 'VIP Bazar', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '450m', walking_time_mins: 6, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=22.5112,88.3858' }],
+    metro_details: [{ station_id: 'vip-bazar', station_name: 'VIP Bazar', line: 'Orange Line (Kavi Subhash-Airport)', line_code: 'orange', walking_distance: '450m', walking_time_mins: 6, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=Milan%20Tirtha%2C%20Kolkata' }],
     tags: ['Traditional', 'Walk-Friendly', 'Community'],
     puja_committee: 'Milan Tirtha Durgotsav Committee',
     best_time: 'Ashtami morning Pushpanjali or evening darshan',
@@ -1329,11 +1329,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.6658,
     longitude: 88.4182,
     google_place_id: 'arjunpur-amra-sabai-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.6658,88.4182',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Arjunpur%20Amra%20Sabai%20Club%2C%20Kolkata',
     nearest_metro: 'Jessore Road Metro Station',
     walking_distance: '1.5 km (Auto 5 mins)',
     walking_time_mins: 18,
-    metro_details: [{ station_id: 'jessore-road', station_name: 'Jessore Road', line: 'Yellow Line (Airport-Noapara)', line_code: 'yellow', walking_distance: '1.5 km', walking_time_mins: 18, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jessore+Road+Metro+Station&destination=22.6658,88.4182' }],
+    metro_details: [{ station_id: 'jessore-road', station_name: 'Jessore Road', line: 'Yellow Line (Airport-Noapara)', line_code: 'yellow', walking_distance: '1.5 km', walking_time_mins: 18, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jessore+Road+Metro+Station&destination=Arjunpur%20Amra%20Sabai%20Club%2C%20Kolkata' }],
     tags: ['Must Visit', 'Community', 'Popular'],
     puja_committee: 'Arjunpur Amra Sabai Club Puja Committee',
     best_time: 'Saptami or Ashtami evening',
@@ -1363,13 +1363,13 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4821,
     longitude: 88.3142,
     google_place_id: 'barisha-sarbojanin-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4821,88.3142',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Barisha%20Sarbojanin%20Durgotsav%2C%20Kolkata',
     nearest_metro: 'Sakher Bazar Metro Station',
     walking_distance: '600m',
     walking_time_mins: 7,
     metro_details: [
-      { station_id: 'sakher-bazar', station_name: 'Sakher Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '600m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=22.4821,88.3142' },
-      { station_id: 'behala-chowrasta', station_name: 'Behala Chowrasta', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '900m', walking_time_mins: 11, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=22.4821,88.3142' }
+      { station_id: 'sakher-bazar', station_name: 'Sakher Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '600m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=Barisha%20Sarbojanin%20Durgotsav%2C%20Kolkata' },
+      { station_id: 'behala-chowrasta', station_name: 'Behala Chowrasta', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '900m', walking_time_mins: 11, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Barisha%20Sarbojanin%20Durgotsav%2C%20Kolkata' }
     ],
     tags: ['Must Visit', 'Popular', 'Trending', 'Monumental', 'Night Friendly'],
     puja_committee: 'Barisha Sarbojanin Durgotsav Committee',
@@ -1398,11 +1398,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4810,
     longitude: 88.3135,
     google_place_id: 'sabarna-roy-chowdhury-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4810,88.3135',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Sabarna%20Roy%20Chowdhury%20Aatchala%20Bari%2C%20Kolkata',
     nearest_metro: 'Sakher Bazar Metro Station',
     walking_distance: '650m',
     walking_time_mins: 8,
-    metro_details: [{ station_id: 'sakher-bazar', station_name: 'Sakher Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '650m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=22.4810,88.3135' }],
+    metro_details: [{ station_id: 'sakher-bazar', station_name: 'Sakher Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '650m', walking_time_mins: 8, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=Sabarna%20Roy%20Chowdhury%20Aatchala%20Bari%2C%20Kolkata' }],
     tags: ['Must Visit', 'Heritage', 'Historic', 'Traditional'],
     puja_committee: 'Sabarna Roy Chowdhury Paribar',
     best_time: 'Shashti or Saptami morning — traditional rites most visible',
@@ -1429,11 +1429,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4970,
     longitude: 88.3165,
     google_place_id: 'behala-nutan-dal-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4970,88.3165',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Behala%20Nutan%20Dal%2C%20Kolkata',
     nearest_metro: 'Behala Bazar Metro Station',
     walking_distance: '700m (Auto available)',
     walking_time_mins: 9,
-    metro_details: [{ station_id: 'behala-bazar', station_name: 'Behala Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '700m', walking_time_mins: 9, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=22.4970,88.3165' }],
+    metro_details: [{ station_id: 'behala-bazar', station_name: 'Behala Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '700m', walking_time_mins: 9, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=Behala%20Nutan%20Dal%2C%20Kolkata' }],
     tags: ['Must Visit', 'Artistic', 'Popular', 'Trending'],
     puja_committee: 'Behala Nutan Dal Durgotsav Samiti',
     best_time: 'Evening 8 PM onwards',
@@ -1460,11 +1460,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.4985,
     longitude: 88.3170,
     google_place_id: 'behala-friends-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.4985,88.3170',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Behala%20Friends%2C%20Kolkata',
     nearest_metro: 'Behala Bazar Metro Station',
     walking_distance: '500m',
     walking_time_mins: 6,
-    metro_details: [{ station_id: 'behala-bazar', station_name: 'Behala Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '500m', walking_time_mins: 6, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=22.4985,88.3170' }],
+    metro_details: [{ station_id: 'behala-bazar', station_name: 'Behala Bazar', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '500m', walking_time_mins: 6, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=Behala%20Friends%2C%20Kolkata' }],
     tags: ['Must Visit', 'Artistic', 'Walk-Friendly'],
     puja_committee: 'Behala Friends Durgotsav Committee',
     best_time: 'Evening to night',
@@ -1491,11 +1491,11 @@ export const PANDALS_DATA: Pandal[] = [
     latitude: 22.5020,
     longitude: 88.3102,
     google_place_id: 'behala-29-pally-kolkata',
-    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=22.5020,88.3102',
+    google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Behala%2029%20Pally%2C%20Kolkata',
     nearest_metro: 'Taratala Metro Station',
     walking_distance: '550m',
     walking_time_mins: 7,
-    metro_details: [{ station_id: 'taratala', station_name: 'Taratala', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '550m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=22.5020,88.3102' }],
+    metro_details: [{ station_id: 'taratala', station_name: 'Taratala', line: 'Purple Line (Joka-Esplanade)', line_code: 'purple', walking_distance: '550m', walking_time_mins: 7, directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=Behala%2029%20Pally%2C%20Kolkata' }],
     tags: ['Must Visit', 'Popular', 'Night Friendly'],
     puja_committee: 'Behala 29 Pally Durgotsav Samiti',
     best_time: 'Evening 7 PM – midnight',

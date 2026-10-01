@@ -33,7 +33,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
     pandal.latitude,
     pandal.longitude,
     pandal.google_place_id,
-    pandal.name
+    pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
   );
 
   // Clean up metro station name to avoid duplicate "Metro Station"

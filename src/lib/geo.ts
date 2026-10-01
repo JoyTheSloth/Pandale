@@ -36,7 +36,8 @@ export function formatDistance(distanceKm: number): string {
 }
 
 /**
- * Constructs an exact Google Maps URL with lat/long and place_id
+ * Constructs an exact Google Maps URL with place name in query parameter
+ * so the location name appears in the Google Maps search bar instead of raw coordinates
  */
 export function buildGoogleMapsUrl(
   lat: number,
@@ -44,22 +45,40 @@ export function buildGoogleMapsUrl(
   placeId?: string,
   queryName?: string
 ): string {
-  if (placeId) {
+  // If a location/place name is provided, search by place name so it appears directly in the Google Maps search bar
+  if (queryName && queryName.trim().length > 0) {
+    const cleanName = queryName.trim();
+    const query = cleanName.toLowerCase().includes('kolkata')
+      ? cleanName
+      : `${cleanName}, Kolkata`;
+
+    // Only attach query_place_id if it's an authentic Google Place ID (ChIJ...)
+    if (placeId && placeId.startsWith('ChIJ')) {
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}&query_place_id=${encodeURIComponent(placeId)}`;
+    }
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
+
+  // Fallback to coordinates only if no location name is available
+  if (placeId && placeId.startsWith('ChIJ')) {
     return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${encodeURIComponent(placeId)}`;
   }
-  const query = queryName ? encodeURIComponent(`${queryName} Kolkata`) : `${lat},${lng}`;
-  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 }
 
 /**
- * Constructs a Google Maps Directions URL from origin to destination coordinates
+ * Constructs a Google Maps Directions URL from origin to destination
  */
 export function buildDirectionsUrl(
   destLat: number,
   destLng: number,
   originQuery?: string,
-  travelMode: 'walking' | 'transit' | 'driving' = 'walking'
+  travelMode: 'walking' | 'transit' | 'driving' = 'walking',
+  destName?: string
 ): string {
   const originParam = originQuery ? `&origin=${encodeURIComponent(originQuery)}` : '';
-  return `https://www.google.com/maps/dir/?api=1${originParam}&destination=${destLat},${destLng}&travelmode=${travelMode}`;
+  const destinationParam = destName
+    ? `&destination=${encodeURIComponent(destName.toLowerCase().includes('kolkata') ? destName : `${destName}, Kolkata`)}`
+    : `&destination=${destLat},${destLng}`;
+  return `https://www.google.com/maps/dir/?api=1${originParam}${destinationParam}&travelmode=${travelMode}`;
 }

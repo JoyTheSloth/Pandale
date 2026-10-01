@@ -36,20 +36,21 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
 
   const saved = isSaved(pandal.id);
 
-  // Exact Google Maps location link
+  // Exact Google Maps location link (place name in search bar)
   const exactMapsUrl = buildGoogleMapsUrl(
     pandal.latitude,
     pandal.longitude,
     pandal.google_place_id,
-    pandal.name
+    pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
   );
 
   // Directions from nearest metro
   const metroDirectionsUrl = buildDirectionsUrl(
     pandal.latitude,
     pandal.longitude,
-    `${pandal.nearest_metro} Kolkata`,
-    'walking'
+    `${pandal.nearest_metro} Metro Station, Kolkata`,
+    'walking',
+    pandal.name
   );
 
   // Share functionality

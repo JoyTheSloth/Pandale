@@ -16,7 +16,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'bagbazar-sarbojanin',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=22.6025,88.3662'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       }
     ]
   },
@@ -35,7 +35,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'kumartuli-park',
         walking_distance: '450m',
         walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=22.5991,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli%20Park%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'bagbazar-sarbojanin',
@@ -43,7 +43,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'bagbazar-sarbojanin',
         walking_distance: '950m',
         walking_time_mins: 12,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=22.6025,88.3662'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       }
     ]
   },
@@ -62,7 +62,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'sree-bhumi-sporting-club',
         walking_distance: '1.4 km (Auto 4 mins)',
         walking_time_mins: 15,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=22.5976,88.3978'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Sree%20Bhumi%20Sporting%20Club%2C%20Kolkata'
       }
     ]
   },
@@ -81,7 +81,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'college-square',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Mahatma+Gandhi+Road+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Mahatma+Gandhi+Road+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -100,7 +100,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'college-square',
         walking_distance: '500m',
         walking_time_mins: 6,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'santosh-mitra-square',
@@ -108,7 +108,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'santosh-mitra-square',
         walking_distance: '850m',
         walking_time_mins: 10,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=22.5691,88.3698'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=Santosh%20Mitra%20Square%2C%20Kolkata'
       }
     ]
   },
@@ -127,7 +127,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'college-square',
         walking_distance: '600m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Chandni+Chowk+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Chandni+Chowk+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'santosh-mitra-square',
@@ -135,7 +135,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'santosh-mitra-square',
         walking_distance: '900m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Chandni+Chowk+Metro+Station&destination=22.5691,88.3698'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Chandni+Chowk+Metro+Station&destination=Santosh%20Mitra%20Square%2C%20Kolkata'
       }
     ]
   },
@@ -154,7 +154,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'santosh-mitra-square',
         walking_distance: '550m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5691,88.3698'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Santosh%20Mitra%20Square%20(Lebutala)%2C%20Kolkata'
       },
       {
         pandal_id: 'college-square',
@@ -162,7 +162,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'college-square',
         walking_distance: '1.1 km (Auto 4 mins)',
         walking_time_mins: 14,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5744,88.3639'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=College%20Square%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'sealdah-athletic-club',
@@ -170,7 +170,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'sealdah-athletic-club',
         walking_distance: '550m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5681,88.3695'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Sealdah%20Athletic%20Club%2C%20Kolkata'
       },
       {
         pandal_id: '37-pally',
@@ -178,7 +178,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: '37-pally-sarbojanin',
         walking_distance: '600m (Auto available)',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=22.5673,88.3702'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=37%20Pally%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -197,7 +197,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'maddox-square',
         walking_distance: '850m',
         walking_time_mins: 10,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=22.5312,88.3571'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Maddox%20Square%2C%20Kolkata'
       }
     ]
   },
@@ -216,7 +216,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'deshapriya-park',
         walking_distance: '450m',
         walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5186,88.3542'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Deshapriya%20Park%2C%20Kolkata'
       },
       {
         pandal_id: 'tridhara-sammilani',
@@ -224,7 +224,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'tridhara-sammilani',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5205,88.3582'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Tridhara%20Sammilani%2C%20Kolkata'
       },
       {
         pandal_id: 'chetla-agrani',
@@ -232,7 +232,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'chetla-agrani',
         walking_distance: '950m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5165,88.3375'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Chetla%20Agrani%20Club%2C%20Kolkata'
       },
       {
         pandal_id: 'ekdalia-evergreen',
@@ -240,7 +240,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'ekdalia-evergreen',
         walking_distance: '1.5 km (Auto 5 mins)',
         walking_time_mins: 17,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=22.5198,88.3687'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Ekdalia%20Evergreen%20Club%2C%20Kolkata'
       }
     ]
   },
@@ -259,7 +259,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'mudiali-club',
         walking_distance: '600m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=22.5121,88.3512'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Mudiali%20Club%2C%20Kolkata'
       }
     ]
   },
@@ -278,7 +278,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'barisha-sarbojanin',
         walking_distance: '900m',
         walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=22.4821,88.3142'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Barisha%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       },
       {
         pandal_id: 'behala-nutan-dal',
@@ -286,7 +286,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'behala-nutan-dal',
         walking_distance: '550m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=22.4975,88.3182'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Behala%20Nutan%20Dal%2C%20Kolkata'
       }
     ]
   },
@@ -308,7 +308,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'salt-lake-fd-block',
         walking_distance: '2.2 km (Auto 7 mins)',
         walking_time_mins: 27,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Stadium+Metro+Station&destination=22.5786,88.4112'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Stadium+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -328,7 +328,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'salt-lake-fd-block',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=City+Centre+Metro+Station&destination=22.5786,88.4112'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=City+Centre+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -348,7 +348,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'ae-block-sarbojanin',
         walking_distance: '700m',
         walking_time_mins: 9,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=22.5848,88.4175'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=AE%20Block%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'sreebhumi-sporting-club-new-town',
@@ -356,7 +356,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'new-town-sarbojanin',
         walking_distance: '1.2 km (Auto 4 mins)',
         walking_time_mins: 15,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=22.5771,88.4641'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=New%20Town%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -376,7 +376,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'bj-block-sarbojanin',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=22.5810,88.4138'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=BJ%20Block%20Sarbojanin%2C%20Kolkata'
       },
       {
         pandal_id: 'salt-lake-fd-block',
@@ -384,7 +384,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'salt-lake-fd-block',
         walking_distance: '750m',
         walking_time_mins: 9,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=22.5786,88.4112'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -404,7 +404,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'new-town-sarbojanin',
         walking_distance: '2.5 km (Auto 8 mins)',
         walking_time_mins: 30,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Sector+V+Metro+Station&destination=22.5771,88.4641'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Sector+V+Metro+Station&destination=New%20Town%20Sarbojanin%2C%20Kolkata'
       }
     ]
   },
@@ -426,7 +426,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'santoshpur-lake-pally',
         walking_distance: '1.8 km (Auto 6 mins)',
         walking_time_mins: 22,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=22.4952,88.3925'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Santoshpur%20Lake%20Pally%2C%20Kolkata'
       }
     ]
   },
@@ -446,7 +446,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'bosepukur-sitala-mandir',
         walking_distance: '1.5 km (Auto 5 mins)',
         walking_time_mins: 18,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kavi+Sukanta+Metro+Station&destination=22.5098,88.3842'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kavi+Sukanta+Metro+Station&destination=Bosepukur%20Sitala%20Mandir%2C%20Kolkata'
       }
     ]
   },
@@ -466,7 +466,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'milan-tirtha',
         walking_distance: '1.2 km (Auto 4 mins)',
         walking_time_mins: 15,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Hemanta+Mukhopadhyay+Metro+Station&destination=22.5112,88.3858'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Hemanta+Mukhopadhyay+Metro+Station&destination=Milan%20Tirtha%2C%20Kolkata'
       }
     ]
   },
@@ -486,7 +486,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'milan-tirtha',
         walking_distance: '450m',
         walking_time_mins: 6,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=22.5112,88.3858'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=Milan%20Tirtha%2C%20Kolkata'
       },
       {
         pandal_id: 'bosepukur-sitala-mandir',
@@ -494,7 +494,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'bosepukur-sitala-mandir',
         walking_distance: '1.2 km (Auto 4 mins)',
         walking_time_mins: 15,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=22.5098,88.3842'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=VIP+Bazar+Metro+Station&destination=Bosepukur%20Sitala%20Mandir%2C%20Kolkata'
       }
     ]
   },
@@ -516,7 +516,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'arjunpur-amra-sabai-club',
         walking_distance: '1.5 km (Auto 5 mins)',
         walking_time_mins: 18,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jessore+Road+Metro+Station&destination=22.6658,88.4182'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Jessore+Road+Metro+Station&destination=Arjunpur%20Amra%20Sabai%20Club%2C%20Kolkata'
       }
     ]
   },
@@ -538,7 +538,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'barisha-sarbojanin',
         walking_distance: '600m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=22.4821,88.3142'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=Barisha%20Sarbojanin%20Durgotsav%2C%20Kolkata'
       },
       {
         pandal_id: 'sabarna-roy-chowdhury-aatchala',
@@ -546,7 +546,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'sabarna-roy-chowdhury-aatchala-bari',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=22.4810,88.3135'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Sakher+Bazar+Metro+Station&destination=Sabarna%20Roy%20Chowdhury%20Aatchala%20Bari%2C%20Kolkata'
       }
     ]
   },
@@ -566,7 +566,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'behala-nutan-dal',
         walking_distance: '700m',
         walking_time_mins: 9,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=22.4970,88.3165'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=Behala%20Nutan%20Dal%2C%20Kolkata'
       },
       {
         pandal_id: 'behala-friends',
@@ -574,7 +574,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'behala-friends',
         walking_distance: '500m',
         walking_time_mins: 6,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=22.4985,88.3170'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Behala+Bazar+Metro+Station&destination=Behala%20Friends%2C%20Kolkata'
       }
     ]
   },
@@ -594,7 +594,7 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         pandal_slug: 'behala-29-pally',
         walking_distance: '550m',
         walking_time_mins: 7,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=22.5020,88.3102'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Taratala+Metro+Station&destination=Behala%2029%20Pally%2C%20Kolkata'
       }
     ]
   }

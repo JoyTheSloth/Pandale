@@ -216,8 +216,6 @@ export default function RoutePlannerPage() {
   // Build full multi-stop Google Maps URL
   const fullGoogleMapsRouteUrl = useMemo(() => {
     if (selectedPandals.length === 0) return 'https://maps.google.com';
-    const origin = `${selectedPandals[0].latitude},${selectedPandals[0].longitude}`;
-    const destination = `${selectedPandals[selectedPandals.length - 1].latitude},${selectedPandals[selectedPandals.length - 1].longitude}`;
     
     if (selectedPandals.length === 1) {
       return buildGoogleMapsUrl(
@@ -228,13 +226,16 @@ export default function RoutePlannerPage() {
       );
     }
 
+    const origin = encodeURIComponent(`${selectedPandals[0].name}, Kolkata`);
+    const destination = encodeURIComponent(`${selectedPandals[selectedPandals.length - 1].name}, Kolkata`);
+
     if (selectedPandals.length === 2) {
       return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
     }
 
     const waypoints = selectedPandals
       .slice(1, selectedPandals.length - 1)
-      .map((p) => `${p.latitude},${p.longitude}`)
+      .map((p) => encodeURIComponent(`${p.name}, Kolkata`))
       .join('|');
 
     return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${waypoints}&travelmode=transit`;
@@ -491,7 +492,7 @@ export default function RoutePlannerPage() {
               pandal.latitude,
               pandal.longitude,
               pandal.google_place_id,
-              pandal.name
+              pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
             );
 
             return (
@@ -737,7 +738,7 @@ export default function RoutePlannerPage() {
                       </div>
 
                       <a
-                        href={`https://www.google.com/maps/dir/?api=1&origin=${pandal.latitude},${pandal.longitude}&destination=${nextPandal.latitude},${nextPandal.longitude}&travelmode=walking`}
+                        href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${pandal.name}, Kolkata`)}&destination=${encodeURIComponent(`${nextPandal.name}, Kolkata`)}&travelmode=walking`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ml-1 p-1 rounded-full text-stone-400 hover:text-[#D8261C] transition-colors"

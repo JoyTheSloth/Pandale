@@ -55,7 +55,7 @@ export default function WishlistPage() {
               pandal.latitude,
               pandal.longitude,
               pandal.google_place_id,
-              pandal.name
+              pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
             );
 
             return (

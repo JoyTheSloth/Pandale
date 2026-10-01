@@ -479,7 +479,7 @@ export default function MetroGuidePage() {
                                   Details
                                 </Link>
                                 <a
-                                  href={item.directions_url}
+                                  href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${station.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandal.name}, Kolkata`)}&travelmode=walking`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="py-1.5 px-3 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white text-[11px] font-bold flex items-center gap-1 shadow-2xs transition-colors shrink-0"

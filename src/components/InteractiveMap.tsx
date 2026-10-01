@@ -221,7 +221,7 @@ export default function InteractiveMap({
                 activePandal.latitude,
                 activePandal.longitude,
                 activePandal.google_place_id,
-                activePandal.name
+                activePandal.locality ? `${activePandal.name}, ${activePandal.locality}` : activePandal.name
               )}
               target="_blank"
               rel="noopener noreferrer"
