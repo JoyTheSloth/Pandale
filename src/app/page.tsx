@@ -60,7 +60,7 @@ export default function HomePage() {
           {isBn ? 'দুর্গাপূজা ২০২৬ · কলকাতা' : 'Durga Puja 2026 · Kolkata'}
         </div>
 
-        {/* Scroll Down Mouse Indicator */}
+        {/* Scroll Down Mouse Indicator — Lifted higher above bottom edge */}
         <button
           type="button"
           onClick={() => {
@@ -69,7 +69,7 @@ export default function HomePage() {
               nextSec.scrollIntoView({ behavior: 'smooth' });
             }
           }}
-          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 cursor-pointer group select-none transition-all active:scale-95"
+          className="absolute bottom-12 sm:bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 cursor-pointer group select-none transition-all active:scale-95"
           aria-label="Scroll down to explore pandals"
         >
           {/* Animated Mouse Icon */}
