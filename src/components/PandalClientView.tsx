@@ -92,10 +92,10 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
   // Crowd helpers
   const getCrowdBg = (level: string) => {
     switch (level) {
-      case 'low': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      case 'moderate': return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'heavy': return 'bg-rose-50 text-rose-700 border-rose-200';
-      default: return 'bg-stone-50 text-stone-700 border-stone-200';
+      case 'low': return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/50';
+      case 'moderate': return 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-900/50';
+      case 'heavy': return 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900/50';
+      default: return 'bg-stone-50 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10';
     }
   };
 
@@ -106,7 +106,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
         <Link
           href="/pandals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8E857B] hover:text-[#181513] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8E857B] hover:text-[#181513] dark:text-stone-400 dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to All Pandals</span>
@@ -115,7 +115,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
 
       {/* 1. HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-lg border border-[#E9E2D8]">
+        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-lg border border-[#E9E2D8] dark:border-white/10">
           <Image
             src={pandal.featured_image}
             alt={pandal.name}
@@ -128,7 +128,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
           {/* Top Hero Badges */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/95 text-[#181513] backdrop-blur-md shadow-sm">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-stone-900/90 text-[#181513] dark:text-stone-100 backdrop-blur-md shadow-sm border border-transparent dark:border-white/10">
                 {pandal.area}
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/50 text-white backdrop-blur-md border border-white/20">
@@ -141,9 +141,9 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
               <button
                 onClick={handleShare}
                 aria-label="Share Pandal details"
-                className="p-3 rounded-full bg-white/90 hover:bg-white text-[#181513] backdrop-blur-md transition-all active:scale-95 shadow-sm"
+                className="p-3 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 backdrop-blur-md transition-all active:scale-95 shadow-sm border border-transparent dark:border-white/10"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="w-4 h-4" />}
               </button>
 
               {/* Wishlist */}
@@ -152,8 +152,8 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 aria-label={saved ? 'Saved in wishlist' : 'Save to wishlist'}
                 className={`p-3 rounded-full backdrop-blur-md transition-all active:scale-95 shadow-sm ${
                   saved
-                    ? 'bg-[#D43827] text-white'
-                    : 'bg-white/90 hover:bg-white text-[#181513]'
+                    ? 'bg-[#D43827] text-white shadow-md'
+                    : 'bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 border border-transparent dark:border-white/10'
                 }`}
               >
                 <Heart className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />
@@ -201,45 +201,45 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
           <div className="col-span-12 lg:col-span-8 space-y-8">
             
             {/* About & History */}
-            <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 sm:p-8 shadow-xs space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                 Overview
               </span>
-              <h2 className="text-2xl font-bold font-editorial text-[#181513]">
+              <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white">
                 About {pandal.name}
               </h2>
-              <p className="text-sm sm:text-base text-[#5C554E] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5C554E] dark:text-stone-300 leading-relaxed">
                 {pandal.description}
               </p>
               {pandal.heritage_note && (
-                <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EBE3D8] text-xs text-[#5C554E] leading-relaxed">
-                  <span className="font-bold text-[#181513] block mb-1">Cultural Heritage:</span>
+                <div className="p-4 rounded-2xl bg-[#FAF8F5] dark:bg-white/[0.04] border border-[#EBE3D8] dark:border-white/10 text-xs text-[#5C554E] dark:text-stone-300 leading-relaxed">
+                  <span className="font-bold text-[#181513] dark:text-stone-100 block mb-1">Cultural Heritage:</span>
                   {pandal.heritage_note}
                 </div>
               )}
             </div>
 
             {/* 2026 Theme */}
-            <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 sm:p-8 shadow-xs space-y-4">
+            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+                <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                   Artistic Concept
                 </span>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-900/50">
                   2026 Preview
                 </span>
               </div>
-              <h2 className="text-2xl font-bold font-editorial text-[#181513]">
+              <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white">
                 Thematic Architecture & Artistry
               </h2>
-              <p className="text-sm sm:text-base text-[#5C554E] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5C554E] dark:text-stone-300 leading-relaxed">
                 {pandal.theme}
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
                 {pandal.tags.map((t) => (
                   <span
                     key={t}
-                    className="px-3 py-1 rounded-full bg-[#FFFBEB] border border-[#FED7AA] text-xs font-bold text-[#B45309]"
+                    className="px-3 py-1 rounded-full bg-[#FFFBEB] dark:bg-amber-950/30 border border-[#FED7AA] dark:border-amber-900/40 text-xs font-bold text-[#B45309] dark:text-amber-400"
                   >
                     #{t}
                   </span>
@@ -248,13 +248,13 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
             </div>
 
             {/* PANDAL PHOTO GALLERY (Section 10) */}
-            <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                     Visual Archive
                   </span>
-                  <h2 className="text-2xl font-bold font-editorial text-[#181513] mt-0.5">
+                  <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white mt-0.5">
                     Pandal Photo Gallery
                   </h2>
                 </div>
@@ -276,7 +276,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                         className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                           isSelected
                             ? 'bg-[#D8261C] text-white shadow-xs'
-                            : 'bg-[#FFFDF9] text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
+                            : 'bg-[#FFFDF9] dark:bg-white/[0.05] text-[#57534E] dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:bg-[#FEF2F2] dark:hover:bg-white/10'
                         }`}
                       >
                         {tab.label}
@@ -295,7 +295,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                       setLightboxIndex(idx);
                       setLightboxOpen(true);
                     }}
-                    className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 cursor-pointer border border-[#E9E2D8]"
+                    className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 cursor-pointer border border-[#E9E2D8] dark:border-white/10"
                   >
                     <Image
                       src={item.media_url || item.url}
@@ -325,47 +325,56 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
           <div className="col-span-12 lg:col-span-4 space-y-6">
             
             {/* HOW TO REACH (Section 5) */}
-            <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 shadow-xs space-y-5">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 shadow-xs space-y-5">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                 Transit Guide
               </span>
-              <h3 className="text-xl font-bold font-editorial text-[#181513]">
+              <h3 className="text-xl font-bold font-editorial text-[#181513] dark:text-white">
                 How to Reach
               </h3>
 
               <div className="space-y-3">
-                <div className="p-3.5 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A] flex items-center justify-between">
+                <div className="p-3.5 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
                       M
                     </div>
                     <div>
-                      <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
+                      <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase">
                         Nearest Metro
                       </span>
-                      <span className="text-xs font-bold text-[#1C1917]">
+                      <span className="text-xs font-bold text-[#1C1917] dark:text-stone-100">
                         {pandal.nearest_metro}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A]">
-                    <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
-                      Distance
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
+                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
+                      Time
                     </span>
-                    <span className="text-sm font-bold text-[#D8261C]">
-                      {pandal.walking_distance.split(' ')[0]}
+                    <span className="text-sm font-bold text-[#D8261C] dark:text-rose-400">
+                      {pandal.walking_time_mins} min
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A]">
-                    <span className="text-[10px] text-[#78716C] block font-semibold uppercase">
-                      Estimated Walk
+                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
+                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
+                      Steps
                     </span>
-                    <span className="text-sm font-bold text-[#1C1917]">
-                      {pandal.walking_time_mins} min
+                    <span className="text-sm font-bold text-amber-700 dark:text-amber-400">
+                      ~{Math.round(pandal.walking_time_mins * 125).toLocaleString()}
+                    </span>
+                  </div>
+
+                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
+                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
+                      Distance
+                    </span>
+                    <span className="text-sm font-bold text-[#1C1917] dark:text-stone-100">
+                      {pandal.walking_distance.split(' ')[0]}
                     </span>
                   </div>
                 </div>
@@ -385,7 +394,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={metroDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] bg-white hover:bg-[#FFFBEB] text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917]"
+                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] dark:border-white/10 bg-white dark:bg-white/[0.04] hover:bg-[#FFFBEB] dark:hover:bg-white/[0.08] text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917] dark:text-stone-200 transition-colors"
               >
                 <Footprints className="w-3.5 h-3.5 text-[#F59E0B]" />
                 <span>Walking Route from Metro Station</span>
@@ -394,16 +403,16 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
             </div>
 
             {/* CROWD STATUS & TIMING (Section 15) */}
-            <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 shadow-xs space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 shadow-xs space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                 Crowd & Best Time
               </span>
 
               {/* Crowd Indicator */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#8E857B]">Current Crowd Level:</span>
-                  <span className="text-[10px] font-mono text-[#8E857B]">
+                  <span className="text-[#8E857B] dark:text-stone-400">Current Crowd Level:</span>
+                  <span className="text-[10px] font-mono text-[#8E857B] dark:text-stone-400">
                     {pandal.crowd_status.last_updated}
                   </span>
                 </div>
@@ -419,33 +428,33 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 </div>
 
                 {pandal.crowd_status.notes && (
-                  <p className="text-[11px] text-[#5C554E] italic pt-1">
+                  <p className="text-[11px] text-[#5C554E] dark:text-stone-300 italic pt-1">
                     &ldquo;{pandal.crowd_status.notes}&rdquo;
                   </p>
                 )}
               </div>
 
               {/* Best Visiting Time */}
-              <div className="pt-3 border-t border-[#EBE3D8] space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] font-semibold">
+              <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
                   Recommended Visiting Window:
                 </span>
-                <p className="text-xs font-medium text-[#181513] flex items-center gap-1.5">
+                <p className="text-xs font-medium text-[#181513] dark:text-stone-100 flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-[#C99726]" />
                   <span>{pandal.best_time}</span>
                 </p>
               </div>
 
               {/* Recommended Days */}
-              <div className="pt-3 border-t border-[#EBE3D8] space-y-1.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] font-semibold">
+              <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1.5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
                   Optimal Days:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {pandal.recommended_days.map((day) => (
                     <span
                       key={day}
-                      className="px-2.5 py-0.5 rounded-lg bg-[#FAF8F5] border border-[#E2DAD0] text-[11px] font-medium text-[#181513]"
+                      className="px-2.5 py-0.5 rounded-lg bg-[#FAF8F5] dark:bg-white/[0.04] border border-[#E2DAD0] dark:border-white/10 text-[11px] font-medium text-[#181513] dark:text-stone-200"
                     >
                       {day}
                     </span>
@@ -463,12 +472,12 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
       {/* 3. NEARBY PANDALS */}
       {nearbyPandals.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-          <div className="flex items-center justify-between mb-6 pb-3 border-b border-[#E9E2D8]">
+          <div className="flex items-center justify-between mb-6 pb-3 border-b border-[#E9E2D8] dark:border-white/10">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
                 Explore More
               </span>
-              <h2 className="text-2xl font-bold font-editorial text-[#181513] mt-0.5">
+              <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white mt-0.5">
                 Nearby in {pandal.area}
               </h2>
             </div>

@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next';
+import Image from 'next/image';
 import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -78,15 +80,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${sansFont.variable} ${editorialFont.variable} scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#FAF8F5] dark:bg-[#0C0A09] text-[#181513] dark:text-[#FAF8F5] selection:bg-[#D43827]/20 selection:text-[#D43827]">
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${sansFont.variable} ${editorialFont.variable} scroll-smooth`}>
+      <body className="min-h-screen flex flex-col relative text-[#181513] dark:text-[#FAF8F5] selection:bg-[#D43827]/20 selection:text-[#D43827]">
+        {/* Fixed Festival Background Layer for all pages & rest of home page */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/brand/page-bg.jpg"
+            alt="Pandalé Kolkata Durga Puja Background"
+            fill
+            priority
+            unoptimized
+            quality={100}
+            className="object-cover object-top sm:object-center select-none"
+            sizes="100vw"
+          />
+          {/* Light Mode Ambiance: Gentle wash preserving the warm cream parchment & Durga artwork */}
+          <div className="absolute inset-0 bg-[#FFFDF9]/20 dark:hidden pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FFFDF9]/10 to-[#FFFDF9]/40 dark:hidden pointer-events-none" />
+
+          {/* Dark Mode Ambiance: Deep royal crimson atmosphere where Maa Durga, dhak, bells & Howrah Bridge glow */}
+          <div className="hidden dark:block absolute inset-0 bg-[#0C0206]/70" />
+          <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-transparent via-[#0C0206]/40 to-[#0C0206]/90 pointer-events-none" />
+        </div>
+
         <ThemeProvider>
-          <WishlistProvider>
-            <Header />
-            <main className="flex-1 pb-16 md:pb-0">{children}</main>
-            <Footer />
-            <BottomNav />
-          </WishlistProvider>
+          <LanguageProvider>
+            <WishlistProvider>
+              <div className="relative z-10 flex min-h-screen flex-col">
+                <Header />
+                <main className="flex-1 pb-16 md:pb-0">{children}</main>
+                <Footer />
+              </div>
+              <BottomNav />
+            </WishlistProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

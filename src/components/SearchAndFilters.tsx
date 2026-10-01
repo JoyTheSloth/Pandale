@@ -84,18 +84,18 @@ export default function SearchAndFilters({
       {/* Primary Search Bar Row */}
       <div className="relative flex items-center gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E857B]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 dark:text-stone-500 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search pandals by name, metro station, theme, or locality..."
-            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white border border-[#FED7AA] text-sm text-[#1C1917] placeholder-[#78716C] focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] shadow-xs transition-all"
+            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] shadow-xs transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-[#8E857B] hover:text-[#181513]"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -110,7 +110,7 @@ export default function SearchAndFilters({
           className={`px-3.5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 border ${
             isNearMeActive
               ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
-              : 'bg-white text-[#1C1917] border-[#FED7AA] hover:bg-[#FFFBEB]'
+              : 'bg-white dark:bg-[#1A1218] text-stone-800 dark:text-stone-200 border-stone-200 dark:border-white/10 hover:bg-stone-50 dark:hover:bg-stone-800'
           }`}
         >
           <LocateFixed className={`w-4 h-4 ${isNearMeActive ? 'text-[#FDE047] animate-spin' : 'text-[#D8261C]'}`} />
@@ -121,11 +121,11 @@ export default function SearchAndFilters({
         <button
           type="button"
           onClick={() => setShowMobileFilterModal(true)}
-          className="md:hidden px-3.5 py-3.5 rounded-2xl bg-white border border-[#E2DAD0] text-[#181513] text-xs font-semibold flex items-center gap-1.5 shadow-sm shrink-0"
+          className="md:hidden px-3.5 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200 text-xs font-semibold flex items-center gap-1.5 shadow-sm shrink-0"
         >
-          <SlidersHorizontal className="w-4 h-4 text-[#8E857B]" />
+          <SlidersHorizontal className="w-4 h-4 text-stone-500 dark:text-stone-400" />
           {activeFilterCount > 0 && (
-            <span className="w-4 h-4 rounded-full bg-[#D43827] text-white text-[10px] flex items-center justify-center font-bold">
+            <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white text-[10px] flex items-center justify-center font-bold">
               {activeFilterCount}
             </span>
           )}
@@ -143,7 +143,7 @@ export default function SearchAndFilters({
               className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                 isSelected
                   ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25 border border-[#FDE047]/40'
-                  : 'bg-white border border-[#FED7AA] text-[#57534E] hover:text-[#D8261C] hover:border-[#D8261C]'
+                  : 'bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:border-[#D8261C]'
               }`}
             >
               {zone === 'All' ? 'All Zones' : zone}
@@ -161,7 +161,7 @@ export default function SearchAndFilters({
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               nearMetroOnly
                 ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-blue-500 hover:text-blue-600'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-blue-500 hover:text-blue-600'
             }`}
           >
             <Train className="w-3.5 h-3.5 text-blue-600" />
@@ -173,7 +173,7 @@ export default function SearchAndFilters({
             className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
               mustVisitOnly
                 ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
-                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-[#D8261C] hover:text-[#D8261C]'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
@@ -185,7 +185,7 @@ export default function SearchAndFilters({
             className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
               trendingOnly
                 ? 'bg-[#F59E0B] text-white border-[#F59E0B] shadow-md shadow-[#F59E0B]/25'
-                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-amber-500 hover:text-amber-700'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500'
             }`}
           >
             <Flame className="w-3.5 h-3.5 text-[#F59E0B]" />
@@ -197,7 +197,7 @@ export default function SearchAndFilters({
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               lessCrowdedOnly
                 ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-emerald-500 hover:text-emerald-700'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-emerald-500 hover:text-emerald-500'
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
@@ -209,7 +209,7 @@ export default function SearchAndFilters({
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
               wishlistOnly
                 ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-sm'
-                : 'bg-white text-[#57534E] border-[#FED7AA]/80 hover:border-[#D8261C] hover:text-[#D8261C]'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
             <Heart className="w-3.5 h-3.5 text-[#D8261C]" />
@@ -220,24 +220,24 @@ export default function SearchAndFilters({
 
         {/* Sort selector */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-[#8E857B] font-medium">Sort by:</span>
+          <span className="text-xs text-stone-500 dark:text-stone-400 font-medium">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
-            className="text-xs font-semibold py-1.5 px-2.5 rounded-xl bg-white border border-[#E2DAD0] text-[#181513] focus:outline-none focus:ring-1 focus:ring-[#D43827]"
+            className="text-xs font-semibold py-1.5 px-2.5 rounded-xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-1 focus:ring-[#D8261C]"
           >
-            <option value="trending">🔥 Trending</option>
-            <option value="popular">👑 Most Popular</option>
-            <option value="nearest-metro">🚇 Nearest Metro Walk</option>
-            <option value="name">🔤 Alphabetical (A-Z)</option>
-            <option value="distance">📍 Distance from Me</option>
+            <option value="trending" className="dark:bg-[#1A1218]">🔥 Trending</option>
+            <option value="popular" className="dark:bg-[#1A1218]">👑 Most Popular</option>
+            <option value="nearest-metro" className="dark:bg-[#1A1218]">🚇 Nearest Metro Walk</option>
+            <option value="name" className="dark:bg-[#1A1218]">🔤 Alphabetical (A-Z)</option>
+            <option value="distance" className="dark:bg-[#1A1218]">📍 Distance from Me</option>
           </select>
         </div>
       </div>
 
       {/* Puja Day selector bar */}
       <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-1 text-xs">
-        <span className="text-[#8E857B] font-mono text-[11px] shrink-0 uppercase tracking-wider">
+        <span className="text-stone-500 dark:text-stone-400 font-mono text-[11px] shrink-0 uppercase tracking-wider">
           Day:
         </span>
         {days.map((d) => (
@@ -246,8 +246,8 @@ export default function SearchAndFilters({
             onClick={() => onDayChange(d)}
             className={`px-3 py-1 rounded-lg transition-all shrink-0 font-medium ${
               selectedDay === d
-                ? 'bg-[#D43827]/10 text-[#D43827] font-semibold border border-[#D43827]/30'
-                : 'text-[#5C554E] hover:text-[#181513] bg-white border border-transparent hover:border-[#E2DAD0]'
+                ? 'bg-[#D8261C]/15 dark:bg-[#D8261C]/30 text-[#D8261C] dark:text-red-300 font-bold border border-[#D8261C]/40'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10'
             }`}
           >
             {d === 'Tonight' ? '🌙 Tonight' : d}
@@ -258,14 +258,14 @@ export default function SearchAndFilters({
       {/* Mobile Filter Drawer / Bottom Sheet */}
       {showMobileFilterModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end md:hidden animate-fade-in">
-          <div className="w-[85%] max-w-sm h-full bg-[#FAF8F5] p-5 flex flex-col justify-between overflow-y-auto">
+          <div className="w-[85%] max-w-sm h-full bg-[#FFFDF9] dark:bg-[#140E13] p-5 flex flex-col justify-between overflow-y-auto border-l border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100">
             <div className="space-y-6">
               
-              <div className="flex items-center justify-between pb-3 border-b border-[#E2DAD0]">
-                <h3 className="text-lg font-bold font-editorial text-[#181513]">Filters & Sorting</h3>
+              <div className="flex items-center justify-between pb-3 border-b border-stone-200 dark:border-white/10">
+                <h3 className="text-lg font-bold font-editorial text-stone-900 dark:text-white">Filters & Sorting</h3>
                 <button
                   onClick={() => setShowMobileFilterModal(false)}
-                  className="p-1 rounded-full text-[#8E857B] hover:text-[#181513]"
+                  className="p-1 rounded-full text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -273,7 +273,7 @@ export default function SearchAndFilters({
 
               {/* Sort by */}
               <div>
-                <label className="text-xs font-semibold text-[#8E857B] uppercase tracking-wider block mb-2">
+                <label className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-2">
                   Sort Pandals By
                 </label>
                 <div className="grid grid-cols-1 gap-1.5">
@@ -287,10 +287,10 @@ export default function SearchAndFilters({
                     <button
                       key={s.id}
                       onClick={() => onSortChange(s.id)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between ${
+                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition-colors ${
                         sortBy === s.id
                           ? 'bg-[#D8261C] text-white shadow-xs'
-                          : 'bg-white border border-[#E7E5E4] text-[#1C1917]'
+                          : 'bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100'
                       }`}
                     >
                       <span>{s.label}</span>
@@ -302,68 +302,68 @@ export default function SearchAndFilters({
 
               {/* Quick Toggle Filters */}
               <div>
-                <label className="text-xs font-semibold text-[#8E857B] uppercase tracking-wider block mb-2">
+                <label className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-2">
                   Experience Tags
                 </label>
                 <div className="space-y-2">
                   
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DAD0] text-xs">
-                    <span className="flex items-center gap-2 text-[#181513] font-medium">
-                      <Train className="w-4 h-4 text-blue-600" /> Near Metro Station (&lt;10m)
+                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
+                      <Train className="w-4 h-4 text-blue-600 dark:text-blue-400" /> Near Metro Station (&lt;10m)
                     </span>
                     <input
                       type="checkbox"
                       checked={nearMetroOnly}
                       onChange={onNearMetroToggle}
-                      className="accent-[#D43827] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-4 h-4 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DAD0] text-xs">
-                    <span className="flex items-center gap-2 text-[#181513] font-medium">
-                      <Sparkles className="w-4 h-4 text-[#D43827]" /> Must Visit Selection
+                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
+                      <Sparkles className="w-4 h-4 text-[#D8261C] dark:text-amber-400" /> Must Visit Selection
                     </span>
                     <input
                       type="checkbox"
                       checked={mustVisitOnly}
                       onChange={onMustVisitToggle}
-                      className="accent-[#D43827] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-4 h-4 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DAD0] text-xs">
-                    <span className="flex items-center gap-2 text-[#181513] font-medium">
-                      <Flame className="w-4 h-4 text-amber-600" /> Trending Pandals
+                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
+                      <Flame className="w-4 h-4 text-amber-600 dark:text-amber-400" /> Trending Pandals
                     </span>
                     <input
                       type="checkbox"
                       checked={trendingOnly}
                       onChange={onTrendingToggle}
-                      className="accent-[#D43827] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-4 h-4 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DAD0] text-xs">
-                    <span className="flex items-center gap-2 text-[#181513] font-medium">
+                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Less Crowded
                     </span>
                     <input
                       type="checkbox"
                       checked={lessCrowdedOnly}
                       onChange={onLessCrowdedToggle}
-                      className="accent-[#D43827] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-4 h-4 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DAD0] text-xs">
-                    <span className="flex items-center gap-2 text-[#181513] font-medium">
+                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
                       <Heart className="w-4 h-4 text-rose-500" /> My Saved Wishlist
                     </span>
                     <input
                       type="checkbox"
                       checked={wishlistOnly}
                       onChange={onWishlistToggle}
-                      className="accent-[#D43827] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-4 h-4 rounded"
                     />
                   </label>
 
@@ -372,10 +372,10 @@ export default function SearchAndFilters({
 
             </div>
 
-            <div className="pt-4 border-t border-[#E2DAD0]">
+            <div className="pt-4 border-t border-stone-200 dark:border-white/10">
               <button
                 onClick={() => setShowMobileFilterModal(false)}
-                className="w-full py-3 rounded-xl bg-[#D43827] text-white font-semibold text-sm shadow-md"
+                className="w-full py-3 rounded-xl bg-[#D8261C] text-white font-semibold text-sm shadow-md active:scale-98 transition-transform"
               >
                 Apply Filters ({totalCount} Pandals)
               </button>

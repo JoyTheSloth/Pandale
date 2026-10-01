@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Pandal } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
-import { Heart, MapPin, Train, ExternalLink, Clock, ArrowUpRight } from 'lucide-react';
+import { Heart, MapPin, Train, ExternalLink, Clock, ArrowUpRight, Footprints } from 'lucide-react';
 import { buildGoogleMapsUrl } from '@/lib/geo';
 
 interface PandalCardProps {
@@ -28,13 +28,13 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
   const getCrowdBg = (level: string) => {
     switch (level) {
       case 'low':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/50';
       case 'moderate':
-        return 'bg-amber-50 text-amber-800 border-amber-300';
+        return 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-900/50';
       case 'heavy':
-        return 'bg-rose-50 text-rose-700 border-rose-300';
+        return 'bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-900/50';
       default:
-        return 'bg-stone-50 text-stone-700 border-stone-200';
+        return 'bg-stone-50 dark:bg-stone-800 text-stone-800 dark:text-stone-300 border-stone-200 dark:border-white/10';
     }
   };
 
@@ -52,10 +52,10 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
   };
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-3xl border border-[#FEE2E2]/80 overflow-hidden shadow-luxe shadow-luxe-hover hover:border-[#F59E0B]/60 transition-all duration-300">
+    <div className="group relative flex flex-col bg-white dark:bg-[#1A1218] rounded-3xl border border-stone-200 dark:border-white/10 overflow-hidden shadow-luxe shadow-luxe-hover hover:border-[#D8261C]/50 dark:hover:border-white/20 transition-all duration-300">
       
       {/* Media Container with Cinematic Vignette */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#FFFBEB]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-100 dark:bg-stone-900">
         <Image
           src={pandal.featured_image}
           alt={pandal.name}
@@ -70,13 +70,13 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
         {/* Top Badges Row */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 gap-2">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="px-3 py-1 rounded-full text-[11px] font-bold backdrop-blur-md bg-white/95 text-[#D8261C] border border-[#FEE2E2] shadow-xs flex items-center gap-1">
+            <span className="px-3 py-1 rounded-full text-[11px] font-bold backdrop-blur-md bg-white/95 dark:bg-stone-900/90 text-[#D8261C] dark:text-red-400 border border-red-100 dark:border-white/15 shadow-xs flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D8261C]" />
               {pandal.area}
             </span>
             
             {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-md bg-[#FEF3C7]/95 text-[#92400E] border border-[#FDE68A] shadow-xs flex items-center gap-1">
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-md bg-amber-50/95 dark:bg-amber-950/90 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-900/50 shadow-xs flex items-center gap-1">
                 <span>👑 Must Visit</span>
               </span>
             )}
@@ -94,7 +94,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             className={`p-2.5 rounded-full backdrop-blur-md transition-all active:scale-90 ${
               saved
                 ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/40 border border-[#FDE047]'
-                : 'bg-white/90 text-[#D8261C] hover:bg-white hover:scale-105 shadow-xs'
+                : 'bg-white/90 dark:bg-black/70 text-[#D8261C] dark:text-red-400 hover:bg-white dark:hover:bg-black hover:scale-105 shadow-xs border border-transparent dark:border-white/10'
             }`}
           >
             <Heart className={`w-4 h-4 transition-transform ${saved ? 'fill-[#FDE047] scale-110' : 'fill-[#D8261C]/15'}`} />
@@ -114,37 +114,43 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
       </div>
 
       {/* Content Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4 bg-gradient-to-b from-white to-[#FFFDF9]">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4 bg-gradient-to-b from-white dark:from-[#1A1210] to-[#FFFDF9] dark:to-[#120D0B]">
         <div>
           {/* Theme preview with artistic accent */}
           <div className="mb-3.5">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#B45309] font-bold mb-1">
+            <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-amber-900 dark:text-amber-400 font-bold mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
               <span>Theme & Architecture</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#292524] font-medium line-clamp-2 leading-relaxed italic">
-              &ldquo;{pandal.theme}&rdquo;
+            <p className="text-xs sm:text-sm text-stone-800 dark:text-stone-200 font-medium line-clamp-2 leading-relaxed">
+              {pandal.theme}
             </p>
           </div>
 
           {/* Metro & Transit Connection Card */}
-          <div className="p-3.5 rounded-2xl bg-[#FFFBEB]/80 border border-[#FDE68A]/80 mb-3.5 flex items-center justify-between text-xs hover:border-[#F59E0B] transition-colors">
+          <div className="p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/80 border border-stone-200/90 dark:border-white/10 mb-3.5 flex items-center justify-between text-xs hover:border-[#D8261C]/40 dark:hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2.5 overflow-hidden">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center shrink-0 font-bold text-xs shadow-xs">
                 M
               </div>
               <div className="truncate">
-                <span className="text-[10px] text-[#78716C] block font-semibold leading-tight">Nearest Metro Station</span>
-                <span className="font-bold text-[#1C1917] truncate block text-xs">
+                <span className="text-[10px] text-stone-600 dark:text-stone-400 block font-semibold leading-tight">Nearest Metro Station</span>
+                <span className="font-bold text-stone-900 dark:text-white truncate block text-xs">
                   {pandal.nearest_metro}
                 </span>
               </div>
             </div>
             <div className="text-right shrink-0 pl-2">
-              <span className="text-[10px] text-[#78716C] block font-semibold leading-tight">Walking</span>
-              <span className="font-bold text-[#D8261C] text-xs">
-                {pandal.walking_time_mins} min <span className="text-[10px] font-normal text-[#78716C]">({pandal.walking_distance.split(' ')[0]})</span>
-              </span>
+              <div className="flex items-center justify-end gap-1.5 text-xs font-bold text-[#D8261C] dark:text-red-400">
+                <Clock className="w-3 h-3 text-[#D8261C]" />
+                <span>{pandal.walking_time_mins} min</span>
+                <span className="text-stone-300 dark:text-stone-600">•</span>
+                <span className="text-stone-700 dark:text-stone-300">{pandal.walking_distance.split(' ')[0]}</span>
+              </div>
+              <div className="flex items-center justify-end gap-1 text-[10px] font-semibold text-amber-800 dark:text-amber-400 mt-0.5">
+                <Footprints className="w-2.5 h-2.5 text-[#D8261C]" />
+                <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
+              </div>
             </div>
           </div>
 
@@ -156,15 +162,15 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
               <span className="text-[9px] opacity-75 font-mono">({pandal.crowd_status.source})</span>
             </div>
 
-            <div className="flex items-center gap-1 text-[#57534E] text-xs">
+            <div className="flex items-center gap-1 text-stone-700 dark:text-stone-300 text-xs font-medium">
               <Clock className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span className="truncate max-w-[130px] font-medium">{pandal.best_time.split('or')[0]}</span>
+              <span className="truncate max-w-[130px]">{pandal.best_time.split('or')[0]}</span>
             </div>
           </div>
         </div>
 
         {/* Footer Action Buttons */}
-        <div className="pt-3 border-t border-[#FEE2E2]/70 flex items-center gap-2">
+        <div className="pt-3 border-t border-[#FEE2E2]/70 dark:border-white/8 flex items-center gap-2">
           
           <Link
             href={`/pandal/${pandal.slug}`}
@@ -179,11 +185,11 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             target="_blank"
             rel="noopener noreferrer"
             title="Open Exact Google Maps Coordinates"
-            className="py-2.5 px-3.5 rounded-xl border border-[#FED7AA] bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] hover:border-[#D8261C] text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-2xs"
+            className="py-2.5 px-3.5 rounded-xl border border-stone-200 dark:border-white/15 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] dark:hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-2xs"
           >
             <MapPin className="w-3.5 h-3.5 text-[#D8261C]" />
             <span className="hidden sm:inline">Maps</span>
-            <ExternalLink className="w-3 h-3 text-[#A8A29E]" />
+            <ExternalLink className="w-3 h-3 text-stone-400 dark:text-stone-500" />
           </a>
 
         </div>

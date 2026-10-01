@@ -176,27 +176,28 @@ function PandalsContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#E9E2D8]">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-stone-200 dark:border-white/10">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#D8261C] dark:text-amber-400 font-bold">
             Discovery Catalog
           </span>
-          <h1 className="text-3xl sm:text-4xl font-bold font-editorial text-[#181513] mt-1">
+          <h1 className="text-3xl sm:text-4xl font-bold font-editorial text-stone-900 dark:text-stone-50 mt-1">
             Kolkata Pandal Guide
           </h1>
-          <p className="text-xs sm:text-sm text-[#5C554E] mt-1">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-1 font-medium">
             Showing {filteredPandals.length} authentic 2026 Kolkata Durga Puja pandals
           </p>
         </div>
 
         {/* View Switcher: Grid vs Map vs Split */}
-        <div className="flex items-center gap-1.5 p-1 bg-white border border-[#E7E5E4] rounded-2xl shadow-xs self-start sm:self-auto">
+        <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 rounded-2xl shadow-xs self-start sm:self-auto">
           <button
+            type="button"
             onClick={() => setViewMode('grid')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
               viewMode === 'grid'
                 ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
+                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
             }`}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -204,11 +205,12 @@ function PandalsContent() {
           </button>
 
           <button
+            type="button"
             onClick={() => setViewMode('map')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
               viewMode === 'map'
                 ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
+                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
             }`}
           >
             <Map className="w-3.5 h-3.5" />
@@ -216,11 +218,12 @@ function PandalsContent() {
           </button>
 
           <button
+            type="button"
             onClick={() => setViewMode('split')}
             className={`hidden lg:flex px-3 py-1.5 rounded-xl text-xs font-semibold items-center gap-1.5 transition-all ${
               viewMode === 'split'
                 ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-[#57534E] hover:text-[#D8261C] hover:bg-[#FEF2F2]'
+                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -338,19 +341,20 @@ function PandalsContent() {
 
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="text-center py-16 px-4 bg-white rounded-3xl border border-[#E9E2D8] max-w-lg mx-auto space-y-4 my-8">
-      <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto">
+    <div className="text-center py-16 px-4 bg-white dark:bg-[#1A1218] rounded-3xl border border-stone-200 dark:border-white/10 max-w-lg mx-auto space-y-4 my-8 shadow-sm">
+      <div className="w-12 h-12 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-200/60 dark:border-amber-900/40">
         <AlertCircle className="w-6 h-6" />
       </div>
-      <h3 className="text-lg font-bold font-editorial text-[#181513]">
+      <h3 className="text-lg font-bold font-editorial text-stone-900 dark:text-white">
         No pandals found
       </h3>
-      <p className="text-xs text-[#5C554E] leading-relaxed">
+      <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
         We couldn&rsquo;t find any pandals matching your active filter criteria. Try clearing your search keyword or relaxing zone constraints.
       </p>
       <button
+        type="button"
         onClick={onReset}
-        className="px-5 py-2.5 rounded-xl bg-[#D8261C] text-white text-xs font-semibold hover:bg-[#B91C1C] transition-all shadow-sm"
+        className="px-5 py-2.5 rounded-xl bg-[#D8261C] text-white text-xs font-semibold hover:bg-[#B91C1C] transition-all shadow-sm active:scale-98"
       >
         Reset All Filters
       </button>

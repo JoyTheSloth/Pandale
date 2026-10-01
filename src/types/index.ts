@@ -3,13 +3,17 @@ export type ZoneArea =
   | 'South Kolkata'
   | 'Central Kolkata'
   | 'East Kolkata'
-  | 'West Kolkata';
+  | 'West Kolkata'
+  | 'Airport Corridor';
+
 
 export type MetroLineName = 
   | 'Blue Line (North-South)'
   | 'Green Line (East-West)'
   | 'Purple Line (Joka-Esplanade)'
-  | 'Orange Line (Kavi Subhash-Airport)';
+  | 'Orange Line (Kavi Subhash-Airport)'
+  | 'Yellow Line (Airport-Noapara)';
+
 
 export type CrowdLevel = 'low' | 'moderate' | 'heavy';
 export type CrowdSource = 'Estimated' | 'Community reported';
@@ -53,7 +57,8 @@ export interface NearbyMetroDetail {
   station_id: string;
   station_name: string;
   line: MetroLineName;
-  line_code: 'blue' | 'green' | 'purple' | 'orange';
+  line_code: 'blue' | 'green' | 'purple' | 'orange' | 'yellow';
+
   walking_distance: string; // e.g. "450m"
   walking_time_mins: number; // e.g. 6
   directions_url: string;
@@ -97,7 +102,8 @@ export interface MetroStation {
   name: string;
   bengali_name?: string;
   line: MetroLineName;
-  line_code: 'blue' | 'green' | 'purple' | 'orange';
+  line_code: 'blue' | 'green' | 'purple' | 'orange' | 'yellow';
+
   latitude: number;
   longitude: number;
   nearby_pandals: {
