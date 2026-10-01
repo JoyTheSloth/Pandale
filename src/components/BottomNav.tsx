@@ -19,8 +19,8 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-nav border-t border-[#FED7AA]/80 pb-[env(safe-area-inset-bottom,0px)] shadow-lg">
-      <div className="flex items-center justify-around h-16 px-2">
+    <nav className="md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto z-50 rounded-[2.2rem] bg-black/80 backdrop-blur-2xl border border-white/10 shadow-2xl p-1.5">
+      <div className="flex items-center justify-between px-1">
         {navItems.map((item) => {
           const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
           const Icon = item.icon;
@@ -29,23 +29,25 @@ export default function BottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-90 ${
-                isActive ? 'text-[#D8261C]' : 'text-[#78716C] hover:text-[#D8261C]'
+              className={`flex flex-col items-center justify-center transition-all active:scale-95 ${
+                isActive 
+                  ? 'bg-[#3B1516] border border-[#D8261C]/50 text-[#D8261C] px-3.5 py-1.5 rounded-2xl shadow-inner'
+                  : 'text-[#A8A29E] hover:text-white px-2.5 py-1.5'
               }`}
             >
               <div className="relative">
-                <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-110 text-[#D8261C]' : ''}`} />
+                <Icon className={`w-5 h-5 ${isActive ? 'text-[#D8261C]' : 'text-[#A8A29E]'}`} />
                 {item.badge !== undefined && item.badge > 0 && (
-                  <span className="absolute -top-1.5 -right-2.5 bg-[#D8261C] text-[#FEF3C7] text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center border-2 border-white shadow-xs">
+                  <span className="absolute -top-1.5 -right-2 bg-[#D8261C] text-white text-[9px] font-bold h-3.5 w-3.5 rounded-full flex items-center justify-center shadow-xs">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className={`text-[10px] mt-1 font-semibold tracking-tight ${isActive ? 'text-[#D8261C] font-bold' : 'text-[#78716C]'}`}>
+              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-[#D8261C] font-bold' : 'text-[#A8A29E] font-medium'}`}>
                 {item.label}
               </span>
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#D8261C] mt-0.5 shadow-xs" />
+                <div className="w-1 h-1 rounded-full bg-[#D8261C] mt-0.5 shadow-sm shadow-[#D8261C]" />
               )}
             </Link>
           );

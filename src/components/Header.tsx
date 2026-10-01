@@ -86,31 +86,48 @@ export default function Header() {
           {/* Left: Floating Brand Pill Badge (exactly matching reference image) */}
           <Link 
             href="/" 
-            className="pointer-events-auto inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-white border border-[#1C1917] shadow-sm hover:shadow-md hover:border-[#D8261C] active:scale-95 transition-all group"
+            className={`pointer-events-auto inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full shadow-lg active:scale-95 transition-all group ${
+              pathname === '/'
+                ? 'bg-black/45 backdrop-blur-md border border-white/20 hover:border-white/40'
+                : 'bg-white border border-[#1C1917] hover:border-[#D8261C]'
+            }`}
           >
             <Image
               src="/brand/pandale-icon.png"
               alt="Pandalé"
-              width={26}
-              height={26}
-              className="w-6 h-6 object-contain shrink-0 group-hover:scale-108 transition-transform"
+              width={28}
+              height={28}
+              className="w-7 h-7 object-contain rounded-lg shrink-0 group-hover:scale-105 transition-transform"
               priority
             />
-            <span className="text-base sm:text-lg font-bold font-editorial tracking-tight text-[#1C1917]">
-              Pandal<span className="text-[#D8261C]">é</span>
-            </span>
+            <div className="flex flex-col text-left">
+              <span className={`text-base sm:text-lg font-bold font-editorial tracking-tight leading-tight ${
+                pathname === '/' ? 'text-white' : 'text-[#1C1917]'
+              }`}>
+                Pandal<span className="text-[#D8261C]">é</span>
+              </span>
+              <span className={`text-[8px] font-mono tracking-widest uppercase leading-none mt-0.5 font-bold ${
+                pathname === '/' ? 'text-[#E7E5E4]/80' : 'text-[#78716C]'
+              }`}>
+                Kolkata Pujo Guide
+              </span>
+            </div>
           </Link>
 
           {/* Right: Floating Circular Hamburger Menu Button (exactly matching reference image) */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
-            className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border border-[#1C1917] shadow-sm hover:shadow-md hover:border-[#D8261C] flex items-center justify-center text-[#1C1917] active:scale-95 transition-all group"
+            className={`pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group ${
+              pathname === '/'
+                ? 'bg-black/45 backdrop-blur-md border border-white/20 text-white hover:border-white/40'
+                : 'bg-white border border-[#1C1917] text-[#1C1917] hover:border-[#D8261C]'
+            }`}
           >
             {menuOpen ? (
               <X className="w-5 h-5 text-[#D8261C] transition-transform duration-200" />
             ) : (
-              <Menu className="w-5 h-5 text-[#1C1917] group-hover:text-[#D8261C] transition-colors" />
+              <Menu className={`w-5 h-5 ${pathname === '/' ? 'text-white' : 'text-[#1C1917]'}`} />
             )}
           </button>
 

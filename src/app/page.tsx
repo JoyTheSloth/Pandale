@@ -139,47 +139,71 @@ export default function HomePage() {
             <Sparkles className="w-3 h-3 text-[#F59E0B]" />
           </div>
 
-          <div className="space-y-1.5">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-editorial text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
-              Kolkata Pujo 2026
+          <div className="space-y-2">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-editorial text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+              Kolkata <span className="text-[#D8261C]">Pujo</span> 2026
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-stone-200 max-w-md mx-auto leading-relaxed drop-shadow font-normal px-2">
+            <p className="text-xs sm:text-sm md:text-base text-[#E7E5E4] max-w-sm sm:max-w-md mx-auto leading-relaxed drop-shadow font-normal px-2">
               Discover iconic pandals, nearest Metro exits, and verified Google Maps walking routes.
             </p>
           </div>
 
-          {/* Symmetrically Centralized 2x2 Quick Action Buttons */}
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 max-w-sm sm:max-w-md mx-auto w-full pt-2">
+          {/* Symmetrically Centralized 2x2 Quick Action Buttons Matching 1st Reference Design */}
+          <div className="grid grid-cols-2 gap-3 max-w-md mx-auto w-full pt-2">
+            {/* 1. Explore Pandals */}
             <Link
               href="/pandals"
-              className="px-4 py-2.5 sm:py-3 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-lg shadow-[#D8261C]/50 transition-transform active:scale-95"
+              className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] border border-red-500/40 text-white shadow-lg shadow-red-950/50 flex items-center justify-between active:scale-95 transition-all group"
             >
-              <Compass className="w-3.5 h-3.5 text-[#FDE047]" />
-              <span>Explore Pandals</span>
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                  <Compass className="w-4 h-4 text-[#FDE047]" />
+                </div>
+                <span className="font-bold text-xs sm:text-sm truncate">Explore Pandals</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/90 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
+            {/* 2. Metro Routes */}
             <Link
               href="/metro"
-              className="px-4 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
-              <Train className="w-3.5 h-3.5 text-blue-600" />
-              <span>Metro Routes</span>
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
+                  <Train className="w-4 h-4 text-blue-400" />
+                </div>
+                <span className="font-bold text-xs sm:text-sm truncate">Metro Routes</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/70 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
+            {/* 3. Wishlist */}
             <Link
               href="/wishlist"
-              className="px-4 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
-              <Heart className="w-3.5 h-3.5 text-[#D8261C] fill-[#D8261C]" />
-              <span>Wishlist ({wishlistCount})</span>
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-rose-500/20 flex items-center justify-center shrink-0">
+                  <Heart className="w-4 h-4 text-[#D8261C] fill-[#D8261C]" />
+                </div>
+                <span className="font-bold text-xs sm:text-sm truncate">Wishlist ({wishlistCount})</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/70 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
+            {/* 4. Near Me */}
             <button
               onClick={handleNearMe}
-              className="px-4 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-md transition-transform active:scale-95"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
-              <LocateFixed className={`w-3.5 h-3.5 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
-              <span>{userLocation ? 'Near Me Active' : 'Near Me'}</span>
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
+                  <LocateFixed className={`w-4 h-4 ${geoLoading ? 'animate-spin text-amber-300' : 'text-amber-400'}`} />
+                </div>
+                <span className="font-bold text-xs sm:text-sm truncate">{userLocation ? 'Near Me Active' : 'Near Me'}</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/70 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
