@@ -6,9 +6,7 @@ import {
   Check, 
   Copy, 
   ExternalLink,
-  Send,
   CheckCheck,
-  Smile,
   Mail
 } from 'lucide-react';
 
@@ -23,21 +21,15 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
 export default function CreatorConnectModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [message, setMessage] = useState("Hi Joydeep! I'm interested in building a website / digital product.");
   const dialogRef = useRef<HTMLDivElement>(null);
   const email = 'joy.thesloth@gmail.com';
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent("Hi Joydeep! I'm interested in building a website / digital product.")}`;
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.stopPropagation();
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    const encoded = encodeURIComponent(message.trim() || 'Hi Joydeep!');
-    window.open(`https://wa.me/?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   // Close on Escape or click outside
@@ -176,7 +168,7 @@ export default function CreatorConnectModal() {
                 Want a custom website, Next.js web application, or digital product built like this?
               </p>
               <p className="text-xs text-stone-600 dark:text-stone-300">
-                Send me a message below or chat directly on WhatsApp! 🚀
+                Let&rsquo;s connect! Tap below to chat directly on WhatsApp or drop an email. 🚀
               </p>
               <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
                 <span>11:42 AM</span>
@@ -185,39 +177,17 @@ export default function CreatorConnectModal() {
             </div>
           </div>
 
-          {/* C. WhatsApp Input & Send Bar */}
+          {/* C. WhatsApp Action & Contact Bar */}
           <div className="p-3 bg-[#F0F2F5] dark:bg-[#202C33] border-t border-stone-200 dark:border-white/5 space-y-2">
-            <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-              <div className="flex-1 bg-white dark:bg-[#2A3942] rounded-2xl px-3 py-2 flex items-center gap-2 shadow-2xs border border-transparent focus-within:border-[#25D366]">
-                <Smile className="w-4 h-4 text-stone-400 shrink-0 hidden sm:block" />
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type a message..."
-                  className="w-full bg-transparent text-xs sm:text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none"
-                />
-              </div>
-
-              {/* Send on WhatsApp Button */}
-              <button
-                type="submit"
-                title="Send via WhatsApp"
-                className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-md active:scale-90 transition-transform btn-jiggle cursor-pointer shrink-0"
-              >
-                <Send className="w-4 h-4 translate-x-0.5" />
-              </button>
-            </form>
-
             {/* Direct 1-Click WhatsApp CTA */}
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(message.trim())}`}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm btn-jiggle"
+              className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm btn-jiggle transition-colors"
             >
               <WhatsAppIcon className="w-4 h-4 text-white" />
-              <span>Open in WhatsApp</span>
+              <span>Chat on WhatsApp</span>
             </a>
 
             {/* Quick Secondary Contact Drawer (Email & GitHub) */}
