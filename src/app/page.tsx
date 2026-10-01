@@ -111,91 +111,91 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
-      {/* 1. HERO SECTION - LUXURY EDITORIAL EXPERIENCE WITH PUJA PATTERN & LOGO */}
-      {/* 1. HERO SECTION - IMMERSIVE DURGA PUJA EXPERIENCE */}
-      <section className="relative min-h-[580px] sm:min-h-[660px] md:min-h-[720px] rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden max-w-7xl mx-auto w-full flex flex-col justify-center items-center px-4 sm:px-8 py-12 sm:py-16 shadow-2xl border border-[#FED7AA]/60">
+      {/* 1. HERO SECTION - UNCONFINED 9:16 IMMERSIVE EXPERIENCE FOR PHONE UI */}
+      <section className="relative w-full aspect-[9/16] sm:aspect-auto sm:min-h-[750px] md:min-h-[820px] flex flex-col justify-end -mt-20 sm:-mt-24 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
         
-        {/* Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
+        {/* Full Bleed 9:16 Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
         <div className="absolute inset-0 -z-20">
           <Image
             src="/brand/hero-bg.jpg"
             alt="Durga Puja Kolkata at Howrah Bridge Ghat"
             fill
             priority
-            className="object-cover object-[center_30%] sm:object-[center_35%]"
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover object-center"
+            sizes="100vw"
           />
         </div>
 
-        {/* Ambient Dark/Warm Vignette Scrim that preserves the photo's vibrant colors while framing the content */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/50 -z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.5)_100%)] -z-10 pointer-events-none" />
+        {/* Ambient Gradient Scrim: Clear at the top so Durga, Moon & Howrah Bridge shine through, dark at bottom for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent via-50% to-black/95 -z-10" />
 
-        {/* Frosted Glass Content Centerpiece Card */}
-        <div className="relative z-10 text-center max-w-3xl mx-auto space-y-5 p-6 sm:p-10 rounded-[2.5rem] bg-[#FFFDF9]/92 backdrop-blur-xl border border-white/80 shadow-2xl">
+        {/* Hero Content anchored elegantly in the lower portion */}
+        <div className="relative z-10 text-center max-w-2xl mx-auto space-y-4 sm:space-y-5">
           
           {/* Luxury Heritage Seal Tag */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-[#FDE68A] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
-            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span className="tracking-wider uppercase text-[11px]">ESTD. 2026 • THE DEFINITIVE KOLKATA PUJO COMPANION</span>
-            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 shadow-md text-[10px] sm:text-xs font-mono font-bold text-amber-300">
+            <Sparkles className="w-3 h-3 text-[#F59E0B]" />
+            <span className="tracking-wider uppercase">ESTD. 2026 • KOLKATA PUJO COMPANION</span>
+            <Sparkles className="w-3 h-3 text-[#F59E0B]" />
           </div>
 
-          {/* Hero Centerpiece: Official Logo Typography */}
-          <div className="flex flex-col items-center justify-center py-1">
-            <div className="relative w-full max-w-[300px] sm:max-w-[460px] md:max-w-[540px] h-20 sm:h-32 md:h-38 transition-transform duration-300 hover:scale-[1.02]">
-              <Image
-                src="/brand/pandale-logo.png"
-                alt="Pandalé — Kolkata Durga Puja & Metro Guide"
-                fill
-                priority
-                className="object-contain drop-shadow-sm"
-              />
+          {/* Hero Centerpiece: Official Logo in Sleek Glass Capsule */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-white/95 backdrop-blur-md shadow-2xl border border-white/80 transition-transform hover:scale-[1.02]">
+              <div className="relative w-44 sm:w-60 md:w-72 h-10 sm:h-14">
+                <Image
+                  src="/brand/pandale-logo.png"
+                  alt="Pandalé — Kolkata Durga Puja & Metro Guide"
+                  fill
+                  priority
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
 
           {/* Supporting Text */}
-          <p className="text-sm sm:text-base md:text-lg text-[#57534E] max-w-xl mx-auto leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm md:text-base text-stone-200 max-w-lg mx-auto leading-relaxed drop-shadow font-normal px-2">
             Discover the city’s most iconic pandals, navigate via Kolkata Metro with exact walking minutes, and open verified Google Maps locations instantly.
           </p>
 
           {/* Quick Action Badges / CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 pt-1">
             <Link
               href="/pandals"
-              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-md shadow-[#D8261C]/30 transition-transform active:scale-95 hover:scale-102"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg shadow-[#D8261C]/40 transition-transform active:scale-95"
             >
-              <Compass className="w-4 h-4 text-[#FDE047]" />
-              <span>Explore All Pandals</span>
+              <Compass className="w-3.5 h-3.5 text-[#FDE047]" />
+              <span>Explore Pandals</span>
             </Link>
 
             <Link
               href="/metro"
-              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
-              <Train className="w-4 h-4 text-blue-600" />
-              <span>Explore by Metro</span>
+              <Train className="w-3.5 h-3.5 text-blue-600" />
+              <span>Metro Routes</span>
             </Link>
 
             <Link
               href="/wishlist"
-              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
-              <Heart className="w-4 h-4 text-[#D8261C] fill-[#D8261C]" />
-              <span>My Wishlist ({wishlistCount})</span>
+              <Heart className="w-3.5 h-3.5 text-[#D8261C] fill-[#D8261C]" />
+              <span>Wishlist ({wishlistCount})</span>
             </Link>
 
             <button
               onClick={handleNearMe}
-              className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFBEB] border border-[#FED7AA] text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#1C1917] hover:text-[#D8261C] text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-md transition-transform active:scale-95"
             >
-              <LocateFixed className={`w-4 h-4 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
+              <LocateFixed className={`w-3.5 h-3.5 ${geoLoading ? 'animate-spin text-amber-500' : 'text-[#D8261C]'}`} />
               <span>{userLocation ? 'Near Me Active' : 'Near Me'}</span>
             </button>
           </div>
 
           {geoError && (
-            <p className="text-xs text-rose-600 font-medium">{geoError}</p>
+            <p className="text-xs text-rose-300 font-medium drop-shadow">{geoError}</p>
           )}
 
         </div>
