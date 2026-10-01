@@ -111,14 +111,14 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
-      {/* 1. HERO SECTION - UNCONFINED 100DVH IMMERSIVE EXPERIENCE FOR PHONE UI */}
-      <section className="relative w-full h-[100dvh] sm:min-h-[800px] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
+      {/* 1. HERO SECTION - UNCONFINED 100DVH IMMERSIVE POSTER FOR PHONE UI */}
+      <section className="relative w-full h-[100dvh] sm:min-h-[820px] flex flex-col justify-end pb-24 sm:pb-20 px-4 sm:px-6 md:px-8 overflow-hidden shadow-2xl">
         
-        {/* Full Bleed 9:16 Background Image: Durga Pratima overlooking Howrah Bridge & Hooghly Ghat */}
+        {/* Full Bleed Background Poster Image: Durga, Pandalé Typography, Howrah Bridge & Victoria Memorial */}
         <div className="absolute inset-0 -z-20">
           <Image
             src="/brand/hero-bg.jpg"
-            alt="Durga Puja Kolkata at Howrah Bridge Ghat"
+            alt="Pandalé — Kolkata Durga Puja & Metro Guide"
             fill
             priority
             className="object-cover object-center"
@@ -126,30 +126,20 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Ambient Gradient Scrim: Balanced dark vignette so centralized text has high contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60 -z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.25)_55%,rgba(0,0,0,0.75)_100%)] -z-10 pointer-events-none" />
+        {/* Subtle Ambient Gradient Scrim at the very bottom so the artwork is fully visible and buttons are readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 via-30% to-transparent -z-10" />
 
-        {/* Hero Content fully centralized */}
-        <div className="relative z-10 text-center max-w-xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center justify-center">
+        {/* Hero Interactive Actions anchored cleanly over the river water reflection */}
+        <div className="relative z-10 text-center max-w-md mx-auto space-y-3.5 w-full">
           
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/30 shadow-md text-[10px] sm:text-xs font-mono font-bold text-amber-300">
             <Sparkles className="w-3 h-3 text-[#F59E0B]" />
-            <span className="tracking-wider uppercase">ESTD. 2026 • KOLKATA PUJO COMPANION</span>
+            <span className="tracking-wider uppercase">ESTD. 2026 • 14+ ICONIC PANDALS & METRO ROUTES</span>
             <Sparkles className="w-3 h-3 text-[#F59E0B]" />
           </div>
 
-          <div className="space-y-2">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-editorial text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
-              Kolkata <span className="text-[#D8261C]">Pujo</span> 2026
-            </h1>
-            <p className="text-xs sm:text-sm md:text-base text-[#E7E5E4] max-w-sm sm:max-w-md mx-auto leading-relaxed drop-shadow font-normal px-2">
-              Discover iconic pandals, nearest Metro exits, and verified Google Maps walking routes.
-            </p>
-          </div>
-
-          {/* Symmetrically Centralized 2x2 Quick Action Buttons Matching 1st Reference Design */}
-          <div className="grid grid-cols-2 gap-3 max-w-md mx-auto w-full pt-2">
+          {/* Symmetrically Centralized 2x2 Quick Action Buttons Matching Reference Design */}
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
             {/* 1. Explore Pandals */}
             <Link
               href="/pandals"
@@ -167,7 +157,7 @@ export default function HomePage() {
             {/* 2. Metro Routes */}
             <Link
               href="/metro"
-              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/55 backdrop-blur-md border border-white/20 text-white hover:bg-black/70 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <div className="w-7 h-7 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
@@ -181,7 +171,7 @@ export default function HomePage() {
             {/* 3. Wishlist */}
             <Link
               href="/wishlist"
-              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/55 backdrop-blur-md border border-white/20 text-white hover:bg-black/70 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <div className="w-7 h-7 rounded-full bg-rose-500/20 flex items-center justify-center shrink-0">
@@ -195,7 +185,7 @@ export default function HomePage() {
             {/* 4. Near Me */}
             <button
               onClick={handleNearMe}
-              className="p-3 sm:p-3.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 text-white hover:bg-black/65 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
+              className="p-3 sm:p-3.5 rounded-2xl bg-black/55 backdrop-blur-md border border-white/20 text-white hover:bg-black/70 shadow-lg flex items-center justify-between active:scale-95 transition-all group"
             >
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
