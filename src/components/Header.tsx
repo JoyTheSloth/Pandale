@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useWishlist } from '@/context/WishlistContext';
 import { Heart, Compass, Train, MapPin, Route, ShieldCheck, Sparkles } from 'lucide-react';
@@ -36,21 +37,27 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
-        {/* Brand Logo */}
-        <Link href="/" className="group flex items-center gap-3 transition-transform active:scale-98">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#D8261C] to-[#B91C1C] flex items-center justify-center text-white font-bold shadow-md shadow-[#D8261C]/30 border border-[#FBBF24]/30">
-            <Sparkles className="w-5 h-5 text-[#FDE047]" />
+        {/* Brand Logo with Official Icon */}
+        <Link href="/" className="group flex items-center gap-3 transition-transform active:scale-95">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl overflow-hidden relative shadow-md shadow-[#D8261C]/25 border border-[#FED7AA] shrink-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-[#D8261C]/35 transition-all duration-300">
+            <Image
+              src="/brand/pandale-icon.png"
+              alt="Pandalé Official Icon"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
           <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1917] font-editorial">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1917] font-editorial leading-none">
                 Pandal<span className="text-[#D8261C]">é</span>
               </span>
-              <span className="text-[11px] px-2 py-0.5 rounded-full font-mono font-bold bg-[#FEF3C7] text-[#B45309] border border-[#FDE68A]">
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
                 2026
               </span>
             </div>
-            <span className="text-[10px] uppercase tracking-wider font-semibold text-[#B91C1C]/80">
+            <span className="text-[9px] uppercase tracking-wider font-bold text-[#D8261C] mt-0.5">
               Kolkata Durga Puja & Metro Guide
             </span>
           </div>

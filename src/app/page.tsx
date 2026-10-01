@@ -126,28 +126,51 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
       
-      {/* 1. HERO SECTION - LUXURY EDITORIAL EXPERIENCE */}
+      {/* 1. HERO SECTION - LUXURY EDITORIAL EXPERIENCE WITH PUJA PATTERN & LOGO */}
       <section className="relative pt-6 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         
+        {/* Subtle Puja architectural grid pattern background with soft radial mask */}
+        <div className="absolute inset-0 bg-[url('/brand/pujo-pattern-bg.jpg')] bg-repeat bg-[length:520px_auto] opacity-20 pointer-events-none -z-10 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_85%)]" />
+
         {/* Subtle festive decorative ambient warm glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-[radial-gradient(ellipse_at_top,_rgba(245,158,11,0.18),_rgba(216,38,28,0.10)_45%,_transparent_75%)] blur-2xl -z-10 pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-[radial-gradient(ellipse_at_top,_rgba(245,158,11,0.22),_rgba(216,38,28,0.12)_45%,_transparent_75%)] blur-2xl -z-10 pointer-events-none" />
 
         <div className="text-center max-w-4xl mx-auto space-y-6">
           
           {/* Luxury Heritage Seal Tag */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#FDE68A] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#FDE68A] shadow-xs text-xs font-mono font-bold text-[#B91C1C]">
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span className="tracking-wider uppercase text-[11px]">ESTD. 2026 • THE DEFINITIVE KOLKATA PUJO COMPANION</span>
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
           </div>
 
-          {/* Hero Main Headline with Playfair Display */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-editorial text-[#1C1917] tracking-tight leading-[1.05]">
-            Kolkata Pujo, <br className="hidden sm:inline" />
-            <span className="font-editorial italic bg-gradient-to-r from-[#D8261C] via-[#B91C1C] to-[#C2410C] bg-clip-text text-transparent">
-              One Guide.
-            </span>
-          </h1>
+          {/* Hero Centerpiece: Icon + Official Logo Typography */}
+          <div className="flex flex-col items-center justify-center space-y-3 pt-1">
+            {/* Floating App Icon with Golden Glow and Micro-Interaction */}
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#D8261C] via-[#F59E0B] to-[#D8261C] opacity-35 blur-md group-hover:opacity-75 transition-opacity duration-500 animate-pulse" />
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden relative shadow-2xl border-2 border-[#FED7AA] bg-white group-hover:scale-108 group-hover:-rotate-2 transition-all duration-300">
+                <Image
+                  src="/brand/pandale-icon.png"
+                  alt="Pandalé Emblem"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Official Typographic Logo Image */}
+            <div className="relative w-full max-w-[340px] sm:max-w-[500px] md:max-w-[620px] h-20 sm:h-28 md:h-32 transition-transform duration-300 hover:scale-[1.02]">
+              <Image
+                src="/brand/pandale-logo.png"
+                alt="Pandalé — Kolkata Durga Puja & Metro Guide"
+                fill
+                priority
+                className="object-contain drop-shadow-sm"
+              />
+            </div>
+          </div>
 
           {/* Supporting Text */}
           <p className="text-base sm:text-lg md:text-xl text-[#57534E] max-w-2xl mx-auto leading-relaxed font-normal">

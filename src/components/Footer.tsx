@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Sparkles, Train, MapPin, Heart, Shield, PhoneCall } from 'lucide-react';
 
 export default function Footer() {
@@ -14,9 +15,14 @@ export default function Footer() {
           
           {/* Brand info */}
           <div className="md:col-span-1 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D8261C] to-[#B91C1C] flex items-center justify-center text-white font-bold border border-[#FDE047]/40 shadow-sm">
-                <Sparkles className="w-4 h-4 text-[#FDE047]" />
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl overflow-hidden relative border border-[#FED7AA] shadow-sm shrink-0">
+                <Image
+                  src="/brand/pandale-icon.png"
+                  alt="Pandalé Official Icon"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <span className="text-2xl font-bold font-editorial text-[#1C1917] tracking-wide">
                 Pandal<span className="text-[#D8261C]">é</span> 2026

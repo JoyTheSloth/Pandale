@@ -44,6 +44,10 @@ export const metadata: Metadata = {
     'South Kolkata Pujo'
   ],
   authors: [{ name: 'Pandalé Kolkata' }],
+  icons: {
+    icon: '/brand/pandale-icon.png',
+    apple: '/brand/pandale-icon.png',
+  },
   openGraph: {
     title: 'Pandalé — Kolkata Durga Puja & Metro Guide',
     description: 'The definitive companion for exploring Kolkata Durga Puja 2026 by Metro with exact Google Maps coordinates.',
