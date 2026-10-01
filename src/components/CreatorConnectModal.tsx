@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
-  MessageCircleQuestion, 
-  Mail, 
   X, 
   Check, 
   Copy, 
-  Sparkles, 
   ExternalLink,
-  Code2
+  Send,
+  CheckCheck,
+  Smile,
+  Mail
 } from 'lucide-react';
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -23,6 +23,8 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
 export default function CreatorConnectModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [message, setMessage] = useState("Hi Joydeep! I'm interested in building a website / digital product.");
+  const dialogRef = useRef<HTMLDivElement>(null);
   const email = 'joy.thesloth@gmail.com';
 
   const handleCopyEmail = (e: React.MouseEvent) => {
@@ -32,155 +34,217 @@ export default function CreatorConnectModal() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // Close on Escape key
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    const encoded = encodeURIComponent(message.trim() || 'Hi Joydeep!');
+    window.open(`https://wa.me/?text=${encoded}`, '_blank', 'noopener,noreferrer');
+  };
+
+  // Close on Escape or click outside
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false);
     };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
+        // Only close if not clicking the toggle button
+        const target = e.target as HTMLElement;
+        if (!target.closest('#whatsapp-floating-trigger')) {
+          setIsOpen(false);
+        }
+      }
+    };
+
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [isOpen]);
-
-  const whatsappMessage = encodeURIComponent(
-    'Hi Joydeep! I came across Pandalé (pandale.in) and would love to connect about building a website or digital experience.'
-  );
-  const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
 
   return (
     <>
-      {/* Floating Trigger Button (Bottom Right above Navigation) */}
+      {/* 1. Floating WhatsApp Trigger Button (Bottom Right) */}
       <div className="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-40 select-none">
         <button
+          id="whatsapp-floating-trigger"
           type="button"
-          onClick={() => setIsOpen(true)}
-          title="Who is behind this? Connect with Creator"
+          onClick={() => setIsOpen(!isOpen)}
+          title="Who is behind this? Connect on WhatsApp"
+          aria-label="Connect with Creator on WhatsApp"
           className="relative group flex items-center gap-2 p-3 sm:p-3.5 rounded-full bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-white shadow-xl shadow-emerald-950/60 border-2 border-white/20 hover:scale-110 active:scale-90 transition-all duration-300 cursor-pointer animate-periodic-jiggle btn-jiggle"
         >
           {/* Subtle Ambient Pulse Ring */}
-          <span className="absolute -inset-1 rounded-full bg-emerald-400 opacity-40 animate-ping pointer-events-none" />
+          {!isOpen && (
+            <span className="absolute -inset-1 rounded-full bg-emerald-400 opacity-40 animate-ping pointer-events-none" />
+          )}
 
-          {/* Combined WhatsApp / Question Message Icon */}
+          {/* WhatsApp / Question Message Icon */}
           <div className="relative flex items-center justify-center">
-            <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-            <span className="absolute -top-1.5 -right-2 px-1 py-0.2 rounded-full bg-amber-400 text-stone-900 font-extrabold text-[9px] font-mono shadow-xs border border-stone-900/20">
-              ?
-            </span>
+            {isOpen ? (
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
+            ) : (
+              <>
+                <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="absolute -top-1.5 -right-2 px-1 py-0.2 rounded-full bg-amber-400 text-stone-900 font-extrabold text-[9px] font-mono shadow-xs border border-stone-900/20">
+                  ?
+                </span>
+              </>
+            )}
           </div>
 
-          {/* Expanded text on hover for desktop */}
-          <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out text-xs font-bold tracking-wide pl-0 group-hover:pl-1">
-            Connect
-          </span>
+          {/* Expand text on hover for desktop */}
+          {!isOpen && (
+            <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out text-xs font-bold tracking-wide pl-0 group-hover:pl-1">
+              Connect
+            </span>
+          )}
         </button>
       </div>
 
-      {/* Popover / Modal Overlay */}
+      {/* 2. Authentic WhatsApp Dialogue Box */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={() => setIsOpen(false)}
+        <div
+          ref={dialogRef}
+          className="fixed bottom-28 right-4 sm:bottom-24 sm:right-8 z-50 w-[350px] sm:w-[380px] max-w-[calc(100vw-2rem)] rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 dark:border-white/10 bg-[#EFEAE2] dark:bg-[#0B141A] flex flex-col animate-in slide-in-from-bottom-6 zoom-in-95 duration-200"
         >
-          <div
-            className="relative w-full max-w-md rounded-3xl bg-[#140810] border border-amber-500/35 shadow-2xl p-6 sm:p-7 text-stone-200 space-y-5 animate-in zoom-in-95 duration-200 overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Top decorative gradient sheen */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-[#25D366] to-[#D8261C]" />
-
-            {/* Header with Title and Close Button */}
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-mono font-bold">
-                  <Sparkles className="w-3 h-3" />
-                  <span>Creator Spotlight</span>
-                </span>
-                <h3 className="text-2xl font-bold font-editorial text-white tracking-tight pt-1">
-                  Who is behind this?
-                </h3>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-stone-400 hover:text-white transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Creator Bio Card */}
-            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-[#D8261C] p-0.5 shadow-md shrink-0 flex items-center justify-center text-white font-black font-editorial text-lg">
+          
+          {/* A. WhatsApp Header */}
+          <div className="bg-[#075E54] dark:bg-[#1F2C34] text-white p-3.5 sm:p-4 flex items-center justify-between shadow-md">
+            <div className="flex items-center gap-3">
+              {/* Profile Avatar with Online Dot */}
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-[#D8261C] flex items-center justify-center text-white font-bold font-editorial text-sm shadow-xs border border-white/20">
                   JD
                 </div>
-                <div>
-                  <h4 className="text-base font-bold text-white">Joydeep Das</h4>
-                  <p className="text-xs text-amber-300 font-mono">Full-Stack & Product Designer</p>
-                </div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#25D366] border-2 border-[#075E54] dark:border-[#1F2C34] animate-pulse" />
               </div>
 
-              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-                I designed and built <strong>Pandalé</strong> to help thousands celebrate Kolkata Durga Puja with seamless transit guides, curated circuits, and real-time routes.
-              </p>
-
-              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 flex items-center gap-2">
-                <Code2 className="w-4 h-4 shrink-0 text-emerald-400" />
-                <span>Want a website or bespoke digital product like this? Let’s build together!</span>
+              {/* Creator Info */}
+              <div className="leading-tight">
+                <h3 className="font-bold text-sm sm:text-base text-white flex items-center gap-1.5">
+                  <span>Joydeep Das</span>
+                  <span className="text-[10px] font-mono bg-emerald-700/80 px-1.5 py-0.2 rounded text-emerald-100 font-normal">Creator</span>
+                </h3>
+                <p className="text-[11px] text-emerald-100/90 font-medium">
+                  Online · Typically replies fast
+                </p>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="space-y-2.5 pt-1">
-              
-              {/* WhatsApp Direct Connect */}
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 btn-jiggle"
-              >
-                <WhatsAppIcon className="w-4 h-4 text-white" />
-                <span>Connect on WhatsApp</span>
-              </a>
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="p-1.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors cursor-pointer btn-jiggle"
+              aria-label="Close chat dialog"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
 
-              {/* Email Button */}
-              <div className="flex items-center gap-2">
-                <a
-                  href={`mailto:${email}?subject=Project%20Inquiry%20from%20Pandalé`}
-                  className="flex-1 py-2.5 px-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/15 btn-jiggle truncate"
-                >
-                  <Mail className="w-4 h-4 text-amber-300 shrink-0" />
-                  <span className="truncate">{email}</span>
-                </a>
+          {/* B. WhatsApp Chat Body */}
+          <div className="p-3.5 space-y-3 max-h-[320px] overflow-y-auto no-scrollbar">
+            {/* Date Pill */}
+            <div className="flex justify-center">
+              <span className="px-3 py-0.5 rounded-md bg-white/80 dark:bg-[#182229] text-[10px] uppercase font-semibold text-stone-600 dark:text-stone-300 shadow-2xs">
+                Today
+              </span>
+            </div>
 
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  title="Copy email to clipboard"
-                  className="p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-stone-300 hover:text-white border border-white/15 btn-jiggle shrink-0 cursor-pointer"
-                >
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                </button>
+            {/* Message Bubble 1 */}
+            <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[92%] space-y-1 relative">
+              <p>
+                👋 Hi there! I&rsquo;m <strong className="font-semibold text-[#075E54] dark:text-emerald-400">Joydeep Das</strong>.
+              </p>
+              <p className="text-xs text-stone-600 dark:text-stone-300">
+                I designed and built <strong>Pandalé</strong> to help thousands celebrate Kolkata Durga Puja 2026 with seamless metro transit, routes, and crowd insights.
+              </p>
+              <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
+                <span>11:42 AM</span>
+                <CheckCheck className="w-3.5 h-3.5 text-[#53BDEB]" />
+              </div>
+            </div>
+
+            {/* Message Bubble 2 (Business & Contact) */}
+            <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[92%] space-y-1 relative">
+              <p className="font-medium">
+                Want a custom website, Next.js web application, or digital product built like this?
+              </p>
+              <p className="text-xs text-stone-600 dark:text-stone-300">
+                Send me a message below or chat directly on WhatsApp! 🚀
+              </p>
+              <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
+                <span>11:42 AM</span>
+                <CheckCheck className="w-3.5 h-3.5 text-[#53BDEB]" />
+              </div>
+            </div>
+          </div>
+
+          {/* C. WhatsApp Input & Send Bar */}
+          <div className="p-3 bg-[#F0F2F5] dark:bg-[#202C33] border-t border-stone-200 dark:border-white/5 space-y-2">
+            <form onSubmit={handleSendMessage} className="flex items-center gap-2">
+              <div className="flex-1 bg-white dark:bg-[#2A3942] rounded-2xl px-3 py-2 flex items-center gap-2 shadow-2xs border border-transparent focus-within:border-[#25D366]">
+                <Smile className="w-4 h-4 text-stone-400 shrink-0 hidden sm:block" />
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type a message..."
+                  className="w-full bg-transparent text-xs sm:text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none"
+                />
               </div>
 
-              {/* GitHub Link */}
+              {/* Send on WhatsApp Button */}
+              <button
+                type="submit"
+                title="Send via WhatsApp"
+                className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-md active:scale-90 transition-transform btn-jiggle cursor-pointer shrink-0"
+              >
+                <Send className="w-4 h-4 translate-x-0.5" />
+              </button>
+            </form>
+
+            {/* Direct 1-Click WhatsApp CTA */}
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(message.trim())}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm btn-jiggle"
+            >
+              <WhatsAppIcon className="w-4 h-4 text-white" />
+              <span>Open in WhatsApp</span>
+            </a>
+
+            {/* Quick Secondary Contact Drawer (Email & GitHub) */}
+            <div className="pt-1 flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="flex items-center gap-1 hover:text-stone-800 dark:hover:text-stone-200 cursor-pointer transition-colors btn-jiggle"
+                title="Copy creator email"
+              >
+                <Mail className="w-3 h-3 text-amber-500" />
+                <span className="truncate max-w-[150px]">{email}</span>
+                {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+              </button>
+
               <a
                 href="https://github.com/JoyTheSloth"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 px-3 text-center text-xs text-stone-400 hover:text-white flex items-center justify-center gap-1.5 transition-colors"
+                className="flex items-center gap-1 hover:text-stone-800 dark:hover:text-stone-200 transition-colors btn-jiggle"
               >
-                <span>View GitHub Portfolio (@JoyTheSloth)</span>
-                <ExternalLink className="w-3 h-3 text-stone-500" />
+                <span>GitHub (@JoyTheSloth)</span>
+                <ExternalLink className="w-2.5 h-2.5" />
               </a>
-
             </div>
-
           </div>
+
         </div>
       )}
     </>
