@@ -35,7 +35,7 @@ export default function KolkataMetroExplorerModal({
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
-  const [selectedStation, setSelectedStation] = useState<FullMetroStation | null>(initialStation);
+  const [selectedStation, setSelectedStation] = useState<FullMetroStation | null>(null);
   const [hoveredStation, setHoveredStation] = useState<FullMetroStation | null>(null);
 
   // Search & "You Are Here" station pin state
@@ -88,7 +88,6 @@ export default function KolkataMetroExplorerModal({
 
   const handleSelectHereStation = (station: FullMetroStation) => {
     setUserHereStation(station);
-    setSelectedStation(station);
     setMapSearchQuery(station.name);
     setIsSearchFocused(false);
     // Pan to focus towards the station if zoomed in
@@ -100,15 +99,19 @@ export default function KolkataMetroExplorerModal({
     }
   };
 
-  // Close search dropdown on click outside
+  // Close search dropdown on click outside or touch outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const closeDropdown = (e: MouseEvent | TouchEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
         setIsSearchFocused(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', closeDropdown);
+    document.addEventListener('touchstart', closeDropdown);
+    return () => {
+      document.removeEventListener('mousedown', closeDropdown);
+      document.removeEventListener('touchstart', closeDropdown);
+    };
   }, []);
 
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -675,7 +678,7 @@ export default function KolkataMetroExplorerModal({
                     className="cursor-pointer group"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedStation(station);
+                      handleSelectHereStation(station);
                     }}
                     onMouseEnter={() => setHoveredStation(station)}
                     onMouseLeave={() => setHoveredStation(null)}
@@ -816,107 +819,6 @@ export default function KolkataMetroExplorerModal({
             </svg>
           </div>
 
-          {/* Station Inspector Floating Drawer */}
-          {selectedStation && (
-            <div className={`absolute bottom-20 sm:bottom-8 left-3 sm:left-6 z-40 w-[calc(100%-1.5rem)] sm:w-[360px] max-w-[360px] max-h-[calc(100%-120px)] sm:max-h-[calc(100%-60px)] overflow-y-auto p-4 sm:p-5 rounded-3xl backdrop-blur-xl border shadow-2xl transition-all animate-in fade-in slide-in-from-bottom-4 duration-200 ${
-              isDark ? 'bg-stone-900/98 border-stone-700 text-stone-100 shadow-2xl shadow-black/80' : 'bg-white/98 border-stone-200 text-stone-900 shadow-2xl shadow-stone-950/20'
-            }`}>
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span 
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: METRO_FULL_MAP_DATA[selectedStation.line].color }}
-                    />
-                    <span 
-                      className="text-[10px] font-mono font-bold uppercase tracking-wider text-white px-2 py-0.5 rounded-md"
-                      style={{ backgroundColor: METRO_FULL_MAP_DATA[selectedStation.line].color }}
-                    >
-                      {METRO_FULL_MAP_DATA[selectedStation.line].name.split(' ')[0]} Line
-                    </span>
-                    {selectedStation.isInterchange && (
-                      <span className={`text-[9.5px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-md border ${
-                        isDark ? 'bg-amber-950/80 text-amber-300 border-amber-800' : 'bg-amber-100 text-amber-800 border-amber-300'
-                      }`}>
-                        Interchange
-                      </span>
-                    )}
-                  </div>
-                  <h3 className={`text-base sm:text-lg font-bold leading-tight font-editorial ${isDark ? 'text-white' : 'text-stone-900'}`}>
-                    {selectedStation.name}
-                  </h3>
-                  <p className={`text-xs font-medium ${isDark ? 'text-amber-400' : 'text-amber-700'}`}>
-                    {selectedStation.bengaliName}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSelectedStation(null)}
-                  className={`p-1 rounded-full cursor-pointer transition-colors ${
-                    isDark ? 'hover:bg-stone-800 text-stone-400 hover:text-white' : 'hover:bg-stone-100 text-stone-400 hover:text-stone-700'
-                  }`}
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Connected Pandals List */}
-              <div className={`mt-3 pt-3 border-t space-y-2 ${isDark ? 'border-stone-800' : 'border-stone-100'}`}>
-                <div className={`text-[10.5px] font-mono uppercase tracking-wider flex items-center gap-1 font-bold ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                  <Sparkles className="w-3 h-3 text-amber-500" />
-                  <span>Iconic Pandals Connected:</span>
-                </div>
-
-                {selectedStation.nearbyPandals && selectedStation.nearbyPandals.length > 0 ? (
-                  <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                    {selectedStation.nearbyPandals.map((pandal, idx) => (
-                      <Link
-                        key={idx}
-                        href={`/pandal/${pandal.slug}`}
-                        className={`flex items-center justify-between p-2 rounded-xl text-xs transition-colors group/item border ${
-                          isDark 
-                            ? 'bg-stone-800/60 hover:bg-stone-800 border-stone-700/80 text-stone-200' 
-                            : 'bg-stone-50 hover:bg-stone-100 border-stone-200/60 text-stone-800'
-                        }`}
-                      >
-                        <span className={`font-bold truncate ${isDark ? 'group-hover/item:text-amber-400' : 'group-hover/item:text-[#D8261C]'}`}>
-                          {pandal.name}
-                        </span>
-                        <span className={`text-[10px] font-mono font-semibold shrink-0 ml-2 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
-                          {pandal.distance}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <p className={`text-xs italic ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                    Transit corridor connecting North, Central, and South Kolkata pujo circuits.
-                  </p>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div className={`flex items-center gap-2 mt-3 pt-3 border-t ${isDark ? 'border-stone-800' : 'border-stone-100'}`}>
-                <button
-                  type="button"
-                  onClick={() => handleSelectHereStation(selectedStation)}
-                  className="flex-1 py-2 px-3 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold font-mono text-center flex items-center justify-center gap-1 shadow-xs transition-colors cursor-pointer"
-                >
-                  <span>📍 Set &quot;You Are Here&quot;</span>
-                </button>
-                <Link
-                  href={`/map`}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold font-mono text-center transition-colors ${
-                    isDark 
-                      ? 'bg-stone-800 hover:bg-stone-700 text-stone-200' 
-                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
-                  }`}
-                >
-                  <span>Live Map →</span>
-                </Link>
-              </div>
-            </div>
-          )}
 
           {/* Bottom Legend */}
           <div className={`absolute bottom-4 right-4 hidden lg:flex items-center gap-4 p-2.5 rounded-2xl border shadow-md backdrop-blur-md text-[11px] font-mono pointer-events-auto transition-colors ${
