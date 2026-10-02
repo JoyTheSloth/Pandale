@@ -67,10 +67,10 @@ export const metadata: Metadata = {
     siteName: 'Pandalé',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
-        width: 1200,
-        height: 630,
-        alt: 'Kolkata Durga Puja Pandal Illumination 2026'
+        url: 'https://pandale.in/brand/og-image.jpg',
+        width: 1280,
+        height: 720,
+        alt: 'Pandalé — Kolkata Durga Puja & Metro Guide 2026'
       }
     ],
     locale: 'en_IN',
