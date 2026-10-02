@@ -317,6 +317,16 @@ export default function RoutePlannerPage() {
             <>
               <button
                 type="button"
+                onClick={handleClearAll}
+                title="Clear entire itinerary route"
+                className="px-3.5 py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-rose-300 dark:hover:border-rose-800/60 hover:bg-rose-50/60 dark:hover:bg-rose-950/20 text-stone-600 dark:text-stone-300 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer btn-jiggle"
+              >
+                <RotateCcw className="w-4 h-4 text-stone-400 group-hover:text-rose-500" />
+                <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={handleShareRoute}
                 title="Share Itinerary"
                 className="p-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] dark:hover:border-white/20 text-stone-700 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer btn-jiggle"
@@ -353,36 +363,24 @@ export default function RoutePlannerPage() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Slider Navigation Buttons */}
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => scrollSlider('left')}
-                aria-label="Slide left"
-                className="w-7 h-7 rounded-full bg-white dark:bg-[#1C1816] border border-stone-200 dark:border-white/10 flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] transition-all shadow-xs cursor-pointer active:scale-90"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollSlider('right')}
-                aria-label="Slide right"
-                className="w-7 h-7 rounded-full bg-white dark:bg-[#1C1816] border border-stone-200 dark:border-white/10 flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] transition-all shadow-xs cursor-pointer active:scale-90"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {selectedPandals.length > 0 && (
-              <button
-                onClick={handleClearAll}
-                className="text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 flex items-center gap-1 text-[11px] transition-colors cursor-pointer ml-1"
-              >
-                <RotateCcw className="w-3 h-3" />
-                <span>{isBn ? 'রুট পরিষ্কার করুন' : 'Clear Route'}</span>
-              </button>
-            )}
+          {/* Slider Navigation Buttons */}
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => scrollSlider('left')}
+              aria-label="Slide left"
+              className="w-7 h-7 rounded-full bg-white dark:bg-[#1C1816] border border-stone-200 dark:border-white/10 flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] transition-all shadow-xs cursor-pointer active:scale-90"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollSlider('right')}
+              aria-label="Slide right"
+              className="w-7 h-7 rounded-full bg-white dark:bg-[#1C1816] border border-stone-200 dark:border-white/10 flex items-center justify-center text-stone-700 dark:text-stone-300 hover:text-[#D8261C] hover:border-[#D8261C] transition-all shadow-xs cursor-pointer active:scale-90"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
@@ -523,6 +521,39 @@ export default function RoutePlannerPage() {
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
         <div className="space-y-4">
+          {/* Itinerary Header & Route Actions */}
+          <div className="flex items-center justify-between pt-2 pb-1 px-1">
+            <div className="flex items-center gap-2.5">
+              <h2 className="text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-100">
+                {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
+              </h2>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#FEF2F2] dark:bg-[#2A1215] text-[#D8261C] border border-[#D8261C]/20 shadow-2xs">
+                {selectedPandals.length} {isBn ? 'প্যান্ডেল' : 'Stops'}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(true)}
+                className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95"
+              >
+                <Plus className="w-3.5 h-3.5 text-[#D8261C]" />
+                <span className="hidden sm:inline">{isBn ? 'প্যান্ডেল যোগ করুন' : 'Add Stop'}</span>
+                <span className="sm:hidden">{isBn ? 'যোগ' : 'Add'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleClearAll}
+                className="px-3.5 py-1.5 rounded-full bg-rose-50/80 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95"
+                title="Clear entire itinerary route"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
+              </button>
+            </div>
+          </div>
           {selectedPandals.map((pandal, index) => {
             const isFirst = index === 0;
             const isLast = index === selectedPandals.length - 1;
