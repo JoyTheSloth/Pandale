@@ -38,8 +38,8 @@ import { ZoneArea, Pandal } from '@/types';
 const PRESET_CIRCUITS = [
   {
     id: 'north-heritage',
-    title: 'North Heritage Circuit',
-    bengaliTitle: 'উত্তর কলকাতা ঐতিহ্য পরিক্রমা',
+    title: 'North Heritage Pandals',
+    bengaliTitle: 'উত্তর কলকাতা ঐতিহ্য প্যান্ডেল রুট',
     icon: '🏛️',
     stopsCount: 4,
     image: '/brand/circuit-north-heritage.jpg',
@@ -50,8 +50,8 @@ const PRESET_CIRCUITS = [
   },
   {
     id: 'south-iconic',
-    title: 'South Iconic Circuit',
-    bengaliTitle: 'দক্ষিণ কলকাতা আইকনিক পরিক্রমা',
+    title: 'South Iconic Pandals',
+    bengaliTitle: 'দক্ষিণ কলকাতা আইকনিক প্যান্ডেল রুট',
     icon: '✨',
     stopsCount: 5,
     image: '/brand/circuit-south-iconic.jpg',
@@ -62,8 +62,8 @@ const PRESET_CIRCUITS = [
   },
   {
     id: 'green-line',
-    title: 'Green Line Metro Express',
-    bengaliTitle: 'গ্রিন লাইন মেট্রো এক্সপ্রেস',
+    title: 'Green Line Metro Pandals',
+    bengaliTitle: 'গ্রিন লাইন মেট্রো প্যান্ডেল রুট',
     icon: '🚇',
     stopsCount: 4,
     image: '/brand/circuit-green-line.jpg',
@@ -74,8 +74,8 @@ const PRESET_CIRCUITS = [
   },
   {
     id: 'central-classic',
-    title: 'Central Classic Grandeur',
-    bengaliTitle: 'সেন্ট্রাল ক্লাসিক গ্র্যান্ডিউর',
+    title: 'Central Classic Pandals',
+    bengaliTitle: 'সেন্ট্রাল ক্লাসিক প্যান্ডেল রুট',
     icon: '👑',
     stopsCount: 3,
     image: '/brand/circuit-central-classic.jpg',
@@ -307,12 +307,12 @@ export default function RoutePlannerPage() {
         </div>
       </div>
 
-      {/* 2. Preset Curated Circuits (Luxury Editorial Cards) */}
+      {/* 2. Preset Popular Pandal Routes (2 Cards Per Line) */}
       <div className="space-y-4">
         <div className="flex items-center justify-between text-xs">
           <span className="font-mono uppercase tracking-wider text-amber-900 dark:text-amber-400 font-bold flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            <span>{isBn ? 'জনপ্রিয় কিউরেটেড রুটসমূহ' : 'Popular Curated Circuits'}</span>
+            <span>{isBn ? 'জনপ্রিয় প্যান্ডেল রুটসমূহ' : 'Popular Pandal Routes'}</span>
           </span>
           {selectedPandals.length > 0 && (
             <button
@@ -325,8 +325,8 @@ export default function RoutePlannerPage() {
           )}
         </div>
 
-        {/* Curated Circuit Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* Popular Pandal Route Cards Grid: 2 Cards in One Line on Desktop / Tablet */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {PRESET_CIRCUITS.map((preset) => {
             const isActive = activePreset === preset.id;
             return (
@@ -345,12 +345,12 @@ export default function RoutePlannerPage() {
                 )}
 
                 {/* Media Window */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-100 dark:bg-stone-900">
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-stone-100 dark:bg-stone-900">
                   <Image
                     src={preset.image}
                     alt={preset.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
                   {/* Subtle vignette gradient */}
@@ -368,7 +368,7 @@ export default function RoutePlannerPage() {
                         ? 'bg-[#D8261C] text-white border border-[#FDE047]/60' 
                         : 'bg-black/60 text-white/90 border border-white/20'
                     }`}>
-                      {preset.stopsCount} {isBn ? 'স্টপ' : 'Stops'}
+                      {preset.stopsCount} {isBn ? 'প্যান্ডেল স্টপ' : 'Pandal Stops'}
                     </span>
                   </div>
 
@@ -400,11 +400,11 @@ export default function RoutePlannerPage() {
                       {isActive ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-500" />
-                          <span>{isBn ? 'সক্রিয় রুট' : 'Active Circuit'}</span>
+                          <span>{isBn ? 'সক্রিয় রুট' : 'Active Route'}</span>
                         </>
                       ) : (
                         <>
-                          <span>{isBn ? 'রুট লোড করুন' : 'Load Circuit'}</span>
+                          <span>{isBn ? 'রুট লোড করুন' : 'Load Route'}</span>
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
@@ -767,8 +767,8 @@ export default function RoutePlannerPage() {
           </h3>
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
             {isBn 
-              ? 'উপরের কিউরেটেড রুট থেকে একটি বেছে নিন অথবা নিজের পছন্দের প্যান্ডেল যোগ করে শুরু করুন।'
-              : 'Pick one of our popular curated circuits above or add iconic pandals manually to build your route.'}
+              ? 'উপরের যেকোনো জনপ্রিয় প্যান্ডেল রুট বেছে নিন অথবা নিজের পছন্দের প্যান্ডেল যোগ করে শুরু করুন।'
+              : 'Pick one of our popular pandal routes above or add iconic pandals manually to build your route.'}
           </p>
           <div className="pt-2 flex items-center justify-center gap-3 flex-wrap">
             <button
@@ -776,7 +776,7 @@ export default function RoutePlannerPage() {
               onClick={() => handleApplyPreset(PRESET_CIRCUITS[0])}
               className="px-5 py-2.5 rounded-xl bg-[#D8261C] text-white text-xs font-bold hover:bg-[#B91C1C] transition-all shadow-md active:scale-95 cursor-pointer"
             >
-              {isBn ? 'উত্তর কলকাতা রুট যোগ করুন' : 'Load North Heritage Circuit'}
+              {isBn ? 'উত্তর কলকাতা প্যান্ডেল রুট যোগ করুন' : 'Load North Heritage Pandal Route'}
             </button>
             <button
               type="button"
