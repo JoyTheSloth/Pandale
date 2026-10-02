@@ -8,7 +8,6 @@ import {
   ShieldCheck, 
   Plus, 
   Save, 
-  RefreshCw, 
   MapPin, 
   Train, 
   CheckCircle2, 
@@ -16,19 +15,11 @@ import {
   Code,
   Sparkles
 } from 'lucide-react';
-import InstagramIcon from '@/components/icons/InstagramIcon';
 
 export default function AdminPage() {
   const [pandalsList, setPandalsList] = useState<Pandal[]>(PANDALS_DATA);
   const [selectedPandalId, setSelectedPandalId] = useState<string>(PANDALS_DATA[0].id);
   const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
-  
-  // Instagram Sync state
-  const [syncStatus, setSyncStatus] = useState<{
-    loading: boolean;
-    result?: any;
-    error?: string;
-  }>({ loading: false });
 
   // Form State for editing
   const activePandal = pandalsList.find((p) => p.id === selectedPandalId) || pandalsList[0];
@@ -113,21 +104,7 @@ export default function AdminPage() {
     setSaveSuccess('New draft created. Fill in coordinates and details then click Save.');
   };
 
-  // Trigger Instagram pipeline sync
-  const handleTriggerSync = async () => {
-    setSyncStatus({ loading: true });
-    try {
-      const res = await fetch('/api/instagram/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pandalId: formData.id })
-      });
-      const data = await res.json();
-      setSyncStatus({ loading: false, result: data });
-    } catch (err: any) {
-      setSyncStatus({ loading: false, error: err.message });
-    }
-  };
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
@@ -359,39 +336,7 @@ export default function AdminPage() {
             </div>
           </form>
 
-          {/* Instagram API Sync Pipeline Panel */}
-          <div className="bg-white rounded-3xl border border-[#E9E2D8] p-6 sm:p-8 shadow-xs space-y-4">
-            <div className="flex items-center gap-2 text-pink-600">
-              <InstagramIcon className="w-5 h-5" />
-              <h3 className="text-lg font-bold font-editorial text-[#181513]">
-                Authorized Instagram Pipeline
-              </h3>
-            </div>
-            <p className="text-xs text-[#5C554E] leading-relaxed">
-              Trigger the server-side sync pipeline for <strong>{formData.name}</strong>. Calls official Meta Graph API when <code>INSTAGRAM_ACCESS_TOKEN</code> is supplied in <code>.env.local</code>, validates payload, and associates media with this pandal.
-            </p>
 
-            <div className="flex items-center gap-3 pt-1">
-              <button
-                type="button"
-                onClick={handleTriggerSync}
-                disabled={syncStatus.loading}
-                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs font-bold flex items-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-50"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${syncStatus.loading ? 'animate-spin' : ''}`} />
-                <span>{syncStatus.loading ? 'Syncing...' : 'Trigger Instagram Sync'}</span>
-              </button>
-            </div>
-
-            {syncStatus.result && (
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E9E2D8] text-xs font-mono space-y-1">
-                <div className="font-bold text-emerald-700">✓ Sync Pipeline Completed</div>
-                <div>Status Message: {syncStatus.result.message}</div>
-                <div>Source Mode: {syncStatus.result.source}</div>
-                <div>Has Live Token: {syncStatus.result.hasTokenConfigured ? 'Yes (Live Graph API)' : 'No (Sample Feed Preview Ready)'}</div>
-              </div>
-            )}
-          </div>
 
         </div>
 

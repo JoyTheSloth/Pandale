@@ -101,27 +101,27 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2.5 text-xs sm:text-sm text-stone-300 font-medium">
                 <li>
-                  <Link href="/pandals?zone=North+Kolkata" className="hover:text-amber-400 transition-colors flex items-center justify-between group">
+                  <Link href="/pandals?zone=North+Kolkata" className="hover:text-amber-400 transition-all duration-150 hover:translate-x-1 flex items-center justify-between group">
                     <span className="truncate">{isBn ? 'উত্তর কলকাতা ঐতিহ্য' : 'North Heritage'}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-stone-500 shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-stone-500 shrink-0" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pandals?zone=South+Kolkata" className="hover:text-amber-400 transition-colors flex items-center justify-between group">
+                  <Link href="/pandals?zone=South+Kolkata" className="hover:text-amber-400 transition-all duration-150 hover:translate-x-1 flex items-center justify-between group">
                     <span className="truncate">{isBn ? 'দক্ষিণ কলকাতা থিম' : 'South Theme Hubs'}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-stone-500 shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-stone-500 shrink-0" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pandals?zone=Central+Kolkata" className="hover:text-amber-400 transition-colors flex items-center justify-between group">
+                  <Link href="/pandals?zone=Central+Kolkata" className="hover:text-amber-400 transition-all duration-150 hover:translate-x-1 flex items-center justify-between group">
                     <span className="truncate">{isBn ? 'মধ্য কলকাতা সাবেক' : 'Central Classics'}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-stone-500 shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-stone-500 shrink-0" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pandals?zone=East+Kolkata" className="hover:text-amber-400 transition-colors flex items-center justify-between group">
+                  <Link href="/pandals?zone=East+Kolkata" className="hover:text-amber-400 transition-all duration-150 hover:translate-x-1 flex items-center justify-between group">
                     <span className="truncate">{isBn ? 'সল্টলেক ও পূর্ব কলকাতা' : 'Salt Lake & East'}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-stone-500 shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-stone-500 shrink-0" />
                   </Link>
                 </li>
               </ul>
@@ -134,26 +134,26 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2.5 text-xs sm:text-sm text-stone-300 font-medium">
                 <li>
-                  <Link href="/metro" className="hover:text-sky-300 transition-colors flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                  <Link href="/metro" className="hover:text-sky-300 transition-all duration-150 hover:translate-x-1 flex items-center gap-2 group">
+                    <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0 group-hover:scale-125 transition-transform" />
                     <span className="truncate">{isBn ? 'ব্লু লাইন (উত্তর-দক্ষিণ)' : 'Blue Line (North-South)'}</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/metro" className="hover:text-emerald-300 transition-colors flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                  <Link href="/metro" className="hover:text-emerald-300 transition-all duration-150 hover:translate-x-1 flex items-center gap-2 group">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 group-hover:scale-125 transition-transform" />
                     <span className="truncate">{isBn ? 'গ্রিন লাইন (আন্ডারওয়াটার)' : 'Green Line (Underwater)'}</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/metro" className="hover:text-orange-300 transition-colors flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+                  <Link href="/metro" className="hover:text-orange-300 transition-all duration-150 hover:translate-x-1 flex items-center gap-2 group">
+                    <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0 group-hover:scale-125 transition-transform" />
                     <span className="truncate">{isBn ? 'অরেঞ্জ লাইন (ইএম বাইপাস)' : 'Orange Line (EM Bypass)'}</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/metro" className="hover:text-purple-300 transition-colors flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-purple-500 shrink-0" />
+                  <Link href="/metro" className="hover:text-purple-300 transition-all duration-150 hover:translate-x-1 flex items-center gap-2 group">
+                    <span className="w-2 h-2 rounded-full bg-purple-500 shrink-0 group-hover:scale-125 transition-transform" />
                     <span className="truncate">{isBn ? 'পার্পল লাইন (জোকা)' : 'Purple Line (Joka Route)'}</span>
                   </Link>
                 </li>
@@ -182,17 +182,17 @@ export default function Footer() {
           <div className="flex items-center gap-4 sm:gap-6 text-xs font-mono">
             <a 
               href="tel:1090"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 hover:text-white transition-all active:scale-95"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 hover:text-white hover:scale-105 active:scale-95 transition-all duration-150 group"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-rose-400" />
+              <PhoneCall className="w-3.5 h-3.5 text-rose-400 group-hover:rotate-12 transition-transform duration-150" />
               <span>{isBn ? 'পুলিশ' : 'Police'}: <strong className="text-white">1090</strong></span>
             </a>
 
             <a 
               href="tel:139"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300 hover:text-white transition-all active:scale-95"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300 hover:text-white hover:scale-105 active:scale-95 transition-all duration-150 group"
             >
-              <Train className="w-3.5 h-3.5 text-blue-400" />
+              <Train className="w-3.5 h-3.5 text-blue-400 group-hover:translate-x-0.5 transition-transform duration-150" />
               <span>{isBn ? 'মেট্রো' : 'Metro'}: <strong className="text-white">139</strong></span>
             </a>
           </div>
@@ -214,7 +214,16 @@ export default function Footer() {
           <p>
             © 2026 Pandalé Kolkata. Celebrating Durga Puja with devotion and art.
           </p>
-          <div className="flex items-center gap-4 text-[11px]">
+          <div className="flex items-center gap-3 text-[11px]">
+            <a 
+              href="https://joydeepdas-portfolio.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-amber-300 transition-colors underline-offset-2 hover:underline"
+            >
+              Built by Joydeep Das
+            </a>
+            <span>•</span>
             <a 
               href="https://flatzy.vercel.app/" 
               target="_blank" 

@@ -77,7 +77,7 @@ export default function BottomNav() {
         .nav-dot-pop  { animation: dotPop     0.34s cubic-bezier(.34,1.56,.64,1) both; }
       `}</style>
 
-      <nav className="md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto z-50 rounded-[2.2rem] bg-white/95 dark:bg-black/85 backdrop-blur-2xl border border-[#FED7AA] dark:border-white/10 shadow-2xl p-1.5 transition-colors">
+      <nav id="mobile-bottom-nav" className="mobile-bottom-nav md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto z-40 rounded-[2.2rem] bg-white/95 dark:bg-black/85 backdrop-blur-2xl border border-[#FED7AA] dark:border-white/10 shadow-2xl p-1.5 transition-all duration-200">
         <div className="flex items-center justify-between px-1">
           {navItems.map((item) => {
             const isActive  = item.exact ? pathname === item.href : pathname.startsWith(item.href);

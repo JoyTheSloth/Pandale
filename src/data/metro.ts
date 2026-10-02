@@ -12,11 +12,35 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
     nearby_pandals: [
       {
         pandal_id: 'bagbazar-sarbojanin',
-        pandal_name: 'Bagbazar Sarbojanin Durgotsav',
+        pandal_name: 'Bagbazar Sarbojanin',
         pandal_slug: 'bagbazar-sarbojanin',
+        walking_distance: '450m',
+        walking_time_mins: 5,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Bagbazar+Sarbojanin+Durgotsav&travelmode=walking'
+      },
+      {
+        pandal_id: 'hatibagan-sarbojanin',
+        pandal_name: 'Hatibagan Sarbojanin',
+        pandal_slug: 'hatibagan-sarbojanin',
+        walking_distance: '350m',
+        walking_time_mins: 4,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Hatibagan+Sarbojanin&travelmode=walking'
+      },
+      {
+        pandal_id: 'tala-prattay',
+        pandal_name: 'Tala Prattay',
+        pandal_slug: 'tala-prattay',
+        walking_distance: '700m',
+        walking_time_mins: 8,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Tala+Prattay+Durga+Puja&travelmode=walking'
+      },
+      {
+        pandal_id: 'kashi-bose-lane',
+        pandal_name: 'Kashi Bose Lane',
+        pandal_slug: 'kashi-bose-lane',
         walking_distance: '650m',
         walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Kashi+Bose+Lane+Durga+Puja&travelmode=walking'
       }
     ]
   },
@@ -31,19 +55,35 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
     nearby_pandals: [
       {
         pandal_id: 'kumartuli-park',
-        pandal_name: 'Kumartuli Park Sarbojanin',
+        pandal_name: 'Kumartuli Park',
         pandal_slug: 'kumartuli-park',
-        walking_distance: '450m',
-        walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli%20Park%20Sarbojanin%2C%20Kolkata'
+        walking_distance: '500m',
+        walking_time_mins: 6,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli+Park+Sarbojanin&travelmode=walking'
+      },
+      {
+        pandal_id: 'kumartuli-sarbojanin',
+        pandal_name: 'Kumartuli Sarbojanin',
+        pandal_slug: 'kumartuli-sarbojanin',
+        walking_distance: '600m',
+        walking_time_mins: 7,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli+Sarbojanin+Durgotsav&travelmode=walking'
+      },
+      {
+        pandal_id: 'ahiritola-sarbojanin',
+        pandal_name: 'Ahiritola Sarbojanin',
+        pandal_slug: 'ahiritola-sarbojanin',
+        walking_distance: '700m',
+        walking_time_mins: 8,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Ahiritola+Sarbojanin+Durgotsav&travelmode=walking'
       },
       {
         pandal_id: 'bagbazar-sarbojanin',
-        pandal_name: 'Bagbazar Sarbojanin Durgotsav',
+        pandal_name: 'Bagbazar Sarbojanin',
         pandal_slug: 'bagbazar-sarbojanin',
         walking_distance: '950m',
         walking_time_mins: 12,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Bagbazar%20Sarbojanin%20Durgotsav%2C%20Kolkata'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Bagbazar+Sarbojanin+Durgotsav&travelmode=walking'
       }
     ]
   },
@@ -211,36 +251,68 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
     longitude: 88.3456,
     nearby_pandals: [
       {
+        pandal_id: 'badamtala-ashar-sangha',
+        pandal_name: 'Badamtala Ashar Sangha',
+        pandal_slug: 'badamtala-ashar-sangha',
+        walking_distance: '250m',
+        walking_time_mins: 3,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Badamtala+Ashar+Sangha&travelmode=walking'
+      },
+      {
+        pandal_id: '66-pally',
+        pandal_name: '66 Pally',
+        pandal_slug: '66-pally',
+        walking_distance: '280m',
+        walking_time_mins: 3,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=66+Pally+Durga+Puja&travelmode=walking'
+      },
+      {
+        pandal_id: '68-pally',
+        pandal_name: '68 Pally',
+        pandal_slug: '68-pally',
+        walking_distance: '320m',
+        walking_time_mins: 4,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=68+Pally+Durga+Puja&travelmode=walking'
+      },
+      {
         pandal_id: 'deshapriya-park',
         pandal_name: 'Deshapriya Park',
         pandal_slug: 'deshapriya-park',
         walking_distance: '450m',
         walking_time_mins: 5,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Deshapriya%20Park%2C%20Kolkata'
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Deshapriya+Park&travelmode=walking'
       },
       {
         pandal_id: 'tridhara-sammilani',
         pandal_name: 'Tridhara Sammilani',
         pandal_slug: 'tridhara-sammilani',
-        walking_distance: '650m',
-        walking_time_mins: 8,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Tridhara%20Sammilani%2C%20Kolkata'
+        walking_distance: '450m',
+        walking_time_mins: 5,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Tridhara+Sammilani&travelmode=walking'
       },
       {
         pandal_id: 'chetla-agrani',
-        pandal_name: 'Chetla Agrani Club',
+        pandal_name: 'Chetla Agrani',
         pandal_slug: 'chetla-agrani',
-        walking_distance: '950m',
-        walking_time_mins: 11,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Chetla%20Agrani%20Club%2C%20Kolkata'
+        walking_distance: '650m',
+        walking_time_mins: 8,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Chetla+Agrani+Club&travelmode=walking'
+      },
+      {
+        pandal_id: 'singhi-park',
+        pandal_name: 'Singhi Park',
+        pandal_slug: 'singhi-park',
+        walking_distance: '850m',
+        walking_time_mins: 10,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Singhi+Park+Durga+Puja&travelmode=walking'
       },
       {
         pandal_id: 'ekdalia-evergreen',
-        pandal_name: 'Ekdalia Evergreen Club',
+        pandal_name: 'Ekdalia Evergreen',
         pandal_slug: 'ekdalia-evergreen',
-        walking_distance: '1.5 km (Auto 5 mins)',
-        walking_time_mins: 17,
-        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Ekdalia%20Evergreen%20Club%2C%20Kolkata'
+        walking_distance: '950m',
+        walking_time_mins: 11,
+        directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Ekdalia+Evergreen+Club&travelmode=walking'
       }
     ]
   },

@@ -47,19 +47,19 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Queue moves steadily along VIP Road service lane.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/sree-bhumi.jpg',
     images: [
       {
         id: 'sb-1',
-        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/sree-bhumi.jpg',
         caption: 'Towering facade illuminated under the midnight Kolkata sky',
         category: 'official',
         author: 'Kolkata Pujo Archives',
-        author_url: 'https://instagram.com/kolkatapujoguide'
+        author_url: '/pandals/sree-bhumi-2.jpg'
       },
       {
         id: 'sb-2',
-        url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/sree-bhumi-3.jpg',
         caption: 'Sanctum sanctorum adorned with gold ornaments',
         category: 'latest',
         author: 'Pujo Explorer',
@@ -81,7 +81,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'calcutta_stories',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'The golden reflections at Sree Bhumi never fail to take our breath away. Ready for 2026 Puja preparations! #Pujo2026 #SreeBhumi #KolkataDurgaPuja',
-        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/sree-bhumi.jpg',
         permalink: 'https://instagram.com/p/C-sreebhumi1',
         timestamp: '2026-09-28T18:40:00Z',
         media_type: 'IMAGE',
@@ -95,7 +95,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'kolkata_frames',
         user_avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
         caption: 'Chandeliers arrive at Lake Town. The grandeur is already shaping up! 🪔✨ #Durgotsav2026 #Kolkata #NorthKolkataPujo',
-        media_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/sree-bhumi-2.jpg',
         permalink: 'https://instagram.com/p/C-sreebhumi2',
         timestamp: '2026-09-29T11:15:00Z',
         media_type: 'IMAGE',
@@ -155,18 +155,18 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Steady queue near Bagbazar Ghat road, wide pedestrian boulevard.'
     },
     recommended_days: ['Saptami', 'Ashtami', 'Nabami', 'Dashami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/sree-bhumi.jpg',
     images: [
       {
         id: 'bg-1',
-        url: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/bagbazar-sarbojanin.jpg',
         caption: 'The divine Ekchala idol with Daaker Saaj at Bagbazar',
         category: 'official',
         author: 'Heritage Bengal Team'
       },
       {
         id: 'bg-2',
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/bagbazar-sarbojanin-2.jpg',
         caption: 'Evening Sandhi Puja rituals and lamps',
         category: 'latest',
         author: 'Bong Heritage Lens'
@@ -179,7 +179,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'kolkata_heritage_walks',
         user_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
         caption: 'Bagbazar is where the soul of classical Kolkata comes alive every autumn. The Daaker Saaj idol is unparalleled. #Bagbazar #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/bagbazar-sarbojanin.jpg',
         permalink: 'https://instagram.com/p/C-bagbazar1',
         timestamp: '2026-09-29T14:30:00Z',
         media_type: 'IMAGE',
@@ -230,11 +230,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Entry lanes through Kumartuli ghat are well barricaded.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/bagbazar-sarbojanin.jpg',
     images: [
       {
         id: 'kp-1',
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/kumartuli-park.jpg',
         caption: 'Earthy sculptural motifs honoring the clay artisans',
         category: 'official',
         author: 'Kumartuli Artisans Guild'
@@ -247,7 +247,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'streetsofkকলকাতা',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'Walking from Shovabazar metro straight into the realm of artists. Kumartuli Park 2026 setup is magical. #Kumartuli #KolkataPujo2026',
-        media_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/kumartuli-park.jpg',
         permalink: 'https://instagram.com/p/C-kumartuli1',
         timestamp: '2026-09-30T09:20:00Z',
         media_type: 'IMAGE',
@@ -307,11 +307,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Open lawn with comfortable seating and food kiosks all around.'
     },
     recommended_days: ['Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/kumartuli-park.jpg',
     images: [
       {
         id: 'ms-1',
-        url: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/maddox-square.jpg',
         caption: 'Atmospheric evening gatherings on the grassy lawns of Maddox',
         category: 'official',
         author: 'Maddox Samiti'
@@ -324,7 +324,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'kolkatagram',
         user_avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
         caption: 'Maddox Square lights are on! The best adda of the season has officially begun. #MaddoxSquare #Pujo2026 #SouthKolkata',
-        media_url: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/maddox-square.jpg',
         permalink: 'https://instagram.com/p/C-maddox1',
         timestamp: '2026-09-30T17:50:00Z',
         media_type: 'IMAGE',
@@ -384,11 +384,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Entry managed via College Street gate; exit through Surya Sen Street.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/maddox-square.jpg',
     images: [
       {
         id: 'cs-1',
-        url: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/college-square.jpg',
         caption: 'The golden reflections on College Square lake water',
         category: 'official',
         author: 'Kolkata Light Arts'
@@ -401,7 +401,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'calcutta_shutterbug',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'First look at College Square 2026 illuminated arches over the lake! #CollegeSquare #CentralKolkata #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/college-square.jpg',
         permalink: 'https://instagram.com/p/C-collegesq1',
         timestamp: '2026-09-29T20:10:00Z',
         media_type: 'IMAGE',
@@ -461,11 +461,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Spacious entry corridor along Nalini Ranjan Avenue.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/college-square.jpg',
     images: [
       {
         id: 'ss-1',
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/suruchi-sangha.jpg',
         caption: 'Authentic handcrafted tribal facade and deity installation',
         category: 'official',
         author: 'Suruchi Cultural Archives'
@@ -478,7 +478,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'the_bengali_lens',
         user_avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
         caption: 'Suruchi Sangha never disappoints with its thematic depth. 2026 is turning out to be one of their finest works yet. #SuruchiSangha #NewAlipore',
-        media_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/suruchi-sangha.jpg',
         permalink: 'https://instagram.com/p/C-suruchi1',
         timestamp: '2026-09-30T15:20:00Z',
         media_type: 'IMAGE',
@@ -529,11 +529,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Direct straight boulevard walk from Kalighat metro Gate 3.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/suruchi-sangha.jpg',
     images: [
       {
         id: 'dp-1',
-        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/deshapriya-park.jpg',
         caption: 'Front facade taking shape under modern architectural geometry',
         category: 'official',
         author: 'Deshapriya Media'
@@ -546,7 +546,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'rashbehari_diaries',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'Just 5 mins walk from Kalighat metro! The scale of Deshapriya Park 2026 is truly monumental. #DeshapriyaPark #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/deshapriya-park.jpg',
         permalink: 'https://instagram.com/p/C-deshapriya1',
         timestamp: '2026-09-30T12:00:00Z',
         media_type: 'IMAGE',
@@ -597,11 +597,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Smooth one-way pedestrian routing through Manoharpukur Road.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/deshapriya-park.jpg',
     images: [
       {
         id: 'ts-1',
-        url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/tridhara-sammilani.jpg',
         caption: 'Intricate ecological art pieces created from natural fiber',
         category: 'official',
         author: 'Tridhara Creative Lab'
@@ -614,7 +614,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'monsoon_kolkata',
         user_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
         caption: 'Tridhara 2026 theme is pure poetry in wood and bamboo. Do not miss this if you love thoughtful art. #Tridhara #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/tridhara-sammilani.jpg',
         permalink: 'https://instagram.com/p/C-tridhara1',
         timestamp: '2026-09-30T16:10:00Z',
         media_type: 'IMAGE',
@@ -665,11 +665,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Pleasant and serene walking environment along lake vicinity.'
     },
     recommended_days: ['Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/tridhara-sammilani.jpg',
     images: [
       {
         id: 'mc-1',
-        url: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/mudiali-club.jpg',
         caption: 'Classical idol illuminated with warm, serene amber lighting',
         category: 'official',
         author: 'Mudiali Archive'
@@ -682,7 +682,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'calcutta_lensman',
         user_avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
         caption: 'If you want serenity and pure artistic devotion, get down at Rabindra Sarobar and walk to Mudiali. #MudialiClub #KolkataPuja2026',
-        media_url: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/mudiali-club.jpg',
         permalink: 'https://instagram.com/p/C-mudiali1',
         timestamp: '2026-09-30T14:40:00Z',
         media_type: 'IMAGE',
@@ -733,11 +733,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Bustling shopping district in Gariahat adds to the festive vibrancy.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/mudiali-club.jpg',
     images: [
       {
         id: 'ee-1',
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/ekdalia-evergreen.jpg',
         caption: 'Stone carved temple arches and traditional idol',
         category: 'official',
         author: 'Ekdalia Media'
@@ -750,7 +750,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'gariahatchronicles',
         user_avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
         caption: 'The majestic chandelier at Ekdalia Evergreen is being hung! Always a grand spectacle. #EkdaliaEvergreen #Gariahat #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/ekdalia-evergreen.jpg',
         permalink: 'https://instagram.com/p/C-ekdalia1',
         timestamp: '2026-09-30T11:45:00Z',
         media_type: 'IMAGE',
@@ -810,11 +810,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Expansive open park grounds with very comfortable walking paths.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/ekdalia-evergreen.jpg',
     images: [
       {
         id: 'fd-1',
-        url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/salt-lake-fd-block.jpg',
         caption: 'Grand architectural setup across the wide FD block park grounds',
         category: 'official',
         author: 'FD Block Media'
@@ -827,7 +827,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'saltlake_vibes',
         user_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
         caption: 'Taking the Green Line metro straight to Karunamoyee made visiting FD Block puja effortless! #GreenLineMetro #SaltLake #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/salt-lake-fd-block.jpg',
         permalink: 'https://instagram.com/p/C-fdblock1',
         timestamp: '2026-09-30T18:15:00Z',
         media_type: 'IMAGE',
@@ -887,11 +887,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Organized queue with shaded waiting enclosures.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/salt-lake-fd-block.jpg',
     images: [
       {
         id: 'ca-1',
-        url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/chetla-agrani.jpg',
         caption: 'Handcrafted installations utilizing clay and river reeds',
         category: 'official',
         author: 'Chetla Arts Guild'
@@ -904,7 +904,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'arty_kolkata',
         user_avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
         caption: 'Chetla Agrani 2026 once again proves that Durga Puja is the world’s greatest public art festival. #ChetlaAgrani #PublicArt #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/chetla-agrani.jpg',
         permalink: 'https://instagram.com/p/C-chetla1',
         timestamp: '2026-09-30T13:30:00Z',
         media_type: 'IMAGE',
@@ -964,11 +964,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Entry lines managed from BB Ganguly Street.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/chetla-agrani.jpg',
     images: [
       {
         id: 'sms-1',
-        url: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/santosh-mitra-square.jpg',
         caption: 'High-tech laser lights mapping across the sanctum structure',
         category: 'official',
         author: 'SMS Media Cell'
@@ -981,7 +981,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'calcutta_buzz',
         user_avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
         caption: 'Sealdah metro has made Santosh Mitra Square so fast to reach! The laser synchronization this year is next level. #SantoshMitraSquare #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/santosh-mitra-square.jpg',
         permalink: 'https://instagram.com/p/C-santoshmitra1',
         timestamp: '2026-09-30T19:30:00Z',
         media_type: 'IMAGE',
@@ -1032,11 +1032,11 @@ export const PANDALS_DATA: Pandal[] = [
       notes: 'Smooth flow along Diamond Harbour Road feeder lane.'
     },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    featured_image: '/pandals/santosh-mitra-square.jpg',
     images: [
       {
         id: 'bnd-1',
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+        url: '/pandals/behala-natun-dal.jpg',
         caption: 'Hand-spun textile textures wrapping the central santum',
         category: 'official',
         author: 'Natun Dal Media'
@@ -1049,7 +1049,7 @@ export const PANDALS_DATA: Pandal[] = [
         username: 'kolkata_tales',
         user_avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
         caption: 'Behala Natun Dal 2026 installation is sheer brilliance. Take the Purple Line metro to Behala Chowrasta! #BehalaNatunDal #PurpleLine #Pujo2026',
-        media_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+        media_url: '/pandals/behala-natun-dal.jpg',
         permalink: 'https://instagram.com/p/C-natundal1',
         timestamp: '2026-09-30T17:00:00Z',
         media_type: 'IMAGE',
@@ -1088,8 +1088,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Ashtami morning or Navami evening',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '1 hour ago' },
     recommended_days: ['Ashtami', 'Nabami'],
-    featured_image: 'https://images.unsplash.com/photo-1602525211940-7b2b7aa9e61d?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'sac-1', url: 'https://images.unsplash.com/photo-1602525211940-7b2b7aa9e61d?auto=format&fit=crop&w=1200&q=80', caption: 'Traditional idol adorned with flowers', category: 'official' }],
+    featured_image: '/pandals/behala-natun-dal.jpg',
+    images: [{ id: 'sac-1', url: '/pandals/sealdah-athletic-club.jpg', caption: 'Traditional idol adorned with flowers', category: 'official' }],
     latest_images: [],
     trending_score: 55,
     saves_count: 210,
@@ -1119,8 +1119,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening after 7 PM',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '2 hours ago' },
     recommended_days: ['Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: '37p-1', url: 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&w=1200&q=80', caption: 'Pandal illumination at dusk', category: 'official' }],
+    featured_image: '/pandals/sealdah-athletic-club.jpg',
+    images: [{ id: '37p-1', url: '/pandals/37-pally.jpg', caption: 'Pandal illumination at dusk', category: 'official' }],
     latest_images: [],
     trending_score: 52,
     saves_count: 180,
@@ -1149,8 +1149,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Late evening (9 PM – midnight)',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '30 mins ago', notes: 'Weekend crowds very high — plan weekday visit.' },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'bj-1', url: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80', caption: 'Grand pandal illuminated at night', category: 'official' }],
+    featured_image: '/pandals/37-pally.jpg',
+    images: [{ id: 'bj-1', url: '/pandals/salt-lake-bj-block.jpg', caption: 'Grand pandal illuminated at night', category: 'official' }],
     latest_images: [],
     trending_score: 82,
     saves_count: 720,
@@ -1180,8 +1180,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening or midnight pandal hop',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '1 hour ago' },
     recommended_days: ['Saptami', 'Ashtami', 'Nabami'],
-    featured_image: 'https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'ae-1', url: 'https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?auto=format&fit=crop&w=1200&q=80', caption: 'Eco-themed pandal with lush decorations', category: 'official' }],
+    featured_image: '/pandals/salt-lake-bj-block.jpg',
+    images: [{ id: 'ae-1', url: '/pandals/ae-block-central-park.jpg', caption: 'Eco-themed pandal with lush decorations', category: 'official' }],
     latest_images: [],
     trending_score: 74,
     saves_count: 580,
@@ -1211,8 +1211,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Ashtami or Nabami evening',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '2 hours ago' },
     recommended_days: ['Ashtami', 'Nabami'],
-    featured_image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'nt-1', url: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80', caption: 'Modern themed pandal in New Town', category: 'official' }],
+    featured_image: '/pandals/ae-block-central-park.jpg',
+    images: [{ id: 'nt-1', url: '/pandals/sreebhumi-sporting-club-new-town.jpg', caption: 'Modern themed pandal in New Town', category: 'official' }],
     latest_images: [],
     trending_score: 68,
     saves_count: 440,
@@ -1244,8 +1244,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'After 9 PM when lake reflections are magical',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '20 mins ago' },
     recommended_days: ['Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'slp-1', url: 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=1200&q=80', caption: 'Pandal lights reflecting on lake waters at midnight', category: 'official' }],
+    featured_image: '/pandals/sreebhumi-sporting-club-new-town.jpg',
+    images: [{ id: 'slp-1', url: '/pandals/santoshpur-lake-pally.jpg', caption: 'Pandal lights reflecting on lake waters at midnight', category: 'official' }],
     latest_images: [],
     trending_score: 84,
     saves_count: 790,
@@ -1276,8 +1276,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening 8 PM onwards',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '25 mins ago' },
     recommended_days: ['Saptami', 'Ashtami', 'Nabami'],
-    featured_image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'bsm-1', url: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80', caption: 'Conceptual art installation forming the pandal structure', category: 'official' }],
+    featured_image: '/pandals/santoshpur-lake-pally.jpg',
+    images: [{ id: 'bsm-1', url: '/pandals/bosepukur-sitala-mandir.jpg', caption: 'Conceptual art installation forming the pandal structure', category: 'official' }],
     latest_images: [],
     trending_score: 86,
     saves_count: 840,
@@ -1307,8 +1307,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Ashtami morning Pushpanjali or evening darshan',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '1 hour ago' },
     recommended_days: ['Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'mt-1', url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80', caption: 'Traditional goddess idol with golden ornaments', category: 'official' }],
+    featured_image: '/pandals/bosepukur-sitala-mandir.jpg',
+    images: [{ id: 'mt-1', url: '/pandals/milan-tirtha.jpg', caption: 'Traditional goddess idol with golden ornaments', category: 'official' }],
     latest_images: [],
     trending_score: 58,
     saves_count: 290,
@@ -1339,8 +1339,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Saptami or Ashtami evening',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '2 hours ago' },
     recommended_days: ['Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'aas-1', url: 'https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?auto=format&fit=crop&w=1200&q=80', caption: 'Colourful pandal in the airport corridor', category: 'official' }],
+    featured_image: '/pandals/milan-tirtha.jpg',
+    images: [{ id: 'aas-1', url: '/pandals/arjunpur-amra-sabai-club.jpg', caption: 'Colourful pandal in the airport corridor', category: 'official' }],
     latest_images: [],
     trending_score: 60,
     saves_count: 320,
@@ -1376,8 +1376,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening 8 PM – midnight',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '15 mins ago', notes: 'Peak crowd on Ashtami — arrive by 7 PM.' },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'bs-1', url: 'https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?auto=format&fit=crop&w=1200&q=80', caption: 'Majestic palace replica pandal illuminated for Durga Puja', category: 'official' }],
+    featured_image: '/pandals/arjunpur-amra-sabai-club.jpg',
+    images: [{ id: 'bs-1', url: '/pandals/barisha-sarbojanin.jpg', caption: 'Majestic palace replica pandal illuminated for Durga Puja', category: 'official' }],
     latest_images: [],
     trending_score: 88,
     saves_count: 950,
@@ -1408,8 +1408,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Shashti or Saptami morning — traditional rites most visible',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '1 hour ago' },
     recommended_days: ['Shashti', 'Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1600456899121-68eda5706b6e?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'src-1', url: 'https://images.unsplash.com/photo-1600456899121-68eda5706b6e?auto=format&fit=crop&w=1200&q=80', caption: 'Ancient aatchala mansion adorned for Durga Puja', category: 'official' }],
+    featured_image: '/pandals/barisha-sarbojanin.jpg',
+    images: [{ id: 'src-1', url: '/pandals/sabarna-roy-chowdhury-aatchala.jpg', caption: 'Ancient aatchala mansion adorned for Durga Puja', category: 'official' }],
     latest_images: [],
     trending_score: 80,
     saves_count: 710,
@@ -1439,8 +1439,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening 8 PM onwards',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '30 mins ago' },
     recommended_days: ['Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1597302122080-89e7c96d32e7?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'bnd-1', url: 'https://images.unsplash.com/photo-1597302122080-89e7c96d32e7?auto=format&fit=crop&w=1200&q=80', caption: 'Artistic pandal interior glowing under festival lights', category: 'official' }],
+    featured_image: '/pandals/sabarna-roy-chowdhury-aatchala.jpg',
+    images: [{ id: 'bnd-1', url: '/pandals/behala-nutan-dal.jpg', caption: 'Artistic pandal interior glowing under festival lights', category: 'official' }],
     latest_images: [],
     trending_score: 83,
     saves_count: 760,
@@ -1470,8 +1470,8 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening to night',
     crowd_status: { level: 'moderate', source: 'Estimated', last_updated: '1 hour ago' },
     recommended_days: ['Saptami', 'Ashtami'],
-    featured_image: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'bf-1', url: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=1200&q=80', caption: 'Warm festive decorations at Behala Friends pandal', category: 'official' }],
+    featured_image: '/pandals/behala-nutan-dal.jpg',
+    images: [{ id: 'bf-1', url: '/pandals/behala-friends.jpg', caption: 'Warm festive decorations at Behala Friends pandal', category: 'official' }],
     latest_images: [],
     trending_score: 72,
     saves_count: 530,
@@ -1501,13 +1501,582 @@ export const PANDALS_DATA: Pandal[] = [
     best_time: 'Evening 7 PM – midnight',
     crowd_status: { level: 'heavy', source: 'Community reported', last_updated: '20 mins ago' },
     recommended_days: ['Saptami', 'Ashtami', 'Tonight'],
-    featured_image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
-    images: [{ id: 'b29-1', url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80', caption: 'Folk art themed pandal interior at Taratala', category: 'official' }],
-    latest_images: [],
+    featured_image: '/pandals/behala-29-pally.jpg',
+    images: [{ id: 'b29-1', url: '/pandals/behala-29-pally.jpg', caption: 'Folk art themed pandal interior at Taratala', category: 'official' }, { id: 'b29-2', url: '/pandals/behala-29-pally-2.jpg', caption: 'Illuminated evening decorations', category: 'latest' }, { id: 'b29-3', url: '/pandals/behala-29-pally-3.jpg', caption: 'Artistic installations and community crowds', category: 'community' }],
+    latest_images: [
+      {
+        id: 'b29-insta-1',
+        pandal_id: 'behala-29-pally',
+        username: 'behala_clicks',
+        caption: 'Behala 29 Pally looking majestic tonight! #DurgaPuja #Behala29Pally #Kolkata',
+        media_url: '/pandals/behala-29-pally.jpg',
+        permalink: 'https://instagram.com',
+        timestamp: '2026-10-01T20:00:00Z',
+        media_type: 'IMAGE',
+        source_type: 'instagram',
+        verified_for_2026: true
+      }
+    ],
     trending_score: 78,
     saves_count: 620,
     is_must_visit: true,
     created_at: '2026-08-01T00:00:00Z',
     updated_at: '2026-09-30T10:00:00Z'
-  }
+  },
+  {
+  id: 'hatibagan-sarbojanin',
+  name: 'Hatibagan Sarbojanin Durgotsav',
+  slug: 'hatibagan-sarbojanin',
+  description: "One of North Kolkata's most historic community Durga Pujas, located in the bustling Hatibagan market hub, celebrated for vibrant cultural themes and traditional clay artistry.",
+  heritage_note: 'Established in 1935, Hatibagan Sarbojanin is a cultural anchor of the historic Shyambazar-Hatibagan neighborhood.',
+  theme: 'Bengal Heritage & Living Folk Traditions (2026)',
+  area: 'North Kolkata',
+  locality: 'Hatibagan, Shyambazar',
+  latitude: 22.5998,
+  longitude: 88.3712,
+  google_place_id: 'hatibagan-sarbojanin-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Hatibagan+Sarbojanin+Durgotsav+Kolkata',
+  nearest_metro: 'Shyambazar Metro Station',
+  walking_distance: '350m',
+  walking_time_mins: 4,
+  metro_details: [
+    {
+      station_id: 'shyambazar',
+      station_name: 'Shyambazar',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '350m',
+      walking_time_mins: 4,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Hatibagan+Sarbojanin&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Popular',
+    'Must Visit',
+    'Heritage',
+    'Near Metro',
+    'Night Friendly'
+  ],
+  puja_committee: 'Hatibagan Sarbojanin Durgotsav Samiti',
+  best_time: 'Evening 6:00 PM – 11:30 PM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '15 mins ago'
+  },
+  recommended_days: [
+    'Saptami',
+    'Ashtami',
+    'Nabami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/hatibagan-sarbojanin.jpg',
+  images: [
+    {
+      id: 'hs-1',
+      url: '/pandals/hatibagan-sarbojanin.jpg',
+      caption: 'Illuminated pandal facade at Hatibagan crossing',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 93,
+  saves_count: 1140,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'tala-prattay',
+  name: 'Tala Prattay',
+  slug: 'tala-prattay',
+  description: 'Renowned for cutting-edge installation art and monumental conceptual themes that push the architectural boundaries of contemporary Kolkata Durga Puja.',
+  heritage_note: "Celebrated for transformative artistic concepts designed by Bengal's foremost contemporary installation artists.",
+  theme: 'Avant-Garde Architectural Canvas & Immersive Soundscapes',
+  area: 'North Kolkata',
+  locality: 'Tala, Shyambazar',
+  latitude: 22.6056,
+  longitude: 88.3745,
+  google_place_id: 'tala-prattay-durga-puja-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Tala+Prattay+Durga+Puja+Kolkata',
+  nearest_metro: 'Shyambazar Metro Station',
+  walking_distance: '700m',
+  walking_time_mins: 8,
+  metro_details: [
+    {
+      station_id: 'shyambazar',
+      station_name: 'Shyambazar',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '700m',
+      walking_time_mins: 8,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Tala+Prattay+Durga+Puja&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Must Visit',
+    'Trending',
+    'Theme Powerhouse',
+    'Artistic Masterpiece'
+  ],
+  puja_committee: 'Tala Prattay Pujo Committee',
+  best_time: 'Late afternoon 4 PM or midnight 1 AM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '20 mins ago'
+  },
+  recommended_days: [
+    'Shashti',
+    'Saptami',
+    'Ashtami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/tala-prattay.jpg',
+  images: [
+    {
+      id: 'tp-1',
+      url: '/pandals/tala-prattay.jpg',
+      caption: 'Monumental conceptual pavilion installation',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 97,
+  saves_count: 1520,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'kashi-bose-lane',
+  name: 'Kashi Bose Lane Durga Puja',
+  slug: 'kashi-bose-lane',
+  description: 'A premier North Kolkata artistic powerhouse famous for its breathtaking visual storytelling, thoughtful social themes, and intricate handcrafted details.',
+  heritage_note: 'Held continuously since 1937, famous for pioneering socially conscious visual narratives.',
+  theme: 'Symphony of Clay, Bell Metal & Ancient Bengal Craftsmanship',
+  area: 'North Kolkata',
+  locality: 'Kashi Bose Lane, Hatibagan',
+  latitude: 22.5935,
+  longitude: 88.3705,
+  google_place_id: 'kashi-bose-lane-durga-puja-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Kashi+Bose+Lane+Durga+Puja+Kolkata',
+  nearest_metro: 'Shyambazar Metro Station',
+  walking_distance: '650m',
+  walking_time_mins: 8,
+  metro_details: [
+    {
+      station_id: 'shyambazar',
+      station_name: 'Shyambazar',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '650m',
+      walking_time_mins: 8,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Kashi+Bose+Lane+Durga+Puja&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Popular',
+    'Must Visit',
+    'Trending',
+    'Theme Pandal'
+  ],
+  puja_committee: 'Kashi Bose Lane Sarbojanin Durgotsav Samiti',
+  best_time: 'Late evening 8 PM – 2 AM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '18 mins ago'
+  },
+  recommended_days: [
+    'Saptami',
+    'Ashtami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/kashi-bose-lane.jpg',
+  images: [
+    {
+      id: 'kbl-1',
+      url: '/pandals/kashi-bose-lane.jpg',
+      caption: 'Dramatic illuminated entrance and sanctum',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 95,
+  saves_count: 1380,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'kumartuli-sarbojanin',
+  name: 'Kumartuli Sarbojanin Durgotsav',
+  slug: 'kumartuli-sarbojanin',
+  description: "Located at the heart of the world-famous idol-makers' colony of Kumartuli, celebrated for unmatched classical idol craftsmanship and heritage rituals.",
+  heritage_note: 'Celebrated by the master artisans of Kumartuli who sculpt the goddess for the world.',
+  theme: 'Pure Sabeki Traditional Sculptural Heritage',
+  area: 'North Kolkata',
+  locality: 'Kumartuli, Shovabazar',
+  latitude: 22.5992,
+  longitude: 88.3655,
+  google_place_id: 'kumartuli-sarbojanin-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Kumartuli+Sarbojanin+Durgotsav+Kolkata',
+  nearest_metro: 'Shovabazar Sutanuti Metro Station',
+  walking_distance: '600m',
+  walking_time_mins: 7,
+  metro_details: [
+    {
+      station_id: 'shovabazar',
+      station_name: 'Shovabazar Sutanuti',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '600m',
+      walking_time_mins: 7,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Kumartuli+Sarbojanin+Durgotsav&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Heritage',
+    'Must Visit',
+    'Traditional',
+    'Idol Makers Hub'
+  ],
+  puja_committee: 'Kumartuli Sarbojanin Durgotsav Committee',
+  best_time: 'Morning 10 AM or Evening 7 PM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '25 mins ago'
+  },
+  recommended_days: [
+    'Shashti',
+    'Saptami',
+    'Ashtami',
+    'Nabami'
+  ],
+  featured_image: '/pandals/kumartuli-sarbojanin.jpg',
+  images: [
+    {
+      id: 'ks-1',
+      url: '/pandals/kumartuli-sarbojanin.jpg',
+      caption: 'Mastercrafted traditional clay Pratima',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 92,
+  saves_count: 1090,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'ahiritola-sarbojanin',
+  name: 'Ahiritola Sarbojanin Durgotsav',
+  slug: 'ahiritola-sarbojanin',
+  description: "Steeped in riverside folklore by the Ganges, Ahiritola Sarbojanin creates awe-inspiring artistic installations celebrating Bengal's cultural soul.",
+  heritage_note: 'One of the oldest community pujas in North Kolkata, renowned for colossal street installations.',
+  theme: 'Ganges Riverside Lore & Folk Tapestries',
+  area: 'North Kolkata',
+  locality: 'Ahiritola, Shovabazar',
+  latitude: 22.5955,
+  longitude: 88.3618,
+  google_place_id: 'ahiritola-sarbojanin-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Ahiritola+Sarbojanin+Durgotsav+Kolkata',
+  nearest_metro: 'Shovabazar Sutanuti Metro Station',
+  walking_distance: '700m',
+  walking_time_mins: 8,
+  metro_details: [
+    {
+      station_id: 'shovabazar',
+      station_name: 'Shovabazar Sutanuti',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '700m',
+      walking_time_mins: 8,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Ahiritola+Sarbojanin+Durgotsav&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Must Visit',
+    'Heritage',
+    'Popular',
+    'River Ghat Corridor'
+  ],
+  puja_committee: 'Ahiritola Sarbojanin Durgotsav Samiti',
+  best_time: 'Evening 6:30 PM – midnight',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '30 mins ago'
+  },
+  recommended_days: [
+    'Saptami',
+    'Ashtami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/ahiritola-sarbojanin.jpg',
+  images: [
+    {
+      id: 'as-1',
+      url: '/pandals/ahiritola-sarbojanin.jpg',
+      caption: 'Elaborate artistic riverside facade',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 91,
+  saves_count: 980,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'badamtala-ashar-sangha',
+  name: 'Badamtala Ashar Sangha',
+  slug: 'badamtala-ashar-sangha',
+  description: "One of South Kolkata's most decorated theme pujas, known for winning prestigious awards with innovative environmental and social concepts.",
+  heritage_note: 'Celebrated for over 85 years, consistently recognized with top Asian Paints Sharad Shamman awards.',
+  theme: 'Living Organic Architecture & Earth Tones',
+  area: 'South Kolkata',
+  locality: 'Kalighat, Rashbehari',
+  latitude: 22.5205,
+  longitude: 88.3475,
+  google_place_id: 'badamtala-ashar-sangha-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha+Kolkata',
+  nearest_metro: 'Kalighat Metro Station',
+  walking_distance: '450m',
+  walking_time_mins: 5,
+  metro_details: [
+    {
+      station_id: 'kalighat',
+      station_name: 'Kalighat',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '450m',
+      walking_time_mins: 5,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Badamtala+Ashar+Sangha&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Must Visit',
+    'Trending',
+    'Theme Pandal',
+    'Award Winner'
+  ],
+  puja_committee: 'Badamtala Ashar Sangha Club Committee',
+  best_time: 'Midnight 12:00 AM – 3:30 AM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '12 mins ago'
+  },
+  recommended_days: [
+    'Shashti',
+    'Saptami',
+    'Ashtami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/badamtala-ashar-sangha.jpg',
+  images: [
+    {
+      id: 'bas-1',
+      url: '/pandals/badamtala-ashar-sangha.jpg',
+      caption: 'Award-winning conceptual architecture',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 96,
+  saves_count: 1410,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: '66-pally',
+  name: '66 Pally Durgotsav',
+  slug: '66-pally',
+  description: 'Distinguished for historic breakthroughs including women priest led rituals and soul-stirring cultural motifs in the Kalighat heritage precinct.',
+  heritage_note: 'A cultural pioneer celebrated for progressive community rituals and traditional Bengali artwork.',
+  theme: 'Divine Feminine & Inclusive Heritage Celebrations',
+  area: 'South Kolkata',
+  locality: 'Kalighat, South Kolkata',
+  latitude: 22.5218,
+  longitude: 88.349,
+  google_place_id: '66-pally-durga-puja-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=66+Pally+Durga+Puja+Kolkata',
+  nearest_metro: 'Kalighat Metro Station',
+  walking_distance: '400m',
+  walking_time_mins: 5,
+  metro_details: [
+    {
+      station_id: 'kalighat',
+      station_name: 'Kalighat',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '400m',
+      walking_time_mins: 5,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=66+Pally+Durga+Puja&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Must Visit',
+    'Popular',
+    'Cultural Landmark',
+    'Near Metro'
+  ],
+  puja_committee: '66 Pally Durgotsav Club',
+  best_time: 'Evening 6 PM – 11 PM',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '14 mins ago'
+  },
+  recommended_days: [
+    'Saptami',
+    'Ashtami',
+    'Nabami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/66-pally.jpg',
+  images: [
+    {
+      id: 'p66-1',
+      url: '/pandals/66-pally.jpg',
+      caption: 'Vibrant cultural gate and sanctum',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 93,
+  saves_count: 1190,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: '68-pally',
+  name: '68 Pally Sarbojanin',
+  slug: '68-pally',
+  description: 'A cherished neighbourhood puja renowned for tranquil traditional decor and warm South Kolkata hospitality right by Rashbehari Avenue.',
+  heritage_note: 'A community cornerstone celebrating family, tradition, and joyous adda for decades.',
+  theme: 'Classic Sabeki Idol in Architectural Canopy',
+  area: 'South Kolkata',
+  locality: 'Rashbehari Avenue, Kalighat',
+  latitude: 22.5192,
+  longitude: 88.3512,
+  google_place_id: '68-pally-durga-puja-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=68+Pally+Durga+Puja+Kolkata',
+  nearest_metro: 'Kalighat Metro Station',
+  walking_distance: '500m',
+  walking_time_mins: 6,
+  metro_details: [
+    {
+      station_id: 'kalighat',
+      station_name: 'Kalighat',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '500m',
+      walking_time_mins: 6,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=68+Pally+Durga+Puja&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Popular',
+    'Heritage',
+    'Near Metro'
+  ],
+  puja_committee: '68 Pally Sarbojanin Committee',
+  best_time: 'Afternoon 2 PM or Evening 8 PM',
+  crowd_status: {
+    level: 'moderate',
+    source: 'Community reported',
+    last_updated: '22 mins ago'
+  },
+  recommended_days: [
+    'Saptami',
+    'Ashtami',
+    'Nabami'
+  ],
+  featured_image: '/pandals/68-pally.jpg',
+  images: [
+    {
+      id: 'p68-1',
+      url: '/pandals/68-pally.jpg',
+      caption: 'Intricate sabeki idol and sanctum details',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 87,
+  saves_count: 760,
+  is_must_visit: false,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+},
+  {
+  id: 'singhi-park',
+  name: 'Singhi Park Sarbojanin',
+  slug: 'singhi-park',
+  description: 'Celebrated continuously since 1941, Singhi Park is universally loved for royal temple architectural replicas and grand Chandannagar lighting spectacles.',
+  heritage_note: 'Founded in 1941, Singhi Park is famous for illuminating Gariahat with legendary lighting gates.',
+  theme: 'Imperial Temple Replicas & Chandannagar Illumination (2026)',
+  area: 'South Kolkata',
+  locality: 'Dover Lane, Gariahat',
+  latitude: 22.5222,
+  longitude: 88.3645,
+  google_place_id: 'singhi-park-durga-puja-kolkata',
+  google_maps_url: 'https://www.google.com/maps/search/?api=1&query=Singhi+Park+Durga+Puja+Kolkata',
+  nearest_metro: 'Kalighat Metro Station',
+  walking_distance: '600m',
+  walking_time_mins: 7,
+  metro_details: [
+    {
+      station_id: 'kalighat',
+      station_name: 'Kalighat',
+      line: 'Blue Line (North-South)',
+      line_code: 'blue',
+      walking_distance: '600m',
+      walking_time_mins: 7,
+      directions_url: 'https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Singhi+Park+Durga+Puja&travelmode=walking'
+    }
+  ],
+  tags: [
+    'Popular',
+    'Must Visit',
+    'Monumental',
+    'Lighting Spectacle'
+  ],
+  puja_committee: 'Singhi Park Sarbojanin Durgotsav Samiti',
+  best_time: 'Night 9:00 PM – 2:00 AM (for best lighting effects)',
+  crowd_status: {
+    level: 'heavy',
+    source: 'Community reported',
+    last_updated: '10 mins ago'
+  },
+  recommended_days: [
+    'Shashti',
+    'Saptami',
+    'Ashtami',
+    'Nabami',
+    'Tonight'
+  ],
+  featured_image: '/pandals/singhi-park.jpg',
+  images: [
+    {
+      id: 'sp-1',
+      url: '/pandals/singhi-park.jpg',
+      caption: 'Towering temple replica glowing at Dover Lane',
+      category: 'official'
+    }
+  ],
+  latest_images: [],
+  trending_score: 96,
+  saves_count: 1470,
+  is_must_visit: true,
+  created_at: '2026-08-01T00:00:00Z',
+  updated_at: '2026-09-30T10:00:00Z'
+}
 ];

@@ -8,6 +8,7 @@ interface WishlistContextType {
   toggleWishlist: (pandalId: string) => void;
   removeFromWishlist: (pandalId: string) => void;
   count: number;
+  isLoaded: boolean;
 }
 
 const WishlistContext = createContext<WishlistContextType>({
@@ -15,7 +16,8 @@ const WishlistContext = createContext<WishlistContextType>({
   isSaved: () => false,
   toggleWishlist: () => {},
   removeFromWishlist: () => {},
-  count: 0
+  count: 0,
+  isLoaded: false
 });
 
 const STORAGE_KEY = 'pujo_2026_wishlist_ids';
@@ -71,7 +73,8 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
         isSaved,
         toggleWishlist,
         removeFromWishlist,
-        count: mounted ? wishlist.length : 0
+        count: mounted ? wishlist.length : 0,
+        isLoaded: mounted
       }}
     >
       {children}

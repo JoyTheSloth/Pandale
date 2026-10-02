@@ -4,6 +4,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PANDALS_DATA } from '@/data/pandals';
+import { METRO_STATIONS_DATA } from '@/data/metro';
 import { useWishlist } from '@/context/WishlistContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { 
@@ -18,7 +19,7 @@ import {
   Clock, 
   ExternalLink, 
   Sparkles,
-  Share2,
+  Forward,
   Check,
   Search,
   X,
@@ -44,16 +45,24 @@ const PRESET_CIRCUITS = [
     subtitle: 'Heritage, Sabeki & River Ghats',
     bengaliSubtitle: 'ঐতিহ্য, সাবেকিয়ানা ও গঙ্গার ঘাট',
     icon: '🏛️',
-    stopsCount: 6,
-    badge: '6 Iconic Pandals',
-    bengaliBadge: '৬টি আইকনিক প্যান্ডেল',
+    stopsCount: 7,
+    badge: '7 Iconic Pandals',
+    bengaliBadge: '৭টি আইকনিক প্যান্ডেল',
     image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
-    landmarks: 'Bagbazar • Kumartuli • Sovabazar',
-    bengaliLandmarks: 'বাগবাজার • কুমারটুলি • শোভাবাজার',
-    description: 'Bagbazar, Kumartuli, Ahiritola & Sovabazar',
-    ids: ['bagbazar-sarbojanin', 'kumartuli-park', 'ahiritola-sarbojanin', 'sovabazar-rajbari'],
+    landmarks: 'Shyambazar • Hatibagan • Kumartuli',
+    bengaliLandmarks: 'শ্যামবাজার • হাতিবাগান • কুমারটুলি',
+    description: 'Bagbazar, Hatibagan, Tala Prattay, Kumartuli & Ahiritola',
+    ids: [
+      'bagbazar-sarbojanin',
+      'hatibagan-sarbojanin',
+      'tala-prattay',
+      'kashi-bose-lane',
+      'kumartuli-park',
+      'kumartuli-sarbojanin',
+      'ahiritola-sarbojanin'
+    ],
     zone: 'North Kolkata',
-    metro: 'Blue Line (Shyambazar)',
+    metro: 'Shyambazar & Shovabazar (350m–700m walk)',
   },
   {
     id: 'south-iconic',
@@ -66,12 +75,12 @@ const PRESET_CIRCUITS = [
     badge: '6 Iconic Pandals',
     bengaliBadge: '৬টি আইকনিক প্যান্ডেল',
     image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
-    landmarks: 'Maddox Square • Suruchi • Tridhara',
-    bengaliLandmarks: 'ম্যাডক্স স্কোয়ার • সুরুচি • ত্রিধারা',
-    description: 'Maddox Square, Ekdalia, Singhi Park & Suruchi',
-    ids: ['maddox-square', 'ekdalia-evergreen', 'singhi-park', 'suruchi-sangha', 'chetla-agrani'],
+    landmarks: 'Maddox Square • Suruchi • Singhi Park',
+    bengaliLandmarks: 'ম্যাডক্স স্কোয়ার • সুরুচি • সিংহী পার্ক',
+    description: 'Maddox Square, Ekdalia, Singhi Park, Suruchi & Badamtala',
+    ids: ['maddox-square', 'ekdalia-evergreen', 'singhi-park', 'suruchi-sangha', 'chetla-agrani', 'badamtala-ashar-sangha'],
     zone: 'South Kolkata',
-    metro: 'Blue Line (Kalighat)',
+    metro: 'Blue Line (Kalighat & Netaji Bhavan)',
   },
   {
     id: 'central-classic',
@@ -80,14 +89,14 @@ const PRESET_CIRCUITS = [
     subtitle: 'Lakeside Lights & Heritage Squares',
     bengaliSubtitle: 'আলোর রোশনাই ও সাবেক পুজো',
     icon: '👑',
-    stopsCount: 3,
-    badge: '3 Iconic Pandals',
-    bengaliBadge: '৩টি আইকনিক প্যান্ডেল',
+    stopsCount: 4,
+    badge: '4 Iconic Pandals',
+    bengaliBadge: '৪টি আইকনিক প্যান্ডেল',
     image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
-    landmarks: 'College Square • Santosh Mitra',
-    bengaliLandmarks: 'কলেজ স্কোয়ার • সন্তোষ মিত্র স্কোয়ার',
-    description: 'College Square, Mohammad Ali & Santosh Mitra',
-    ids: ['college-square', 'mohammad-ali-park', 'santosh-mitra-square'],
+    landmarks: 'College Square • Lebutala • Sealdah',
+    bengaliLandmarks: 'কলেজ স্কোয়ার • লেবুবাগান • শিয়ালদহ',
+    description: 'College Square, Santosh Mitra Square & Sealdah',
+    ids: ['college-square', 'santosh-mitra-square', 'sealdah-athletic-club', '37-pally'],
     zone: 'Central Kolkata',
     metro: 'Blue & Green (Central / MG Road)',
   },
@@ -102,27 +111,211 @@ const PRESET_CIRCUITS = [
     badge: '4 Iconic Pandals',
     bengaliBadge: '৪টি আইকনিক প্যান্ডেল',
     image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
-    landmarks: 'Salt Lake FD Block • BJ Block • Sree Bhumi',
-    bengaliLandmarks: 'সল্টলেক এফডি ব্লক • বিজে ব্লক • শ্রীভূমি',
-    description: 'Sealdah, FD Block, BJ Block & Sree Bhumi',
-    ids: ['chaltabagan', 'salt-lake-fd-block', 'salt-lake-bj-block', 'sree-bhumi-sporting-club'],
+    landmarks: 'Salt Lake FD Block • BJ Block • Central Park',
+    bengaliLandmarks: 'সল্টলেক এফডি ব্লক • বিজে ব্লক • সেন্ট্রাল পার্ক',
+    description: 'FD Block, BJ Block, Central Park & New Town',
+    ids: ['salt-lake-fd-block', 'salt-lake-bj-block', 'ae-block-central-park', 'sreebhumi-sporting-club-new-town'],
     zone: 'East Kolkata',
-    metro: 'Green Line (Sector V / Karunamoyee)',
+    metro: 'Green Line (City Centre / Karunamoyee)',
   }
 ];
+
+// Metro hubs grouped by zone for starting point destination selection
+export interface HubStationOption {
+  id: string;
+  name: string;
+  bengaliName: string;
+  line: string;
+  lineColor: 'blue' | 'green' | 'purple';
+  subtitle: string;
+  bengaliSubtitle: string;
+}
+
+const ZONE_METRO_HUBS: Record<string, HubStationOption[]> = {
+  'North Kolkata': [
+    {
+      id: 'shyambazar',
+      name: 'Shyambazar',
+      bengaliName: 'শ্যামবাজার',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Hatibagan, Bagbazar & Tala',
+      bengaliSubtitle: 'হাতিবাগান, বাগবাজার ও টালা প্রত্যয়',
+    },
+    {
+      id: 'shovabazar',
+      name: 'Shovabazar Sutanuti',
+      bengaliName: 'শোভাবাজার সুতানুটি',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Kumartuli Park & Ahiritola',
+      bengaliSubtitle: 'কুমারটুলি পার্ক ও আহিরীটোলা',
+    },
+    {
+      id: 'belgachia',
+      name: 'Belgachia',
+      bengaliName: 'বেলগাছিয়া',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Sree Bhumi & Lake Town',
+      bengaliSubtitle: 'শ্রীভূমি ও লেক টাউন',
+    },
+    {
+      id: 'mg-road',
+      name: 'MG Road',
+      bengaliName: 'মহাত্মা গান্ধী রোড',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'College Square & Heritage North',
+      bengaliSubtitle: 'কলেজ স্কোয়ার ও ঐতিহ্যবাহী উত্তর',
+    },
+  ],
+  'South Kolkata': [
+    {
+      id: 'kalighat',
+      name: 'Kalighat',
+      bengaliName: 'কালীঘাট',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Badamtala, 66 Pally & Deshapriya',
+      bengaliSubtitle: 'বাদামতলা, ৬৬ পল্লী ও দেশপ্রিয় পার্ক',
+    },
+    {
+      id: 'netaji-bhavan',
+      name: 'Netaji Bhavan',
+      bengaliName: 'নেতাজি ভবন',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Maddox Square & Bhowanipore',
+      bengaliSubtitle: 'ম্যাডক্স স্কোয়ার ও ভবানীপুর',
+    },
+    {
+      id: 'rabindra-sarobar',
+      name: 'Rabindra Sarobar',
+      bengaliName: 'রবীন্দ্র সরোবর',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Mudiali Club & Lake Pandals',
+      bengaliSubtitle: 'মুদিয়ালী ক্লাব ও লেক প্যান্ডেল',
+    },
+    {
+      id: 'behala-chowrasta',
+      name: 'Behala Chowrasta',
+      bengaliName: 'বেহালা চৌরাস্তা',
+      line: 'Purple Line (Joka-Esplanade)',
+      lineColor: 'purple',
+      subtitle: 'Behala Nutan Dal & Barisha',
+      bengaliSubtitle: 'বেহালা নূতন দল ও বরিষা',
+    },
+  ],
+  'Central Kolkata': [
+    {
+      id: 'central',
+      name: 'Central',
+      bengaliName: 'সেন্ট্রাল',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'College Square & Santosh Mitra',
+      bengaliSubtitle: 'কলেজ স্কোয়ার ও সন্তোষ মিত্র স্কয়ার',
+    },
+    {
+      id: 'sealdah',
+      name: 'Sealdah',
+      bengaliName: 'শিয়ালদহ',
+      line: 'Green Line (East-West)',
+      lineColor: 'green',
+      subtitle: 'Lebutala, Sealdah Athletic & 37 Pally',
+      bengaliSubtitle: 'লেবুবাগান ও শিয়ালদহ অ্যাথলেটিক',
+    },
+    {
+      id: 'chandni-chowk',
+      name: 'Chandni Chowk',
+      bengaliName: 'চাঁদনি চক',
+      line: 'Blue Line (North-South)',
+      lineColor: 'blue',
+      subtitle: 'Central Hub & Bowbazar',
+      bengaliSubtitle: 'সেন্ট্রাল ও বৌবাজার',
+    },
+  ],
+  'East Kolkata': [
+    {
+      id: 'city-centre',
+      name: 'City Centre',
+      bengaliName: 'সিটি সেন্টার',
+      line: 'Green Line (East-West)',
+      lineColor: 'green',
+      subtitle: 'Salt Lake FD Block & BD Block',
+      bengaliSubtitle: 'সল্টলেক এফডি ব্লক',
+    },
+    {
+      id: 'karunamoyee',
+      name: 'Karunamoyee',
+      bengaliName: 'করুণাময়ী',
+      line: 'Green Line (East-West)',
+      lineColor: 'green',
+      subtitle: 'BJ Block & Central Salt Lake',
+      bengaliSubtitle: 'সল্টলেক বিজে ব্লক',
+    },
+    {
+      id: 'central-park',
+      name: 'Central Park',
+      bengaliName: 'সেন্ট্রাল পার্ক',
+      line: 'Green Line (East-West)',
+      lineColor: 'green',
+      subtitle: 'AE Block Central Park & New Town',
+      bengaliSubtitle: 'এই ব্লক ও নিউ টাউন',
+    },
+    {
+      id: 'salt-lake-stadium',
+      name: 'Salt Lake Stadium',
+      bengaliName: 'সল্টলেক স্টেডিয়াম',
+      line: 'Green Line (East-West)',
+      lineColor: 'green',
+      subtitle: 'Kadamtala & Salt Lake Gateway',
+      bengaliSubtitle: 'সল্টলেক প্রবেশদ্বার',
+    },
+  ],
+};
 
 export default function RoutePlannerPage() {
   const { wishlist } = useWishlist();
   const { language } = useLanguage();
   const isBn = language === 'bn';
 
-  // Selected pandal IDs in route order
+  // Zone & Starting Metro Hub state
+  const [selectedHubZone, setSelectedHubZone] = useState<ZoneArea>('North Kolkata');
+  const [activeStartingHub, setActiveStartingHub] = useState<string>('shyambazar');
+
+  // Selected pandal IDs in route order (defaults to North Kolkata sequentially ordered from Shyambazar)
   const [selectedIds, setSelectedIds] = useState<string[]>(() => {
     if (wishlist.length > 0) {
-      return wishlist.slice(0, 5);
+      return wishlist.slice(0, 6);
     }
-    // Default starter itinerary
-    return ['bagbazar-sarbojanin', 'kumartuli-park', 'college-square', 'maddox-square'];
+    const shyambazar = METRO_STATIONS_DATA.find((s) => s.id === 'shyambazar');
+    if (shyambazar) {
+      const candidates = PANDALS_DATA.filter((p) => p.area === 'North Kolkata');
+      const ordered: string[] = [];
+      const remaining = [...candidates];
+      let curLat = shyambazar.latitude;
+      let curLng = shyambazar.longitude;
+      while (remaining.length > 0) {
+        let nearestIdx = 0;
+        let minDist = Infinity;
+        for (let i = 0; i < remaining.length; i++) {
+          const d = calculateDistanceKm(curLat, curLng, remaining[i].latitude, remaining[i].longitude);
+          if (d < minDist) {
+            minDist = d;
+            nearestIdx = i;
+          }
+        }
+        const [nearest] = remaining.splice(nearestIdx, 1);
+        ordered.push(nearest.id);
+        curLat = nearest.latitude;
+        curLng = nearest.longitude;
+      }
+      return ordered;
+    }
+    return ['hatibagan-sarbojanin', 'kashi-bose-lane', 'tala-prattay', 'bagbazar-sarbojanin'];
   });
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -217,6 +410,104 @@ export default function RoutePlannerPage() {
   const handleApplyPreset = (preset: typeof PRESET_CIRCUITS[0]) => {
     setSelectedIds(preset.ids);
     setActivePreset(preset.id);
+    setSelectedHubZone(preset.zone as ZoneArea);
+    const hubs = ZONE_METRO_HUBS[preset.zone];
+    if (hubs && hubs.length > 0) {
+      setActiveStartingHub(hubs[0].id);
+    }
+  };
+
+  // Algorithm to auto-generate a sequential itinerary starting at the selected metro hub
+  const generateSequentialRoute = (stationId: string, zone: ZoneArea) => {
+    const station = METRO_STATIONS_DATA.find((s) => s.id === stationId);
+    if (!station) return;
+
+    let candidates = PANDALS_DATA.filter((p) => p.area === zone);
+    if (candidates.length === 0) {
+      candidates = PANDALS_DATA.slice(0, 7);
+    }
+
+    const orderedIds: string[] = [];
+    const remaining = [...candidates];
+
+    let currentLat = station.latitude;
+    let currentLng = station.longitude;
+
+    // Step-by-step nearest neighbor routing starting from the metro station
+    while (remaining.length > 0) {
+      let nearestIdx = 0;
+      let minDistance = Infinity;
+
+      for (let i = 0; i < remaining.length; i++) {
+        const dist = calculateDistanceKm(
+          currentLat,
+          currentLng,
+          remaining[i].latitude,
+          remaining[i].longitude
+        );
+        if (dist < minDistance) {
+          minDistance = dist;
+          nearestIdx = i;
+        }
+      }
+
+      const [nearest] = remaining.splice(nearestIdx, 1);
+      orderedIds.push(nearest.id);
+      currentLat = nearest.latitude;
+      currentLng = nearest.longitude;
+    }
+
+    setSelectedIds(orderedIds);
+    setActiveStartingHub(stationId);
+    setSelectedHubZone(zone);
+    setActivePreset(null);
+  };
+
+  // Memoized active starting station details
+  const activeStartingStation = useMemo(() => {
+    if (!activeStartingHub) return null;
+    return METRO_STATIONS_DATA.find((s) => s.id === activeStartingHub) || null;
+  }, [activeStartingHub]);
+
+  // Distance and walk time from the starting station to Stop 01
+  const distFromStationToFirst = useMemo(() => {
+    if (!activeStartingStation || selectedPandals.length === 0) return null;
+    const first = selectedPandals[0];
+    const km = calculateDistanceKm(
+      activeStartingStation.latitude,
+      activeStartingStation.longitude,
+      first.latitude,
+      first.longitude
+    );
+    return {
+      km,
+      text: km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`,
+      mins: Math.max(3, Math.round(km * 12)),
+      autoMins: Math.max(3, Math.round(km * 3.2 + 1))
+    };
+  }, [activeStartingStation, selectedPandals]);
+
+  // Direct walk directions from starting metro hub to Stop 01
+  const walkFromHubToFirstUrl = useMemo(() => {
+    if (!activeStartingStation || selectedPandals.length === 0) return null;
+    const cleanHub = activeStartingStation.name.toLowerCase().includes('metro')
+      ? activeStartingStation.name
+      : `${activeStartingStation.name} Metro Station`;
+    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${cleanHub}, Kolkata`)}&destination=${encodeURIComponent(`${selectedPandals[0].name}, Kolkata`)}&travelmode=walking`;
+  }, [activeStartingStation, selectedPandals]);
+
+  const handleAppendPreset = (preset: typeof PRESET_CIRCUITS[0]) => {
+    const newIds = preset.ids.filter((id) => !selectedIds.includes(id));
+    if (newIds.length > 0) {
+      setSelectedIds([...selectedIds, ...newIds]);
+    }
+  };
+
+  const handleAddAllAvailableZone = () => {
+    const toAdd = availableToAdd.map((p) => p.id);
+    if (toAdd.length > 0) {
+      setSelectedIds([...selectedIds, ...toAdd]);
+    }
   };
 
   const handleClearAll = () => {
@@ -319,9 +610,9 @@ export default function RoutePlannerPage() {
                 type="button"
                 onClick={handleClearAll}
                 title="Clear entire itinerary route"
-                className="px-3.5 py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-rose-300 dark:hover:border-rose-800/60 hover:bg-rose-50/60 dark:hover:bg-rose-950/20 text-stone-600 dark:text-stone-300 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer btn-jiggle"
+                className="px-3.5 py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-rose-300 dark:hover:border-rose-800/60 hover:bg-rose-50/60 dark:hover:bg-rose-950/20 text-stone-600 dark:text-stone-300 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group btn-jiggle"
               >
-                <RotateCcw className="w-4 h-4 text-stone-400 group-hover:text-rose-500" />
+                <RotateCcw className="w-4 h-4 text-stone-400 group-hover:text-rose-500 group-hover:-rotate-90 transition-transform duration-200" />
                 <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
               </button>
 
@@ -329,9 +620,9 @@ export default function RoutePlannerPage() {
                 type="button"
                 onClick={handleShareRoute}
                 title="Share Itinerary"
-                className="p-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] dark:hover:border-white/20 text-stone-700 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer btn-jiggle"
+                className="p-3 sm:px-4 sm:py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] dark:hover:border-white/20 text-stone-700 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group btn-jiggle"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Share2 className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Forward className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />}
                 <span className="hidden sm:inline">{copied ? (isBn ? 'কপি হয়েছে!' : 'Copied!') : (isBn ? 'শেয়ার' : 'Share')}</span>
               </button>
 
@@ -339,11 +630,11 @@ export default function RoutePlannerPage() {
                 href={fullGoogleMapsRouteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-[#D8261C]/30 hover:shadow-xl transition-all btn-jiggle"
+                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-[#D8261C]/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-200 group btn-jiggle"
               >
-                <MapPin className="w-4 h-4 text-[#FDE047]" />
+                <MapPin className="w-4 h-4 text-[#FDE047] group-hover:-translate-y-0.5 transition-transform duration-200" />
                 <span>{isBn ? 'গুগল ম্যাপসে সম্পূর্ণ রুট দেখুন' : 'Open Entire Route in Maps'}</span>
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </a>
             </>
           )}
@@ -395,7 +686,7 @@ export default function RoutePlannerPage() {
               <div
                 key={preset.id}
                 onClick={() => handleApplyPreset(preset)}
-                className={`group cursor-pointer shrink-0 snap-start w-[155px] sm:w-[175px] rounded-2xl p-2.5 sm:p-3 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-lg active:scale-[0.98] select-none ${
+                className={`group cursor-pointer shrink-0 snap-start w-[155px] sm:w-[175px] rounded-2xl p-2.5 sm:p-3 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-2 active:scale-[0.96] select-none ${
                   isActive
                     ? 'bg-[#181412] dark:bg-[#120D0B] text-white border-2 border-[#D8261C] ring-2 ring-[#D8261C]/30 shadow-[#D8261C]/20'
                     : 'bg-[#181412] dark:bg-[#140F0E] text-white border border-stone-800/80 hover:border-amber-400/50 hover:shadow-amber-500/10'
@@ -412,13 +703,13 @@ export default function RoutePlannerPage() {
                     className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs ${
                       isActive
                         ? 'bg-[#D8261C] text-white'
-                        : 'bg-white text-stone-900 group-hover:scale-105 group-hover:bg-[#FFFBEB]'
+                        : 'bg-white text-stone-900 group-hover:scale-115 group-hover:bg-[#FFFBEB]'
                     }`}
                   >
                     {isActive ? (
                       <Check className="w-3 h-3 text-white stroke-[2.5]" />
                     ) : (
-                      <ArrowUpRight className="w-3 h-3 text-stone-900 group-hover:text-[#D8261C] transition-colors stroke-[2.5]" />
+                      <ArrowUpRight className="w-3 h-3 text-stone-900 group-hover:text-[#D8261C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all stroke-[2.5]" />
                     )}
                   </div>
                 </div>
@@ -440,14 +731,14 @@ export default function RoutePlannerPage() {
                     alt={preset.title}
                     fill
                     sizes="180px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-112"
                   />
                   {/* Subtle vignette gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25 group-hover:via-black/5 transition-opacity" />
 
                   {/* Floating Center Badge: e.g. "6 Iconic Pandals" */}
                   <div className="absolute bottom-1.5 inset-x-1.5 text-center z-10">
-                    <span className={`inline-block px-2 py-0.5 rounded-full text-[8.5px] font-bold font-mono shadow-xs backdrop-blur-md transition-all ${
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[8.5px] font-bold font-mono shadow-xs backdrop-blur-md transition-all group-hover:scale-105 ${
                       isActive
                         ? 'bg-[#D8261C] text-white border border-[#FDE047]/60'
                         : 'bg-[#FFF8F0] text-[#7C2D12] border border-[#FED7AA]'
@@ -458,13 +749,43 @@ export default function RoutePlannerPage() {
                 </div>
 
                 {/* Card Footer Details */}
-                <div className="pt-2 mt-2 border-t border-white/10 text-center space-y-0.5">
+                <div className="pt-2 mt-2 border-t border-white/10 text-center space-y-1">
                   <div className="text-[10px] sm:text-[11px] font-bold text-white tracking-tight truncate">
                     {isBn ? preset.bengaliLandmarks : preset.landmarks}
                   </div>
                   <div className="text-[9px] text-blue-400 flex items-center justify-center gap-1 font-semibold">
                     <Train className="w-2.5 h-2.5 text-blue-400 shrink-0" />
                     <span className="truncate">{preset.metro}</span>
+                  </div>
+
+                  {/* 1-Click Load vs Add on Action Buttons */}
+                  <div className="flex items-center gap-1 pt-1">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleApplyPreset(preset);
+                      }}
+                      className={`flex-1 py-1 rounded-lg text-[9.5px] font-bold transition-all ${
+                        isActive
+                          ? 'bg-[#D8261C] text-white shadow-xs'
+                          : 'bg-white/15 hover:bg-white/25 text-white'
+                      }`}
+                    >
+                      {isActive ? (isBn ? 'সক্রিয়' : 'Active') : (isBn ? 'রুট লোড' : 'Load Plan')}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAppendPreset(preset);
+                      }}
+                      title="Add stops from this circuit onto your current plan"
+                      className="py-1 px-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/35 text-amber-300 text-[9.5px] font-bold border border-amber-500/30 flex items-center gap-0.5 transition-all"
+                    >
+                      <Plus className="w-2.5 h-2.5" />
+                      <span>{isBn ? 'যোগ' : 'Add on'}</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -473,50 +794,159 @@ export default function RoutePlannerPage() {
         </div>
       </div>
 
-      {/* 3. Itinerary Summary Stats Bar (Compact Dashboard) */}
-      {selectedPandals.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 bg-white dark:bg-[#1A1218] rounded-2xl border border-stone-200/90 dark:border-white/10 p-3 sm:p-3.5 shadow-luxe">
-          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
-              <Route className="w-3 h-3 text-[#D8261C]" />
-              <span>{isBn ? 'মোট প্যান্ডেল' : 'Total Stops'}</span>
-            </span>
-            <span className="text-xl sm:text-2xl font-bold font-editorial text-stone-900 dark:text-white">
-              {routeStats.totalStops} <span className="text-[10px] font-mono font-normal text-stone-400">{isBn ? 'টি' : 'stops'}</span>
-            </span>
+      {/* 3. Destination Metro Hub Selector & Sequential Proximity Route Generator */}
+      <div className="bg-white dark:bg-[#1A1218] rounded-2xl sm:rounded-3xl border border-stone-200/90 dark:border-white/10 p-4 sm:p-5 shadow-luxe relative overflow-hidden transition-all">
+        {/* Subtle decorative glow */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-red-500/5 dark:bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Top Header Row with Title and Compact Stats Strip */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 relative z-10">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-lg bg-[#D8261C] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                🚇
+              </span>
+              <h3 className="font-editorial text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 tracking-tight">
+                {isBn ? 'গন্তব্য ও মেট্রো স্টেশন নির্বাচন করুন' : 'Select Destination & Starting Metro'}
+              </h3>
+            </div>
+            <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 max-w-xl">
+              {isBn 
+                ? 'আপনার যাত্রা শুরুর মেট্রো স্টেশন বেছে নিন। সিস্টেম স্বয়ংক্রিয়ভাবে স্টেশন থেকে সবচেয়ে কাছের প্যান্ডেল আগে রেখে ক্রমানুসারে নিখুঁত রুট তৈরি করবে।'
+                : 'Choose your destination hub to auto-generate a sequential itinerary ordered by walking proximity from that station.'}
+            </p>
           </div>
 
-          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
-              <Train className="w-3 h-3 text-blue-600" />
-              <span>{isBn ? 'মোট দূরত্ব' : 'Transit Span'}</span>
-            </span>
-            <span className="text-xl sm:text-2xl font-bold font-editorial text-[#D8261C] dark:text-red-400">
-              {routeStats.totalDistance} <span className="text-[10px] font-mono font-normal text-stone-400">km</span>
-            </span>
-          </div>
-
-          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
-              <Clock className="w-3 h-3 text-amber-500" />
-              <span>{isBn ? 'আনুমানিক সময়' : 'Est. Duration'}</span>
-            </span>
-            <span className="text-xl sm:text-2xl font-bold font-editorial text-amber-700 dark:text-amber-400">
-              ~{routeStats.estimatedHours} <span className="text-[10px] font-mono font-normal text-stone-400">hrs</span>
-            </span>
-          </div>
-
-          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
-              <Footprints className="w-3 h-3 text-[#D8261C]" />
-              <span>{isBn ? 'আনুমানিক পদক্ষেপ' : 'Est. Steps'}</span>
-            </span>
-            <span className="text-xl sm:text-2xl font-bold font-editorial text-stone-900 dark:text-white">
-              ~{routeStats.estimatedSteps}
-            </span>
-          </div>
+          {/* Compact summary metrics badge */}
+          {selectedPandals.length > 0 && (
+            <div className="flex items-center gap-2 bg-stone-50 dark:bg-white/[0.04] border border-stone-200/70 dark:border-white/10 rounded-xl px-3 py-2 shrink-0 self-start sm:self-auto">
+              <div className="text-center px-2 border-r border-stone-200 dark:border-white/10">
+                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
+                <span className="text-sm font-bold font-editorial text-stone-900 dark:text-white">{routeStats.totalStops}</span>
+              </div>
+              <div className="text-center px-2 border-r border-stone-200 dark:border-white/10">
+                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'দূরত্ব' : 'Distance'}</span>
+                <span className="text-sm font-bold font-editorial text-[#D8261C] dark:text-red-400">{routeStats.totalDistance} km</span>
+              </div>
+              <div className="text-center px-2">
+                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'সময়' : 'Time'}</span>
+                <span className="text-sm font-bold font-editorial text-amber-600 dark:text-amber-400">~{routeStats.estimatedHours}h</span>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Zone Filter Tabs */}
+        <div className="flex items-center gap-1.5 p-1 bg-stone-100 dark:bg-white/[0.05] rounded-xl overflow-x-auto no-scrollbar mb-3.5 relative z-10">
+          {(['North Kolkata', 'South Kolkata', 'Central Kolkata', 'East Kolkata'] as ZoneArea[]).map((zone) => {
+            const isSelected = selectedHubZone === zone;
+            const zoneBnMap: Record<string, string> = {
+              'North Kolkata': 'উত্তর কলকাতা',
+              'South Kolkata': 'দক্ষিণ কলকাতা',
+              'Central Kolkata': 'মধ্য কলকাতা',
+              'East Kolkata': 'পূর্ব কলকাতা',
+            };
+            return (
+              <button
+                key={zone}
+                type="button"
+                onClick={() => {
+                  setSelectedHubZone(zone);
+                  const firstHub = ZONE_METRO_HUBS[zone]?.[0];
+                  if (firstHub) {
+                    generateSequentialRoute(firstHub.id, zone);
+                  }
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#D8261C] text-white shadow-xs'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'
+                }`}
+              >
+                {isBn ? zoneBnMap[zone] || zone : zone}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Metro Station Selector Chips / Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 relative z-10">
+          {(ZONE_METRO_HUBS[selectedHubZone] || []).map((hub) => {
+            const isSelected = activeStartingHub === hub.id;
+            return (
+              <button
+                key={hub.id}
+                type="button"
+                onClick={() => generateSequentialRoute(hub.id, selectedHubZone)}
+                className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between group ${
+                  isSelected
+                    ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
+                    : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-1.5 w-full mb-1">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 ${
+                      hub.lineColor === 'blue' ? 'bg-blue-600' : hub.lineColor === 'green' ? 'bg-emerald-600' : 'bg-purple-600'
+                    }`}>
+                      M
+                    </span>
+                    <span className={`text-xs font-bold truncate ${
+                      isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
+                    }`}>
+                      {isBn ? hub.bengaliName : hub.name}
+                    </span>
+                  </div>
+                  {isSelected && (
+                    <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between gap-1 text-[10px] text-stone-500 dark:text-stone-400 mt-1">
+                  <span className="truncate">{isBn ? hub.bengaliSubtitle : hub.subtitle}</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Live Route sequencing feedback strip */}
+        {activeStartingStation && (
+          <div className="mt-3 pt-3 border-t border-stone-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-1.5 text-stone-700 dark:text-stone-300 flex-wrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span className="font-medium">
+                {isBn ? 'যাত্রা শুরু:' : 'Starting Point:'}{' '}
+                <strong className="text-stone-900 dark:text-white font-bold">
+                  {isBn ? activeStartingStation.bengali_name : activeStartingStation.name} {isBn ? 'মেট্রো' : 'Metro'}
+                </strong>
+              </span>
+              {distFromStationToFirst && selectedPandals.length > 0 && (
+                <span className="text-stone-500 dark:text-stone-400">
+                  → {isBn ? 'প্রথম স্টপ' : 'Stop 01'} ({selectedPandals[0].name}) {isBn ? 'মাত্র' : 'is only'}{' '}
+                  <strong className="text-[#D8261C] dark:text-red-400 font-bold">{distFromStationToFirst.text}</strong> ({distFromStationToFirst.mins} mins walk)
+                  {distFromStationToFirst.km >= 0.8 && (
+                    <span className="ml-1 text-amber-700 dark:text-amber-400 font-bold">
+                      · 🛺 ~{distFromStationToFirst.autoMins} mins by Auto
+                    </span>
+                  )}
+                </span>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => generateSequentialRoute(activeStartingHub, selectedHubZone)}
+              className="text-[11px] font-bold text-[#D8261C] hover:text-[#B91C1C] flex items-center gap-1 cursor-pointer transition-colors"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>{isBn ? 'পুনরায় রুট সাজান' : 'Re-sequence Proximity'}</span>
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
@@ -580,210 +1010,230 @@ export default function RoutePlannerPage() {
               ? pandal.nearest_metro
               : `${pandal.nearest_metro} ${isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}`;
 
-            const cleanDistance = pandal.walking_distance.replace(/m\s*m/gi, 'm').replace(/\s*m$/i, '').trim() + 'm';
+            const cleanDistance = pandal.walking_distance.includes('km')
+              ? pandal.walking_distance
+              : (pandal.walking_distance.endsWith('m') ? pandal.walking_distance : `${pandal.walking_distance}m`);
+
+            const walkFromStationUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${cleanMetroName}, Kolkata`)}&destination=${encodeURIComponent(`${pandal.name}, Kolkata`)}&travelmode=walking`;
 
             return (
               <React.Fragment key={pandal.id}>
-                {/* Redesigned Pandal Stop Card (Truly Compact & Slim) */}
-                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-2xl sm:rounded-3xl border border-[#EFE8DD] dark:border-white/10 p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
-                  
-                  {/* Subtle Botanical Left Vine */}
-                  <svg
-                    className="absolute -left-2 top-3 w-8 h-24 pointer-events-none z-10 hidden sm:block opacity-70"
-                    viewBox="0 0 48 144"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 2 C16 35, 8 70, 14 110" stroke="#C9A070" strokeWidth="1.2" strokeLinecap="round" opacity="0.4" />
-                    <path d="M14 15 C24 8, 38 12, 42 22 C34 26, 20 25, 14 15 Z" fill="#C9A070" opacity="0.8" />
-                    <path d="M12 38 C4 30, -2 40, 2 52 C8 48, 11 44, 12 38 Z" fill="#9B2C2C" opacity="0.85" />
-                    <path d="M11 65 C22 60, 32 68, 35 78 C26 80, 16 76, 11 65 Z" fill="#D4AF37" opacity="0.8" />
-                  </svg>
+                {/* Starting Station Hub Banner (Rendered right above Stop 01) */}
+                {isFirst && activeStartingStation && (
+                  <div className="space-y-3 pt-1">
+                    <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 dark:from-[#1E1420] dark:via-[#2A1822] dark:to-[#1E1420] text-white rounded-2xl p-3.5 sm:p-4 shadow-md border border-indigo-500/30 overflow-hidden">
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
 
-                  {/* Corner Floral Bouquet */}
-                  <svg
-                    className="absolute -bottom-2 -left-2 w-16 h-16 pointer-events-none z-20 drop-shadow-2xs opacity-80"
-                    viewBox="0 0 128 128"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path d="M50 85 C65 72, 85 75, 95 88 C82 96, 62 95, 50 85 Z" fill="#C9A070" opacity="0.85" />
-                    <g transform="translate(14, 60)">
-                      <path d="M32 32 C15 15, 10 38, 22 52 C26 44, 30 38, 32 32 Z" fill="#78111A" />
-                      <path d="M32 32 C38 12, 58 14, 56 32 C48 34, 40 33, 32 32 Z" fill="#991B1B" />
-                      <path d="M32 32 C50 30, 60 48, 48 58 C42 50, 36 42, 32 32 Z" fill="#881337" />
-                      <path d="M32 32 C30 52, 44 62, 34 66 C28 56, 30 44, 32 32 Z" fill="#A31D1D" />
-                      <circle cx="32" cy="32" r="5" fill="#4C0519" />
-                      <circle cx="32" cy="32" r="2.5" fill="#F59E0B" />
-                    </g>
-                  </svg>
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg text-white shadow-inner shrink-0 ${
+                            activeStartingStation.line_code === 'green' ? 'bg-emerald-600 border border-emerald-400/40' : activeStartingStation.line_code === 'purple' ? 'bg-purple-600 border border-purple-400/40' : 'bg-blue-600 border border-blue-400/40'
+                          }`}>
+                            M
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-white/10 text-white border border-white/20">
+                                {activeStartingStation.line}
+                              </span>
+                              <span className="text-[10px] font-bold text-amber-300 flex items-center gap-1">
+                                <MapPin className="w-2.5 h-2.5" />
+                                <span>{isBn ? 'পরিক্রমা শুরুর স্টেশন' : 'Official Starting Metro Hub'}</span>
+                              </span>
+                            </div>
+                            <h3 className="text-base sm:text-lg font-bold font-editorial text-white tracking-tight mt-0.5">
+                              {isBn ? activeStartingStation.bengali_name : activeStartingStation.name} {isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}
+                            </h3>
+                            {distFromStationToFirst && (
+                              <p className="text-xs text-stone-200 mt-0.5 flex items-center gap-1.5 flex-wrap">
+                                <span>{isBn ? 'স্টপ ০১ থেকে দূরত্ব:' : 'Distance to Stop 01:'}</span>
+                                <strong className="text-amber-300 bg-white/15 px-1.5 py-0.5 rounded font-mono text-[11px]">
+                                  {distFromStationToFirst.text}
+                                </strong>
+                                <span>(~{distFromStationToFirst.mins} mins walk)</span>
+                                {distFromStationToFirst.km >= 0.8 && (
+                                  <span className="inline-flex items-center gap-1 bg-amber-400/25 border border-amber-300/40 text-amber-200 px-2 py-0.5 rounded-full text-[10.5px] font-bold">
+                                    <span>🛺 ~{distFromStationToFirst.autoMins} mins by Auto / Toto</span>
+                                  </span>
+                                )}
+                              </p>
+                            )}
+                          </div>
+                        </div>
 
-                  <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
-                    
-                    {/* 1. Media Container: Slim Cinematic Banner on Mobile, Compact Column on Desktop */}
-                    <div
-                      className="relative w-full md:w-[28%] aspect-[21/9] sm:aspect-[16/8] md:aspect-auto md:min-h-[140px] max-h-[130px] md:max-h-none shrink-0 overflow-hidden shadow-inner group/media rounded-xl sm:rounded-2xl"
-                    >
-                      <Image
-                        src={pandal.featured_image}
-                        alt={pandal.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 28vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/25 pointer-events-none" />
-
-                      {/* Top Floating Badge: STOP Pill */}
-                      <div className="absolute top-2 left-2 z-10 flex items-center gap-1">
-                        <span className="px-2 py-0.5 rounded-full bg-[#D8261C] text-white text-[9.5px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-xs flex items-center gap-1">
-                          <span>{isBn ? `স্টপ ${index + 1}` : `STOP ${String(index + 1).padStart(2, '0')}`}</span>
-                        </span>
-                      </div>
-
-                      {/* Top-Right Arrow button */}
-                      <Link
-                        href={`/pandal/${pandal.slug}`}
-                        className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
-                        aria-label="View pandal details"
-                      >
-                        <ArrowUpRight className="w-3 h-3" />
-                      </Link>
-
-                      {/* Bottom Floating Badges Row (Area + Must Visit) */}
-                      <div className="absolute bottom-2 left-2 right-2 z-10 flex items-center gap-1.5 flex-wrap">
-                        <span className="px-2 py-0.5 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-[10px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-md border border-white/40 dark:border-white/10">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#D8261C]" />
-                          <span>{pandal.area}</span>
-                        </span>
-
-                        {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                          <span className="px-1.5 py-0.5 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-[10px] font-bold shadow-xs flex items-center gap-0.5 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
-                            <span>👑</span>
-                            <span>{isBn ? 'দর্শনীয়' : 'Must Visit'}</span>
-                          </span>
+                        {walkFromHubToFirstUrl && (
+                          <a
+                            href={walkFromHubToFirstUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3.5 py-2 rounded-xl bg-white text-stone-900 hover:bg-stone-100 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all shrink-0 cursor-pointer"
+                          >
+                            <Footprints className="w-3.5 h-3.5 text-[#D8261C]" />
+                            <span>{isBn ? 'স্টেশন থেকে হাঁটার পথ' : 'Walk Directions to Stop 01'}</span>
+                            <ExternalLink className="w-3 h-3 text-stone-400" />
+                          </a>
                         )}
                       </div>
                     </div>
 
-                    {/* 2. Content Area */}
-                    <div className="flex-1 flex flex-col justify-between space-y-2">
-                      
-                      {/* Header: Theme & Architecture label, Title, and Theme description */}
-                      <div>
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-[#9C7A5B] dark:text-amber-400 font-bold block">
-                          {isBn ? 'থিম এবং স্থাপত্য' : 'THEME & ARCHITECTURE'}
-                        </span>
+                    {/* Downward Connector Track from Metro Hub to Stop 01 */}
+                    <div className="flex flex-col items-center justify-center py-0.5 relative">
+                      <div className="w-0.5 h-5 bg-gradient-to-b from-blue-600 via-indigo-500 to-[#D8261C]" />
+                      <div className="my-1 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 flex items-center gap-2 text-[10.5px] text-blue-900 dark:text-blue-300 font-bold shadow-2xs flex-wrap justify-center">
+                        <div className="flex items-center gap-1">
+                          <Footprints className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                          <span>
+                            {isBn ? 'হাঁটার পথ:' : 'Walk:'} {distFromStationToFirst?.text} (~{distFromStationToFirst?.mins} mins)
+                          </span>
+                        </div>
+                        {distFromStationToFirst && distFromStationToFirst.km >= 0.8 && (
+                          <>
+                            <span className="text-stone-300 dark:text-stone-600">•</span>
+                            <span className="inline-flex items-center gap-1 text-amber-800 dark:text-amber-300 font-bold">
+                              <span>🛺 {isBn ? 'অটো / টোটো:' : 'Auto / Toto:'} ~{distFromStationToFirst.autoMins} mins</span>
+                            </span>
+                          </>
+                        )}
+                        <ArrowDown className="w-3 h-3 text-blue-600 dark:text-blue-400 animate-bounce" />
+                      </div>
+                      <div className="w-0.5 h-5 bg-gradient-to-b from-[#D8261C] to-[#D8261C]" />
+                    </div>
+                  </div>
+                )}
 
-                        <div className="flex items-center gap-1.5 mt-0.5">
+                {/* Compact Pandal Stop Card */}
+                <div className="group relative bg-white dark:bg-[#1A1215] rounded-2xl border border-stone-200 dark:border-white/10 p-2.5 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                  <div className="flex items-center gap-3">
+
+                    {/* Thumbnail */}
+                    <div className="relative w-16 h-16 sm:w-[72px] sm:h-[72px] shrink-0 rounded-xl overflow-hidden shadow-sm">
+                      <Image
+                        src={pandal.featured_image}
+                        alt={pandal.name}
+                        fill
+                        sizes="80px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                      {/* Stop number badge */}
+                      <span className="absolute bottom-1 left-1 px-1.5 py-px rounded-full bg-[#D8261C] text-white text-[8px] font-mono font-bold tracking-wider">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      {/* Title row */}
+                      <div className="flex items-start justify-between gap-1">
+                        <div className="min-w-0">
                           <Link
                             href={`/pandal/${pandal.slug}`}
-                            className="font-editorial text-lg sm:text-xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-snug hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1"
+                            className="font-editorial text-sm font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1 block"
                           >
                             {pandal.name}
                           </Link>
-                          <svg className="w-3.5 h-3.5 text-[#C9A070] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M4 20 C8 14, 14 8, 20 4" stroke="#C9A070" strokeWidth="1.5" strokeLinecap="round" />
-                            <path d="M12 12 C14 8, 18 8, 20 10 C18 13, 14 13, 12 12 Z" fill="#C9A070" />
-                            <path d="M16 8 C17 5, 20 5, 21 7 C20 9, 17 9, 16 8 Z" fill="#991B1B" />
-                          </svg>
+                          <p className="text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
+                            {pandal.area} · {pandal.theme}
+                          </p>
                         </div>
-
-                        {/* Theme Description */}
-                        <p className="text-xs text-stone-600 dark:text-stone-300 font-medium leading-normal line-clamp-1 mt-0.5">
-                          {pandal.theme}
-                        </p>
-                      </div>
-
-                      {/* Metro Transit & Walk Info (Compact Combined Box) */}
-                      <div className="p-2 sm:p-2.5 rounded-xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/60 dark:border-white/5 flex items-center justify-between gap-2 flex-wrap">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <div className="w-6 h-6 rounded-lg bg-[#0052FF] text-white font-bold flex items-center justify-center text-xs shadow-2xs shrink-0">
-                            M
-                          </div>
-                          <div className="min-w-0">
-                            <h4 className="text-xs font-bold text-stone-900 dark:text-white truncate leading-tight">
-                              {cleanMetroName}
-                            </h4>
-                            <div className="flex items-center gap-1.5 text-[11px] text-stone-600 dark:text-stone-300 mt-0.5">
-                              <span className="flex items-center gap-0.5 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
-                                <Clock className="w-3 h-3" />
-                                <span>{pandal.walking_time_mins} min</span>
-                              </span>
-                              <span className="text-stone-300 dark:text-stone-600">•</span>
-                              <span className="font-semibold shrink-0">{cleanDistance}</span>
-                              <span className="text-stone-300 dark:text-stone-600">•</span>
-                              <span className="flex items-center gap-0.5 text-stone-500 dark:text-stone-400 shrink-0">
-                                <Footprints className="w-3 h-3 text-[#D8261C]" />
-                                <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Compact Crowd Tag */}
-                        <div className="px-2 py-0.5 rounded-md bg-[#F9EDE6] dark:bg-rose-950/30 text-[#8C4A32] dark:text-rose-300 border border-[#F3DACF] dark:border-rose-900/30 flex items-center gap-1 text-[10px] font-semibold shrink-0">
-                          <Users className="w-3 h-3 text-[#8C4A32] dark:text-rose-300 shrink-0" />
-                          <span>{pandal.crowd_status.level.toUpperCase()} CROWD</span>
+                        {/* Badges */}
+                        <div className="flex items-center gap-1 shrink-0">
+                          {isFirst && activeStartingStation && distFromStationToFirst && (
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[9px] font-bold border border-emerald-200 dark:border-emerald-800/40 flex items-center gap-1">
+                              <span>🎯 {isBn ? 'স্টেশনের নিকটতম' : 'Nearest Stop'} ({distFromStationToFirst.text})</span>
+                            </span>
+                          )}
+                          {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
+                            <span className="px-1.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[9px] font-bold border border-amber-200/60 dark:border-amber-900/40">👑</span>
+                          )}
+                          <Link
+                            href={`/pandal/${pandal.slug}`}
+                            className="w-5.5 h-5.5 rounded-full bg-stone-100 dark:bg-white/10 flex items-center justify-center hover:bg-[#D8261C] hover:text-white hover:scale-115 active:scale-85 transition-all duration-150 cursor-pointer"
+                            aria-label="View pandal details"
+                          >
+                            <ArrowUpRight className="w-3 h-3" />
+                          </Link>
                         </div>
                       </div>
 
-                      {/* Footer: Bottom Controls */}
-                      <div className="flex items-center justify-between pt-1">
-                        <span className="text-[10px] text-stone-500 dark:text-stone-400 font-mono">
-                          {isFirst ? (isBn ? 'শুরুর পয়েন্ট' : 'Starting Point') : isLast ? (isBn ? 'শেষ স্টপ' : 'Final Stop') : (isBn ? `ধাপ ${index + 1}` : `Stop ${index + 1}`)}
-                        </span>
-
-                        {/* Action Buttons: Reorder + Maps + Trash */}
-                        <div className="flex items-center gap-1.5">
-                          {/* Reorder Arrows */}
-                          <div className="flex items-center gap-0.5 bg-white dark:bg-white/[0.06] p-0.5 rounded-xl border border-stone-200 dark:border-white/10 shadow-2xs">
-                            <button
-                              type="button"
-                              onClick={() => handleMoveUp(index)}
-                              disabled={isFirst}
-                              className="p-1 rounded-lg text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer disabled:cursor-not-allowed"
-                              title="Move earlier in route"
-                              aria-label="Move up"
-                            >
-                              <ArrowUp className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleMoveDown(index)}
-                              disabled={isLast}
-                              className="p-1 rounded-lg text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer disabled:cursor-not-allowed"
-                              title="Move later in route"
-                              aria-label="Move down"
-                            >
-                              <ArrowDown className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-
-                          {/* Google Maps Button */}
+                      {/* Metro info row: Station Distance & Walk / Auto Duration */}
+                      <div className="flex items-center justify-between gap-1.5 mt-2 pt-1.5 border-t border-stone-100 dark:border-white/5 flex-wrap">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <div className="w-4.5 h-4.5 rounded-md bg-[#0052FF] text-white font-bold flex items-center justify-center text-[9px] shrink-0">M</div>
+                          <span className="text-[10px] sm:text-[11px] text-stone-800 dark:text-stone-200 font-bold truncate">{cleanMetroName}</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-[10px] shrink-0 flex-wrap">
+                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-bold border border-stone-200 dark:border-white/10">
+                            <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
+                            <span>{cleanDistance}</span>
+                          </span>
+                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold border border-red-200/50 dark:border-red-900/40">
+                            <Clock className="w-2.5 h-2.5" />
+                            <span>{pandal.walking_time_mins}m walk</span>
+                          </span>
+                          {(pandal.walking_distance.toLowerCase().includes('auto') || pandal.walking_time_mins >= 12) && (
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-bold border border-amber-200/60 dark:border-amber-900/40">
+                              <span>🛺 Auto: ~{pandal.walking_distance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(pandal.walking_time_mins / 3.5))}m</span>
+                            </span>
+                          )}
                           <a
-                            href={exactMapsUrl}
+                            href={walkFromStationUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-7 h-7 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] flex items-center justify-center transition-all shadow-2xs cursor-pointer"
-                            title="Open exact location in Google Maps"
-                            aria-label="View in Maps"
+                            className="p-1 rounded-md text-stone-400 hover:text-[#D8261C] hover:bg-stone-100 dark:hover:bg-white/10 transition-colors"
+                            title="Walking directions from station to pandal"
                           >
-                            <MapPin className="w-3.5 h-3.5 text-[#D8261C]" />
+                            <ExternalLink className="w-3 h-3" />
                           </a>
-
-                          {/* Remove Stop Button */}
-                          <button
-                            type="button"
-                            onClick={() => handleRemovePandal(pandal.id)}
-                            className="w-7 h-7 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 flex items-center justify-center transition-all shadow-2xs cursor-pointer"
-                            title="Remove from itinerary"
-                            aria-label="Remove stop"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
                         </div>
                       </div>
+                    </div>
 
+                    {/* Action buttons */}
+                    <div className="flex flex-col items-center gap-1.5 shrink-0">
+                      <div className="flex flex-col items-center bg-stone-100 dark:bg-white/[0.06] rounded-xl border border-stone-200 dark:border-white/10">
+                        <button
+                          type="button"
+                          onClick={() => handleMoveUp(index)}
+                          disabled={isFirst}
+                          className="p-1 rounded-t-xl text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-25 hover:scale-110 active:scale-85 transition-all duration-150 cursor-pointer disabled:cursor-not-allowed"
+                          title="Move earlier in route"
+                          aria-label="Move up"
+                        >
+                          <ArrowUp className="w-3 h-3" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleMoveDown(index)}
+                          disabled={isLast}
+                          className="p-1 rounded-b-xl text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-25 hover:scale-110 active:scale-85 transition-all duration-150 cursor-pointer disabled:cursor-not-allowed"
+                          title="Move later in route"
+                          aria-label="Move down"
+                        >
+                          <ArrowDown className="w-3 h-3" />
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <a
+                          href={exactMapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-6 h-6 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:scale-115 active:scale-85 flex items-center justify-center transition-all duration-150 shadow-2xs cursor-pointer group/pin"
+                          title="Open in Google Maps"
+                          aria-label="View in Maps"
+                        >
+                          <MapPin className="w-3 h-3 text-[#D8261C] group-hover/pin:-translate-y-0.5 transition-transform duration-150" />
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => handleRemovePandal(pandal.id)}
+                          className="w-6 h-6 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 hover:scale-115 active:scale-85 flex items-center justify-center transition-all duration-150 shadow-2xs cursor-pointer"
+                          title="Remove from itinerary"
+                          aria-label="Remove stop"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
 
                   </div>
@@ -796,14 +1246,14 @@ export default function RoutePlannerPage() {
                     <div className="w-0.5 h-7 bg-gradient-to-b from-[#D8261C] via-amber-400 to-[#D8261C]" />
                     
                     {/* Transit Connection Pill */}
-                    <div className="my-1.5 px-4 py-2 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200/90 dark:border-white/15 flex items-center gap-3 text-xs text-stone-800 dark:text-stone-200 shadow-md hover:shadow-lg transition-shadow">
+                    <div className="my-1.5 px-4 py-2 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200/90 dark:border-white/15 flex items-center gap-2.5 sm:gap-3 text-xs text-stone-800 dark:text-stone-200 shadow-md hover:shadow-lg transition-shadow flex-wrap justify-center">
                       <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-[10px] shadow-xs">
                         M
                       </div>
 
                       <div className="flex items-center gap-1.5 font-medium">
                         <span className="text-stone-500 dark:text-stone-400 font-mono text-[11px] uppercase tracking-wider">
-                          {isBn ? 'হাঁটা বা মেট্রো সংযোগ:' : 'Transit Leg:'}
+                          {isBn ? 'দূরত্ব:' : 'Transit Leg:'}
                         </span>
                         <span className="font-bold text-[#D8261C] dark:text-red-400 font-mono">
                           {distanceToNext < 1 ? `${Math.round(distanceToNext * 1000)} m` : `${distanceToNext.toFixed(1)} km`}
@@ -816,6 +1266,16 @@ export default function RoutePlannerPage() {
                         <Footprints className="w-3.5 h-3.5 text-amber-500" />
                         <span>~{Math.max(4, Math.round(distanceToNext * 12))} mins on foot</span>
                       </div>
+
+                      {/* Auto / Toto Travel Duration for distances >= 0.8 km */}
+                      {distanceToNext >= 0.8 && (
+                        <>
+                          <span className="text-stone-300 dark:text-stone-600">•</span>
+                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 text-[11px] font-bold border border-amber-200/60 dark:border-amber-900/40">
+                            <span>🛺 ~{Math.max(3, Math.round(distanceToNext * 3.2 + 1))} mins by Auto / Toto</span>
+                          </div>
+                        </>
+                      )}
 
                       <a
                         href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${pandal.name}, Kolkata`)}&destination=${encodeURIComponent(`${nextPandal.name}, Kolkata`)}&travelmode=walking`}
@@ -899,7 +1359,7 @@ export default function RoutePlannerPage() {
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(false)}
-                className="p-2.5 rounded-full text-stone-400 hover:text-stone-800 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                className="p-2.5 rounded-full text-stone-400 hover:text-stone-800 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 hover:scale-110 hover:rotate-90 active:scale-90 transition-all duration-200 cursor-pointer"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -908,14 +1368,14 @@ export default function RoutePlannerPage() {
 
             {/* Modal Search & Filters */}
             <div className="p-5 border-b border-stone-200 dark:border-white/10 space-y-3 bg-stone-50/60 dark:bg-white/[0.02]">
-              <div className="relative">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+              <div className="relative group">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 group-focus-within:text-[#D8261C] transition-colors" />
                 <input
                   type="text"
                   value={addSearchQuery}
                   onChange={(e) => setAddSearchQuery(e.target.value)}
                   placeholder={isBn ? 'প্যান্ডেল বা মেট্রো স্টেশন খুঁজুন...' : 'Search by pandal name, metro, locality...'}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-[#12090F] border border-stone-200 dark:border-white/10 text-xs sm:text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C]"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-[#12090F] border border-stone-200 dark:border-white/10 text-xs sm:text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] focus:shadow-md transition-all duration-200"
                 />
               </div>
 
@@ -928,7 +1388,7 @@ export default function RoutePlannerPage() {
                       key={zone}
                       type="button"
                       onClick={() => setSelectedAddZone(zone)}
-                      className={`px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer hover:scale-105 active:scale-95 ${
                         isSelected
                           ? 'bg-[#D8261C] text-white shadow-xs'
                           : 'bg-white dark:bg-[#12090F] border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:border-[#D8261C]'
@@ -939,51 +1399,85 @@ export default function RoutePlannerPage() {
                   );
                 })}
               </div>
+
+              {/* Special Zone Context & 1-Click Add All Action */}
+              <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200/70 dark:border-amber-900/40 text-xs">
+                <div className="flex items-center gap-2 text-stone-700 dark:text-stone-300 min-w-0">
+                  <Train className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span className="truncate text-[11px] font-medium">
+                    {selectedAddZone === 'North Kolkata' 
+                      ? (isBn ? 'উত্তর কলকাতা: শ্যামবাজার ও শোভাবাজার মেট্রো স্টেশন থেকে হাঁটার দূরত্ব নিচে দেখানো হল।' : 'North Kolkata: Walking distance from Shyambazar & Shovabazar Metro to each pandal.')
+                      : (isBn ? `${selectedAddZone === 'All' ? 'কলকাতা' : selectedAddZone}: মেট্রো স্টেশন থেকে হাঁটার দূরত্ব প্রদর্শিত হচ্ছে।` : `Showing station walking distances for ${selectedAddZone === 'All' ? 'all' : selectedAddZone} pandals.`)}
+                  </span>
+                </div>
+                {availableToAdd.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleAddAllAvailableZone}
+                    className="px-2.5 py-1 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white font-bold text-[10.5px] whitespace-nowrap shadow-xs hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer"
+                  >
+                    + {isBn ? `সবগুলি যোগ (${availableToAdd.length})` : `Add All (${availableToAdd.length})`}
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Modal Pandals List */}
             <div className="flex-1 overflow-y-auto p-5 space-y-3">
               {availableToAdd.length > 0 ? (
-                availableToAdd.map((p) => (
-                  <div
-                    key={p.id}
-                    className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/80 dark:border-white/5 hover:border-[#D8261C]/50 dark:hover:border-amber-400/30 flex items-center justify-between gap-3 transition-colors group"
-                  >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100 dark:bg-stone-900 shadow-xs">
-                        <Image
-                          src={p.featured_image}
-                          alt={p.name}
-                          fill
-                          sizes="56px"
-                          className="object-cover group-hover:scale-108 transition-transform duration-300"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <h4 className="text-xs sm:text-sm font-bold font-editorial text-stone-900 dark:text-white truncate group-hover:text-[#D8261C] transition-colors">
-                          {p.name}
-                        </h4>
-                        <div className="flex items-center gap-2 text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                          <span className="text-[#D8261C] dark:text-red-400 font-semibold">{p.area}</span>
-                          <span>•</span>
-                          <span className="truncate flex items-center gap-1">
-                            <Train className="w-3 h-3 text-blue-600" />
-                            {p.nearest_metro}
-                          </span>
+                availableToAdd.map((p) => {
+                  const cleanPandalDist = p.walking_distance.includes('km')
+                    ? p.walking_distance
+                    : (p.walking_distance.endsWith('m') ? p.walking_distance : `${p.walking_distance}m`);
+
+                  return (
+                    <div
+                      key={p.id}
+                      className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/80 dark:border-white/5 hover:border-[#D8261C]/50 dark:hover:border-amber-400/30 hover:shadow-md hover:-translate-y-0.5 flex items-center justify-between gap-3 transition-all duration-200 group"
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100 dark:bg-stone-900 shadow-xs">
+                          <Image
+                            src={p.featured_image}
+                            alt={p.name}
+                            fill
+                            sizes="56px"
+                            className="object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-xs sm:text-sm font-bold font-editorial text-stone-900 dark:text-white truncate group-hover:text-[#D8261C] transition-colors">
+                            {p.name}
+                          </h4>
+                          {/* Distance from nearest station badges */}
+                          <div className="flex items-center gap-1.5 flex-wrap mt-1 text-[10px]">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200/50 dark:border-blue-900/40">
+                              <Train className="w-2.5 h-2.5 text-blue-600 shrink-0" />
+                              <span className="truncate max-w-[130px] sm:max-w-none">{p.nearest_metro}</span>
+                            </span>
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-bold border border-stone-200 dark:border-white/10">
+                              <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
+                              <span>{cleanPandalDist} from station</span>
+                            </span>
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold border border-red-200/50 dark:border-red-900/40">
+                              <Clock className="w-2.5 h-2.5" />
+                              <span>{p.walking_time_mins} min walk</span>
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <button
-                      type="button"
-                      onClick={() => handleAddPandal(p.id)}
-                      className="px-3.5 py-1.5 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-1 shadow-xs transition-colors shrink-0 active:scale-95 cursor-pointer"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>{isBn ? 'যোগ করুন' : 'Add'}</span>
-                    </button>
-                  </div>
-                ))
+                      <button
+                        type="button"
+                        onClick={() => handleAddPandal(p.id)}
+                        className="px-3.5 py-1.5 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold flex items-center gap-1 shadow-xs hover:shadow-md hover:scale-105 active:scale-90 transition-all duration-150 shrink-0 cursor-pointer group/add"
+                      >
+                        <Plus className="w-3.5 h-3.5 group-hover/add:rotate-90 transition-transform duration-200" />
+                        <span>{isBn ? 'যোগ করুন' : 'Add'}</span>
+                      </button>
+                    </div>
+                  );
+                })
               ) : (
                 <div className="text-center py-10 text-stone-500 dark:text-stone-400 text-xs">
                   {isBn ? 'কোনো প্যান্ডেল পাওয়া যায়নি।' : 'No matching unselected pandals found.'}
@@ -999,7 +1493,7 @@ export default function RoutePlannerPage() {
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(false)}
-                className="px-5 py-2.5 rounded-xl bg-stone-900 dark:bg-white text-white dark:text-stone-900 font-bold transition-all cursor-pointer hover:opacity-90"
+                className="px-5 py-2.5 rounded-xl bg-stone-900 dark:bg-white text-white dark:text-stone-900 font-bold hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer shadow-xs hover:shadow-md"
               >
                 {isBn ? 'সম্পন্ন' : 'Done'}
               </button>

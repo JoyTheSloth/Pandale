@@ -13,7 +13,7 @@ import {
   MapPin, 
   Train, 
   Clock, 
-  Share2, 
+  Forward, 
   ExternalLink, 
   ArrowLeft, 
   Sparkles, 
@@ -107,9 +107,9 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
         <Link
           href="/pandals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8E857B] hover:text-[#181513] dark:text-stone-400 dark:hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8E857B] hover:text-[#181513] dark:text-stone-400 dark:hover:text-white transition-all duration-150 hover:-translate-x-1 group"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-150" />
           <span>Back to All Pandals</span>
         </Link>
       </div>
@@ -142,22 +142,22 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
               <button
                 onClick={handleShare}
                 aria-label="Share Pandal details"
-                className="p-3 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 backdrop-blur-md transition-all active:scale-95 shadow-sm border border-transparent dark:border-white/10"
+                className="p-3 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer border border-transparent dark:border-white/10 group"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Forward className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />}
               </button>
 
               {/* Wishlist */}
               <button
                 onClick={() => toggleWishlist(pandal.id)}
                 aria-label={saved ? 'Saved in wishlist' : 'Save to wishlist'}
-                className={`p-3 rounded-full backdrop-blur-md transition-all active:scale-95 shadow-sm ${
+                className={`p-3 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer ${
                   saved
                     ? 'bg-[#D43827] text-white shadow-md'
                     : 'bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 border border-transparent dark:border-white/10'
                 }`}
               >
-                <Heart className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 transition-transform duration-150 active:scale-125 ${saved ? 'fill-current' : ''}`} />
               </button>
             </div>
           </div>
@@ -183,11 +183,11 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={exactMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#D8261C]/40 transition-all active:scale-95"
+                className="px-6 py-3.5 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#D8261C]/40 hover:shadow-2xl hover:scale-[1.03] active:scale-95 transition-all duration-200 group"
               >
-                <MapPin className="w-4 h-4 text-[#FDE047]" />
+                <MapPin className="w-4 h-4 text-[#FDE047] group-hover:-translate-y-0.5 transition-transform duration-200" />
                 <span>Open in Google Maps</span>
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </a>
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                       <button
                         key={tab.id}
                         onClick={() => setActiveGalleryTab(tab.id as any)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-150 hover:scale-105 active:scale-95 cursor-pointer ${
                           isSelected
                             ? 'bg-[#D8261C] text-white shadow-xs'
                             : 'bg-[#FFFDF9] dark:bg-white/[0.05] text-[#57534E] dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:bg-[#FEF2F2] dark:hover:bg-white/10'
@@ -296,22 +296,22 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                       setLightboxIndex(idx);
                       setLightboxOpen(true);
                     }}
-                    className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 cursor-pointer border border-[#E9E2D8] dark:border-white/10"
+                    className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 cursor-pointer border border-[#E9E2D8] dark:border-white/10 hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] transition-all duration-300"
                   >
                     <Image
                       src={item.media_url || item.url}
                       alt={item.caption || pandal.name}
                       fill
                       sizes="(max-width: 768px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-108"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-112"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2.5">
-                      <p className="text-[11px] text-white line-clamp-1">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2.5">
+                      <p className="text-[11px] text-white line-clamp-1 font-medium">
                         {item.caption || pandal.name}
                       </p>
                     </div>
                     {item.permalink && (
-                      <div className="absolute top-2 right-2 p-1 rounded-full bg-black/50 text-white backdrop-blur-sm">
+                      <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white backdrop-blur-sm group-hover:scale-110 transition-transform duration-200">
                         <InstagramIcon className="w-3 h-3" />
                       </div>
                     )}
@@ -386,18 +386,19 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
                 href={exactMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-4 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 shadow-lg shadow-[#D8261C]/35 transition-all active:scale-98"
+                className="w-full py-4 px-4 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 shadow-lg shadow-[#D8261C]/35 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer group"
               >
-                <span>CHECK OUT IN GOOGLE MAPS →</span>
+                <span>CHECK OUT IN GOOGLE MAPS</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </a>
 
               <a
                 href={metroDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] dark:border-white/10 bg-white dark:bg-white/[0.04] hover:bg-[#FFFBEB] dark:hover:bg-white/[0.08] text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917] dark:text-stone-200 transition-colors"
+                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] dark:border-white/10 bg-white dark:bg-white/[0.04] hover:bg-[#FFFBEB] dark:hover:bg-white/[0.08] hover:border-[#D8261C]/50 hover:scale-[1.02] active:scale-95 text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917] dark:text-stone-200 transition-all duration-200 cursor-pointer group"
               >
-                <Footprints className="w-3.5 h-3.5 text-[#F59E0B]" />
+                <Footprints className="w-3.5 h-3.5 text-[#F59E0B] group-hover:scale-125 transition-transform duration-200" />
                 <span>Walking Route from Metro Station</span>
               </a>
 

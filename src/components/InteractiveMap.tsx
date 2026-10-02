@@ -5,12 +5,14 @@ import { Pandal, MetroStation } from '@/types';
 import { buildGoogleMapsUrl } from '@/lib/geo';
 import { MapPin, Train, ExternalLink, Heart, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import { useTheme } from '@/context/ThemeContext';
 
 interface InteractiveMapProps {
   pandals: Pandal[];
   metroStations?: MetroStation[];
   selectedPandalId?: string | null;
   onSelectPandal?: (pandal: Pandal) => void;
+  userStationId?: string | null;
   heightClass?: string;
   initialCenter?: [number, number];
   initialZoom?: number;
@@ -21,26 +23,37 @@ export default function InteractiveMap({
   metroStations = [],
   selectedPandalId,
   onSelectPandal,
+  userStationId,
   heightClass = 'h-[550px]',
   initialCenter = [22.5600, 88.3639], // Central Kolkata default
   initialZoom = 12
 }: InteractiveMapProps) {
+  const { theme } = useTheme();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
+  const tileLayerRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
-  const [activePandal, setActivePandal] = useState<Pandal | null>(null);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Update map tile layer when theme toggles
+  useEffect(() => {
+    if (tileLayerRef.current) {
+      const tileUrl = theme === 'dark'
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+      tileLayerRef.current.setUrl(tileUrl);
+    }
+  }, [theme]);
+
   // Sync selected pandal prop
   useEffect(() => {
     if (selectedPandalId) {
       const match = pandals.find((p) => p.id === selectedPandalId);
       if (match) {
-        setActivePandal(match);
         if (mapInstanceRef.current) {
           mapInstanceRef.current.flyTo([match.latitude, match.longitude], 15, {
             duration: 1.2
@@ -49,6 +62,18 @@ export default function InteractiveMap({
       }
     }
   }, [selectedPandalId, pandals]);
+
+  // Sync userStationId prop (fly to station when user enters metro station name)
+  useEffect(() => {
+    if (userStationId) {
+      const match = metroStations.find((s) => s.id === userStationId);
+      if (match && mapInstanceRef.current) {
+        mapInstanceRef.current.flyTo([match.latitude, match.longitude], 16, {
+          duration: 1.2
+        });
+      }
+    }
+  }, [userStationId, metroStations]);
 
   useEffect(() => {
     if (!isClient || !mapContainerRef.current) return;
@@ -76,11 +101,17 @@ export default function InteractiveMap({
           zoomControl: false
         });
 
-        // Add sleek muted CartoDB Positron / OSM tiles for an editorial look
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        // Add sleek CartoDB Dark Matter / Voyager tiles dynamically
+        const tileUrl = theme === 'dark'
+          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+          : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+        const tiles = L.tileLayer(tileUrl, {
           attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
           maxZoom: 19
         }).addTo(map);
+
+        tileLayerRef.current = tiles;
 
         L.control.zoom({ position: 'bottomright' }).addTo(map);
         mapInstanceRef.current = map;
@@ -94,27 +125,91 @@ export default function InteractiveMap({
 
       // Add Metro Station Markers
       metroStations.forEach((station) => {
+        const isUserStation = station.id === userStationId;
         const isBlue = station.line_code === 'blue';
-        const metroIcon = L.divIcon({
-          className: 'metro-pin',
-          html: `
-            <div style="background-color: ${isBlue ? '#2563EB' : '#059669'}; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.25);">
-              M
-            </div>
-          `,
-          iconSize: [26, 26],
-          iconAnchor: [13, 13]
-        });
+        const metroIcon = isUserStation
+          ? L.divIcon({
+              className: 'you-are-here-pin',
+              html: `
+                <div style="position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 1000;">
+                  <!-- Floating Label -->
+                  <div style="background: linear-gradient(135deg, #181513, #D8261C); color: #FFF; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 800; border: 2px solid #FDE047; box-shadow: 0 4px 14px rgba(216, 38, 28, 0.55); white-space: nowrap; display: flex; align-items: center; gap: 4px;">
+                    <span style="font-size: 13px;">📍</span>
+                    <span>YOU ARE HERE</span>
+                  </div>
+                  <!-- Marker Pin -->
+                  <div style="position: relative; margin-top: 4px;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #D8261C; border: 3px solid #FFF; box-shadow: 0 2px 10px rgba(216, 38, 28, 0.6); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 900;">
+                      M
+                    </div>
+                    <div style="position: absolute; inset: -8px; border-radius: 50%; border: 3px solid #F59E0B; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; pointer-events: none;"></div>
+                  </div>
+                </div>
+              `,
+              iconSize: [120, 62],
+              iconAnchor: [60, 58]
+            })
+          : L.divIcon({
+              className: 'metro-pin',
+              html: `
+                <div style="background-color: ${isBlue ? '#2563EB' : '#059669'}; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.25);">
+                  M
+                </div>
+              `,
+              iconSize: [26, 26],
+              iconAnchor: [13, 13]
+            });
 
-        const metroMarker = L.marker([station.latitude, station.longitude], { icon: metroIcon })
+        const metroMarker = L.marker([station.latitude, station.longitude], { 
+          icon: metroIcon,
+          zIndexOffset: isUserStation ? 1000 : 0
+        })
           .addTo(map)
-          .bindTooltip(`<b>${station.name} Metro</b><br/><span style="font-size: 10px; color: #666;">${station.line}</span>`, {
+          .bindTooltip(`<b>${isUserStation ? '📍 You Are Here: ' : ''}${station.name} Metro</b><br/><span style="font-size: 10px; color: #666;">${station.line}</span>`, {
             direction: 'top',
-            offset: [0, -10]
+            offset: [0, isUserStation ? -38 : -10],
+            permanent: isUserStation
           });
+
+        metroMarker.on('click', () => {
+          map.flyTo([station.latitude, station.longitude], 16, { duration: 0.8 });
+        });
 
         markersRef.current.push(metroMarker);
       });
+
+      // Draw Metro Route Track Lines connecting stations
+      const blueStations = metroStations
+        .filter((s) => s.line_code === 'blue')
+        .sort((a, b) => b.latitude - a.latitude);
+
+      if (blueStations.length > 1) {
+        const blueCoords: [number, number][] = blueStations.map((s) => [s.latitude, s.longitude]);
+        const blueLine = L.polyline(blueCoords, {
+          color: '#2563EB',
+          weight: 4,
+          opacity: 0.8,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(map);
+        markersRef.current.push(blueLine);
+      }
+
+      const greenStations = metroStations
+        .filter((s) => s.line_code === 'green')
+        .sort((a, b) => a.longitude - b.longitude);
+
+      if (greenStations.length > 1) {
+        const greenCoords: [number, number][] = greenStations.map((s) => [s.latitude, s.longitude]);
+        const greenLine = L.polyline(greenCoords, {
+          color: '#059669',
+          weight: 4,
+          opacity: 0.8,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(map);
+        markersRef.current.push(greenLine);
+      }
 
       // Add Pandal Markers
       pandals.forEach((pandal) => {
@@ -138,8 +233,21 @@ export default function InteractiveMap({
 
         const marker = L.marker([pandal.latitude, pandal.longitude], { icon: pandalIcon }).addTo(map);
 
+        const cleanDist = pandal.walking_distance.includes('km')
+          ? pandal.walking_distance
+          : (pandal.walking_distance.endsWith('m') ? pandal.walking_distance : `${pandal.walking_distance}m`);
+
+        const popupHtml = `
+          <div style="font-family: inherit; padding: 4px 2px; min-width: 170px;">
+            <div style="font-size: 13px; font-weight: 700; color: #181513; margin-bottom: 2px;">${pandal.name}</div>
+            <div style="font-size: 11px; color: #666; margin-bottom: 4px;">${pandal.area} • ${pandal.locality || ''}</div>
+            <div style="font-size: 11px; font-weight: 600; color: #D8261C; margin-bottom: 6px;">🚇 ${pandal.nearest_metro} • 🚶 ${cleanDist}</div>
+            <a href="/pandal/${pandal.slug}" style="display: inline-block; font-size: 11px; font-weight: 700; color: #D8261C; text-decoration: underline;">View Details →</a>
+          </div>
+        `;
+        marker.bindPopup(popupHtml, { offset: [0, -10] });
+
         marker.on('click', () => {
-          setActivePandal(pandal);
           if (onSelectPandal) {
             onSelectPandal(pandal);
           }
@@ -153,7 +261,7 @@ export default function InteractiveMap({
     return () => {
       isMounted = false;
     };
-  }, [isClient, pandals, metroStations, selectedPandalId, onSelectPandal]);
+  }, [isClient, pandals, metroStations, selectedPandalId, onSelectPandal, userStationId]);
 
   return (
     <div className={`relative w-full ${heightClass} rounded-2xl overflow-hidden border border-[#E2DAD0] dark:border-white/10 shadow-sm bg-[#FAF8F5] dark:bg-[#12090F]`}>
@@ -171,68 +279,13 @@ export default function InteractiveMap({
           <span className="w-3 h-3 rounded-full bg-blue-600 border-2 border-white dark:border-[#2C1F2A] shadow-xs inline-block" />
           <span className="font-medium text-[#181513] dark:text-stone-200">Metro Station</span>
         </div>
+        {userStationId && (
+          <div className="flex items-center gap-1 font-bold text-[#D8261C] dark:text-amber-400 border-l border-stone-200 dark:border-white/10 pl-2">
+            <span>📍</span>
+            <span>You Are Here</span>
+          </div>
+        )}
       </div>
-
-      {/* Floating Selected Pandal Quick Card (Popup Preview) */}
-      {activePandal && (
-        <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-[400] bg-white dark:bg-[#1C141B] rounded-2xl p-4 shadow-xl border border-[#E2DAD0] dark:border-white/10 animate-in fade-in slide-in-from-bottom-2 duration-200">
-          <div className="flex items-start justify-between gap-2 mb-2">
-            <div>
-              <span className="text-[10px] uppercase font-mono font-semibold text-[#D43827] dark:text-rose-400">
-                {activePandal.area}
-              </span>
-              <h4 className="text-sm font-bold font-editorial text-[#181513] dark:text-white line-clamp-1">
-                {activePandal.name}
-              </h4>
-            </div>
-            <button
-              onClick={() => setActivePandal(null)}
-              className="text-[#8E857B] hover:text-[#181513] dark:text-stone-400 dark:hover:text-stone-200 text-xs p-1"
-            >
-              ✕
-            </button>
-          </div>
-
-          <p className="text-xs text-[#5C554E] dark:text-stone-300 line-clamp-2 mb-2.5">
-            {activePandal.theme}
-          </p>
-
-          <div className="flex items-center justify-between text-[11px] text-[#5C554E] dark:text-stone-300 mb-3 py-1.5 px-2 bg-[#FAF8F5] dark:bg-white/[0.04] border border-transparent dark:border-white/5 rounded-lg">
-            <span className="flex items-center gap-1">
-              <Train className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-              {activePandal.nearest_metro}
-            </span>
-            <span className="font-semibold text-[#D43827] dark:text-rose-400">
-              {activePandal.walking_time_mins} min walk
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Link
-              href={`/pandal/${activePandal.slug}`}
-              className="flex-1 py-2 px-3 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-semibold text-center flex items-center justify-center gap-1 shadow-xs transition-colors"
-            >
-              <span>Details</span>
-              <ArrowUpRight className="w-3 h-3 text-amber-200" />
-            </Link>
-
-            <a
-              href={buildGoogleMapsUrl(
-                activePandal.latitude,
-                activePandal.longitude,
-                activePandal.google_place_id,
-                activePandal.locality ? `${activePandal.name}, ${activePandal.locality}` : activePandal.name
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2 px-3 rounded-xl border border-[#D8CEBF] dark:border-white/10 bg-[#FAF8F5] dark:bg-white/[0.04] text-[#181513] dark:text-stone-200 text-xs font-semibold flex items-center justify-center gap-1 hover:border-[#D43827] dark:hover:border-rose-400 transition-colors"
-            >
-              <MapPin className="w-3.5 h-3.5 text-[#D43827] dark:text-rose-400" />
-              <span>Maps</span>
-            </a>
-          </div>
-        </div>
-      )}
 
     </div>
   );

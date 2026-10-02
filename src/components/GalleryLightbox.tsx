@@ -63,7 +63,7 @@ export default function GalleryLightbox({
   const isInstagram = Boolean((current as InstagramPost).permalink);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-in fade-in duration-200">
       
       {/* Top Header Bar */}
       <div className="flex items-center justify-between z-10 w-full text-white/90">
@@ -80,10 +80,10 @@ export default function GalleryLightbox({
 
         <button
           onClick={onClose}
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          className="p-2 rounded-full bg-white/10 hover:bg-white/20 hover:scale-110 active:scale-90 text-white transition-all duration-200 cursor-pointer group"
           aria-label="Close fullscreen gallery"
         >
-          <X className="w-6 h-6" />
+          <X className="w-6 h-6 group-hover:rotate-90 transition-transform duration-200" />
         </button>
       </div>
 
@@ -93,10 +93,10 @@ export default function GalleryLightbox({
         {/* Previous Button */}
         <button
           onClick={handlePrev}
-          className="absolute left-2 sm:left-4 z-20 p-3 rounded-full bg-black/50 text-white/80 hover:text-white hover:bg-black/80 transition-all backdrop-blur-sm"
+          className="absolute left-2 sm:left-4 z-20 p-3 rounded-full bg-black/50 text-white/80 hover:text-white hover:bg-black/80 hover:scale-110 active:scale-90 transition-all duration-200 backdrop-blur-sm cursor-pointer group"
           aria-label="Previous photo"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform duration-200" />
         </button>
 
         {/* The Media Display */}
@@ -111,10 +111,10 @@ export default function GalleryLightbox({
         {/* Next Button */}
         <button
           onClick={handleNext}
-          className="absolute right-2 sm:right-4 z-20 p-3 rounded-full bg-black/50 text-white/80 hover:text-white hover:bg-black/80 transition-all backdrop-blur-sm"
+          className="absolute right-2 sm:right-4 z-20 p-3 rounded-full bg-black/50 text-white/80 hover:text-white hover:bg-black/80 hover:scale-110 active:scale-90 transition-all duration-200 backdrop-blur-sm cursor-pointer group"
           aria-label="Next photo"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform duration-200" />
         </button>
 
       </div>
@@ -137,10 +137,10 @@ export default function GalleryLightbox({
                 href={permalink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-amber-300 hover:text-white flex items-center gap-1 text-[11px] font-medium"
+                className="text-amber-300 hover:text-white flex items-center gap-1 text-[11px] font-medium hover:scale-105 active:scale-95 transition-all duration-150 group"
               >
                 <span>View original post</span>
-                <ExternalLink className="w-3 h-3" />
+                <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </a>
             )}
           </div>

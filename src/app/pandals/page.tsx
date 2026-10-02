@@ -3,14 +3,15 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PANDALS_DATA } from '@/data/pandals';
-import { METRO_STATIONS_DATA } from '@/data/metro';
 import PandalCard from '@/components/PandalCard';
 import SearchAndFilters from '@/components/SearchAndFilters';
-import InteractiveMap from '@/components/InteractiveMap';
-import { ZoneArea, Pandal } from '@/types';
+import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
-import { LayoutGrid, Map, SlidersHorizontal, Sparkles, AlertCircle, Loader2 } from 'lucide-react';
+import { Sparkles, AlertCircle, Loader2, ArrowRight, Train } from 'lucide-react';
+import FamousPandalCircuitModal from '@/components/FamousPandalCircuitModal';
+import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
+import { useLocation } from '@/context/LocationContext';
 
 function PandalsContent() {
   const searchParams = useSearchParams();
@@ -23,6 +24,8 @@ function PandalsContent() {
   const initialTrending = searchParams.get('trending') === 'true';
 
   // Filter states
+  const [isMetroExplorerOpen, setIsMetroExplorerOpen] = useState(false);
+  const [circuitModalZone, setCircuitModalZone] = useState<'north' | 'central' | 'south' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedZone, setSelectedZone] = useState<ZoneArea | 'All'>(initialZone);
   const [nearMetroOnly, setNearMetroOnly] = useState(initialNearMetro);
@@ -34,13 +37,19 @@ function PandalsContent() {
   const [selectedDay, setSelectedDay] = useState('All');
   const [sortBy, setSortBy] = useState('trending');
 
-  // View mode: 'split' (desktop side-by-side or responsive), 'grid', 'map'
-  const [viewMode, setViewMode] = useState<'grid' | 'map' | 'split'>('grid');
-  const [selectedPandalForMap, setSelectedPandalForMap] = useState<Pandal | null>(null);
-
-  // Geolocation
+  // Geolocation from Global LocationContext
+  const { location, fetchCurrentLocation } = useLocation();
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [isNearMeActive, setIsNearMeActive] = useState(false);
+
+  // Sync with global pinged GPS coordinates
+  useEffect(() => {
+    if (location.coords) {
+      setUserLocation(location.coords);
+      setIsNearMeActive(true);
+      setSortBy('distance');
+    }
+  }, [location.coords]);
 
   // Sync URL search params if user navigated with parameters
   useEffect(() => {
@@ -56,27 +65,11 @@ function PandalsContent() {
     if (isNearMeActive) {
       setIsNearMeActive(false);
       setUserLocation(null);
+      setSortBy('trending');
       return;
     }
 
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setUserLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        });
-        setIsNearMeActive(true);
-        setSortBy('distance');
-      },
-      (err) => {
-        alert('Could not access your location. Please check browser permissions.');
-      }
-    );
+    fetchCurrentLocation();
   };
 
   // Filtered & sorted Pandals
@@ -189,45 +182,16 @@ function PandalsContent() {
           </p>
         </div>
 
-        {/* View Switcher: Grid vs Map vs Split */}
-        <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 rounded-2xl shadow-xs self-start sm:self-auto">
+        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+          {/* View Metro Router Modal Trigger */}
           <button
             type="button"
-            onClick={() => setViewMode('grid')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
-              viewMode === 'grid'
-                ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
-            }`}
+            onClick={() => setIsMetroExplorerOpen(true)}
+            className="px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-red-600/20 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-white/20 group"
           >
-            <LayoutGrid className="w-3.5 h-3.5" />
-            <span>Grid</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setViewMode('map')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
-              viewMode === 'map'
-                ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
-            }`}
-          >
-            <Map className="w-3.5 h-3.5" />
-            <span>Map Only</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setViewMode('split')}
-            className={`hidden lg:flex px-3 py-1.5 rounded-xl text-xs font-semibold items-center gap-1.5 transition-all ${
-              viewMode === 'split'
-                ? 'bg-[#D8261C] text-white shadow-sm'
-                : 'text-stone-600 dark:text-stone-400 hover:text-[#D8261C] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800'
-            }`}
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>Split View</span>
+            <Train className="w-3.5 h-3.5 text-yellow-300" />
+            <span>View Metro Router</span>
+            <ArrowRight className="w-3 h-3 text-yellow-200 group-hover:translate-x-1 transition-transform duration-200" />
           </button>
         </div>
       </div>
@@ -261,79 +225,41 @@ function PandalsContent() {
         />
       </div>
 
-      {/* Main Content Render based on ViewMode */}
-      {viewMode === 'grid' && (
-        <div>
-          {filteredPandals.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPandals.map((pandal) => (
-                <PandalCard key={pandal.id} pandal={pandal} />
-              ))}
-            </div>
-          ) : (
-            <EmptyState onReset={() => {
-              setSearchQuery('');
-              setSelectedZone('All');
-              setNearMetroOnly(false);
-              setMustVisitOnly(false);
-              setPopularOnly(false);
-              setTrendingOnly(false);
-              setLessCrowdedOnly(false);
-              setWishlistOnly(false);
-              setSelectedDay('All');
-            }} />
-          )}
-        </div>
-      )}
-
-      {viewMode === 'map' && (
-        <div className="w-full">
-          <InteractiveMap
-            pandals={filteredPandals}
-            metroStations={METRO_STATIONS_DATA}
-            selectedPandalId={selectedPandalForMap?.id}
-            onSelectPandal={(p) => setSelectedPandalForMap(p)}
-            heightClass="h-[75vh]"
-          />
-        </div>
-      )}
-
-      {viewMode === 'split' && (
-        <div className="grid grid-cols-12 gap-6 items-start">
-          {/* Left Column: Pandal cards list */}
-          <div className="col-span-12 lg:col-span-7 space-y-4 max-h-[85vh] overflow-y-auto pr-2 no-scrollbar">
-            {filteredPandals.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {filteredPandals.map((pandal) => (
-                  <div
-                    key={pandal.id}
-                    onClick={() => setSelectedPandalForMap(pandal)}
-                    className="cursor-pointer"
-                  >
-                    <PandalCard pandal={pandal} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState onReset={() => {
-                setSearchQuery('');
-                setSelectedZone('All');
-              }} />
-            )}
+      {/* Pandals List */}
+      <div>
+        {filteredPandals.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+            {filteredPandals.map((pandal) => (
+              <PandalCard key={pandal.id} pandal={pandal} />
+            ))}
           </div>
+        ) : (
+          <EmptyState onReset={() => {
+            setSearchQuery('');
+            setSelectedZone('All');
+            setNearMetroOnly(false);
+            setMustVisitOnly(false);
+            setPopularOnly(false);
+            setTrendingOnly(false);
+            setLessCrowdedOnly(false);
+            setWishlistOnly(false);
+            setSelectedDay('All');
+          }} />
+        )}
+      </div>
 
-          {/* Right Column: Sticky Interactive Map */}
-          <div className="col-span-12 lg:col-span-5 sticky top-24">
-            <InteractiveMap
-              pandals={filteredPandals}
-              metroStations={METRO_STATIONS_DATA}
-              selectedPandalId={selectedPandalForMap?.id}
-              onSelectPandal={(p) => setSelectedPandalForMap(p)}
-              heightClass="h-[80vh]"
-            />
-          </div>
-        </div>
-      )}
+      {/* Interactive Kolkata Metro Router Modal */}
+      <KolkataMetroExplorerModal
+        isOpen={isMetroExplorerOpen}
+        onClose={() => setIsMetroExplorerOpen(false)}
+      />
+
+      {/* Famous Pandal Circuit Modal with Station Distances */}
+      <FamousPandalCircuitModal
+        isOpen={!!circuitModalZone}
+        onClose={() => setCircuitModalZone(null)}
+        initialZone={circuitModalZone || 'north'}
+      />
 
     </div>
   );

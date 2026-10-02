@@ -300,3 +300,14 @@ html.dark .leaflet-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Hide bottom navigation when any full-screen modal is open */
+body.modal-open #mobile-bottom-nav,
+body.modal-open nav.mobile-bottom-nav {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transform: translateY(100%) !important;
+}
+

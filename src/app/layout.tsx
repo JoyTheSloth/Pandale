@@ -5,6 +5,7 @@ import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { WishlistProvider } from '@/context/WishlistContext';
+import { LocationProvider } from '@/context/LocationContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
@@ -107,13 +108,15 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <WishlistProvider>
-              <div className="relative z-10 flex min-h-screen flex-col">
-                <Header />
-                <main className="flex-1 pb-16 md:pb-0">{children}</main>
-                <Footer />
-              </div>
-              <CreatorConnectModal />
-              <BottomNav />
+              <LocationProvider>
+                <div className="relative flex min-h-screen flex-col">
+                  <Header />
+                  <main className="flex-1 pb-16 md:pb-0">{children}</main>
+                  <Footer />
+                </div>
+                <CreatorConnectModal />
+                <BottomNav />
+              </LocationProvider>
             </WishlistProvider>
           </LanguageProvider>
         </ThemeProvider>

@@ -83,19 +83,19 @@ export default function SearchAndFilters({
       
       {/* Primary Search Bar Row */}
       <div className="relative flex items-center gap-2">
-        <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 dark:text-stone-500 pointer-events-none" />
+        <div className="relative flex-1 group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 dark:text-stone-500 group-focus-within:text-[#D8261C] transition-colors pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search pandals by name, metro station, theme, or locality..."
-            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] shadow-xs transition-all"
+            className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] focus:shadow-md transition-all duration-200 shadow-xs"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:scale-125 hover:rotate-90 active:scale-75 transition-all duration-200"
             >
               <X className="w-4 h-4" />
             </button>
@@ -107,13 +107,13 @@ export default function SearchAndFilters({
           type="button"
           onClick={onNearMeToggle}
           title="Show pandals nearest to your current location"
-          className={`px-3.5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 border ${
+          className={`px-3.5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all duration-200 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 shrink-0 border cursor-pointer group ${
             isNearMeActive
               ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
-              : 'bg-white dark:bg-[#1A1218] text-stone-800 dark:text-stone-200 border-stone-200 dark:border-white/10 hover:bg-stone-50 dark:hover:bg-stone-800'
+              : 'bg-white dark:bg-[#1A1218] text-stone-800 dark:text-stone-200 border-stone-200 dark:border-white/10 hover:bg-stone-50 dark:hover:bg-stone-800 hover:border-[#D8261C]/50'
           }`}
         >
-          <LocateFixed className={`w-4 h-4 ${isNearMeActive ? 'text-[#FDE047] animate-spin' : 'text-[#D8261C]'}`} />
+          <LocateFixed className={`w-4 h-4 transition-transform group-hover:scale-110 ${isNearMeActive ? 'text-[#FDE047] animate-spin' : 'text-[#D8261C]'}`} />
           <span className="hidden sm:inline">Near Me</span>
         </button>
 
@@ -121,7 +121,7 @@ export default function SearchAndFilters({
         <button
           type="button"
           onClick={() => setShowMobileFilterModal(true)}
-          className="md:hidden px-3.5 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200 text-xs font-semibold flex items-center gap-1.5 shadow-sm shrink-0"
+          className="md:hidden px-3.5 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200 text-xs font-semibold flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 cursor-pointer"
         >
           <SlidersHorizontal className="w-4 h-4 text-stone-500 dark:text-stone-400" />
           {activeFilterCount > 0 && (
@@ -140,10 +140,10 @@ export default function SearchAndFilters({
             <button
               key={zone}
               onClick={() => onZoneChange(zone)}
-              className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 ${
                 isSelected
                   ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25 border border-[#FDE047]/40'
-                  : 'bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:border-[#D8261C]'
+                  : 'bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:border-[#D8261C] hover:shadow-xs'
               }`}
             >
               {zone === 'All' ? 'All Zones' : zone}
@@ -158,61 +158,61 @@ export default function SearchAndFilters({
           
           <button
             onClick={onNearMetroToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
               nearMetroOnly
                 ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
                 : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-blue-500 hover:text-blue-600'
             }`}
           >
-            <Train className="w-3.5 h-3.5 text-blue-600" />
+            <Train className="w-3.5 h-3.5 text-blue-600 group-hover:translate-x-0.5 transition-transform duration-200" />
             <span>Near Metro (&lt;10m walk)</span>
           </button>
 
           <button
             onClick={onMustVisitToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
               mustVisitOnly
                 ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
                 : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B] group-hover:rotate-45 group-hover:scale-115 transition-transform duration-200" />
             <span>Must Visit</span>
           </button>
 
           <button
             onClick={onTrendingToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all shadow-2xs ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
               trendingOnly
                 ? 'bg-[#F59E0B] text-white border-[#F59E0B] shadow-md shadow-[#F59E0B]/25'
                 : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500'
             }`}
           >
-            <Flame className="w-3.5 h-3.5 text-[#F59E0B]" />
+            <Flame className="w-3.5 h-3.5 text-[#F59E0B] group-hover:scale-125 transition-transform duration-200" />
             <span>Trending</span>
           </button>
 
           <button
             onClick={onLessCrowdedToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
               lessCrowdedOnly
                 ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
                 : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-emerald-500 hover:text-emerald-500'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block group-hover:scale-150 transition-transform duration-200" />
             <span>Less Crowded</span>
           </button>
 
           <button
             onClick={onWishlistToggle}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all shadow-2xs ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
               wishlistOnly
                 ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-sm'
                 : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-[#D8261C] hover:text-[#D8261C]'
             }`}
           >
-            <Heart className="w-3.5 h-3.5 text-[#D8261C]" />
+            <Heart className="w-3.5 h-3.5 text-[#D8261C] group-hover:scale-125 transition-transform duration-200" />
             <span>My Wishlist</span>
           </button>
 
@@ -224,7 +224,7 @@ export default function SearchAndFilters({
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
-            className="text-xs font-semibold py-1.5 px-2.5 rounded-xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-1 focus:ring-[#D8261C]"
+            className="text-xs font-semibold py-1.5 px-2.5 rounded-xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-1 focus:ring-[#D8261C] hover:border-[#D8261C]/50 transition-colors cursor-pointer"
           >
             <option value="trending" className="dark:bg-[#1A1218]">🔥 Trending</option>
             <option value="popular" className="dark:bg-[#1A1218]">👑 Most Popular</option>
@@ -244,10 +244,10 @@ export default function SearchAndFilters({
           <button
             key={d}
             onClick={() => onDayChange(d)}
-            className={`px-3 py-1 rounded-lg transition-all shrink-0 font-medium ${
+            className={`px-3 py-1 rounded-lg transition-all duration-150 shrink-0 font-medium cursor-pointer hover:scale-105 active:scale-95 ${
               selectedDay === d
-                ? 'bg-[#D8261C]/15 dark:bg-[#D8261C]/30 text-[#D8261C] dark:text-red-300 font-bold border border-[#D8261C]/40'
-                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10'
+                ? 'bg-[#D8261C]/15 dark:bg-[#D8261C]/30 text-[#D8261C] dark:text-red-300 font-bold border border-[#D8261C]/40 shadow-xs'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-stone-400'
             }`}
           >
             {d === 'Tonight' ? '🌙 Tonight' : d}
