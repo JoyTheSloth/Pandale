@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     siteName: 'Pandalé',
     images: [
       {
-        url: 'https://pandale.in/brand/og-image.jpg',
+        url: 'https://pandalekolkata.vercel.app/brand/og-image.jpg',
         width: 1280,
         height: 720,
         alt: 'Pandalé — Kolkata Durga Puja & Metro Guide 2026'
