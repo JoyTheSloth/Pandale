@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useWishlist } from '@/context/WishlistContext';
-import { Sun, Moon, Languages, Heart, MapPin, ChevronDown, Loader2 } from 'lucide-react';
+import { Sun, Moon, Languages, Heart, MapPin, ChevronDown, Loader2, Home, Compass, Train, Route } from 'lucide-react';
 import { useLocation } from '@/context/LocationContext';
 
 export default function Header() {
@@ -25,7 +25,8 @@ export default function Header() {
         pathname === '/' ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex flex-col">
+        <div className="flex items-center justify-between">
         
         {/* Left: Brand Pill on Home vs Zomato-style Interactive Location on Pandals */}
         {isPandalsSection ? (
@@ -188,9 +189,41 @@ export default function Header() {
               বাং
             </button>
           </div>
-
         </div>
 
+        {/* Desktop-only horizontal nav bar — hidden on mobile (BottomNav handles it) */}
+        <nav className="hidden md:flex items-center gap-1 mt-3 pb-1" aria-label="Desktop navigation">
+          {[
+            { href: '/',        label: language === 'bn' ? 'হোম' : 'Home',      icon: Home,    exact: true  },
+            { href: '/pandals', label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass, exact: false },
+            { href: '/metro',   label: language === 'bn' ? 'মেট্রো' : 'Metro',    icon: Train,   exact: false },
+            { href: '/planner', label: language === 'bn' ? 'প্ল্যানার' : 'Planner',  icon: Route,   exact: false },
+            { href: '/wishlist',label: language === 'bn' ? 'পছন্দ' : 'Wishlist', icon: Heart,   exact: false, badge: count },
+          ].map(({ href, label, icon: Icon, exact, badge }) => {
+            const isActive = exact ? pathname === href : pathname.startsWith(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`pointer-events-auto flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 relative ${
+                  isActive
+                    ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/30'
+                    : pathname === '/'
+                      ? 'text-white/80 hover:text-white hover:bg-white/15'
+                      : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10'
+                }`}
+              >
+                <Icon className="w-4 h-4" strokeWidth={isActive ? 2.5 : 1.8} />
+                <span>{label}</span>
+                {badge !== undefined && badge > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-amber-400 text-black text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow">
+                    {badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );
