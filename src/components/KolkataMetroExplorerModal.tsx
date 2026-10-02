@@ -41,6 +41,7 @@ export default function KolkataMetroExplorerModal({
   // Search & "You Are Here" station pin state
   const [mapSearchQuery, setMapSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [userHereStation, setUserHereStation] = useState<FullMetroStation | null>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +50,7 @@ export default function KolkataMetroExplorerModal({
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const lastPinchDistRef = useRef<number | null>(null);
   const [lineFilter, setLineFilter] = useState<string>('all');
   const [showOperationalOnly, setShowOperationalOnly] = useState(false);
 
@@ -90,6 +92,7 @@ export default function KolkataMetroExplorerModal({
     setUserHereStation(station);
     setMapSearchQuery(station.name);
     setIsSearchFocused(false);
+    setShowDropdown(false);
     // Pan to focus towards the station if zoomed in
     if (zoom > 1) {
       setPan((p) => clampPan({
@@ -104,6 +107,7 @@ export default function KolkataMetroExplorerModal({
     const closeDropdown = (e: MouseEvent | TouchEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
         setIsSearchFocused(false);
+        setShowDropdown(false);
       }
     };
     document.addEventListener('mousedown', closeDropdown);
@@ -161,6 +165,43 @@ export default function KolkataMetroExplorerModal({
   };
 
   const handleMouseUp = () => setIsDragging(false);
+
+  // Touch drag handlers (single finger pan)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && isDragging) {
+      const newPan = {
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y,
+      };
+      setPan(clampPan(newPan, zoom));
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (lastPinchDistRef.current !== null) {
+        const scale = dist / lastPinchDistRef.current;
+        setZoom((prev) => {
+          const next = Math.min(3.0, Math.max(1.0, prev * scale));
+          if (next <= 1.02) { setPan({ x: 0, y: 0 }); return 1.0; }
+          return next;
+        });
+      }
+      lastPinchDistRef.current = dist;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    lastPinchDistRef.current = null;
+  };
 
   // Non-passive wheel handler: prevents page scroll leakage and fixes min-zoom at 1.0
   useEffect(() => {
@@ -351,11 +392,12 @@ export default function KolkataMetroExplorerModal({
                 <input
                   type="text"
                   value={mapSearchQuery}
-                  onFocus={() => setIsSearchFocused(true)}
+                  onFocus={() => { setIsSearchFocused(true); setShowDropdown(true); }}
                   onChange={(e) => {
                     const val = e.target.value;
                     setMapSearchQuery(val);
                     setIsSearchFocused(true);
+                    setShowDropdown(true);
                     if (val.trim().length >= 3) {
                       const matchStation = allStations.find(
                         (s) => s.name.toLowerCase().includes(val.trim().toLowerCase())
@@ -393,8 +435,8 @@ export default function KolkataMetroExplorerModal({
                   </button>
                 )}
 
-                {/* Dropdown Suggestions: Stations (Floats Over Map Image With High Z-Index) */}
-                {(isSearchFocused || mapSearchQuery.trim().length > 0) && searchMatchedStations.length > 0 && (
+                {/* Dropdown: only when showDropdown is explicitly true */}
+                {showDropdown && searchMatchedStations.length > 0 && (
                   <div className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto divide-y z-[100] border backdrop-blur-xl ${
                     isDark 
                       ? 'bg-stone-900 border-stone-700 divide-stone-800 text-stone-100 shadow-2xl shadow-black/80' 
@@ -422,6 +464,10 @@ export default function KolkataMetroExplorerModal({
                         key={st.id}
                         type="button"
                         onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleSelectHereStation(st);
+                        }}
+                        onTouchEnd={(e) => {
                           e.preventDefault();
                           handleSelectHereStation(st);
                         }}
@@ -527,13 +573,18 @@ export default function KolkataMetroExplorerModal({
             </button>
           </div>
 
-          {/* SVG Interactive Canvas */}
+          {/* SVG Interactive Canvas — touch-action: none lets us handle all gestures */}
           <div 
             ref={canvasRef}
-            className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden relative flex items-center justify-center touch-none"
+            className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden relative flex items-center justify-center"
+            style={{ touchAction: 'none' }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <svg
               width="100%"
