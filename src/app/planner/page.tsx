@@ -384,10 +384,10 @@ export default function RoutePlannerPage() {
           </div>
         </div>
 
-        {/* Popular Pandal Route Cards: Smaller Sliding Carousel */}
+        {/* Popular Pandal Route Cards: Compact Sliding Carousel */}
         <div
           ref={sliderRef}
-          className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2 px-1 scroll-smooth"
+          className="flex items-stretch gap-3 sm:gap-3.5 overflow-x-auto no-scrollbar snap-x snap-mandatory py-1 px-0.5 scroll-smooth"
         >
           {PRESET_CIRCUITS.map((preset) => {
             const isActive = activePreset === preset.id;
@@ -395,9 +395,9 @@ export default function RoutePlannerPage() {
               <div
                 key={preset.id}
                 onClick={() => handleApplyPreset(preset)}
-                className={`group cursor-pointer shrink-0 snap-start w-[215px] sm:w-[235px] rounded-[2rem] p-4 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-xl active:scale-[0.98] select-none ${
+                className={`group cursor-pointer shrink-0 snap-start w-[155px] sm:w-[175px] rounded-2xl p-2.5 sm:p-3 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-lg active:scale-[0.98] select-none ${
                   isActive
-                    ? 'bg-[#181412] dark:bg-[#120D0B] text-white border-2 border-[#D8261C] ring-2 ring-[#D8261C]/30 shadow-[#D8261C]/25'
+                    ? 'bg-[#181412] dark:bg-[#120D0B] text-white border-2 border-[#D8261C] ring-2 ring-[#D8261C]/30 shadow-[#D8261C]/20'
                     : 'bg-[#181412] dark:bg-[#140F0E] text-white border border-stone-800/80 hover:border-amber-400/50 hover:shadow-amber-500/10'
                 }`}
               >
@@ -409,45 +409,45 @@ export default function RoutePlannerPage() {
                 {/* Card Top: Arrow ↗ / Check Button at Top Right */}
                 <div className="flex items-center justify-end mb-1">
                   <div
-                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs ${
                       isActive
                         ? 'bg-[#D8261C] text-white'
                         : 'bg-white text-stone-900 group-hover:scale-105 group-hover:bg-[#FFFBEB]'
                     }`}
                   >
                     {isActive ? (
-                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white stroke-[2.5]" />
+                      <Check className="w-3 h-3 text-white stroke-[2.5]" />
                     ) : (
-                      <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-900 group-hover:text-[#D8261C] transition-colors stroke-[2.5]" />
+                      <ArrowUpRight className="w-3 h-3 text-stone-900 group-hover:text-[#D8261C] transition-colors stroke-[2.5]" />
                     )}
                   </div>
                 </div>
 
                 {/* Centered Neighborhood & Route Title */}
-                <div className="text-center -mt-3 mb-3.5 px-1">
-                  <h3 className="text-lg sm:text-xl font-bold font-editorial text-white tracking-tight group-hover:text-amber-200 transition-colors leading-tight">
+                <div className="text-center -mt-2.5 mb-2 px-1">
+                  <h3 className="text-sm sm:text-base font-bold font-editorial text-white tracking-tight group-hover:text-amber-200 transition-colors leading-tight truncate">
                     {isBn ? preset.bengaliTitle : preset.title}
                   </h3>
-                  <p className="text-[10px] sm:text-[11px] text-[#E7E5E4]/80 mt-0.5 font-medium truncate">
+                  <p className="text-[9px] text-[#E7E5E4]/80 mt-0.5 font-medium truncate">
                     {isBn ? preset.bengaliSubtitle : preset.subtitle}
                   </p>
                 </div>
 
                 {/* The Iconic Arched Dome Photo Window */}
-                <div className="relative w-full aspect-[4/4.8] rounded-t-full overflow-hidden bg-stone-900 border border-white/10 shadow-inner">
+                <div className="relative w-full aspect-[1/1] rounded-t-[1.8rem] overflow-hidden bg-stone-900 border border-white/10 shadow-inner">
                   <Image
                     src={preset.image}
                     alt={preset.title}
                     fill
-                    sizes="240px"
+                    sizes="180px"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
                   {/* Subtle vignette gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25 group-hover:via-black/5 transition-opacity" />
 
                   {/* Floating Center Badge: e.g. "6 Iconic Pandals" */}
-                  <div className="absolute bottom-2.5 inset-x-2 text-center z-10">
-                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold font-mono shadow-sm backdrop-blur-md transition-all ${
+                  <div className="absolute bottom-1.5 inset-x-1.5 text-center z-10">
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[8.5px] font-bold font-mono shadow-xs backdrop-blur-md transition-all ${
                       isActive
                         ? 'bg-[#D8261C] text-white border border-[#FDE047]/60'
                         : 'bg-[#FFF8F0] text-[#7C2D12] border border-[#FED7AA]'
@@ -458,12 +458,12 @@ export default function RoutePlannerPage() {
                 </div>
 
                 {/* Card Footer Details */}
-                <div className="pt-2.5 mt-2.5 border-t border-white/10 text-center space-y-1">
-                  <div className="text-[11px] sm:text-xs font-bold text-white tracking-tight truncate">
+                <div className="pt-2 mt-2 border-t border-white/10 text-center space-y-0.5">
+                  <div className="text-[10px] sm:text-[11px] font-bold text-white tracking-tight truncate">
                     {isBn ? preset.bengaliLandmarks : preset.landmarks}
                   </div>
-                  <div className="text-[10px] text-blue-400 flex items-center justify-center gap-1 font-semibold">
-                    <Train className="w-3 h-3 text-blue-400 shrink-0" />
+                  <div className="text-[9px] text-blue-400 flex items-center justify-center gap-1 font-semibold">
+                    <Train className="w-2.5 h-2.5 text-blue-400 shrink-0" />
                     <span className="truncate">{preset.metro}</span>
                   </div>
                 </div>
@@ -473,45 +473,45 @@ export default function RoutePlannerPage() {
         </div>
       </div>
 
-      {/* 3. Itinerary Summary Stats Bar (Executive Luxury Dashboard) */}
+      {/* 3. Itinerary Summary Stats Bar (Compact Dashboard) */}
       {selectedPandals.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 bg-white dark:bg-[#1A1218] rounded-[2rem] border border-stone-200/90 dark:border-white/10 p-5 sm:p-6 shadow-luxe">
-          <div className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1.5 flex items-center justify-center gap-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 bg-white dark:bg-[#1A1218] rounded-2xl border border-stone-200/90 dark:border-white/10 p-3 sm:p-3.5 shadow-luxe">
+          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
+            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
               <Route className="w-3 h-3 text-[#D8261C]" />
               <span>{isBn ? 'মোট প্যান্ডেল' : 'Total Stops'}</span>
             </span>
-            <span className="text-2xl sm:text-3xl font-bold font-editorial text-stone-900 dark:text-white">
-              {routeStats.totalStops} <span className="text-xs font-mono font-normal text-stone-400">{isBn ? 'টি' : 'stops'}</span>
+            <span className="text-xl sm:text-2xl font-bold font-editorial text-stone-900 dark:text-white">
+              {routeStats.totalStops} <span className="text-[10px] font-mono font-normal text-stone-400">{isBn ? 'টি' : 'stops'}</span>
             </span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1.5 flex items-center justify-center gap-1">
+          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
+            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
               <Train className="w-3 h-3 text-blue-600" />
               <span>{isBn ? 'মোট দূরত্ব' : 'Transit Span'}</span>
             </span>
-            <span className="text-2xl sm:text-3xl font-bold font-editorial text-[#D8261C] dark:text-red-400">
-              {routeStats.totalDistance} <span className="text-xs font-mono font-normal text-stone-400">km</span>
+            <span className="text-xl sm:text-2xl font-bold font-editorial text-[#D8261C] dark:text-red-400">
+              {routeStats.totalDistance} <span className="text-[10px] font-mono font-normal text-stone-400">km</span>
             </span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1.5 flex items-center justify-center gap-1">
+          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
+            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
               <Clock className="w-3 h-3 text-amber-500" />
               <span>{isBn ? 'আনুমানিক সময়' : 'Est. Duration'}</span>
             </span>
-            <span className="text-2xl sm:text-3xl font-bold font-editorial text-amber-700 dark:text-amber-400">
-              ~{routeStats.estimatedHours} <span className="text-xs font-mono font-normal text-stone-400">hrs</span>
+            <span className="text-xl sm:text-2xl font-bold font-editorial text-amber-700 dark:text-amber-400">
+              ~{routeStats.estimatedHours} <span className="text-[10px] font-mono font-normal text-stone-400">hrs</span>
             </span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1.5 flex items-center justify-center gap-1">
+          <div className="p-2 sm:p-2.5 rounded-xl bg-stone-50 dark:bg-white/[0.03] border border-stone-200/60 dark:border-white/5 text-center">
+            <span className="text-[9px] uppercase font-mono tracking-widest text-stone-500 dark:text-stone-400 block font-bold mb-1 flex items-center justify-center gap-1">
               <Footprints className="w-3 h-3 text-[#D8261C]" />
               <span>{isBn ? 'আনুমানিক পদক্ষেপ' : 'Est. Steps'}</span>
             </span>
-            <span className="text-2xl sm:text-3xl font-bold font-editorial text-stone-900 dark:text-white">
+            <span className="text-xl sm:text-2xl font-bold font-editorial text-stone-900 dark:text-white">
               ~{routeStats.estimatedSteps}
             </span>
           </div>
@@ -578,8 +578,8 @@ export default function RoutePlannerPage() {
 
             return (
               <React.Fragment key={pandal.id}>
-                {/* Redesigned Pandal Stop Card (Matching Mockup Aesthetic) */}
-                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-[2.5rem] border border-[#EFE8DD] dark:border-white/10 p-4 sm:p-5 lg:p-6 shadow-luxe hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                {/* Redesigned Pandal Stop Card (Compact Mockup Aesthetic) */}
+                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-3xl border border-[#EFE8DD] dark:border-white/10 p-3.5 sm:p-4.5 shadow-luxe hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   
                   {/* Subtle Botanical Left Vine */}
                   <svg
@@ -597,7 +597,7 @@ export default function RoutePlannerPage() {
 
                   {/* Corner Floral Bouquet */}
                   <svg
-                    className="absolute -bottom-3 -left-3 w-24 sm:w-28 h-24 sm:h-28 pointer-events-none z-20 drop-shadow-sm"
+                    className="absolute -bottom-3 -left-3 w-20 sm:w-24 h-20 sm:h-24 pointer-events-none z-20 drop-shadow-sm opacity-90"
                     viewBox="0 0 128 128"
                     fill="none"
                     aria-hidden="true"
@@ -613,25 +613,25 @@ export default function RoutePlannerPage() {
                     </g>
                   </svg>
 
-                  <div className="flex flex-col md:flex-row gap-5 lg:gap-6">
+                  <div className="flex flex-col md:flex-row gap-4 lg:gap-5">
                     
                     {/* 1. Left Artwork Container (Organic Pebble Shape) */}
                     <div
-                      className="relative w-full md:w-[40%] min-h-[220px] sm:min-h-[260px] md:min-h-[270px] shrink-0 overflow-hidden shadow-inner group/media"
-                      style={{ borderRadius: '2.8rem 1.8rem 2.8rem 2.2rem' }}
+                      className="relative w-full md:w-[32%] min-h-[170px] sm:min-h-[190px] shrink-0 overflow-hidden shadow-inner group/media"
+                      style={{ borderRadius: '2rem 1.4rem 2rem 1.6rem' }}
                     >
                       <Image
                         src={pandal.featured_image}
                         alt={pandal.name}
                         fill
-                        sizes="(max-width: 768px) 100vw, 40vw"
+                        sizes="(max-width: 768px) 100vw, 32vw"
                         className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/30 pointer-events-none" />
 
                       {/* Top Floating Badge on Image: STOP Pill */}
-                      <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-                        <span className="px-3 py-1 rounded-full bg-gradient-to-r from-[#D8261C] to-[#B91C1C] text-white text-[11px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-md flex items-center gap-1">
+                      <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D8261C] to-[#B91C1C] text-white text-[10px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-xs flex items-center gap-1">
                           <span>{isBn ? `স্টপ ${index + 1}` : `STOP ${String(index + 1).padStart(2, '0')}`}</span>
                         </span>
                       </div>
@@ -639,21 +639,21 @@ export default function RoutePlannerPage() {
                       {/* Top-Right Arrow button */}
                       <Link
                         href={`/pandal/${pandal.slug}`}
-                        className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-md flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
+                        className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                         aria-label="View pandal details"
                       >
-                        <ArrowUpRight className="w-4 h-4" />
+                        <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
 
                       {/* Bottom Floating Badges Row (Area + Must Visit) */}
-                      <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center gap-2 flex-wrap">
-                        <span className="px-3 py-1 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-xs font-semibold shadow-md flex items-center gap-1.5 backdrop-blur-md border border-white/40 dark:border-white/10">
-                          <span className="w-2 h-2 rounded-full bg-[#D8261C]" />
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 flex items-center gap-1.5 flex-wrap">
+                        <span className="px-2.5 py-0.5 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-[11px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-md border border-white/40 dark:border-white/10">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#D8261C]" />
                           <span>{pandal.area}</span>
                         </span>
 
                         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                          <span className="px-2.5 py-1 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-xs font-bold shadow-md flex items-center gap-1 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
+                          <span className="px-2 py-0.5 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-[11px] font-bold shadow-xs flex items-center gap-1 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
                             <span>👑</span>
                             <span>{isBn ? 'দর্শনীয়' : 'Must Visit'}</span>
                           </span>
@@ -662,18 +662,18 @@ export default function RoutePlannerPage() {
                     </div>
 
                     {/* 2. Middle & Right Content Area */}
-                    <div className="flex-1 flex flex-col justify-between space-y-3.5 py-1">
+                    <div className="flex-1 flex flex-col justify-between space-y-2.5 py-0.5">
                       
                       {/* Header: Theme & Architecture, Title, Underline */}
                       <div>
-                        <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] text-[#9C7A5B] dark:text-amber-400 font-bold block mb-1">
+                        <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-[#9C7A5B] dark:text-amber-400 font-bold block mb-0.5">
                           {isBn ? 'থিম এবং স্থাপত্য' : 'THEME & ARCHITECTURE'}
                         </span>
 
                         <div className="flex items-center gap-2 flex-wrap">
                           <Link
                             href={`/pandal/${pandal.slug}`}
-                            className="font-editorial text-2xl sm:text-3xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors"
+                            className="font-editorial text-xl sm:text-2xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors"
                           >
                             {pandal.name}
                           </Link>
