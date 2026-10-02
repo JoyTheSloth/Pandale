@@ -576,28 +576,33 @@ export default function RoutePlannerPage() {
               pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
             );
 
+            const cleanMetroName = pandal.nearest_metro.toLowerCase().includes('metro')
+              ? pandal.nearest_metro
+              : `${pandal.nearest_metro} ${isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}`;
+
+            const cleanDistance = pandal.walking_distance.replace(/m\s*m/gi, 'm').replace(/\s*m$/i, '').trim() + 'm';
+
             return (
               <React.Fragment key={pandal.id}>
-                {/* Redesigned Pandal Stop Card (Compact Mockup Aesthetic) */}
-                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-3xl border border-[#EFE8DD] dark:border-white/10 p-3.5 sm:p-4.5 shadow-luxe hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                {/* Redesigned Pandal Stop Card (Truly Compact & Slim) */}
+                <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-2xl sm:rounded-3xl border border-[#EFE8DD] dark:border-white/10 p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
                   
                   {/* Subtle Botanical Left Vine */}
                   <svg
-                    className="absolute -left-2 top-4 w-10 h-32 pointer-events-none z-10 hidden sm:block opacity-80"
+                    className="absolute -left-2 top-3 w-8 h-24 pointer-events-none z-10 hidden sm:block opacity-70"
                     viewBox="0 0 48 144"
                     fill="none"
                     aria-hidden="true"
                   >
-                    <path d="M12 2 C16 35, 8 70, 14 110" stroke="#C9A070" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-                    <path d="M14 15 C24 8, 38 12, 42 22 C34 26, 20 25, 14 15 Z" fill="#C9A070" opacity="0.85" />
-                    <path d="M12 38 C4 30, -2 40, 2 52 C8 48, 11 44, 12 38 Z" fill="#9B2C2C" opacity="0.9" />
-                    <path d="M11 65 C22 60, 32 68, 35 78 C26 80, 16 76, 11 65 Z" fill="#D4AF37" opacity="0.85" />
-                    <path d="M13 92 C5 86, 0 98, 4 108 C10 104, 13 98, 13 92 Z" fill="#881337" opacity="0.9" />
+                    <path d="M12 2 C16 35, 8 70, 14 110" stroke="#C9A070" strokeWidth="1.2" strokeLinecap="round" opacity="0.4" />
+                    <path d="M14 15 C24 8, 38 12, 42 22 C34 26, 20 25, 14 15 Z" fill="#C9A070" opacity="0.8" />
+                    <path d="M12 38 C4 30, -2 40, 2 52 C8 48, 11 44, 12 38 Z" fill="#9B2C2C" opacity="0.85" />
+                    <path d="M11 65 C22 60, 32 68, 35 78 C26 80, 16 76, 11 65 Z" fill="#D4AF37" opacity="0.8" />
                   </svg>
 
                   {/* Corner Floral Bouquet */}
                   <svg
-                    className="absolute -bottom-3 -left-3 w-20 sm:w-24 h-20 sm:h-24 pointer-events-none z-20 drop-shadow-sm opacity-90"
+                    className="absolute -bottom-2 -left-2 w-16 h-16 pointer-events-none z-20 drop-shadow-2xs opacity-80"
                     viewBox="0 0 128 128"
                     fill="none"
                     aria-hidden="true"
@@ -613,25 +618,24 @@ export default function RoutePlannerPage() {
                     </g>
                   </svg>
 
-                  <div className="flex flex-col md:flex-row gap-4 lg:gap-5">
+                  <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
                     
-                    {/* 1. Left Artwork Container (Organic Pebble Shape) */}
+                    {/* 1. Media Container: Slim Cinematic Banner on Mobile, Compact Column on Desktop */}
                     <div
-                      className="relative w-full md:w-[32%] min-h-[170px] sm:min-h-[190px] shrink-0 overflow-hidden shadow-inner group/media"
-                      style={{ borderRadius: '2rem 1.4rem 2rem 1.6rem' }}
+                      className="relative w-full md:w-[28%] aspect-[21/9] sm:aspect-[16/8] md:aspect-auto md:min-h-[140px] max-h-[130px] md:max-h-none shrink-0 overflow-hidden shadow-inner group/media rounded-xl sm:rounded-2xl"
                     >
                       <Image
                         src={pandal.featured_image}
                         alt={pandal.name}
                         fill
-                        sizes="(max-width: 768px) 100vw, 32vw"
-                        className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                        sizes="(max-width: 768px) 100vw, 28vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/30 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/25 pointer-events-none" />
 
-                      {/* Top Floating Badge on Image: STOP Pill */}
-                      <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5">
-                        <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D8261C] to-[#B91C1C] text-white text-[10px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-xs flex items-center gap-1">
+                      {/* Top Floating Badge: STOP Pill */}
+                      <div className="absolute top-2 left-2 z-10 flex items-center gap-1">
+                        <span className="px-2 py-0.5 rounded-full bg-[#D8261C] text-white text-[9.5px] font-mono font-bold tracking-wider border border-[#FDE047]/60 shadow-xs flex items-center gap-1">
                           <span>{isBn ? `স্টপ ${index + 1}` : `STOP ${String(index + 1).padStart(2, '0')}`}</span>
                         </span>
                       </div>
@@ -639,21 +643,21 @@ export default function RoutePlannerPage() {
                       {/* Top-Right Arrow button */}
                       <Link
                         href={`/pandal/${pandal.slug}`}
-                        className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
+                        className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-white/95 dark:bg-black/75 backdrop-blur-md text-stone-900 dark:text-white shadow-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                         aria-label="View pandal details"
                       >
-                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        <ArrowUpRight className="w-3 h-3" />
                       </Link>
 
                       {/* Bottom Floating Badges Row (Area + Must Visit) */}
-                      <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 flex items-center gap-1.5 flex-wrap">
-                        <span className="px-2.5 py-0.5 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-[11px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-md border border-white/40 dark:border-white/10">
+                      <div className="absolute bottom-2 left-2 right-2 z-10 flex items-center gap-1.5 flex-wrap">
+                        <span className="px-2 py-0.5 rounded-full bg-white/95 dark:bg-black/85 text-stone-900 dark:text-white text-[10px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-md border border-white/40 dark:border-white/10">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#D8261C]" />
                           <span>{pandal.area}</span>
                         </span>
 
                         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                          <span className="px-2 py-0.5 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-[11px] font-bold shadow-xs flex items-center gap-1 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
+                          <span className="px-1.5 py-0.5 rounded-full bg-[#FFF4E5] dark:bg-amber-950/85 text-[#8C5E28] dark:text-amber-300 text-[10px] font-bold shadow-xs flex items-center gap-0.5 border border-amber-200/60 dark:border-amber-900/50 backdrop-blur-md">
                             <span>👑</span>
                             <span>{isBn ? 'দর্শনীয়' : 'Must Visit'}</span>
                           </span>
@@ -661,102 +665,97 @@ export default function RoutePlannerPage() {
                       </div>
                     </div>
 
-                    {/* 2. Middle & Right Content Area */}
-                    <div className="flex-1 flex flex-col justify-between space-y-2.5 py-0.5">
+                    {/* 2. Content Area */}
+                    <div className="flex-1 flex flex-col justify-between space-y-2">
                       
-                      {/* Header: Theme & Architecture, Title, Underline */}
+                      {/* Header: Theme & Architecture label, Title, and Theme description */}
                       <div>
-                        <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-[#9C7A5B] dark:text-amber-400 font-bold block mb-0.5">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-[#9C7A5B] dark:text-amber-400 font-bold block">
                           {isBn ? 'থিম এবং স্থাপত্য' : 'THEME & ARCHITECTURE'}
                         </span>
 
-                        <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-1.5 mt-0.5">
                           <Link
                             href={`/pandal/${pandal.slug}`}
-                            className="font-editorial text-xl sm:text-2xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors"
+                            className="font-editorial text-lg sm:text-xl font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-snug hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1"
                           >
                             {pandal.name}
                           </Link>
-
-                          {/* Decorative Leaf Sprig */}
-                          <svg className="w-5 h-5 text-[#C9A070] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <svg className="w-3.5 h-3.5 text-[#C9A070] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M4 20 C8 14, 14 8, 20 4" stroke="#C9A070" strokeWidth="1.5" strokeLinecap="round" />
                             <path d="M12 12 C14 8, 18 8, 20 10 C18 13, 14 13, 12 12 Z" fill="#C9A070" />
                             <path d="M16 8 C17 5, 20 5, 21 7 C20 9, 17 9, 16 8 Z" fill="#991B1B" />
-                            <path d="M8 16 C9 13, 13 13, 14 15 C13 17, 10 17, 8 16 Z" fill="#D4AF37" />
                           </svg>
                         </div>
 
-                        {/* Red Accent Underline */}
-                        <div className="w-12 h-0.5 bg-[#881337] dark:bg-rose-500 rounded-full mt-1.5 mb-2" />
-
                         {/* Theme Description */}
-                        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-medium leading-relaxed line-clamp-2">
+                        <p className="text-xs text-stone-600 dark:text-stone-300 font-medium leading-normal line-clamp-1 mt-0.5">
                           {pandal.theme}
                         </p>
                       </div>
 
-                      {/* Metro Transit Card */}
-                      <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/70 dark:border-white/5 flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#0052FF] text-white font-bold flex items-center justify-center text-sm shadow-xs shrink-0">
-                          M
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h4 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white truncate">
-                            {pandal.nearest_metro} {isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}
-                          </h4>
-                          <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-300 mt-0.5 flex-wrap">
-                            <span className="flex items-center gap-1 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span>{pandal.walking_time_mins} min</span>
-                            </span>
-                            <span className="text-stone-300 dark:text-stone-600">•</span>
-                            <span className="font-semibold text-stone-700 dark:text-stone-300 shrink-0">
-                              {pandal.walking_distance.split(' ')[0]} m
-                            </span>
-                            <span className="text-stone-300 dark:text-stone-600">•</span>
-                            <span className="flex items-center gap-1 text-stone-600 dark:text-stone-300 font-medium shrink-0">
-                              <Footprints className="w-3.5 h-3.5 text-[#D8261C]" />
-                              <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
-                            </span>
+                      {/* Metro Transit & Walk Info (Compact Combined Box) */}
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/60 dark:border-white/5 flex items-center justify-between gap-2 flex-wrap">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-6 h-6 rounded-lg bg-[#0052FF] text-white font-bold flex items-center justify-center text-xs shadow-2xs shrink-0">
+                            M
                           </div>
+                          <div className="min-w-0">
+                            <h4 className="text-xs font-bold text-stone-900 dark:text-white truncate leading-tight">
+                              {cleanMetroName}
+                            </h4>
+                            <div className="flex items-center gap-1.5 text-[11px] text-stone-600 dark:text-stone-300 mt-0.5">
+                              <span className="flex items-center gap-0.5 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
+                                <Clock className="w-3 h-3" />
+                                <span>{pandal.walking_time_mins} min</span>
+                              </span>
+                              <span className="text-stone-300 dark:text-stone-600">•</span>
+                              <span className="font-semibold shrink-0">{cleanDistance}</span>
+                              <span className="text-stone-300 dark:text-stone-600">•</span>
+                              <span className="flex items-center gap-0.5 text-stone-500 dark:text-stone-400 shrink-0">
+                                <Footprints className="w-3 h-3 text-[#D8261C]" />
+                                <span>~{Math.round(pandal.walking_time_mins * 125).toLocaleString()} steps</span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Compact Crowd Tag */}
+                        <div className="px-2 py-0.5 rounded-md bg-[#F9EDE6] dark:bg-rose-950/30 text-[#8C4A32] dark:text-rose-300 border border-[#F3DACF] dark:border-rose-900/30 flex items-center gap-1 text-[10px] font-semibold shrink-0">
+                          <Users className="w-3 h-3 text-[#8C4A32] dark:text-rose-300 shrink-0" />
+                          <span>{pandal.crowd_status.level.toUpperCase()} CROWD</span>
                         </div>
                       </div>
 
-                      {/* Crowd & Controls Bar */}
-                      <div className="flex items-center justify-between gap-3 pt-1 flex-wrap">
-                        {/* Crowd Pill */}
-                        <div className="px-3 py-1.5 rounded-xl bg-[#F9EDE6] dark:bg-rose-950/30 text-[#8C4A32] dark:text-rose-300 border border-[#F3DACF] dark:border-rose-900/30 flex items-center gap-2 text-xs font-semibold shadow-2xs">
-                          <Users className="w-4 h-4 text-[#8C4A32] dark:text-rose-300 shrink-0" />
-                          <span>{pandal.crowd_status.level.toUpperCase()} CROWD</span>
-                          <span className="text-[10px] opacity-75 font-normal">
-                            ({isBn ? 'কমিউনিটি রিপোর্ট' : 'Community reported'})
-                          </span>
-                        </div>
+                      {/* Footer: Bottom Controls */}
+                      <div className="flex items-center justify-between pt-1">
+                        <span className="text-[10px] text-stone-500 dark:text-stone-400 font-mono">
+                          {isFirst ? (isBn ? 'শুরুর পয়েন্ট' : 'Starting Point') : isLast ? (isBn ? 'শেষ স্টপ' : 'Final Stop') : (isBn ? `ধাপ ${index + 1}` : `Stop ${index + 1}`)}
+                        </span>
 
-                        {/* Itinerary Re-ordering & Maps Controls */}
-                        <div className="flex items-center gap-2 shrink-0">
-                          {/* Reorder Arrows Pill */}
-                          <div className="flex items-center gap-1 bg-white dark:bg-white/[0.06] p-1 rounded-2xl border border-stone-200 dark:border-white/10 shadow-2xs">
+                        {/* Action Buttons: Reorder + Maps + Trash */}
+                        <div className="flex items-center gap-1.5">
+                          {/* Reorder Arrows */}
+                          <div className="flex items-center gap-0.5 bg-white dark:bg-white/[0.06] p-0.5 rounded-xl border border-stone-200 dark:border-white/10 shadow-2xs">
                             <button
                               type="button"
                               onClick={() => handleMoveUp(index)}
                               disabled={isFirst}
-                              className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed btn-jiggle"
+                              className="p-1 rounded-lg text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer disabled:cursor-not-allowed"
                               title="Move earlier in route"
                               aria-label="Move up"
                             >
-                              <ArrowUp className="w-4 h-4" />
+                              <ArrowUp className="w-3.5 h-3.5" />
                             </button>
                             <button
                               type="button"
                               onClick={() => handleMoveDown(index)}
                               disabled={isLast}
-                              className="p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 disabled:hover:bg-transparent transition-all cursor-pointer disabled:cursor-not-allowed btn-jiggle"
+                              className="p-1 rounded-lg text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer disabled:cursor-not-allowed"
                               title="Move later in route"
                               aria-label="Move down"
                             >
-                              <ArrowDown className="w-4 h-4" />
+                              <ArrowDown className="w-3.5 h-3.5" />
                             </button>
                           </div>
 
@@ -765,22 +764,22 @@ export default function RoutePlannerPage() {
                             href={exactMapsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] flex items-center justify-center transition-all shadow-2xs cursor-pointer btn-jiggle"
+                            className="w-7 h-7 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 text-stone-800 dark:text-stone-200 hover:text-[#D8261C] flex items-center justify-center transition-all shadow-2xs cursor-pointer"
                             title="Open exact location in Google Maps"
                             aria-label="View in Maps"
                           >
-                            <MapPin className="w-4 h-4 text-[#D8261C]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#D8261C]" />
                           </a>
 
                           {/* Remove Stop Button */}
                           <button
                             type="button"
                             onClick={() => handleRemovePandal(pandal.id)}
-                            className="w-10 h-10 rounded-2xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 flex items-center justify-center transition-all shadow-2xs cursor-pointer btn-jiggle"
+                            className="w-7 h-7 rounded-xl border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 flex items-center justify-center transition-all shadow-2xs cursor-pointer"
                             title="Remove from itinerary"
                             aria-label="Remove stop"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
