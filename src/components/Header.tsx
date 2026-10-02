@@ -190,6 +190,7 @@ export default function Header() {
             </button>
           </div>
         </div>
+        </div>
 
         {/* Desktop-only horizontal nav bar — hidden on mobile (BottomNav handles it) */}
         <nav className="hidden md:flex items-center gap-1 mt-3 pb-1" aria-label="Desktop navigation">
