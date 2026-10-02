@@ -98,7 +98,11 @@ export default function InteractiveMap({
         const map = L.map(mapContainerRef.current, {
           center: initialCenter,
           zoom: initialZoom,
-          zoomControl: false
+          zoomControl: false,
+          touchZoom: true,
+          scrollWheelZoom: true,
+          doubleClickZoom: true,
+          boxZoom: true,
         });
 
         // Add sleek CartoDB Dark Matter / Voyager tiles dynamically
@@ -264,10 +268,10 @@ export default function InteractiveMap({
   }, [isClient, pandals, metroStations, selectedPandalId, onSelectPandal, userStationId]);
 
   return (
-    <div className={`relative w-full ${heightClass} rounded-2xl overflow-hidden border border-[#E2DAD0] dark:border-white/10 shadow-sm bg-[#FAF8F5] dark:bg-[#12090F]`}>
+    <div className={`relative w-full ${heightClass} rounded-2xl border border-[#E2DAD0] dark:border-white/10 shadow-sm bg-[#FAF8F5] dark:bg-[#12090F]`}>
       
-      {/* Map container DOM element */}
-      <div ref={mapContainerRef} className="w-full h-full" />
+      {/* Map container DOM element — no overflow-hidden so pinch zoom touch events aren't blocked */}
+      <div ref={mapContainerRef} className="w-full h-full rounded-2xl" />
 
       {/* Map Legend Overlay */}
       <div className="absolute top-3 left-3 z-[400] glass-card px-3 py-2 rounded-xl border border-[#E2DAD0] dark:border-white/10 dark:bg-[#1A1218]/90 text-[11px] shadow-sm flex items-center gap-3 backdrop-blur-md">

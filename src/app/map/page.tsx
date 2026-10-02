@@ -4,29 +4,32 @@ import React, { useState, useMemo } from 'react';
 import InteractiveMap from '@/components/InteractiveMap';
 import { PANDALS_DATA } from '@/data/pandals';
 import { METRO_STATIONS_DATA } from '@/data/metro';
-import { ZoneArea, Pandal, MetroStation } from '@/types';
+import { ZoneArea, MetroStation } from '@/types';
 import { MapPin, Train, Search, Filter, X, Sparkles, Navigation } from 'lucide-react';
 
 export default function MapPage() {
   const [selectedZone, setSelectedZone] = useState<ZoneArea | 'All'>('All');
   const [search, setSearch] = useState('');
   const [userStation, setUserStation] = useState<MetroStation | null>(null);
-  const [selectedPandal, setSelectedPandal] = useState<Pandal | null>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  // Click outside listener to immediately close recommendation dropdown
+  // Click outside / touch outside listener to immediately close recommendation dropdown
   React.useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const closeDropdown = (e: MouseEvent | TouchEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
         setShowDropdown(false);
         setIsSearchFocused(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', closeDropdown);
+    document.addEventListener('touchstart', closeDropdown);
+    return () => {
+      document.removeEventListener('mousedown', closeDropdown);
+      document.removeEventListener('touchstart', closeDropdown);
+    };
   }, []);
 
   const zones: (ZoneArea | 'All')[] = [
@@ -258,8 +261,6 @@ export default function MapPage() {
         <InteractiveMap
           pandals={filteredPandals}
           metroStations={METRO_STATIONS_DATA}
-          selectedPandalId={selectedPandal?.id}
-          onSelectPandal={(p) => setSelectedPandal(p)}
           userStationId={userStation?.id}
           heightClass="h-[78vh]"
         />
