@@ -38,11 +38,17 @@ import { ZoneArea, Pandal } from '@/types';
 const PRESET_CIRCUITS = [
   {
     id: 'north-heritage',
-    title: 'North Heritage Pandals',
-    bengaliTitle: 'উত্তর কলকাতা ঐতিহ্য প্যান্ডেল রুট',
+    title: 'North Kolkata',
+    bengaliTitle: 'উত্তর কলকাতা',
+    subtitle: 'Heritage, Sabeki & River Ghats',
+    bengaliSubtitle: 'ঐতিহ্য, সাবেকিয়ানা ও গঙ্গার ঘাট',
     icon: '🏛️',
-    stopsCount: 4,
-    image: '/brand/circuit-north-heritage.jpg',
+    stopsCount: 6,
+    badge: '6 Iconic Pandals',
+    bengaliBadge: '৬টি আইকনিক প্যান্ডেল',
+    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
+    landmarks: 'Bagbazar • Kumartuli • Sovabazar',
+    bengaliLandmarks: 'বাগবাজার • কুমারটুলি • শোভাবাজার',
     description: 'Bagbazar, Kumartuli, Ahiritola & Sovabazar',
     ids: ['bagbazar-sarbojanin', 'kumartuli-park', 'ahiritola-sarbojanin', 'sovabazar-rajbari'],
     zone: 'North Kolkata',
@@ -50,39 +56,57 @@ const PRESET_CIRCUITS = [
   },
   {
     id: 'south-iconic',
-    title: 'South Iconic Pandals',
-    bengaliTitle: 'দক্ষিণ কলকাতা আইকনিক প্যান্ডেল রুট',
+    title: 'South Kolkata',
+    bengaliTitle: 'দক্ষিণ কলকাতা',
+    subtitle: 'Theme Powerhouses & Night Adda',
+    bengaliSubtitle: 'সেরা থিম পুজো ও জমজমাট আড্ডা',
     icon: '✨',
-    stopsCount: 5,
-    image: '/brand/circuit-south-iconic.jpg',
+    stopsCount: 6,
+    badge: '6 Iconic Pandals',
+    bengaliBadge: '৬টি আইকনিক প্যান্ডেল',
+    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
+    landmarks: 'Maddox Square • Suruchi • Tridhara',
+    bengaliLandmarks: 'ম্যাডক্স স্কোয়ার • সুরুচি • ত্রিধারা',
     description: 'Maddox Square, Ekdalia, Singhi Park & Suruchi',
     ids: ['maddox-square', 'ekdalia-evergreen', 'singhi-park', 'suruchi-sangha', 'chetla-agrani'],
     zone: 'South Kolkata',
     metro: 'Blue Line (Kalighat)',
   },
   {
-    id: 'green-line',
-    title: 'Green Line Metro Pandals',
-    bengaliTitle: 'গ্রিন লাইন মেট্রো প্যান্ডেল রুট',
-    icon: '🚇',
-    stopsCount: 4,
-    image: '/brand/circuit-green-line.jpg',
-    description: 'Sealdah, FD Block, BJ Block & Sree Bhumi',
-    ids: ['chaltabagan', 'salt-lake-fd-block', 'salt-lake-bj-block', 'sree-bhumi-sporting-club'],
-    zone: 'East Kolkata',
-    metro: 'Green Line (Salt Lake)',
-  },
-  {
     id: 'central-classic',
-    title: 'Central Classic Pandals',
-    bengaliTitle: 'সেন্ট্রাল ক্লাসিক প্যান্ডেল রুট',
+    title: 'Central Kolkata',
+    bengaliTitle: 'মধ্য কলকাতা',
+    subtitle: 'Lakeside Lights & Heritage Squares',
+    bengaliSubtitle: 'আলোর রোশনাই ও সাবেক পুজো',
     icon: '👑',
     stopsCount: 3,
-    image: '/brand/circuit-central-classic.jpg',
+    badge: '3 Iconic Pandals',
+    bengaliBadge: '৩টি আইকনিক প্যান্ডেল',
+    image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
+    landmarks: 'College Square • Santosh Mitra',
+    bengaliLandmarks: 'কলেজ স্কোয়ার • সন্তোষ মিত্র স্কোয়ার',
     description: 'College Square, Mohammad Ali & Santosh Mitra',
     ids: ['college-square', 'mohammad-ali-park', 'santosh-mitra-square'],
     zone: 'Central Kolkata',
-    metro: 'Blue & Green (Central)',
+    metro: 'Blue & Green (Central / MG Road)',
+  },
+  {
+    id: 'east-saltlake',
+    title: 'East Kolkata',
+    bengaliTitle: 'পূর্ব কলকাতা',
+    subtitle: 'Salt Lake & Tech Corridors',
+    bengaliSubtitle: 'সল্টলেক ও টেক করিডোর',
+    icon: '🚇',
+    stopsCount: 4,
+    badge: '4 Iconic Pandals',
+    bengaliBadge: '৪টি আইকনিক প্যান্ডেল',
+    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
+    landmarks: 'Salt Lake FD Block • BJ Block • Sree Bhumi',
+    bengaliLandmarks: 'সল্টলেক এফডি ব্লক • বিজে ব্লক • শ্রীভূমি',
+    description: 'Sealdah, FD Block, BJ Block & Sree Bhumi',
+    ids: ['chaltabagan', 'salt-lake-fd-block', 'salt-lake-bj-block', 'sree-bhumi-sporting-club'],
+    zone: 'East Kolkata',
+    metro: 'Green Line (Sector V / Karunamoyee)',
   }
 ];
 
@@ -325,18 +349,18 @@ export default function RoutePlannerPage() {
           )}
         </div>
 
-        {/* Popular Pandal Route Cards Grid: 2 Cards in One Line on Desktop / Tablet */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        {/* Popular Pandal Route Cards Grid: 2 Cards in One Line on Desktop / Tablet (Arched Dome Mockup) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
           {PRESET_CIRCUITS.map((preset) => {
             const isActive = activePreset === preset.id;
             return (
               <div
                 key={preset.id}
                 onClick={() => handleApplyPreset(preset)}
-                className={`group cursor-pointer rounded-[2rem] border transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white dark:bg-[#1A1218] shadow-luxe hover:shadow-2xl hover:-translate-y-1 ${
+                className={`group cursor-pointer rounded-[2.5rem] sm:rounded-[2.8rem] p-5 sm:p-7 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-2xl active:scale-[0.99] ${
                   isActive
-                    ? 'border-[#D8261C] ring-2 ring-[#D8261C]/50 shadow-lg shadow-[#D8261C]/20'
-                    : 'border-stone-200/90 dark:border-white/10 hover:border-amber-400/60 dark:hover:border-amber-400/40'
+                    ? 'bg-[#181412] dark:bg-[#120D0B] text-white border-2 border-[#D8261C] ring-4 ring-[#D8261C]/25 shadow-xl shadow-[#D8261C]/20'
+                    : 'bg-[#181412] dark:bg-[#140F0E] text-white border border-stone-800/80 hover:border-amber-400/50 hover:shadow-amber-500/10'
                 }`}
               >
                 {/* Active Indicator Top Accent Bar */}
@@ -344,79 +368,65 @@ export default function RoutePlannerPage() {
                   <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#D8261C] via-[#FDE047] to-[#D8261C] z-20" />
                 )}
 
-                {/* Media Window */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-stone-100 dark:bg-stone-900">
+                {/* Card Top: Arrow ↗ / Check Button at Top Right */}
+                <div className="flex items-center justify-end mb-2">
+                  <div
+                    className={`w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+                      isActive
+                        ? 'bg-[#D8261C] text-white'
+                        : 'bg-white text-stone-900 group-hover:scale-105 group-hover:bg-[#FFFBEB]'
+                    }`}
+                  >
+                    {isActive ? (
+                      <Check className="w-5 h-5 text-white stroke-[2.5]" />
+                    ) : (
+                      <ArrowUpRight className="w-5 h-5 text-stone-900 group-hover:text-[#D8261C] transition-colors stroke-[2.5]" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Centered Neighborhood & Route Title */}
+                <div className="text-center -mt-4 mb-5 px-2">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-editorial text-white tracking-tight group-hover:text-amber-200 transition-colors leading-tight">
+                    {isBn ? preset.bengaliTitle : preset.title}
+                  </h3>
+                  <p className="text-xs sm:text-[13px] text-[#E7E5E4]/80 mt-1 font-medium">
+                    {isBn ? preset.bengaliSubtitle : preset.subtitle}
+                  </p>
+                </div>
+
+                {/* The Iconic Arched Dome Photo Window */}
+                <div className="relative w-full aspect-[4/5] rounded-t-full overflow-hidden bg-stone-900 border border-white/10 shadow-inner">
                   <Image
                     src={preset.image}
                     alt={preset.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
                   {/* Subtle vignette gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/35 group-hover:via-black/15 transition-colors" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25 group-hover:via-black/5 transition-opacity" />
 
-                  {/* Floating Badges */}
-                  <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold backdrop-blur-md bg-black/60 text-white border border-white/20 shadow-xs flex items-center gap-1.5">
-                      <span>{preset.icon}</span>
-                      <span>{preset.zone}</span>
-                    </span>
-
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold backdrop-blur-md shadow-xs ${
-                      isActive 
-                        ? 'bg-[#D8261C] text-white border border-[#FDE047]/60' 
-                        : 'bg-black/60 text-white/90 border border-white/20'
+                  {/* Floating Center Badge: e.g. "6 Iconic Pandals" */}
+                  <div className="absolute bottom-4 inset-x-4 text-center z-10">
+                    <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold font-mono shadow-md backdrop-blur-md transition-all ${
+                      isActive
+                        ? 'bg-[#D8261C] text-white border border-[#FDE047]/60'
+                        : 'bg-[#FFF8F0] text-[#7C2D12] border border-[#FED7AA]'
                     }`}>
-                      {preset.stopsCount} {isBn ? 'প্যান্ডেল স্টপ' : 'Pandal Stops'}
+                      {isBn ? preset.bengaliBadge : preset.badge}
                     </span>
-                  </div>
-
-                  {/* Bottom Metro Tag */}
-                  <div className="absolute bottom-2.5 inset-x-3 z-10">
-                    <p className="text-[10px] uppercase font-mono tracking-wider text-amber-300 font-semibold drop-shadow-sm flex items-center gap-1">
-                      <Train className="w-3 h-3 text-[#FDE047]" />
-                      <span>{preset.metro}</span>
-                    </p>
                   </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-                  <div>
-                    <h3 className="font-bold text-base sm:text-lg font-editorial text-stone-900 dark:text-white group-hover:text-[#D8261C] dark:group-hover:text-amber-400 transition-colors leading-snug">
-                      {isBn ? preset.bengaliTitle : preset.title}
-                    </h3>
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 line-clamp-2 leading-relaxed">
-                      {preset.description}
-                    </p>
+                {/* Card Footer Details */}
+                <div className="pt-4 mt-4 border-t border-white/10 text-center space-y-1.5">
+                  <div className="text-xs sm:text-sm font-bold text-white tracking-tight truncate">
+                    {isBn ? preset.bengaliLandmarks : preset.landmarks}
                   </div>
-
-                  {/* Action Footer */}
-                  <div className="pt-2 border-t border-stone-100 dark:border-white/5 flex items-center justify-between">
-                    <span className={`text-[11px] font-mono font-bold flex items-center gap-1.5 ${
-                      isActive ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-600 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-white'
-                    }`}>
-                      {isActive ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
-                          <span>{isBn ? 'সক্রিয় রুট' : 'Active Route'}</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>{isBn ? 'রুট লোড করুন' : 'Load Route'}</span>
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
-                    </span>
-
-                    <span className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
-                      isActive 
-                        ? 'bg-[#D8261C] text-white shadow-xs' 
-                        : 'bg-stone-100 dark:bg-white/5 text-stone-500 group-hover:bg-[#D8261C] group-hover:text-white'
-                    }`}>
-                      {isActive ? <Check className="w-3.5 h-3.5" /> : <ChevronRight className="w-4 h-4" />}
-                    </span>
+                  <div className="text-xs text-blue-400 flex items-center justify-center gap-1.5 font-semibold">
+                    <Train className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                    <span className="truncate">{preset.metro}</span>
                   </div>
                 </div>
               </div>
