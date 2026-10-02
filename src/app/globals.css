@@ -291,3 +291,12 @@ html.dark .leaflet-container {
 .btn-jiggle:hover svg {
   animation: jiggle-subtle 0.4s ease-in-out;
 }
+
+/* Hide scrollbar for Chrome, Safari, Edge and Firefox */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
