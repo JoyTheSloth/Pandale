@@ -121,6 +121,49 @@ export default function KolkataMetroExplorerModal({
   }, []);
 
   const canvasRef = useRef<HTMLDivElement>(null);
+  const [containerDimensions, setContainerDimensions] = useState<{ width: number; height: number }>({ width: 1050, height: 1350 });
+
+  // Dynamically observe container dimensions so viewBox matches aspect ratio with ZERO black bars
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const updateDims = () => {
+      if (canvas.clientWidth && canvas.clientHeight) {
+        setContainerDimensions({ width: canvas.clientWidth, height: canvas.clientHeight });
+      }
+    };
+
+    updateDims();
+    const observer = new ResizeObserver(updateDims);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
+
+  // Compute viewBox where aspect ratio strictly equals container aspect ratio (no letterbox/pillarbox)
+  const viewBox = useMemo(() => {
+    const { width: cw, height: ch } = containerDimensions;
+    const baseW = 1050;
+    const baseH = 1350;
+    if (!cw || !ch) return `0 0 ${baseW} ${baseH}`;
+
+    const containerRatio = cw / ch;
+    const baseRatio = baseW / baseH;
+
+    let vbW = baseW;
+    let vbH = baseH;
+
+    if (containerRatio > baseRatio) {
+      vbW = baseH * containerRatio;
+    } else {
+      vbH = baseW / containerRatio;
+    }
+
+    const minX = 525 - vbW / 2;
+    const minY = 675 - vbH / 2;
+
+    return `${minX.toFixed(1)} ${minY.toFixed(1)} ${vbW.toFixed(1)} ${vbH.toFixed(1)}`;
+  }, [containerDimensions]);
 
   // Lock background body scroll and hide bottom nav when modal is open
   useEffect(() => {
@@ -137,9 +180,8 @@ export default function KolkataMetroExplorerModal({
 
   // Clamp pan so map can be explored smoothly across all zoom levels
   const clampPan = useCallback((newPan: { x: number; y: number }, currentZoom: number) => {
-    // Generous pan boundaries proportional to zoom level
-    const maxPanX = Math.max(180, 500 * Math.max(0.2, currentZoom - 0.5));
-    const maxPanY = Math.max(220, 600 * Math.max(0.2, currentZoom - 0.5));
+    const maxPanX = Math.max(120, 500 * Math.max(0.1, currentZoom - 0.5));
+    const maxPanY = Math.max(160, 600 * Math.max(0.1, currentZoom - 0.5));
     return {
       x: Math.max(-maxPanX, Math.min(maxPanX, newPan.x)),
       y: Math.max(-maxPanY, Math.min(maxPanY, newPan.y)),
@@ -187,7 +229,7 @@ export default function KolkataMetroExplorerModal({
       if (lastPinchDistRef.current !== null) {
         const scale = dist / lastPinchDistRef.current;
         setZoom((prev) => {
-          const next = Math.min(3.0, Math.max(0.75, prev * scale));
+          const next = Math.min(3.5, Math.max(0.6, prev * scale));
           return next;
         });
       }
@@ -200,7 +242,7 @@ export default function KolkataMetroExplorerModal({
     lastPinchDistRef.current = null;
   };
 
-  // Non-passive wheel handler: prevents page scroll leakage and allows smooth zoom down to 0.75
+  // Non-passive wheel handler: allows smooth zoom from 0.6 to 3.5
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !isOpen) return;
@@ -209,10 +251,10 @@ export default function KolkataMetroExplorerModal({
       e.preventDefault();
       e.stopPropagation();
 
-      const factor = e.deltaY < 0 ? 1.12 : 0.88;
+      const factor = e.deltaY < 0 ? 1.15 : 0.87;
 
       setZoom((prevZoom) => {
-        const nextZoom = Math.min(3.0, Math.max(0.75, prevZoom * factor));
+        const nextZoom = Math.min(3.5, Math.max(0.6, Number((prevZoom * factor).toFixed(3))));
 
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -504,7 +546,7 @@ export default function KolkataMetroExplorerModal({
           }`}>
             <button
               type="button"
-              onClick={() => setZoom((z) => Math.min(3.0, Number((z + 0.25).toFixed(2))))}
+              onClick={() => setZoom((z) => Math.min(3.5, Number((z + 0.2).toFixed(2))))}
               className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
@@ -516,12 +558,12 @@ export default function KolkataMetroExplorerModal({
             <button
               type="button"
               onClick={() => {
-                setZoom((z) => Math.max(0.75, Number((z - 0.25).toFixed(2))));
+                setZoom((z) => Math.max(0.6, Number((z - 0.2).toFixed(2))));
               }}
               className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
-              title="Zoom Out (Expanded full view)"
+              title="Zoom Out"
             >
               <ZoomOut className="w-4 h-4 transition-transform active:scale-90" />
             </button>
@@ -554,8 +596,7 @@ export default function KolkataMetroExplorerModal({
             <svg
               width="100%"
               height="100%"
-              viewBox="0 0 1050 1350"
-              preserveAspectRatio="xMidYMid slice"
+              viewBox={viewBox}
               className="w-full h-full select-none"
               style={{
                 transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
@@ -569,16 +610,16 @@ export default function KolkataMetroExplorerModal({
                 </filter>
               </defs>
 
-              {/* Extended Base Plate so zooming out never reveals harsh black void */}
-              <rect x="-800" y="-800" width="2650" height="2950" fill={isDark ? '#0c0a09' : '#FFFFFF'} />
+              {/* Extended Base Plate matching the theme background */}
+              <rect x="-2000" y="-2000" width="5050" height="5350" fill={isDark ? '#0c0a09' : '#FFFFFF'} />
 
               {/* 1. ARTWORK BACKGROUND: Illustrated Kolkata Map - Rich Nocturnal Scene in Dark Mode */}
               <image
                 href="/brand/kolkata-art-map.jpg"
-                x="-40"
-                y="-40"
-                width="1130"
-                height="1430"
+                x="-100"
+                y="-50"
+                width="1250"
+                height="1450"
                 preserveAspectRatio="none"
                 opacity={isDark ? 0.38 : 0.45}
                 style={{
