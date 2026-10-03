@@ -1022,15 +1022,32 @@ export default function RoutePlannerPage() {
       {selectedPandals.length > 0 ? (
         <div className="space-y-2">
           {/* Itinerary Header */}
-          <div className="flex items-center justify-between pt-1 pb-1 px-1">
-            <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-xl font-bold font-editorial text-stone-900 dark:text-stone-100">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 pb-2.5 px-1 border-b border-stone-200/70 dark:border-white/10 mb-2">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#D8261C] shadow-xs shadow-red-500/50 animate-pulse shrink-0" />
+              <h2 className="text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-100 tracking-tight">
                 {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#FEF2F2] dark:bg-[#2A1215] text-[#D8261C] border border-[#D8261C]/20 shadow-2xs">
-                {selectedPandals.length} {isBn ? 'প্যান্ডেল' : 'Stops'}
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 dark:bg-red-500/20 text-[#D8261C] dark:text-red-300 border border-red-200 dark:border-red-500/30 shadow-2xs">
+                <span className="font-mono font-black">{selectedPandals.length}</span>
+                <span className="text-[11px] font-medium opacity-90">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
               </span>
             </div>
+
+            {/* Quick Distance & Time Overview */}
+            {selectedPandals.length > 1 && (
+              <div className="flex items-center gap-2 text-xs font-medium text-stone-600 dark:text-stone-300 bg-stone-100/80 dark:bg-white/[0.04] px-3 py-1 rounded-xl border border-stone-200/60 dark:border-white/5">
+                <span className="flex items-center gap-1">
+                  <Footprints className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
+                  <span>~{routeStats.totalDistance} km</span>
+                </span>
+                <span className="text-stone-300 dark:text-stone-700">•</span>
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
+                  <span>~{routeStats.estimatedHours} {isBn ? 'ঘণ্টা' : 'hrs'}</span>
+                </span>
+              </div>
+            )}
           </div>
           {selectedPandals.map((pandal, index) => {
             const isFirst = index === 0;
