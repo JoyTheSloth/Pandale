@@ -1021,33 +1021,32 @@ export default function RoutePlannerPage() {
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
         <div className="space-y-2">
-          {/* Itinerary Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 pb-2.5 px-1 border-b border-stone-200/70 dark:border-white/10 mb-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#D8261C] shadow-xs shadow-red-500/50 animate-pulse shrink-0" />
+          {/* Centered Itinerary Header Banner with Festive Border & Pattern */}
+          <div className="relative py-3.5 px-4 my-2.5 rounded-2xl bg-stone-50/90 dark:bg-[#181316] border border-stone-200/90 dark:border-white/10 overflow-hidden shadow-2xs">
+            {/* Subtle Festive Micro-Pattern Background */}
+            <div 
+              className="absolute inset-0 opacity-[0.05] dark:opacity-[0.10] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(#D8261C 1.5px, transparent 1.5px)',
+                backgroundSize: '14px 14px'
+              }}
+            />
+            {/* Subtle Festive Accent Borders at Top & Bottom */}
+            <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-[#D8261C]/40 to-transparent" />
+            <div className="absolute bottom-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-[#D8261C]/40 to-transparent" />
+
+            <div className="relative z-10 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-center">
+              <span className="text-[#D8261C] text-xs font-mono select-none opacity-80">✦</span>
               <h2 className="text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-100 tracking-tight">
                 {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
               </h2>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 dark:bg-red-500/20 text-[#D8261C] dark:text-red-300 border border-red-200 dark:border-red-500/30 shadow-2xs">
+              <span className="text-[#D8261C] text-xs font-mono select-none opacity-80">✦</span>
+
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D8261C] text-white shadow-xs">
                 <span className="font-mono font-black">{selectedPandals.length}</span>
-                <span className="text-[11px] font-medium opacity-90">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
+                <span className="text-[11px] font-medium opacity-95">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
               </span>
             </div>
-
-            {/* Quick Distance & Time Overview */}
-            {selectedPandals.length > 1 && (
-              <div className="flex items-center gap-2 text-xs font-medium text-stone-600 dark:text-stone-300 bg-stone-100/80 dark:bg-white/[0.04] px-3 py-1 rounded-xl border border-stone-200/60 dark:border-white/5">
-                <span className="flex items-center gap-1">
-                  <Footprints className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
-                  <span>~{routeStats.totalDistance} km</span>
-                </span>
-                <span className="text-stone-300 dark:text-stone-700">•</span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
-                  <span>~{routeStats.estimatedHours} {isBn ? 'ঘণ্টা' : 'hrs'}</span>
-                </span>
-              </div>
-            )}
           </div>
           {selectedPandals.map((pandal, index) => {
             const isFirst = index === 0;
