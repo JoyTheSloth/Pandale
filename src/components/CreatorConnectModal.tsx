@@ -17,7 +17,8 @@ import {
   ArrowLeft,
   QrCode,
   MessageCircle,
-  Sparkles
+  Sparkles,
+  Zap
 } from 'lucide-react';
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -382,11 +383,17 @@ export default function CreatorConnectModal() {
                       </a>
 
                       <a
-                        href="upi://pay?pa=joy.thesloth@okicici&pn=Joydeep%20Das&aid=uGICAgKCA0KWEbQ"
-                        className="flex-1 py-2 px-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                        href="upi://pay?pa=joy.thesloth@okicici&pn=Joydeep%20Das&cu=INR&tn=Pandale%20Support&aid=uGICAgKCA0KWEbQ"
+                        onClick={() => {
+                          if (navigator.clipboard) {
+                            navigator.clipboard.writeText(upiId).catch(() => {});
+                          }
+                        }}
+                        title="Open UPI App (GPay, PhonePe, Paytm, CRED)"
+                        className="flex-1 py-2 px-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
                       >
-                        <Coffee className="w-3.5 h-3.5" />
-                        <span>Buy me a Coffee</span>
+                        <Zap className="w-3.5 h-3.5 fill-white" />
+                        <span>Direct UPI</span>
                       </a>
                     </div>
                   </div>
