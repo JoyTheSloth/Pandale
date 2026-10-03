@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PANDALS_DATA } from '@/data/pandals';
 import { METRO_STATIONS_DATA } from '@/data/metro';
 import { useWishlist } from '@/context/WishlistContext';
+import { useVisited } from '@/context/VisitedContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { 
   Route, 
@@ -279,6 +280,7 @@ const ZONE_METRO_HUBS: Record<string, HubStationOption[]> = {
 
 export default function RoutePlannerPage() {
   const { wishlist } = useWishlist();
+  const { isVisited, toggleVisited } = useVisited();
   const { language } = useLanguage();
   const isBn = language === 'bn';
 
@@ -1083,7 +1085,11 @@ export default function RoutePlannerPage() {
                   </div>
 
                   {/* Slim Card Content with Generous Inner Padding */}
-                  <div className="flex-1 min-w-0 bg-[#140C10] dark:bg-[#140C10] border border-white/10 rounded-2xl py-3 px-4 sm:py-3.5 sm:px-5 flex items-center justify-between gap-3 sm:gap-4 shadow-sm hover:border-white/20 transition-all">
+                  <div className={`flex-1 min-w-0 border rounded-2xl py-3 px-4 sm:py-3.5 sm:px-5 flex items-center justify-between gap-3 sm:gap-4 shadow-sm hover:border-white/20 transition-all ${
+                    isVisited(pandal.id)
+                      ? 'bg-[#0E1612] dark:bg-[#0E1612] border-emerald-500/40'
+                      : 'bg-[#140C10] dark:bg-[#140C10] border-white/10'
+                  }`}>
                     {/* Left Info: Title, Area, Metro Station & Line Dot */}
                     <div className="min-w-0 flex-1 space-y-1.5">
                       {/* Row 1: Title, Crown & Location */}
@@ -1125,6 +1131,20 @@ export default function RoutePlannerPage() {
 
                     {/* Right Action Icons: Compact button row */}
                     <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+                      {/* Checkbox: Visited toggle (persisted in cookies) */}
+                      <button
+                        type="button"
+                        onClick={() => toggleVisited(pandal.id)}
+                        className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg border flex items-center justify-center transition-all cursor-pointer ${
+                          isVisited(pandal.id)
+                            ? 'bg-emerald-600 text-white border-emerald-500 shadow-xs'
+                            : 'bg-white/5 hover:bg-emerald-950/40 text-transparent hover:text-emerald-400 border-white/20'
+                        }`}
+                        title={isVisited(pandal.id) ? (isBn ? 'দর্শন সম্পন্ন (কুকিতে সংরক্ষিত)' : 'Visited (Saved in cookies)') : (isBn ? 'দর্শন সম্পন্ন হিসেবে চিহ্নিত করুন' : 'Mark as Visited (Saves to cookies)')}
+                        aria-label="Toggle visited"
+                      >
+                        <Check className={`w-3.5 h-3.5 stroke-[3] transition-all duration-150 ${isVisited(pandal.id) ? 'opacity-100 scale-100 text-white' : 'opacity-0 scale-75'}`} />
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleMoveUp(index)}

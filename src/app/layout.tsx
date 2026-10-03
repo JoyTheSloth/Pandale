@@ -5,6 +5,7 @@ import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { WishlistProvider } from '@/context/WishlistContext';
+import { VisitedProvider } from '@/context/VisitedContext';
 import { LocationProvider } from '@/context/LocationContext';
 import { Suspense } from 'react';
 import TopProgressBar from '@/components/TopProgressBar';
@@ -121,16 +122,18 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <WishlistProvider>
-              <LocationProvider>
-                <div className="relative flex min-h-screen flex-col">
-                  <Header />
-                  <main className="flex-1 pb-16 md:pb-0">{children}</main>
-                  <Footer />
-                </div>
-                <CreatorConnectModal />
-                <BottomNav />
-                <InstallPrompt />
-              </LocationProvider>
+              <VisitedProvider>
+                <LocationProvider>
+                  <div className="relative flex min-h-screen flex-col">
+                    <Header />
+                    <main className="flex-1 pb-16 md:pb-0">{children}</main>
+                    <Footer />
+                  </div>
+                  <CreatorConnectModal />
+                  <BottomNav />
+                  <InstallPrompt />
+                </LocationProvider>
+              </VisitedProvider>
             </WishlistProvider>
           </LanguageProvider>
         </ThemeProvider>

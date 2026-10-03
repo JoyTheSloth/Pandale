@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Pandal } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
+import { useVisited } from '@/context/VisitedContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { 
   Heart, 
@@ -12,7 +13,6 @@ import {
   Clock, 
   ArrowRight, 
   Users, 
-  Forward,
   Check 
 } from 'lucide-react';
 import { buildGoogleMapsUrl } from '@/lib/geo';
@@ -24,10 +24,11 @@ interface PandalCardProps {
 
 export default function PandalCard({ pandal, priority = false }: PandalCardProps) {
   const { isSaved, toggleWishlist } = useWishlist();
+  const { isVisited, toggleVisited } = useVisited();
   const { language } = useLanguage();
   const isBn = language === 'bn';
   const saved = isSaved(pandal.id);
-  const [copied, setCopied] = React.useState(false);
+  const visited = isVisited(pandal.id);
 
   const exactMapsUrl = buildGoogleMapsUrl(
     pandal.latitude,
@@ -57,51 +58,28 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
     }
   };
 
-  const handleShare = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const url = typeof window !== 'undefined' ? `${window.location.origin}/pandal/${pandal.slug}` : '';
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `${pandal.name} | Pandalé 2026`,
-          text: `Check out ${pandal.name} in ${pandal.area} for Kolkata Durga Puja 2026!`,
-          url,
-        });
-      } catch {
-        // dismissed
-      }
-    } else if (navigator.clipboard) {
-      try {
-        await navigator.clipboard.writeText(url);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch {
-        // ignore
-      }
-    }
-  };
-
   return (
-    <div className="group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-[1.75rem] border border-[#EFE8DD] dark:border-white/10 p-2.5 sm:p-3 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.99] transition-all duration-300 flex flex-row md:flex-col items-stretch gap-2.5 sm:gap-3.5 md:gap-0 overflow-hidden">
+    <div className={`group relative bg-[#FAF7F2] dark:bg-[#1A1215] rounded-[1.75rem] border p-2.5 sm:p-3 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.99] transition-all duration-300 flex flex-row md:flex-col items-stretch gap-2.5 sm:gap-3.5 md:gap-0 overflow-hidden ${
+      visited ? 'border-emerald-500/50 dark:border-emerald-500/40 bg-emerald-50/10 dark:bg-emerald-950/10' : 'border-[#EFE8DD] dark:border-white/10'
+    }`}>
       
-      {/* Top-Right Floating Share Button */}
+      {/* Top-Right Visited / Completed Checkbox (stored in cookies) */}
       <button
         type="button"
-        onClick={handleShare}
-        title={isBn ? (copied ? 'লিঙ্ক কপি হয়েছে!' : 'শেয়ার করুন') : (copied ? 'Link Copied!' : 'Share Pandal')}
-        aria-label="Share pandal"
-        className={`absolute top-2.5 right-2.5 z-20 w-7.5 h-7.5 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md hover:scale-110 active:scale-90 backdrop-blur-md group/share ${
-          copied
-            ? 'bg-emerald-500 text-white border border-emerald-400'
-            : 'bg-white/95 dark:bg-[#20161C]/95 hover:bg-[#D8261C] hover:text-white dark:hover:bg-[#D8261C] dark:hover:text-white text-stone-600 dark:text-stone-300 border border-stone-200/90 dark:border-white/10'
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleVisited(pandal.id);
+        }}
+        title={visited ? (isBn ? 'দর্শন সম্পন্ন (চিহ্নিত)' : 'Visited (Saved in cookies)') : (isBn ? 'দর্শন সম্পন্ন হিসেবে চিহ্নিত করুন' : 'Mark as Visited (Saves to cookies)')}
+        aria-label={visited ? 'Marked as visited' : 'Mark as visited'}
+        className={`absolute top-2.5 right-2.5 z-20 w-7.5 h-7.5 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:scale-110 active:scale-90 backdrop-blur-md border ${
+          visited
+            ? 'bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-900/30'
+            : 'bg-white/95 dark:bg-[#20161C]/95 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-transparent hover:text-emerald-600 dark:hover:text-emerald-400 border-stone-300 dark:border-white/20'
         }`}
       >
-        {copied ? (
-          <Check className="w-3.5 h-3.5 stroke-[2.5] text-white animate-in zoom-in-75 duration-150" />
-        ) : (
-          <Forward className="w-3.5 h-3.5 transition-transform group-hover/share:translate-x-0.5" />
-        )}
+        <Check className={`w-4 h-4 stroke-[3] transition-all duration-150 ${visited ? 'scale-100 opacity-100 text-white' : 'scale-75 opacity-0 hover:opacity-70'}`} />
       </button>
 
       {/* 1. LEFT (mobile) / TOP (desktop): MEDIA / IMAGE CONTAINER */}

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Pandal } from '@/types';
 import { PANDALS_DATA } from '@/data/pandals';
 import { useWishlist } from '@/context/WishlistContext';
+import { useVisited } from '@/context/VisitedContext';
 import { buildGoogleMapsUrl, buildDirectionsUrl } from '@/lib/geo';
 import GalleryLightbox from '@/components/GalleryLightbox';
 import { 
@@ -29,12 +30,14 @@ interface PandalClientViewProps {
 
 export default function PandalClientView({ pandal }: PandalClientViewProps) {
   const { isSaved, toggleWishlist } = useWishlist();
+  const { isVisited, toggleVisited } = useVisited();
   const [copied, setCopied] = useState(false);
   const [activeGalleryTab, setActiveGalleryTab] = useState<'all' | 'official' | 'latest' | 'instagram' | 'community'>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const saved = isSaved(pandal.id);
+  const visited = isVisited(pandal.id);
 
   // Exact Google Maps location link (place name in search bar)
   const exactMapsUrl = buildGoogleMapsUrl(
@@ -138,8 +141,24 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Visited Checkbox (stored in cookies) */}
+              <button
+                type="button"
+                onClick={() => toggleVisited(pandal.id)}
+                aria-label={visited ? 'Marked as visited' : 'Mark as visited'}
+                title={visited ? 'Visited (Saved in cookies)' : 'Mark as Visited (Saves to cookies)'}
+                className={`p-3 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer border ${
+                  visited
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-md'
+                    : 'bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-stone-400 hover:text-emerald-500 border-transparent dark:border-white/10'
+                }`}
+              >
+                <Check className={`w-4 h-4 stroke-[3] transition-transform duration-150 ${visited ? 'text-white scale-110' : 'opacity-40'}`} />
+              </button>
+
               {/* Share */}
               <button
+                type="button"
                 onClick={handleShare}
                 aria-label="Share Pandal details"
                 className="p-3 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer border border-transparent dark:border-white/10 group"
