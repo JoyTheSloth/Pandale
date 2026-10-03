@@ -135,15 +135,11 @@ export default function KolkataMetroExplorerModal({
     }
   }, [isOpen, isPage]);
 
-  // Clamp pan so map stays fixed at base zoom and cannot be panned off screen
+  // Clamp pan so map can be explored smoothly across all zoom levels
   const clampPan = useCallback((newPan: { x: number; y: number }, currentZoom: number) => {
-    // When zoomed out to base (<= 1.05), lock strictly fixed at center (0, 0)
-    if (currentZoom <= 1.05) {
-      return { x: 0, y: 0 };
-    }
-    // Clamped panning range proportional to zoom level
-    const maxPanX = 380 * (currentZoom - 1);
-    const maxPanY = 480 * (currentZoom - 1);
+    // Generous pan boundaries proportional to zoom level
+    const maxPanX = Math.max(180, 500 * Math.max(0.2, currentZoom - 0.5));
+    const maxPanY = Math.max(220, 600 * Math.max(0.2, currentZoom - 0.5));
     return {
       x: Math.max(-maxPanX, Math.min(maxPanX, newPan.x)),
       y: Math.max(-maxPanY, Math.min(maxPanY, newPan.y)),
@@ -191,8 +187,7 @@ export default function KolkataMetroExplorerModal({
       if (lastPinchDistRef.current !== null) {
         const scale = dist / lastPinchDistRef.current;
         setZoom((prev) => {
-          const next = Math.min(3.0, Math.max(1.0, prev * scale));
-          if (next <= 1.02) { setPan({ x: 0, y: 0 }); return 1.0; }
+          const next = Math.min(3.0, Math.max(0.75, prev * scale));
           return next;
         });
       }
@@ -205,7 +200,7 @@ export default function KolkataMetroExplorerModal({
     lastPinchDistRef.current = null;
   };
 
-  // Non-passive wheel handler: prevents page scroll leakage and fixes min-zoom at 1.0
+  // Non-passive wheel handler: prevents page scroll leakage and allows smooth zoom down to 0.75
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !isOpen) return;
@@ -217,14 +212,7 @@ export default function KolkataMetroExplorerModal({
       const factor = e.deltaY < 0 ? 1.12 : 0.88;
 
       setZoom((prevZoom) => {
-        // Fix min zoom to 1.0 so scrolling out can NEVER shrink into void or drift away
-        const nextZoom = Math.min(3.0, Math.max(1.0, prevZoom * factor));
-
-        if (nextZoom <= 1.02) {
-          // Snap back to fixed centered view when fully scrolled out!
-          setPan({ x: 0, y: 0 });
-          return 1.0;
-        }
+        const nextZoom = Math.min(3.0, Math.max(0.75, prevZoom * factor));
 
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -516,7 +504,7 @@ export default function KolkataMetroExplorerModal({
           }`}>
             <button
               type="button"
-              onClick={() => setZoom((z) => Math.min(3.0, z + 0.25))}
+              onClick={() => setZoom((z) => Math.min(3.0, Number((z + 0.25).toFixed(2))))}
               className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
@@ -528,16 +516,12 @@ export default function KolkataMetroExplorerModal({
             <button
               type="button"
               onClick={() => {
-                setZoom((z) => {
-                  const nextZ = Math.max(1.0, z - 0.25);
-                  if (nextZ <= 1.05) setPan({ x: 0, y: 0 });
-                  return nextZ;
-                });
+                setZoom((z) => Math.max(0.75, Number((z - 0.25).toFixed(2))));
               }}
               className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
-              title="Zoom Out (Fixed at full view)"
+              title="Zoom Out (Expanded full view)"
             >
               <ZoomOut className="w-4 h-4 transition-transform active:scale-90" />
             </button>
@@ -571,6 +555,7 @@ export default function KolkataMetroExplorerModal({
               width="100%"
               height="100%"
               viewBox="0 0 1050 1350"
+              preserveAspectRatio="xMidYMid slice"
               className="w-full h-full select-none"
               style={{
                 transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
@@ -584,20 +569,20 @@ export default function KolkataMetroExplorerModal({
                 </filter>
               </defs>
 
-              {/* Clean Base Plate (White in light mode, Dark Charcoal in dark mode) */}
-              <rect width="1050" height="1350" fill={isDark ? '#0c0a09' : '#FFFFFF'} />
+              {/* Extended Base Plate so zooming out never reveals harsh black void */}
+              <rect x="-800" y="-800" width="2650" height="2950" fill={isDark ? '#0c0a09' : '#FFFFFF'} />
 
               {/* 1. ARTWORK BACKGROUND: Illustrated Kolkata Map - Rich Nocturnal Scene in Dark Mode */}
               <image
                 href="/brand/kolkata-art-map.jpg"
-                x="0"
-                y="0"
-                width="1050"
-                height="1350"
+                x="-40"
+                y="-40"
+                width="1130"
+                height="1430"
                 preserveAspectRatio="none"
-                opacity={isDark ? 0.35 : 0.42}
+                opacity={isDark ? 0.38 : 0.45}
                 style={{
-                  filter: isDark ? 'brightness(0.52) contrast(1.12) saturate(0.88)' : undefined
+                  filter: isDark ? 'brightness(0.55) contrast(1.12) saturate(0.9)' : undefined
                 }}
               />
 
