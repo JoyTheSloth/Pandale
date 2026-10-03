@@ -31,7 +31,6 @@ import {
   ChevronRight,
   ChevronLeft,
   ArrowRight,
-  ArrowUpRight,
   Users
 } from 'lucide-react';
 import { calculateDistanceKm, formatDistance, buildGoogleMapsUrl } from '@/lib/geo';
@@ -732,42 +731,14 @@ export default function RoutePlannerPage() {
           className="flex items-stretch gap-3 sm:gap-3.5 overflow-x-auto no-scrollbar snap-x snap-mandatory py-1 px-0.5 scroll-smooth"
         >
           {PRESET_CIRCUITS.map((preset) => {
-            const isActive = activePreset === preset.id;
             return (
               <div
                 key={preset.id}
-                onClick={() => handleApplyPreset(preset)}
-                className={`group cursor-pointer shrink-0 snap-start w-[155px] sm:w-[175px] rounded-2xl p-2.5 sm:p-3 relative overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-2 active:scale-[0.96] select-none ${
-                  isActive
-                    ? 'bg-[#181412] dark:bg-[#120D0B] text-white border-2 border-[#D8261C] ring-2 ring-[#D8261C]/30 shadow-[#D8261C]/20'
-                    : 'bg-[#181412] dark:bg-[#140F0E] text-white border border-stone-800/80 hover:border-amber-400/50 hover:shadow-amber-500/10'
-                }`}
+                className="shrink-0 snap-start w-[155px] sm:w-[175px] rounded-2xl p-2.5 sm:p-3 relative overflow-hidden flex flex-col justify-between shadow-md bg-[#181412] dark:bg-[#140F0E] text-white border border-stone-800/80 select-none cursor-default"
               >
-                {/* Active Indicator Top Accent Bar */}
-                {isActive && (
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#D8261C] via-[#FDE047] to-[#D8261C] z-20" />
-                )}
-
-                {/* Card Top: Arrow ↗ / Check Button at Top Right */}
-                <div className="flex items-center justify-end mb-1">
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs ${
-                      isActive
-                        ? 'bg-[#D8261C] text-white'
-                        : 'bg-white text-stone-900 group-hover:scale-115 group-hover:bg-[#FFFBEB]'
-                    }`}
-                  >
-                    {isActive ? (
-                      <Check className="w-3 h-3 text-white stroke-[2.5]" />
-                    ) : (
-                      <ArrowUpRight className="w-3 h-3 text-stone-900 group-hover:text-[#D8261C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all stroke-[2.5]" />
-                    )}
-                  </div>
-                </div>
-
                 {/* Centered Neighborhood & Route Title */}
-                <div className="text-center -mt-2.5 mb-2 px-1">
-                  <h3 className="text-sm sm:text-base font-bold font-editorial text-white tracking-tight group-hover:text-amber-200 transition-colors leading-tight truncate">
+                <div className="text-center mb-2 px-1">
+                  <h3 className="text-sm sm:text-base font-bold font-editorial text-white tracking-tight leading-tight truncate">
                     {isBn ? preset.bengaliTitle : preset.title}
                   </h3>
                   <p className="text-[9px] text-[#E7E5E4]/80 mt-0.5 font-medium truncate">
@@ -782,18 +753,14 @@ export default function RoutePlannerPage() {
                     alt={preset.title}
                     fill
                     sizes="180px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-112"
+                    className="object-cover"
                   />
                   {/* Subtle vignette gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25 group-hover:via-black/5 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25" />
 
                   {/* Floating Center Badge: e.g. "6 Iconic Pandals" */}
                   <div className="absolute bottom-1.5 inset-x-1.5 text-center z-10">
-                    <span className={`inline-block px-2 py-0.5 rounded-full text-[8.5px] font-bold font-mono shadow-xs backdrop-blur-md transition-all group-hover:scale-105 ${
-                      isActive
-                        ? 'bg-[#D8261C] text-white border border-[#FDE047]/60'
-                        : 'bg-[#FFF8F0] text-[#7C2D12] border border-[#FED7AA]'
-                    }`}>
+                    <span className="inline-block px-2 py-0.5 rounded-full text-[8.5px] font-bold font-mono shadow-xs backdrop-blur-md bg-[#FFF8F0] text-[#7C2D12] border border-[#FED7AA]">
                       {isBn ? preset.bengaliBadge : preset.badge}
                     </span>
                   </div>
