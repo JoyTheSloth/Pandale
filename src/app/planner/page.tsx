@@ -983,9 +983,10 @@ export default function RoutePlannerPage() {
                     type="button"
                     disabled={stationPage === 1}
                     onClick={() => setStationPage((p) => Math.max(1, p - 1))}
-                    className="px-2 py-1 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 text-[11px] font-bold transition-all cursor-pointer"
+                    aria-label="Previous Page"
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 transition-all cursor-pointer flex items-center justify-center"
                   >
-                    {isBn ? '← পূর্ববর্তী' : '← Prev'}
+                    <ChevronLeft className="w-3.5 h-3.5" />
                   </button>
                   {Array.from({ length: totalStationPages }, (_, i) => i + 1).map((pageNum) => (
                     <button
@@ -1005,9 +1006,10 @@ export default function RoutePlannerPage() {
                     type="button"
                     disabled={stationPage === totalStationPages}
                     onClick={() => setStationPage((p) => Math.min(totalStationPages, p + 1))}
-                    className="px-2 py-1 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 text-[11px] font-bold transition-all cursor-pointer"
+                    aria-label="Next Page"
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 transition-all cursor-pointer flex items-center justify-center"
                   >
-                    {isBn ? 'পরবর্তী →' : 'Next →'}
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
