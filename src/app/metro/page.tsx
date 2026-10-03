@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { METRO_STATIONS_DATA } from '@/data/metro';
@@ -11,6 +11,7 @@ import {
   Footprints, 
   Search, 
   ChevronRight, 
+  ChevronDown,
   LayoutGrid, 
   X, 
   ExternalLink,
@@ -29,6 +30,24 @@ export default function MetroGuidePage() {
   const [selectedLine, setSelectedLine] = useState<'all' | 'blue' | 'green' | 'orange' | 'purple' | 'yellow'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedStationId, setExpandedStationId] = useState<string | null>('shyambazar');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [dropdownSearch, setDropdownSearch] = useState('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
 
   // Metro Line Cards
   const METRO_LINE_CARDS = [
@@ -135,6 +154,38 @@ export default function MetroGuidePage() {
     }
     return list;
   }, [selectedLine, searchQuery]);
+
+  // Lookup currently active expanded station
+  const activeStation = useMemo(() => {
+    return METRO_STATIONS_DATA.find((s) => s.id === expandedStationId);
+  }, [expandedStationId]);
+
+  // Stations for the Jump Dropdown (filterable via inline input)
+  const dropdownStations = useMemo(() => {
+    if (!dropdownSearch.trim()) return METRO_STATIONS_DATA;
+    const q = dropdownSearch.toLowerCase().trim();
+    return METRO_STATIONS_DATA.filter((s) =>
+      s.name.toLowerCase().includes(q) ||
+      (s.bengali_name && s.bengali_name.includes(q)) ||
+      s.line.toLowerCase().includes(q)
+    );
+  }, [dropdownSearch]);
+
+  // Handle station selection from dropdown
+  const handleSelectDropdownStation = (st: (typeof METRO_STATIONS_DATA)[0]) => {
+    if (selectedLine !== 'all' && selectedLine !== st.line_code) {
+      setSelectedLine('all');
+    }
+    setExpandedStationId(st.id);
+    setIsDropdownOpen(false);
+    setDropdownSearch('');
+    setTimeout(() => {
+      const el = document.getElementById(`station-${st.id}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 150);
+  };
 
   // Helper for line color badges
   const getLineStyles = (lineCode: string) => {
@@ -333,36 +384,141 @@ export default function MetroGuidePage() {
             </div>
           </div>
 
-          {/* Search bar inside pill */}
-          <div className="relative w-full sm:w-64">
-            <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => {
-                const val = e.target.value;
-                setSearchQuery(val);
-                if (val.trim().length >= 3) {
-                  const match = METRO_STATIONS_DATA.find((s) =>
-                    s.name.toLowerCase().includes(val.trim().toLowerCase())
-                  );
-                  if (match) {
-                    setExpandedStationId(match.id);
-                  }
-                }
-              }}
-              placeholder="Search station (e.g. Kalighat, Shyambazar)..."
-              className="w-full pl-9 pr-8 py-2 rounded-full bg-stone-50 dark:bg-stone-800/80 border border-stone-200 dark:border-white/10 text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] transition-all"
-            />
-            {searchQuery && (
+          {/* Action Controls: Quick Jump Station Dropdown + Search bar */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+            {/* Quick Station Jump Dropdown */}
+            <div ref={dropdownRef} className="relative">
               <button
                 type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 dark:hover:text-white"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`w-full sm:w-auto h-9 px-3.5 rounded-full border text-xs font-semibold flex items-center justify-between sm:justify-start gap-2 transition-all cursor-pointer select-none active:scale-95 ${
+                  isDropdownOpen
+                    ? 'bg-[#D8261C] text-white border-transparent shadow-md'
+                    : 'bg-stone-50 dark:bg-stone-800/80 hover:bg-stone-100 dark:hover:bg-stone-700/80 border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200'
+                }`}
+                title="Jump directly to any station"
               >
-                <X className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-1.5 truncate max-w-[190px] sm:max-w-[160px]">
+                  <MapPin className={`w-3.5 h-3.5 shrink-0 ${isDropdownOpen ? 'text-white' : 'text-[#D8261C]'}`} />
+                  <span className="truncate">
+                    {activeStation
+                      ? (language === 'bn' && activeStation.bengali_name ? activeStation.bengali_name : activeStation.name)
+                      : (language === 'bn' ? 'স্টেশনে লাফ দিন' : 'Jump to Station')}
+                  </span>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-            )}
+
+              {/* Dropdown Menu Modal / Popover */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-full sm:w-80 max-h-80 overflow-hidden flex flex-col rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150">
+                  {/* Dropdown Quick Filter Input */}
+                  <div className="p-2 border-b border-stone-100 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-950/40">
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        value={dropdownSearch}
+                        onChange={(e) => setDropdownSearch(e.target.value)}
+                        placeholder={language === 'bn' ? 'স্টেশনের নাম খুঁজুন...' : 'Type station name...'}
+                        className="w-full pl-8 pr-7 py-1.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#D8261C]"
+                        autoFocus
+                      />
+                      {dropdownSearch && (
+                        <button
+                          type="button"
+                          onClick={() => setDropdownSearch('')}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Stations Scrollable List */}
+                  <div className="overflow-y-auto divide-y divide-stone-100 dark:divide-stone-800/60 max-h-64">
+                    {dropdownStations.length === 0 ? (
+                      <div className="p-4 text-center text-xs text-stone-500">
+                        {language === 'bn' ? 'কোনো স্টেশন পাওয়া যায়নি' : 'No stations found'}
+                      </div>
+                    ) : (
+                      dropdownStations.map((st) => {
+                        const isCurrent = expandedStationId === st.id;
+                        const lineBadge = getLineStyles(st.line_code);
+                        return (
+                          <button
+                            key={st.id}
+                            type="button"
+                            onClick={() => handleSelectDropdownStation(st)}
+                            className={`w-full px-3 py-2 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
+                              isCurrent
+                                ? 'bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold'
+                                : 'hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2 truncate">
+                              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${lineBadge.bg}`} />
+                              <div className="truncate">
+                                <p className="leading-tight truncate">
+                                  {st.name}
+                                  {st.bengali_name && (
+                                    <span className="ml-1.5 text-[10.5px] font-normal text-stone-600 dark:text-stone-400">
+                                      {st.bengali_name}
+                                    </span>
+                                  )}
+                                </p>
+                                <p className="text-[10px] text-stone-600 dark:text-stone-400 font-normal truncate">
+                                  {st.line}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
+                                {st.nearby_pandals.length} {language === 'bn' ? 'পুজো' : 'pujas'}
+                              </span>
+                              {isCurrent && <Check className="w-3.5 h-3.5 text-[#D8261C] shrink-0" />}
+                            </div>
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Search bar inside pill */}
+            <div className="relative w-full sm:w-56">
+              <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSearchQuery(val);
+                  if (val.trim().length >= 3) {
+                    const match = METRO_STATIONS_DATA.find((s) =>
+                      s.name.toLowerCase().includes(val.trim().toLowerCase())
+                    );
+                    if (match) {
+                      setExpandedStationId(match.id);
+                    }
+                  }
+                }}
+                placeholder={language === 'bn' ? 'স্টেশন খুঁজুন...' : 'Search station...'}
+                className="w-full pl-9 pr-8 py-2 rounded-full bg-stone-50 dark:bg-stone-800/80 border border-stone-200 dark:border-white/10 text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]/30 focus:border-[#D8261C] transition-all"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 dark:hover:text-white"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -389,7 +545,8 @@ export default function MetroGuidePage() {
               return (
                 <div
                   key={station.id}
-                  className={`py-3 sm:py-3.5 transition-colors ${
+                  id={`station-${station.id}`}
+                  className={`py-3 sm:py-3.5 transition-colors scroll-mt-24 ${
                     isSearchedMatch ? 'bg-red-50/40 dark:bg-red-950/20 rounded-2xl px-2' : ''
                   }`}
                 >
