@@ -296,9 +296,6 @@ export default function MetroGuidePage() {
                   <p className="text-[11px] text-stone-600 dark:text-stone-300 font-semibold line-clamp-1">
                     {line.route}
                   </p>
-                  <p className="text-[9.5px] font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400 font-medium truncate">
-                    {line.corridor}
-                  </p>
                 </div>
 
                 {/* 3. Bottom Bar: Action Cue + Chevron */}
