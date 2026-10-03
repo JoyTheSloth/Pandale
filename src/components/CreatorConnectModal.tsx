@@ -268,7 +268,7 @@ export default function CreatorConnectModal() {
                     Want a custom website, Next.js web application, or digital product built like this?
                   </p>
                   <p className="text-xs text-stone-600 dark:text-stone-300">
-                    Let&rsquo;s connect! Tap below to chat directly on WhatsApp or drop an email. 🚀
+                    Let&rsquo;s connect! Drop an email or connect with me on Instagram below. 🚀
                   </p>
                   <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
                     <span>11:44 AM</span>
@@ -279,15 +279,17 @@ export default function CreatorConnectModal() {
 
               {/* Action Bar */}
               <div className="p-3 bg-[#F0F2F5] dark:bg-[#202C33] border-t border-stone-200 dark:border-white/5 space-y-2">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('help');
+                    setShowQr(false);
+                  }}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#FFDD00] hover:bg-[#FFEA47] text-stone-950 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer"
                 >
-                  <WhatsAppIcon className="w-4 h-4 text-white" />
-                  <span>Chat on WhatsApp</span>
-                </a>
+                  <Coffee className="w-4 h-4 text-stone-900" />
+                  <span>Buy me a coffee ☕</span>
+                </button>
 
                 {/* Quick Secondary Contact Drawer (Email & Instagram) */}
                 <div className="pt-1 flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400">
