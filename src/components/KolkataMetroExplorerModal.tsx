@@ -463,36 +463,28 @@ export default function KolkataMetroExplorerModal({
             {Object.entries(METRO_FULL_MAP_DATA).map(([id, line]) => {
               const isSelected = lineFilter === id;
               const shortNumber = id === 'blue' ? 'L1' : id === 'green' ? 'L2' : id === 'purple' ? 'L3' : id === 'yellow' ? 'L4' : 'L6';
+              const lineEmoji = id === 'blue' ? '🔵' : id === 'green' ? '🟢' : id === 'purple' ? '🟣' : id === 'yellow' ? '🟡' : '🟠';
 
               return (
                 <button
                   key={id}
                   type="button"
                   onClick={() => setLineFilter(isSelected ? 'all' : id)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold h-8 shrink-0 flex items-center gap-2 border cursor-pointer active:scale-95 transition-all ${
+                  title={`${line.name} (${shortNumber})`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold h-8 shrink-0 flex items-center gap-1.5 border cursor-pointer active:scale-95 transition-all ${
                     isSelected
                       ? 'text-white border-transparent shadow-xs'
                       : (isDark
-                          ? 'bg-stone-900 text-stone-300 border-stone-800 hover:border-stone-700'
-                          : 'bg-stone-100 text-stone-700 border-stone-200 hover:bg-stone-200/60')
+                          ? 'bg-stone-900 text-stone-200 border-stone-800 hover:border-stone-700'
+                          : 'bg-stone-100 text-stone-800 border-stone-200 hover:bg-stone-200/70')
                   }`}
                   style={{
                     backgroundColor: isSelected ? line.color : undefined,
                     boxShadow: isSelected ? `0 2px 8px ${line.glowColor}` : undefined
                   }}
                 >
-                  <span 
-                    className="w-2 h-2 rounded-full shrink-0" 
-                    style={{ backgroundColor: isSelected ? '#FFFFFF' : line.color }} 
-                  />
-                  <span>{line.name.split(' ')[0]}</span>
-                  <span 
-                    className={`text-[9.5px] px-1.5 py-0.5 rounded font-mono font-bold leading-none ${
-                      isSelected ? 'bg-white/25 text-white' : (isDark ? 'bg-stone-800 text-stone-400' : 'bg-stone-200 text-stone-600')
-                    }`}
-                  >
-                    {shortNumber}
-                  </span>
+                  <span className="text-xs leading-none">{lineEmoji}</span>
+                  <span className="font-bold tracking-tight">{shortNumber}</span>
                 </button>
               );
             })}
