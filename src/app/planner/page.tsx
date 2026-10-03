@@ -1129,22 +1129,8 @@ export default function RoutePlannerPage() {
                       </div>
                     </div>
 
-                    {/* Right Action Icons: Compact button row */}
-                    <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                      {/* Checkbox: Visited toggle (persisted in cookies) */}
-                      <button
-                        type="button"
-                        onClick={() => toggleVisited(pandal.id)}
-                        className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg border flex items-center justify-center transition-all cursor-pointer ${
-                          isVisited(pandal.id)
-                            ? 'bg-emerald-600 text-white border-emerald-500 shadow-xs'
-                            : 'bg-white/5 hover:bg-emerald-950/40 text-transparent hover:text-emerald-400 border-white/20'
-                        }`}
-                        title={isVisited(pandal.id) ? (isBn ? 'দর্শন সম্পন্ন (কুকিতে সংরক্ষিত)' : 'Visited (Saved in cookies)') : (isBn ? 'দর্শন সম্পন্ন হিসেবে চিহ্নিত করুন' : 'Mark as Visited (Saves to cookies)')}
-                        aria-label="Toggle visited"
-                      >
-                        <Check className={`w-3.5 h-3.5 stroke-[3] transition-all duration-150 ${isVisited(pandal.id) ? 'opacity-100 scale-100 text-white' : 'opacity-0 scale-75'}`} />
-                      </button>
+                    {/* Right Action Icons: Move, Map, Details & Big Visited Checkbox */}
+                    <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleMoveUp(index)}
@@ -1179,13 +1165,20 @@ export default function RoutePlannerPage() {
                       >
                         <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </Link>
+
+                      {/* Big Checkbox in each card (stored in cookies) */}
                       <button
                         type="button"
-                        onClick={() => handleRemovePandal(pandal.id)}
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
-                        title="Remove stop"
+                        onClick={() => toggleVisited(pandal.id)}
+                        aria-label={isVisited(pandal.id) ? 'Marked as visited' : 'Mark as visited'}
+                        title={isVisited(pandal.id) ? (isBn ? 'দর্শন সম্পন্ন (কুকিতে সংরক্ষিত)' : 'Visited (Saved in cookies)') : (isBn ? 'দর্শন সম্পন্ন চিহ্নিত করুন' : 'Mark as Visited (Saves to cookies)')}
+                        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border-2 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 hover:scale-105 shadow-sm ${
+                          isVisited(pandal.id)
+                            ? 'bg-emerald-600 border-emerald-500 text-white shadow-md shadow-emerald-950/40'
+                            : 'bg-white/5 hover:bg-emerald-950/40 text-transparent hover:text-emerald-400 border-white/25 hover:border-emerald-500/60'
+                        }`}
                       >
-                        <Trash2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                        <Check className={`w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[3] transition-all duration-150 ${isVisited(pandal.id) ? 'opacity-100 scale-100 text-white' : 'opacity-0 scale-75 hover:opacity-60'}`} />
                       </button>
                     </div>
                   </div>
