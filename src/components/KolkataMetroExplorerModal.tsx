@@ -502,8 +502,13 @@ export default function KolkataMetroExplorerModal({
           </div>
         </div>
 
-        {/* FULL-HEIGHT IMMERSIVE MAP VIEW - CLEAN CANVAS */}
-        <div className={`relative flex-1 w-full h-full overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0e0d0b]' : 'bg-white'}`}>
+        {/* MAP CANVAS CONTAINER WITH CURVED BORDERS ON ALL SIDES */}
+        <div className={`relative flex-1 w-full min-h-0 p-2.5 sm:p-4 overflow-hidden flex flex-col ${isDark ? 'bg-black' : 'bg-stone-100'} transition-colors duration-300`}>
+          <div className={`relative flex-1 w-full h-full rounded-2xl sm:rounded-3xl border overflow-hidden shadow-2xl transition-colors duration-300 ${
+            isDark 
+              ? 'bg-[#0e0d0b] border-white/15 shadow-black/80 ring-1 ring-white/10' 
+              : 'bg-white border-stone-300/80 shadow-stone-900/10 ring-1 ring-stone-900/5'
+          }`}>
           
           {/* Map Zoom & Theme Controls (Top-Right Floating Glass Capsule) */}
           <div className={`absolute top-3.5 right-3.5 sm:right-4 z-20 flex flex-col gap-1 p-1 rounded-2xl backdrop-blur-md border shadow-md pointer-events-auto transition-colors ${
@@ -867,6 +872,7 @@ export default function KolkataMetroExplorerModal({
               <div className={`w-3 h-3 rounded-full border-2 bg-blue-600 ${isDark ? 'border-amber-400' : 'border-stone-800'}`} />
               <span>Interchange Junction</span>
             </div>
+          </div>
           </div>
         </div>
       </div>
