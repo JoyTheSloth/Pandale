@@ -12,6 +12,7 @@ import { Sparkles, AlertCircle, Loader2, ArrowRight, Train } from 'lucide-react'
 import FamousPandalCircuitModal from '@/components/FamousPandalCircuitModal';
 import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
 import { useLocation } from '@/context/LocationContext';
+import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
 
 function PandalsContent() {
   const searchParams = useSearchParams();
@@ -290,14 +291,7 @@ function EmptyState({ onReset }: { onReset: () => void }) {
 
 export default function PandalsPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="max-w-7xl mx-auto px-4 py-24 text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-[#D43827] mx-auto mb-3" />
-          <p className="text-xs text-[#8E857B] font-mono">Loading Kolkata Pandals Catalog...</p>
-        </div>
-      }
-    >
+    <Suspense fallback={<PandalsPageSkeleton />}>
       <PandalsContent />
     </Suspense>
   );
