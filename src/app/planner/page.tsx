@@ -1023,28 +1023,37 @@ export default function RoutePlannerPage() {
 
             const walkFromStationUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${metroStationName}, Kolkata`)}&destination=${encodeURIComponent(`${pandal.name}, Kolkata`)}&travelmode=walking`;
 
-            const getLineStyle = (code: string) => {
+            const getLineDot = (code: string) => {
               switch (code) {
                 case 'green':
                   return {
-                    pill: 'bg-[#0A2616] text-[#4ADE80] border-[#22C55E]/60'
+                    dot: 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]',
+                    name: 'Green Line'
                   };
                 case 'orange':
                   return {
-                    pill: 'bg-[#28180A] text-[#FB923C] border-[#EA580C]/60'
+                    dot: 'bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.7)]',
+                    name: 'Orange Line'
                   };
                 case 'purple':
                   return {
-                    pill: 'bg-[#200A28] text-[#C084FC] border-[#9333EA]/60'
+                    dot: 'bg-purple-500 shadow-[0_0_6px_rgba(168,85,247,0.7)]',
+                    name: 'Purple Line'
+                  };
+                case 'yellow':
+                  return {
+                    dot: 'bg-yellow-400 shadow-[0_0_6px_rgba(250,204,21,0.7)]',
+                    name: 'Yellow Line'
                   };
                 case 'blue':
                 default:
                   return {
-                    pill: 'bg-[#0A1628] text-[#58A6FF] border-[#1F6FEB]/60'
+                    dot: 'bg-blue-500 shadow-[0_0_6px_rgba(59,130,246,0.7)]',
+                    name: 'Blue Line'
                   };
               }
             };
-            const metroStyle = getLineStyle(metroLineCode);
+            const lineDotInfo = getLineDot(metroLineCode);
 
             return (
               <React.Fragment key={pandal.id}>
@@ -1075,7 +1084,7 @@ export default function RoutePlannerPage() {
 
                   {/* Slim Card Content */}
                   <div className="flex-1 min-w-0 bg-[#140C10] dark:bg-[#140C10] border border-white/10 rounded-xl py-1.5 px-2.5 sm:py-2 sm:px-3.5 flex items-center justify-between gap-2 shadow-xs hover:border-white/20 transition-all">
-                    {/* Left Info: Title, Area, Metro Station & Line */}
+                    {/* Left Info: Title, Area, Metro Station & Line Dot */}
                     <div className="min-w-0 flex-1 space-y-0.5">
                       {/* Row 1: Title, Crown & Location */}
                       <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
@@ -1095,22 +1104,22 @@ export default function RoutePlannerPage() {
                         </span>
                       </div>
 
-                      {/* Row 2: Metro Station & Line */}
+                      {/* Row 2: Metro Station & Line Dot */}
                       <div className="text-[10px] sm:text-[11px] flex items-center gap-1 sm:gap-1.5 flex-wrap">
                         <a
                           href={walkFromStationUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 font-semibold text-white hover:text-blue-300 transition-colors"
-                          title="Directions from metro"
+                          className="inline-flex items-center gap-1.5 font-semibold text-white hover:text-blue-300 transition-colors"
+                          title={`Directions from ${metroStationName} (${lineDotInfo.name})`}
                         >
-                          <span className="w-3 h-3 rounded bg-[#0052FF] text-white font-bold text-[7px] flex items-center justify-center shrink-0">M</span>
+                          <span className="w-3 h-3 rounded bg-white/10 text-white font-bold text-[7px] flex items-center justify-center shrink-0 border border-white/15">M</span>
                           <span>{metroStationName}</span>
+                          <span
+                            className={`w-2 h-2 rounded-full shrink-0 ${lineDotInfo.dot}`}
+                            title={lineDotInfo.name}
+                          />
                         </a>
-                        <span className="text-stone-600">•</span>
-                        <span className={`px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-medium border ${metroStyle.pill}`}>
-                          {metroLine}
-                        </span>
                       </div>
                     </div>
 
