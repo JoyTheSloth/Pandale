@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useWishlist } from '@/context/WishlistContext';
-import { Sun, Moon, Languages, Heart, MapPin, ChevronDown, Loader2, Home, Compass, Train, Route } from 'lucide-react';
+import { Sun, Moon, Languages, Heart, MapPin, ChevronDown, Loader2, Home, Compass, Train, Route, Map } from 'lucide-react';
 import { useLocation } from '@/context/LocationContext';
 
 export default function Header() {
@@ -196,13 +196,15 @@ export default function Header() {
 
         {/* Desktop-only horizontal nav bar — hidden on mobile (BottomNav handles it) */}
         <nav className="hidden md:flex items-center gap-1 mt-3 pb-1" aria-label="Desktop navigation">
-          {[
-            { href: '/',        label: language === 'bn' ? 'হোম' : 'Home',      icon: Home,    exact: true  },
-            { href: '/pandals', label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass, exact: false },
-            { href: '/metro',   label: language === 'bn' ? 'মেট্রো' : 'Metro',    icon: Train,   exact: false },
-            { href: '/planner', label: language === 'bn' ? 'প্ল্যানার' : 'Planner',  icon: Route,   exact: false },
-            { href: '/wishlist',label: language === 'bn' ? 'পছন্দ' : 'Wishlist', icon: Heart,   exact: false, badge: count },
-          ].map(({ href, label, icon: Icon, exact, badge }) => {
+          {(
+            [
+              { href: '/',        label: language === 'bn' ? 'হোম' : 'Home',      icon: Home,    exact: true  },
+              { href: '/pandals', label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass, exact: false },
+              { href: '/metro',   label: language === 'bn' ? 'মেট্রো' : 'Metro',    icon: Train,   exact: false },
+              { href: '/planner', label: language === 'bn' ? 'প্ল্যানার' : 'Planner',  icon: Route,   exact: false },
+              { href: '/map',     label: language === 'bn' ? 'মেট্রো ম্যাপ' : 'Metro Map', icon: Map,    exact: false },
+            ] as Array<{ href: string; label: string; icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; exact: boolean; badge?: number }>
+          ).map(({ href, label, icon: Icon, exact, badge }) => {
             const isActive = exact ? pathname === href : pathname.startsWith(href);
             return (
               <Link

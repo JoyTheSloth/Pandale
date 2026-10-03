@@ -22,15 +22,17 @@ import {
 import { useTheme } from '@/context/ThemeContext';
 
 interface KolkataMetroExplorerModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
   initialStation?: FullMetroStation | null;
+  isPage?: boolean;
 }
 
 export default function KolkataMetroExplorerModal({
-  isOpen,
+  isOpen = true,
   onClose,
-  initialStation = null
+  initialStation = null,
+  isPage = false
 }: KolkataMetroExplorerModalProps) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
@@ -122,7 +124,7 @@ export default function KolkataMetroExplorerModal({
 
   // Lock background body scroll and hide bottom nav when modal is open
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isPage) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       document.body.classList.add('modal-open');
@@ -131,7 +133,7 @@ export default function KolkataMetroExplorerModal({
         document.body.classList.remove('modal-open');
       };
     }
-  }, [isOpen]);
+  }, [isOpen, isPage]);
 
   // Clamp pan so map stays fixed at base zoom and cannot be panned off screen
   const clampPan = useCallback((newPan: { x: number; y: number }, currentZoom: number) => {
@@ -251,17 +253,13 @@ export default function KolkataMetroExplorerModal({
     setPan({ x: 0, y: 0 });
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !isPage) return null;
 
-  return (
+  const modalContent = (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-md p-2 sm:p-4 select-none animate-in fade-in duration-200"
-      onClick={onClose}
+      className={`relative w-full max-w-6xl ${isPage ? 'h-[85vh] min-h-[640px] max-h-[920px]' : 'h-[92vh] max-h-[900px]'} ${isDark ? 'bg-stone-950 text-stone-100 border-stone-800' : 'bg-white text-stone-900 border-stone-200'} rounded-3xl border shadow-2xl flex flex-col overflow-hidden transition-colors duration-200`}
+      onClick={(e) => e.stopPropagation()}
     >
-      <div 
-        className={`relative w-full max-w-6xl h-[92vh] max-h-[900px] ${isDark ? 'bg-stone-950 text-stone-100 border-stone-800' : 'bg-white text-stone-900 border-stone-200'} rounded-3xl border shadow-2xl flex flex-col overflow-hidden transition-colors duration-200`}
-        onClick={(e) => e.stopPropagation()}
-      >
         {/* COMPREHENSIVE HEADER & FILTER SECTION WITH ARTISTIC DURGA PUJA / METRO BANNER */}
         <div className={`relative z-30 shrink-0 border-b ${isDark ? 'border-stone-800' : 'border-stone-200/80'} overflow-visible`}>
           {/* Background Illustration - strictly clipped inside rounded top header corners */}
@@ -299,18 +297,20 @@ export default function KolkataMetroExplorerModal({
               </div>
 
               {/* Close Button */}
-              <button
-                type="button"
-                onClick={onClose}
-                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all cursor-pointer hover:rotate-90 backdrop-blur-sm shadow-md border ${
-                  isDark 
-                    ? 'bg-stone-900/90 hover:bg-stone-800 text-stone-300 hover:text-white border-stone-700' 
-                    : 'bg-white/95 hover:bg-white text-stone-800 hover:text-stone-950 border-stone-300/90'
-                }`}
-                aria-label="Close Metro Map"
-              >
-                <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-              </button>
+              {onClose && (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all cursor-pointer hover:rotate-90 backdrop-blur-sm shadow-md border ${
+                    isDark 
+                      ? 'bg-stone-900/90 hover:bg-stone-800 text-stone-300 hover:text-white border-stone-700' 
+                      : 'bg-white/95 hover:bg-white text-stone-800 hover:text-stone-950 border-stone-300/90'
+                  }`}
+                  aria-label="Close Metro Map"
+                >
+                  <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                </button>
+              )}
             </div>
 
             {/* SUB-HEADER: TRANSIT FILTER PILLS (TOP) & CURVED SEARCH BAR (BELOW) */}
@@ -894,6 +894,22 @@ export default function KolkataMetroExplorerModal({
           </div>
         </div>
       </div>
+  );
+
+  if (isPage) {
+    return (
+      <div className="w-full max-w-6xl mx-auto select-none">
+        {modalContent}
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-md p-2 sm:p-4 select-none animate-in fade-in duration-200"
+      onClick={onClose}
+    >
+      {modalContent}
     </div>
   );
 }

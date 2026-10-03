@@ -3,23 +3,21 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useWishlist } from '@/context/WishlistContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { Compass, Train, Heart, Route, Home } from 'lucide-react';
+import { Compass, Train, Map, Route, Home } from 'lucide-react';
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const { count } = useWishlist();
   const { language } = useLanguage();
   const [pressed, setPressed] = useState<string | null>(null);
   const [ripple, setRipple] = useState<string | null>(null);
 
-  const navItems = [
+  const navItems: Array<{ href: string; label: string; icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; exact?: boolean; badge?: number }> = [
     { href: '/',         label: language === 'bn' ? 'হোম' : 'Home',       icon: Home,    exact: true },
     { href: '/pandals',  label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass },
     { href: '/metro',    label: language === 'bn' ? 'মেট্রো' : 'Metro',     icon: Train },
     { href: '/planner',  label: language === 'bn' ? 'প্ল্যান' : 'Plan',      icon: Route },
-    { href: '/wishlist', label: language === 'bn' ? 'পছন্দ' : 'Wishlist',  icon: Heart, badge: count },
+    { href: '/map',      label: language === 'bn' ? 'মেট্রো ম্যাপ' : 'Metro Map', icon: Map },
   ];
 
   const handlePress = useCallback((href: string) => {
