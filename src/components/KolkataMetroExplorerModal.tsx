@@ -270,11 +270,11 @@ export default function KolkataMetroExplorerModal({
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent pointer-events-none" />
 
           {/* Row 1: Brand Badge + Station Search + Theme/Close Actions */}
-          <div className="px-3 sm:px-5 pt-2.5 pb-2 flex items-center justify-between gap-2.5">
+          <div className="px-4 sm:px-6 pt-3.5 pb-2.5 sm:pt-4 sm:pb-3 flex items-center justify-between gap-3">
             {/* Brand / Metro Badge */}
-            <div className="flex items-center gap-2 shrink-0">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 text-stone-950 flex items-center justify-center shadow-sm font-bold shrink-0">
-                <Train className="w-4 h-4 text-stone-950" />
+            <div className="flex items-center gap-2.5 shrink-0">
+              <div className="w-9.5 h-9.5 sm:w-10 sm:h-10 rounded-2xl bg-amber-400 text-stone-950 flex items-center justify-center shadow-sm font-bold shrink-0">
+                <Train className="w-5 h-5 text-stone-950" />
               </div>
               <div className="hidden xs:block sm:block">
                 <div className="flex items-center gap-1.5">
@@ -291,7 +291,7 @@ export default function KolkataMetroExplorerModal({
 
             {/* Integrated Pill Search Input */}
             <div ref={searchContainerRef} className="relative z-50 flex-1 max-w-md sm:max-w-lg">
-              <Search className={`w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none ${isDark ? 'text-stone-400' : 'text-stone-500'}`} />
+              <Search className={`w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none ${isDark ? 'text-stone-400' : 'text-stone-500'}`} />
               <input
                 type="text"
                 value={mapSearchQuery}
@@ -318,7 +318,7 @@ export default function KolkataMetroExplorerModal({
                   }
                 }}
                 placeholder="Search station (e.g. Kalighat, Esplanade...)"
-                className={`w-full h-8.5 sm:h-9 pl-8.5 pr-8 py-1.5 rounded-full text-xs focus:outline-none focus:ring-2 shadow-xs transition-all border ${
+                className={`w-full h-10 pl-10 pr-9 py-2 rounded-full text-xs sm:text-sm focus:outline-none focus:ring-2 shadow-xs transition-all border ${
                   isDark 
                     ? 'bg-stone-900/90 border-stone-800 text-stone-100 placeholder-stone-400 focus:border-amber-400 focus:ring-amber-400/20' 
                     : 'bg-stone-100/90 border-stone-300/80 text-stone-900 placeholder-stone-500 focus:border-amber-500 focus:ring-amber-500/20 focus:bg-white'
@@ -332,7 +332,7 @@ export default function KolkataMetroExplorerModal({
                     setUserHereStation(null);
                     setIsSearchFocused(false);
                   }}
-                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer p-1 transition-colors ${isDark ? 'text-stone-400 hover:text-white' : 'text-stone-400 hover:text-stone-700'}`}
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 transition-colors ${isDark ? 'text-stone-400 hover:text-white' : 'text-stone-400 hover:text-stone-700'}`}
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -410,11 +410,11 @@ export default function KolkataMetroExplorerModal({
             </div>
 
             {/* Actions: Theme Toggle & Close (if modal) */}
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={toggleTheme}
-                className={`h-8.5 w-8.5 sm:h-9 sm:w-9 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
+                className={`h-10 w-10 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
                   isDark
                     ? 'bg-stone-900 border-stone-800 text-amber-400 hover:bg-stone-800 hover:border-stone-700 shadow-sm'
                     : 'bg-stone-100 border-stone-200 text-stone-700 hover:bg-stone-200/70 hover:text-stone-950 shadow-sm'
@@ -423,9 +423,9 @@ export default function KolkataMetroExplorerModal({
                 aria-label="Toggle Theme"
               >
                 {isDark ? (
-                  <Sun className="w-4 h-4 transition-transform hover:rotate-90 duration-300 text-amber-400" />
+                  <Sun className="w-4.5 h-4.5 transition-transform hover:rotate-90 duration-300 text-amber-400" />
                 ) : (
-                  <Moon className="w-4 h-4 transition-transform hover:-rotate-12 duration-300 text-stone-700" />
+                  <Moon className="w-4.5 h-4.5 transition-transform hover:-rotate-12 duration-300 text-stone-700" />
                 )}
               </button>
 
@@ -433,25 +433,25 @@ export default function KolkataMetroExplorerModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className={`h-8.5 w-8.5 sm:h-9 sm:w-9 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
+                  className={`h-10 w-10 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
                     isDark 
                       ? 'bg-stone-900 border-stone-800 text-stone-300 hover:text-white hover:bg-stone-800' 
                       : 'bg-stone-100 border-stone-200 text-stone-700 hover:text-stone-950 hover:bg-stone-200'
                   }`}
                   aria-label="Close Metro Map"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4.5 h-4.5" />
                 </button>
               )}
             </div>
           </div>
 
           {/* Row 2: Micro Line Selector Pills */}
-          <div className="px-3 sm:px-5 pb-2.5 pt-0.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="px-4 sm:px-6 pt-1 pb-3 sm:pb-3.5 flex items-center gap-2 overflow-x-auto no-scrollbar">
             <button
               type="button"
               onClick={() => setLineFilter('all')}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-semibold h-7 flex items-center shrink-0 cursor-pointer active:scale-95 transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold h-8 flex items-center shrink-0 cursor-pointer active:scale-95 transition-all ${
                 lineFilter === 'all'
                   ? (isDark ? 'bg-amber-400 text-stone-950 font-bold shadow-xs' : 'bg-stone-950 text-white font-bold shadow-xs')
                   : (isDark ? 'bg-stone-900 text-stone-300 border border-stone-800 hover:border-stone-700' : 'bg-stone-100 text-stone-700 border border-stone-200 hover:bg-stone-200/60')
@@ -469,7 +469,7 @@ export default function KolkataMetroExplorerModal({
                   key={id}
                   type="button"
                   onClick={() => setLineFilter(isSelected ? 'all' : id)}
-                  className={`px-2.5 py-1 rounded-full text-[11px] font-semibold h-7 shrink-0 flex items-center gap-1.5 border cursor-pointer active:scale-95 transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold h-8 shrink-0 flex items-center gap-2 border cursor-pointer active:scale-95 transition-all ${
                     isSelected
                       ? 'text-white border-transparent shadow-xs'
                       : (isDark
@@ -482,12 +482,12 @@ export default function KolkataMetroExplorerModal({
                   }}
                 >
                   <span 
-                    className="w-1.5 h-1.5 rounded-full shrink-0" 
+                    className="w-2 h-2 rounded-full shrink-0" 
                     style={{ backgroundColor: isSelected ? '#FFFFFF' : line.color }} 
                   />
                   <span>{line.name.split(' ')[0]}</span>
                   <span 
-                    className={`text-[9px] px-1 py-0.2 rounded font-mono font-bold leading-none ${
+                    className={`text-[9.5px] px-1.5 py-0.5 rounded font-mono font-bold leading-none ${
                       isSelected ? 'bg-white/25 text-white' : (isDark ? 'bg-stone-800 text-stone-400' : 'bg-stone-200 text-stone-600')
                     }`}
                   >
@@ -497,12 +497,12 @@ export default function KolkataMetroExplorerModal({
               );
             })}
 
-            <div className={`w-px h-4 mx-0.5 shrink-0 ${isDark ? 'bg-stone-800' : 'bg-stone-200'}`} />
+            <div className={`w-px h-4.5 mx-0.5 shrink-0 ${isDark ? 'bg-stone-800' : 'bg-stone-200'}`} />
 
             <button
               type="button"
               onClick={() => setShowOperationalOnly(!showOperationalOnly)}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-medium h-7 shrink-0 border cursor-pointer flex items-center gap-1.5 active:scale-95 transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium h-8 shrink-0 border cursor-pointer flex items-center gap-2 active:scale-95 transition-all ${
                 showOperationalOnly
                   ? (isDark ? 'bg-amber-950/80 text-amber-300 border-amber-800 shadow-2xs' : 'bg-amber-100 text-amber-900 border-amber-300 shadow-2xs')
                   : (isDark ? 'bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700' : 'bg-stone-100 text-stone-600 border-stone-200 hover:bg-stone-200/60')
