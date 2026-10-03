@@ -26,6 +26,7 @@ import {
   Compass,
   RotateCcw,
   SlidersHorizontal,
+  ChevronUp,
   ChevronDown,
   ChevronRight,
   ChevronLeft,
@@ -1044,42 +1045,40 @@ export default function RoutePlannerPage() {
 
             return (
               <React.Fragment key={pandal.id}>
-                {/* Starting Station Hub Banner (Rendered right above Stop 01) */}
+                {/* Clean, Modern Starting Station Hub Card (Rendered right above Stop 01) */}
                 {isFirst && activeStartingStation && (
-                  <div className="space-y-3 pt-1">
-                    <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 dark:from-[#1E1420] dark:via-[#2A1822] dark:to-[#1E1420] text-white rounded-2xl p-3.5 sm:p-4 shadow-md border border-indigo-500/30 overflow-hidden">
-                      <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
-
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
+                  <div className="space-y-2 pt-1">
+                    <div className="bg-white dark:bg-[#1A1218] rounded-2xl border border-blue-200/80 dark:border-blue-500/20 p-3.5 sm:p-4 shadow-sm relative overflow-hidden">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg text-white shadow-inner shrink-0 ${
-                            activeStartingStation.line_code === 'green' ? 'bg-emerald-600 border border-emerald-400/40' : activeStartingStation.line_code === 'purple' ? 'bg-purple-600 border border-purple-400/40' : 'bg-blue-600 border border-blue-400/40'
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-base text-white shadow-xs shrink-0 ${
+                            activeStartingStation.line_code === 'green' ? 'bg-emerald-600' : activeStartingStation.line_code === 'purple' ? 'bg-purple-600' : 'bg-blue-600'
                           }`}>
                             M
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-white/10 text-white border border-white/20">
+                              <span className="text-[10px] font-bold text-[#D8261C] dark:text-red-400 uppercase tracking-wider">
+                                {isBn ? 'পরিক্রমা শুরুর স্টেশন' : 'Official Starting Hub'}
+                              </span>
+                              <span className="text-stone-300 dark:text-stone-600">•</span>
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300 border border-blue-200 dark:border-blue-800/40">
                                 {activeStartingStation.line}
                               </span>
-                              <span className="text-[10px] font-bold text-amber-300 flex items-center gap-1">
-                                <MapPin className="w-2.5 h-2.5" />
-                                <span>{isBn ? 'পরিক্রমা শুরুর স্টেশন' : 'Official Starting Metro Hub'}</span>
-                              </span>
                             </div>
-                            <h3 className="text-base sm:text-lg font-bold font-editorial text-white tracking-tight mt-0.5">
+                            <h3 className="text-base sm:text-lg font-bold font-editorial text-stone-900 dark:text-stone-100 tracking-tight mt-0.5">
                               {isBn ? activeStartingStation.bengali_name : activeStartingStation.name} {isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}
                             </h3>
                             {distFromStationToFirst && (
-                              <p className="text-xs text-stone-200 mt-0.5 flex items-center gap-1.5 flex-wrap">
-                                <span>{isBn ? 'স্টপ ০১ থেকে দূরত্ব:' : 'Distance to Stop 01:'}</span>
-                                <strong className="text-amber-300 bg-white/15 px-1.5 py-0.5 rounded font-mono text-[11px]">
+                              <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5 flex items-center gap-1.5 flex-wrap">
+                                <span>{isBn ? 'স্টপ ০১ হাঁটার পথ:' : 'Walk to Stop 01:'}</span>
+                                <strong className="text-stone-800 dark:text-stone-200 font-bold font-mono">
                                   {distFromStationToFirst.text}
                                 </strong>
-                                <span>(~{distFromStationToFirst.mins} mins walk)</span>
+                                <span>(~{distFromStationToFirst.mins} mins)</span>
                                 {distFromStationToFirst.km >= 0.8 && (
-                                  <span className="inline-flex items-center gap-1 bg-amber-400/25 border border-amber-300/40 text-amber-200 px-2 py-0.5 rounded-full text-[10.5px] font-bold">
-                                    <span>🛺 ~{distFromStationToFirst.autoMins} mins by Auto / Toto</span>
+                                  <span className="text-amber-700 dark:text-amber-400 font-semibold">
+                                    • 🛺 ~{distFromStationToFirst.autoMins} mins by Auto
                                   </span>
                                 )}
                               </p>
@@ -1092,91 +1091,62 @@ export default function RoutePlannerPage() {
                             href={walkFromHubToFirstUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-3.5 py-2 rounded-xl bg-white text-stone-900 hover:bg-stone-100 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all shrink-0 cursor-pointer"
+                            className="px-3.5 py-2 rounded-xl bg-stone-100 dark:bg-white/10 hover:bg-stone-200 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shrink-0 cursor-pointer self-start sm:self-center"
                           >
                             <Footprints className="w-3.5 h-3.5 text-[#D8261C]" />
-                            <span>{isBn ? 'স্টেশন থেকে হাঁটার পথ' : 'Walk Directions to Stop 01'}</span>
+                            <span>{isBn ? 'হাঁটার দিকনির্দেশনা' : 'Walk Directions'}</span>
                             <ExternalLink className="w-3 h-3 text-stone-400" />
                           </a>
                         )}
                       </div>
                     </div>
 
-                    {/* Downward Connector Track from Metro Hub to Stop 01 */}
-                    <div className="flex flex-col items-center justify-center py-0.5 relative">
-                      <div className="w-0.5 h-5 bg-gradient-to-b from-blue-600 via-indigo-500 to-[#D8261C]" />
-                      <div className="my-1 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 flex items-center gap-2 text-[10.5px] text-blue-900 dark:text-blue-300 font-bold shadow-2xs flex-wrap justify-center">
-                        <div className="flex items-center gap-1">
-                          <Footprints className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                          <span>
-                            {isBn ? 'হাঁটার পথ:' : 'Walk:'} {distFromStationToFirst?.text} (~{distFromStationToFirst?.mins} mins)
-                          </span>
-                        </div>
-                        {distFromStationToFirst && distFromStationToFirst.km >= 0.8 && (
-                          <>
-                            <span className="text-stone-300 dark:text-stone-600">•</span>
-                            <span className="inline-flex items-center gap-1 text-amber-800 dark:text-amber-300 font-bold">
-                              <span>🛺 {isBn ? 'অটো / টোটো:' : 'Auto / Toto:'} ~{distFromStationToFirst.autoMins} mins</span>
-                            </span>
-                          </>
-                        )}
-                        <ArrowDown className="w-3 h-3 text-blue-600 dark:text-blue-400 animate-bounce" />
-                      </div>
-                      <div className="w-0.5 h-5 bg-gradient-to-b from-[#D8261C] to-[#D8261C]" />
+                    {/* Downward Connector to Stop 01 */}
+                    <div className="flex flex-col items-center justify-center py-0.5">
+                      <div className="w-0.5 h-4 bg-gradient-to-b from-blue-500 to-[#D8261C]" />
+                      <div className="w-2 h-2 rounded-full bg-[#D8261C]" />
+                      <div className="w-0.5 h-4 bg-[#D8261C]" />
                     </div>
                   </div>
                 )}
 
-                {/* User-Friendly Pandal Stop Card (Clean stop badge, no images, only station name & line) */}
-                <div className="group relative bg-white dark:bg-[#1A1215] rounded-2xl border border-stone-200 dark:border-white/10 p-3 sm:p-3.5 shadow-sm hover:shadow-md transition-all duration-300">
-                  <div className="flex items-center gap-3 sm:gap-3.5">
+                {/* User-Friendly Pandal Stop Card */}
+                <div className="group relative bg-white dark:bg-[#1A1215] rounded-2xl border border-stone-200 dark:border-white/10 p-3.5 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4">
 
-                    {/* Prominent Stop Sequence Indicator */}
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#D8261C] to-red-700 text-white font-mono font-bold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-xs border border-white/20">
+                    {/* Clean Stop Sequence Badge */}
+                    <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-[#D8261C] dark:text-rose-400 border border-rose-200/80 dark:border-rose-900/50 font-mono font-bold text-sm flex items-center justify-center shrink-0 shadow-2xs">
                       {String(index + 1).padStart(2, '0')}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-                      {/* Title row */}
-                      <div className="flex items-start justify-between gap-1.5">
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-1.5 flex-wrap">
-                            <Link
-                              href={`/pandal/${pandal.slug}`}
-                              className="font-editorial text-sm sm:text-base font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1"
-                            >
-                              {pandal.name}
-                            </Link>
-                            {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                              <span className="px-1.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[9px] font-bold border border-amber-200/60 dark:border-amber-900/40 shrink-0" title="Must Visit">
-                                👑
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-[11px] text-stone-500 dark:text-stone-400 truncate mt-0.5">
-                            {pandal.locality || pandal.area} {pandal.theme ? `· ${pandal.theme}` : ''}
-                          </p>
-                        </div>
-
-                        {/* Badges / Links */}
-                        <div className="flex items-center gap-1 shrink-0">
-                          {isFirst && activeStartingStation && distFromStationToFirst && (
-                            <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[9px] font-bold border border-emerald-200 dark:border-emerald-800/40 items-center gap-1">
-                              🎯 {isBn ? 'স্টেশনের নিকটতম' : 'Nearest Stop'}
-                            </span>
-                          )}
-                          <Link
-                            href={`/pandal/${pandal.slug}`}
-                            className="w-6 h-6 rounded-full bg-stone-100 dark:bg-white/10 flex items-center justify-center hover:bg-[#D8261C] hover:text-white transition-all text-stone-500 dark:text-stone-300"
-                            aria-label="View pandal details"
-                          >
-                            <ArrowUpRight className="w-3.5 h-3.5" />
-                          </Link>
-                        </div>
+                      {/* Title & Badges */}
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <Link
+                          href={`/pandal/${pandal.slug}`}
+                          className="font-editorial text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 hover:text-[#D8261C] dark:hover:text-rose-300 transition-colors truncate block"
+                        >
+                          {pandal.name}
+                        </Link>
+                        {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
+                          <span className="px-1.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[10px] font-bold border border-amber-200/60 dark:border-amber-900/40 shrink-0" title="Must Visit">
+                            👑
+                          </span>
+                        )}
+                        {isFirst && activeStartingStation && (
+                          <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[9px] font-bold border border-emerald-200 dark:border-emerald-800/40 items-center gap-1">
+                            🎯 {isBn ? 'নিকটতম স্টপ' : 'First Stop'}
+                          </span>
+                        )}
                       </div>
 
-                      {/* Metro Info: Only mentions metro station name and which line */}
+                      {/* Locality Subtitle */}
+                      <p className="text-xs text-stone-500 dark:text-stone-400 truncate mt-0.5">
+                        {pandal.locality || pandal.area} {pandal.theme ? `• ${pandal.theme}` : ''}
+                      </p>
+
+                      {/* Metro Info: Only Station Name and Line */}
                       <div className="flex items-center gap-2 mt-2 pt-2 border-t border-stone-100 dark:border-white/5 flex-wrap">
                         <div className="flex items-center gap-1.5 min-w-0">
                           <div className={`w-4.5 h-4.5 rounded-md ${metroStyle.badgeBg} text-white font-bold flex items-center justify-center text-[9px] shrink-0 shadow-2xs`}>
@@ -1193,107 +1163,88 @@ export default function RoutePlannerPage() {
                       </div>
                     </div>
 
-                    {/* Action buttons */}
-                    <div className="flex flex-col items-center gap-1.5 shrink-0 pl-1 border-l border-stone-100 dark:border-white/5">
-                      <div className="flex flex-col items-center bg-stone-100 dark:bg-white/[0.06] rounded-xl border border-stone-200 dark:border-white/10">
+                    {/* Actions: Reorder chevrons, Map link, Delete */}
+                    <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 self-center pl-2 border-l border-stone-100 dark:border-white/5">
+                      <div className="flex flex-col gap-0.5 bg-stone-100 dark:bg-white/[0.06] rounded-xl p-0.5 border border-stone-200/80 dark:border-white/10">
                         <button
                           type="button"
                           onClick={() => handleMoveUp(index)}
                           disabled={isFirst}
-                          className="p-1 rounded-t-xl text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-25 hover:scale-110 active:scale-85 transition-all duration-150 cursor-pointer disabled:cursor-not-allowed"
+                          className="w-6 h-5 rounded-md flex items-center justify-center text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer"
                           title="Move earlier in route"
                           aria-label="Move up"
                         >
-                          <ArrowUp className="w-3 h-3" />
+                          <ChevronUp className="w-3.5 h-3.5" />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleMoveDown(index)}
                           disabled={isLast}
-                          className="p-1 rounded-b-xl text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-25 hover:scale-110 active:scale-85 transition-all duration-150 cursor-pointer disabled:cursor-not-allowed"
+                          className="w-6 h-5 rounded-md flex items-center justify-center text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-white/10 disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer"
                           title="Move later in route"
                           aria-label="Move down"
                         >
-                          <ArrowDown className="w-3 h-3" />
+                          <ChevronDown className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <a
-                          href={exactMapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-6 h-6 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:border-[#D8261C] hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:scale-115 active:scale-85 flex items-center justify-center transition-all duration-150 shadow-2xs cursor-pointer group/pin"
-                          title="Open in Google Maps"
-                          aria-label="View in Maps"
-                        >
-                          <MapPin className="w-3 h-3 text-[#D8261C] group-hover/pin:-translate-y-0.5 transition-transform duration-150" />
-                        </a>
-                        <button
-                          type="button"
-                          onClick={() => handleRemovePandal(pandal.id)}
-                          className="w-6 h-6 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:border-rose-300 hover:text-rose-600 text-stone-400 hover:scale-115 active:scale-85 flex items-center justify-center transition-all duration-150 shadow-2xs cursor-pointer"
-                          title="Remove from itinerary"
-                          aria-label="Remove stop"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </button>
-                      </div>
+
+                      <a
+                        href={exactMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-xl bg-stone-100 dark:bg-white/[0.06] hover:bg-red-50 dark:hover:bg-red-950/30 text-stone-500 hover:text-[#D8261C] flex items-center justify-center transition-all cursor-pointer group/pin border border-stone-200/80 dark:border-white/10"
+                        title="Open in Google Maps"
+                        aria-label="View in Maps"
+                      >
+                        <MapPin className="w-3.5 h-3.5 text-[#D8261C] group-hover/pin:-translate-y-0.5 transition-transform" />
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={() => handleRemovePandal(pandal.id)}
+                        className="w-8 h-8 rounded-xl bg-stone-100 dark:bg-white/[0.06] hover:bg-rose-50 dark:hover:bg-rose-950/40 text-stone-400 hover:text-rose-600 flex items-center justify-center transition-all cursor-pointer border border-stone-200/80 dark:border-white/10"
+                        title="Remove stop"
+                        aria-label="Remove stop"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
 
                   </div>
                 </div>
 
-                {/* Redesigned Transit Hop Connector */}
+                {/* Clean, Refined Transit Connector between stops */}
                 {!isLast && nextPandal && (
-                  <div className="flex flex-col items-center justify-center my-3 relative py-1">
-                    {/* Upper Track */}
-                    <div className="w-0.5 h-7 bg-gradient-to-b from-[#D8261C] via-amber-400 to-[#D8261C]" />
+                  <div className="flex flex-col items-center justify-center my-2 relative py-0.5">
+                    <div className="w-0.5 h-3 bg-stone-300 dark:bg-stone-700" />
                     
-                    {/* Transit Connection Pill */}
-                    <div className="my-1.5 px-4 py-2 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200/90 dark:border-white/15 flex items-center gap-2.5 sm:gap-3 text-xs text-stone-800 dark:text-stone-200 shadow-md hover:shadow-lg transition-shadow flex-wrap justify-center">
-                      <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-[10px] shadow-xs">
-                        M
-                      </div>
-
-                      <div className="flex items-center gap-1.5 font-medium">
-                        <span className="text-stone-500 dark:text-stone-400 font-mono text-[11px] uppercase tracking-wider">
-                          {isBn ? 'দূরত্ব:' : 'Transit Leg:'}
-                        </span>
-                        <span className="font-bold text-[#D8261C] dark:text-red-400 font-mono">
-                          {distanceToNext < 1 ? `${Math.round(distanceToNext * 1000)} m` : `${distanceToNext.toFixed(1)} km`}
-                        </span>
-                      </div>
-
+                    <div className="my-1 px-3 py-1 rounded-full bg-stone-50 dark:bg-[#1E171B] border border-stone-200 dark:border-white/10 flex items-center gap-2 text-xs text-stone-600 dark:text-stone-300 shadow-2xs">
+                      <Footprints className="w-3.5 h-3.5 text-[#D8261C]" />
+                      <span className="font-mono font-bold text-stone-800 dark:text-stone-200">
+                        {distanceToNext < 1 ? `${Math.round(distanceToNext * 1000)} m` : `${distanceToNext.toFixed(1)} km`}
+                      </span>
                       <span className="text-stone-300 dark:text-stone-600">•</span>
-
-                      <div className="flex items-center gap-1 text-stone-600 dark:text-stone-300 font-semibold text-[11px]">
-                        <Footprints className="w-3.5 h-3.5 text-amber-500" />
-                        <span>~{Math.max(4, Math.round(distanceToNext * 12))} mins on foot</span>
-                      </div>
-
-                      {/* Auto / Toto Travel Duration for distances >= 0.8 km */}
+                      <span>~{Math.max(3, Math.round(distanceToNext * 12))} mins walk</span>
                       {distanceToNext >= 0.8 && (
                         <>
                           <span className="text-stone-300 dark:text-stone-600">•</span>
-                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 text-[11px] font-bold border border-amber-200/60 dark:border-amber-900/40">
-                            <span>🛺 ~{Math.max(3, Math.round(distanceToNext * 3.2 + 1))} mins by Auto / Toto</span>
-                          </div>
+                          <span className="text-amber-700 dark:text-amber-400 font-semibold">
+                            🛺 ~{Math.max(3, Math.round(distanceToNext * 3.2 + 1))}m auto
+                          </span>
                         </>
                       )}
-
                       <a
                         href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${pandal.name}, Kolkata`)}&destination=${encodeURIComponent(`${nextPandal.name}, Kolkata`)}&travelmode=walking`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-1 p-1 rounded-full text-stone-400 hover:text-[#D8261C] transition-colors"
-                        title="Open walking directions between these two stops"
+                        className="ml-0.5 text-stone-400 hover:text-[#D8261C] transition-colors"
+                        title="Open walking directions"
                       >
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
 
-                    {/* Lower Track */}
-                    <div className="w-0.5 h-7 bg-gradient-to-b from-[#D8261C] via-amber-400 to-[#D8261C]" />
+                    <div className="w-0.5 h-3 bg-stone-300 dark:bg-stone-700" />
                   </div>
                 )}
               </React.Fragment>
