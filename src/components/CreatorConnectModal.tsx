@@ -224,10 +224,10 @@ export default function CreatorConnectModal() {
                 {/* Message Bubble 1 */}
                 <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[94%] space-y-1 relative">
                   <p>
-                    👋 Hi there! I&rsquo;m <strong className="font-semibold text-[#075E54] dark:text-emerald-400">Joydeep Das</strong>.
+                    👋 Hi! I&rsquo;m <strong className="font-semibold text-[#075E54] dark:text-emerald-400">Joydeep Das</strong>.
                   </p>
                   <p className="text-xs text-stone-600 dark:text-stone-300">
-                    I designed and built <strong>Pandalé</strong> to help thousands celebrate Kolkata Durga Puja 2026 with real-time metro transit, proximity route planning, and crowd alerts.
+                    I built <strong>Pandalé</strong> to make Durga Puja pandal hopping effortless with metro routes &amp; live transit.
                   </p>
                   <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
                     <span>11:42 AM</span>
@@ -240,11 +240,11 @@ export default function CreatorConnectModal() {
                   <div className="flex items-center gap-1.5">
                     <span className="text-base">☕</span>
                     <span className="font-bold text-xs text-amber-950 dark:text-amber-200">
-                      Buy me a coffee ☕
+                      Support the Project
                     </span>
                   </div>
                   <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
-                    &ldquo;Love Pandalé? Help me out by buying me a coffee 😂 Or check out my startup <strong>Flatzy</strong>, offer me that remote job, or check my portfolio out!&rdquo;
+                    &ldquo;Enjoying Pandalé? Buy me a coffee or support my work ☕&rdquo;
                   </p>
                   <button
                     type="button"
@@ -254,7 +254,7 @@ export default function CreatorConnectModal() {
                     }}
                     className="w-full py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 via-[#D8261C] to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
                   >
-                    <span>☕ Buy Me a Coffee / Help Me Out</span>
+                    <span>Buy Me a Coffee</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                   <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
@@ -265,11 +265,8 @@ export default function CreatorConnectModal() {
 
                 {/* Message Bubble 3 (Business & Web Dev) */}
                 <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[94%] space-y-1 relative">
-                  <p className="font-medium">
-                    Want a custom website, Next.js web application, or digital product built like this?
-                  </p>
-                  <p className="text-xs text-stone-600 dark:text-stone-300">
-                    Let&rsquo;s connect! Drop an email or connect with me on Instagram below. 🚀
+                  <p className="text-xs text-stone-700 dark:text-stone-200 font-medium">
+                    Want a custom Next.js web app or digital product? Let&rsquo;s connect! 🚀
                   </p>
                   <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
                     <span>11:44 AM</span>
