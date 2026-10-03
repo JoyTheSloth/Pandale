@@ -1027,41 +1027,6 @@ export default function RoutePlannerPage() {
             })}
           </div>
         )}
-
-        {/* Live Route sequencing feedback strip */}
-        {activeStartingHubData && (
-          <div className="mt-3 pt-3 border-t border-stone-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-1.5 text-stone-700 dark:text-stone-300 flex-wrap">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-              <span className="font-medium">
-                {isBn ? 'যাত্রা শুরু:' : 'Starting Point:'}{' '}
-                <strong className="text-stone-900 dark:text-white font-bold">
-                  {activeStartingHubData.displayName}
-                </strong>
-              </span>
-              {distFromStationToFirst && selectedPandals.length > 0 && (
-                <span className="text-stone-500 dark:text-stone-400">
-                  → {isBn ? 'প্রথম স্টপ' : 'Stop 01'} ({selectedPandals[0].name}) {isBn ? 'মাত্র' : 'is only'}{' '}
-                  <strong className="text-[#D8261C] dark:text-red-400 font-bold">{distFromStationToFirst.text}</strong> ({distFromStationToFirst.mins} mins walk)
-                  {distFromStationToFirst.km >= 0.8 && (
-                    <span className="ml-1 text-amber-700 dark:text-amber-400 font-bold">
-                      · 🛺 ~{distFromStationToFirst.autoMins} mins by Auto
-                    </span>
-                  )}
-                </span>
-              )}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => generateSequentialRoute(activeStartingHub)}
-              className="text-[11px] font-bold text-[#D8261C] hover:text-[#B91C1C] flex items-center gap-1 cursor-pointer transition-colors"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>{isBn ? 'পুনরায় রুট সাজান' : 'Re-sequence Proximity'}</span>
-            </button>
-          </div>
-        )}
       </div>
 
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
