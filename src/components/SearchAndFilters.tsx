@@ -21,8 +21,8 @@ interface SearchAndFiltersProps {
   onLessCrowdedToggle: () => void;
   wishlistOnly: boolean;
   onWishlistToggle: () => void;
-  selectedDay: string;
-  onDayChange: (day: string) => void;
+  selectedDay?: string;
+  onDayChange?: (day: string) => void;
   sortBy: string;
   onSortChange: (sort: string) => void;
   isNearMeActive: boolean;
@@ -65,11 +65,9 @@ export default function SearchAndFilters({
     'East Kolkata'
   ];
 
-  const days = ['All', 'Tonight', 'Shashti', 'Saptami', 'Ashtami', 'Nabami', 'Dashami'];
-
   const activeFilterCount =
     (selectedZone !== 'All' ? 1 : 0) +
-    (selectedDay !== 'All' ? 1 : 0) +
+    (selectedDay && selectedDay !== 'All' ? 1 : 0) +
     (nearMetroOnly ? 1 : 0) +
     (mustVisitOnly ? 1 : 0) +
     (popularOnly ? 1 : 0) +
@@ -233,26 +231,6 @@ export default function SearchAndFilters({
             <option value="distance" className="dark:bg-[#1A1218]">📍 Distance from Me</option>
           </select>
         </div>
-      </div>
-
-      {/* Puja Day selector bar */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-1 text-xs">
-        <span className="text-stone-500 dark:text-stone-400 font-mono text-[11px] shrink-0 uppercase tracking-wider">
-          Day:
-        </span>
-        {days.map((d) => (
-          <button
-            key={d}
-            onClick={() => onDayChange(d)}
-            className={`px-3 py-1 rounded-lg transition-all duration-150 shrink-0 font-medium cursor-pointer hover:scale-105 active:scale-95 ${
-              selectedDay === d
-                ? 'bg-[#D8261C]/15 dark:bg-[#D8261C]/30 text-[#D8261C] dark:text-red-300 font-bold border border-[#D8261C]/40 shadow-xs'
-                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-stone-400'
-            }`}
-          >
-            {d === 'Tonight' ? '🌙 Tonight' : d}
-          </button>
-        ))}
       </div>
 
       {/* Mobile Filter Drawer / Bottom Sheet */}
