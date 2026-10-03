@@ -178,10 +178,15 @@ export default function KolkataMetroExplorerModal({
     }
   }, [isOpen, isPage]);
 
-  // Clamp pan so map can be explored smoothly across all zoom levels
+  // Clamp pan so map stays strictly fixed at base full view (1.0) and pans only when zoomed in
   const clampPan = useCallback((newPan: { x: number; y: number }, currentZoom: number) => {
-    const maxPanX = Math.max(120, 500 * Math.max(0.1, currentZoom - 0.5));
-    const maxPanY = Math.max(160, 600 * Math.max(0.1, currentZoom - 0.5));
+    // When at base full view (<= 1.02), lock strictly fixed at center (0, 0)
+    if (currentZoom <= 1.02) {
+      return { x: 0, y: 0 };
+    }
+    // Clamped panning range proportional to zoom level
+    const maxPanX = 400 * (currentZoom - 1);
+    const maxPanY = 500 * (currentZoom - 1);
     return {
       x: Math.max(-maxPanX, Math.min(maxPanX, newPan.x)),
       y: Math.max(-maxPanY, Math.min(maxPanY, newPan.y)),
@@ -190,13 +195,13 @@ export default function KolkataMetroExplorerModal({
 
   // Pan and drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0) return;
+    if (e.button !== 0 || zoom <= 1.02) return;
     setIsDragging(true);
     setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
+    if (!isDragging || zoom <= 1.02) return;
     const newPan = {
       x: e.clientX - dragStart.x,
       y: e.clientY - dragStart.y,
@@ -208,28 +213,33 @@ export default function KolkataMetroExplorerModal({
 
   // Touch drag handlers (single finger pan)
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
+    if (e.touches.length === 1 && zoom > 1.02) {
       setIsDragging(true);
       setDragStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
-    if (e.touches.length === 1 && isDragging) {
+    if (e.touches.length === 1 && isDragging && zoom > 1.02) {
+      e.preventDefault();
       const newPan = {
         x: e.touches[0].clientX - dragStart.x,
         y: e.touches[0].clientY - dragStart.y,
       };
       setPan(clampPan(newPan, zoom));
     } else if (e.touches.length === 2) {
+      e.preventDefault();
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (lastPinchDistRef.current !== null) {
         const scale = dist / lastPinchDistRef.current;
         setZoom((prev) => {
-          const next = Math.min(3.5, Math.max(0.6, prev * scale));
+          const next = Math.min(3.0, Math.max(1.0, prev * scale));
+          if (next <= 1.02) {
+            setPan({ x: 0, y: 0 });
+            return 1.0;
+          }
           return next;
         });
       }
@@ -242,7 +252,7 @@ export default function KolkataMetroExplorerModal({
     lastPinchDistRef.current = null;
   };
 
-  // Non-passive wheel handler: allows smooth zoom from 0.6 to 3.5
+  // Non-passive wheel handler: stops strictly at 1.0 base view
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !isOpen) return;
@@ -251,10 +261,16 @@ export default function KolkataMetroExplorerModal({
       e.preventDefault();
       e.stopPropagation();
 
-      const factor = e.deltaY < 0 ? 1.15 : 0.87;
+      const factor = e.deltaY < 0 ? 1.12 : 0.88;
 
       setZoom((prevZoom) => {
-        const nextZoom = Math.min(3.5, Math.max(0.6, Number((prevZoom * factor).toFixed(3))));
+        const nextZoom = Math.min(3.0, Math.max(1.0, Number((prevZoom * factor).toFixed(3))));
+
+        if (nextZoom <= 1.02) {
+          // Snap back to fixed centered full view when fully zoomed out
+          setPan({ x: 0, y: 0 });
+          return 1.0;
+        }
 
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -546,8 +562,9 @@ export default function KolkataMetroExplorerModal({
           }`}>
             <button
               type="button"
-              onClick={() => setZoom((z) => Math.min(3.5, Number((z + 0.2).toFixed(2))))}
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
+              onClick={() => setZoom((z) => Math.min(3.0, Number((z + 0.25).toFixed(2))))}
+              disabled={zoom >= 3.0}
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
               title="Zoom In"
@@ -558,12 +575,17 @@ export default function KolkataMetroExplorerModal({
             <button
               type="button"
               onClick={() => {
-                setZoom((z) => Math.max(0.6, Number((z - 0.2).toFixed(2))));
+                setZoom((z) => {
+                  const nextZ = Math.max(1.0, Number((z - 0.25).toFixed(2)));
+                  if (nextZ <= 1.02) setPan({ x: 0, y: 0 });
+                  return nextZ;
+                });
               }}
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 ${
+              disabled={zoom <= 1.0}
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed ${
                 isDark ? 'hover:bg-stone-800 text-stone-200 hover:text-white' : 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
               }`}
-              title="Zoom Out"
+              title="Zoom Out (Locks at full view)"
             >
               <ZoomOut className="w-4 h-4 transition-transform active:scale-90" />
             </button>
