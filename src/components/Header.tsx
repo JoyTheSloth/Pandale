@@ -78,6 +78,7 @@ export default function Header() {
         ) : (
           <Link 
             href="/" 
+            prefetch={true}
             className={`pointer-events-auto inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full shadow-lg active:scale-95 transition-all group ${
               pathname === '/'
                 ? 'bg-black/45 backdrop-blur-md border border-white/20 hover:border-white/40'
@@ -113,6 +114,7 @@ export default function Header() {
           {/* Wishlist Link Button with Live Count Badge */}
           <Link
             href="/wishlist"
+            prefetch={true}
             aria-label="View Wishlist"
             title="My Wishlist"
             className={`pointer-events-auto relative w-11 h-11 md:w-12 md:h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-85 transition-all duration-200 cursor-pointer group ${
@@ -206,6 +208,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
+                prefetch={true}
                 className={`pointer-events-auto flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 relative ${
                   isActive
                     ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/30'

@@ -6,6 +6,8 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import { LocationProvider } from '@/context/LocationContext';
+import { Suspense } from 'react';
+import TopProgressBar from '@/components/TopProgressBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
@@ -111,6 +113,10 @@ export default function RootLayout({
           <div className="hidden dark:block absolute inset-0 bg-[#0C0206]/70" />
           <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-transparent via-[#0C0206]/40 to-[#0C0206]/90 pointer-events-none" />
         </div>
+
+        <Suspense fallback={null}>
+          <TopProgressBar />
+        </Suspense>
 
         <ThemeProvider>
           <LanguageProvider>

@@ -89,6 +89,7 @@ export default function BottomNav() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={true}
                 onMouseDown={() => handlePress(item.href)}
                 onTouchStart={() => handlePress(item.href)}
                 className={`
