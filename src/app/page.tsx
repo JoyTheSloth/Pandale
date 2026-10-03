@@ -156,9 +156,9 @@ export default function HomePage() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1C1917] dark:text-[#FAF8F5] leading-[1.15]">
-            {isBn ? 'সার্কিট অনুযায়ী' : 'Explore Famous'} <br />
+            {isBn ? 'প্যান্ডেল হপিং' : 'Explore Famous'} <br />
             <span className="font-editorial italic font-normal text-4xl sm:text-6xl text-[#1C1917] dark:text-white">
-              {isBn ? 'পুজো পরিক্রমা' : 'Pandal Circuits'}
+              {isBn ? 'পুজো পরিক্রমা' : 'Pandal Hopping'}
             </span>
           </h2>
           <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A8A29E] mt-3 max-w-lg mx-auto">
