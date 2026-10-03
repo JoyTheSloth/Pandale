@@ -484,7 +484,7 @@ export default function MetroGuidePage() {
                         </a>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3.5 pt-1">
                         {station.nearby_pandals.map((item) => {
                           const pandal = PANDALS_DATA.find((p) => p.id === item.pandal_id);
                           const pandalName = pandal?.name || item.pandal_name;
@@ -497,45 +497,45 @@ export default function MetroGuidePage() {
                           return (
                             <div
                               key={item.pandal_id}
-                              className="p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/80 border border-stone-200 dark:border-white/10 hover:border-[#D8261C]/50 transition-all flex flex-col justify-between gap-3 group"
+                              className="p-2.5 sm:p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/80 border border-stone-200 dark:border-white/10 hover:border-[#D8261C]/50 transition-all flex flex-col justify-between gap-2 sm:gap-3 group"
                             >
-                              <div className="flex items-start gap-3">
-                                <div className="w-14 h-14 rounded-xl overflow-hidden relative shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100">
+                              <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
+                                <div className="w-full sm:w-14 aspect-[16/10] sm:aspect-square sm:h-14 rounded-xl overflow-hidden relative shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100">
                                   <Image
                                     src={pandalImage}
                                     alt={pandalName}
                                     fill
-                                    sizes="56px"
+                                    sizes="(max-width: 640px) 50vw, 56px"
                                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                                   />
                                 </div>
-                                <div className="min-w-0 flex-1">
+                                <div className="min-w-0 flex-1 w-full">
                                   <Link
                                     href={`/pandal/${pandalSlug}`}
                                     className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white hover:text-[#D8261C] transition-colors line-clamp-1"
                                   >
                                     {pandalName}
                                   </Link>
-                                  <p className="text-[11px] text-stone-600 dark:text-stone-400 truncate mt-0.5 font-medium">
+                                  <p className="text-[10px] sm:text-[11px] text-stone-600 dark:text-stone-400 truncate mt-0.5 font-medium">
                                     {pandalLocality}
                                   </p>
                                   
                                   {/* 3 Metric Pills: Time, Steps, Distance */}
-                                  <div className="mt-2 flex items-center gap-1.5 flex-wrap text-[10px] font-bold">
-                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
+                                  <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 flex-wrap text-[9px] sm:text-[10px] font-bold">
+                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
                                       <Clock className="w-2.5 h-2.5" />
                                       <span>{item.walking_time_mins} min</span>
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/50 dark:border-amber-900/40">
+                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/50 dark:border-amber-900/40">
                                       <Footprints className="w-2.5 h-2.5" />
                                       <span>~{itemSteps.toLocaleString()} steps</span>
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
+                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
                                       <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
                                       <span>{item.walking_distance}</span>
                                     </span>
                                     {(item.walking_distance.toLowerCase().includes('auto') || item.walking_time_mins >= 12) && (
-                                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/50 font-bold">
+                                      <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/50 font-bold">
                                         <span>🛺 Auto: ~{item.walking_distance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(item.walking_time_mins / 3.5))} min</span>
                                       </span>
                                     )}
@@ -543,10 +543,10 @@ export default function MetroGuidePage() {
                                 </div>
                               </div>
 
-                              <div className="flex items-center gap-2 pt-2 border-t border-stone-200/60 dark:border-white/10">
+                              <div className="flex items-center gap-1.5 sm:gap-2 pt-2 border-t border-stone-200/60 dark:border-white/10">
                                 <Link
                                   href={`/pandal/${pandalSlug}`}
-                                  className="flex-1 py-1.5 rounded-lg bg-white dark:bg-stone-800 hover:bg-[#D8261C] text-stone-800 dark:text-stone-200 hover:text-white text-[11px] font-bold text-center border border-stone-200 dark:border-white/10 transition-colors"
+                                  className="flex-1 py-1.5 rounded-lg bg-white dark:bg-stone-800 hover:bg-[#D8261C] text-stone-800 dark:text-stone-200 hover:text-white text-[10px] sm:text-[11px] font-bold text-center border border-stone-200 dark:border-white/10 transition-colors"
                                 >
                                   Details
                                 </Link>
@@ -554,7 +554,7 @@ export default function MetroGuidePage() {
                                   href={walkUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="py-1.5 px-3 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white text-[11px] font-bold flex items-center gap-1 shadow-2xs transition-colors shrink-0"
+                                  className="py-1.5 px-2 sm:px-3 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white text-[10px] sm:text-[11px] font-bold flex items-center justify-center gap-1 shadow-2xs transition-colors shrink-0"
                                 >
                                   <MapPin className="w-3 h-3 text-[#FDE047]" />
                                   <span>Walk Path</span>
