@@ -8,8 +8,7 @@ import SearchAndFilters from '@/components/SearchAndFilters';
 import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
-import { Sparkles, AlertCircle, Loader2, ArrowRight, Train } from 'lucide-react';
-import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
+import { Sparkles, AlertCircle, Loader2 } from 'lucide-react';
 import { useLocation } from '@/context/LocationContext';
 import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
 
@@ -24,7 +23,6 @@ function PandalsContent() {
   const initialTrending = searchParams.get('trending') === 'true';
 
   // Filter states
-  const [isMetroExplorerOpen, setIsMetroExplorerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedZone, setSelectedZone] = useState<ZoneArea | 'All'>(initialZone);
   const [nearMetroOnly, setNearMetroOnly] = useState(initialNearMetro);
@@ -180,19 +178,6 @@ function PandalsContent() {
             Showing {filteredPandals.length} authentic 2026 Kolkata Durga Puja pandals
           </p>
         </div>
-
-        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
-          {/* View Metro Router Modal Trigger */}
-          <button
-            type="button"
-            onClick={() => setIsMetroExplorerOpen(true)}
-            className="px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-red-600/20 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-white/20 group"
-          >
-            <Train className="w-3.5 h-3.5 text-yellow-300" />
-            <span>View Metro Router</span>
-            <ArrowRight className="w-3 h-3 text-yellow-200 group-hover:translate-x-1 transition-transform duration-200" />
-          </button>
-        </div>
       </div>
 
       {/* Search and Filters component */}
@@ -246,12 +231,6 @@ function PandalsContent() {
           }} />
         )}
       </div>
-
-      {/* Interactive Kolkata Metro Router Modal */}
-      <KolkataMetroExplorerModal
-        isOpen={isMetroExplorerOpen}
-        onClose={() => setIsMetroExplorerOpen(false)}
-      />
 
     </div>
   );
