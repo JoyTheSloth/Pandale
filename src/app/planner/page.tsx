@@ -622,12 +622,6 @@ export default function RoutePlannerPage() {
     return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${activeStartingHubData.displayName}, Kolkata`)}&destination=${encodeURIComponent(`${selectedPandals[0].name}, Kolkata`)}&travelmode=walking`;
   }, [activeStartingHubData, selectedPandals]);
 
-  const handleAppendPreset = (preset: typeof PRESET_CIRCUITS[0]) => {
-    const newIds = preset.ids.filter((id) => !selectedIds.includes(id));
-    if (newIds.length > 0) {
-      setSelectedIds([...selectedIds, ...newIds]);
-    }
-  };
 
   const handleAddAllAvailableZone = () => {
     const toAdd = availableToAdd.map((p) => p.id);
@@ -882,36 +876,6 @@ export default function RoutePlannerPage() {
                   <div className="text-[9px] text-blue-400 flex items-center justify-center gap-1 font-semibold">
                     <Train className="w-2.5 h-2.5 text-blue-400 shrink-0" />
                     <span className="truncate">{preset.metro}</span>
-                  </div>
-
-                  {/* 1-Click Load vs Add on Action Buttons */}
-                  <div className="flex items-center gap-1 pt-1">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleApplyPreset(preset);
-                      }}
-                      className={`flex-1 py-1 rounded-lg text-[9.5px] font-bold transition-all ${
-                        isActive
-                          ? 'bg-[#D8261C] text-white shadow-xs'
-                          : 'bg-white/15 hover:bg-white/25 text-white'
-                      }`}
-                    >
-                      {isActive ? (isBn ? 'সক্রিয়' : 'Active') : (isBn ? 'রুট লোড' : 'Load Plan')}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAppendPreset(preset);
-                      }}
-                      title="Add stops from this circuit onto your current plan"
-                      className="py-1 px-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/35 text-amber-300 text-[9.5px] font-bold border border-amber-500/30 flex items-center gap-0.5 transition-all"
-                    >
-                      <Plus className="w-2.5 h-2.5" />
-                      <span>{isBn ? 'যোগ' : 'Add on'}</span>
-                    </button>
                   </div>
                 </div>
               </div>
