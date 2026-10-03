@@ -5,7 +5,7 @@ import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
 
 export default function MapPage() {
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] py-3 px-2 sm:px-6 flex flex-col items-center">
+    <div className="w-full h-[calc(100dvh-4.5rem)] md:h-[calc(100dvh-5.5rem)] flex flex-col overflow-hidden">
       <KolkataMetroExplorerModal isPage={true} />
     </div>
   );

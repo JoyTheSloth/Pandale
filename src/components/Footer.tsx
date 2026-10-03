@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { 
   Train, 
@@ -12,8 +13,11 @@ import {
 } from 'lucide-react';
 
 export default function Footer() {
+  const pathname = usePathname();
   const { language } = useLanguage();
   const isBn = language === 'bn';
+
+  if (pathname === '/map') return null;
 
   return (
     <footer className="w-full relative bg-[#0A0207] text-stone-200 border-t border-rose-950/40 pb-32 md:pb-12 mt-20 sm:mt-32 lg:mt-40 transition-colors">

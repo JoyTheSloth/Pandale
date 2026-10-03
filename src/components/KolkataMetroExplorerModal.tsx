@@ -257,13 +257,17 @@ export default function KolkataMetroExplorerModal({
 
   const modalContent = (
     <div 
-      className={`relative w-full max-w-6xl ${isPage ? 'h-[85vh] min-h-[640px] max-h-[920px]' : 'h-[92vh] max-h-[900px]'} ${isDark ? 'bg-stone-950 text-stone-100 border-stone-800' : 'bg-white text-stone-900 border-stone-200'} rounded-3xl border shadow-2xl flex flex-col overflow-hidden transition-colors duration-200`}
+      className={
+        isPage
+          ? `relative w-full h-full ${isDark ? 'bg-stone-950 text-stone-100' : 'bg-white text-stone-900'} flex flex-col overflow-hidden transition-colors duration-200`
+          : `relative w-full max-w-6xl h-[92vh] max-h-[900px] ${isDark ? 'bg-stone-950 text-stone-100 border-stone-800' : 'bg-white text-stone-900 border-stone-200'} rounded-3xl border shadow-2xl flex flex-col overflow-hidden transition-colors duration-200`
+      }
       onClick={(e) => e.stopPropagation()}
     >
         {/* COMPREHENSIVE HEADER & FILTER SECTION WITH ARTISTIC DURGA PUJA / METRO BANNER */}
         <div className={`relative z-30 shrink-0 border-b ${isDark ? 'border-stone-800' : 'border-stone-200/80'} overflow-visible`}>
-          {/* Background Illustration - strictly clipped inside rounded top header corners */}
-          <div className="absolute inset-0 overflow-hidden rounded-t-3xl pointer-events-none">
+          {/* Background Illustration */}
+          <div className={`absolute inset-0 overflow-hidden ${isPage ? '' : 'rounded-t-3xl'} pointer-events-none`}>
             <div 
               className="absolute inset-0 bg-cover bg-no-repeat"
               style={{ 
@@ -898,7 +902,7 @@ export default function KolkataMetroExplorerModal({
 
   if (isPage) {
     return (
-      <div className="w-full max-w-6xl mx-auto select-none">
+      <div className="w-full h-full select-none flex flex-col overflow-hidden">
         {modalContent}
       </div>
     );
