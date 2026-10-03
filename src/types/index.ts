@@ -75,7 +75,7 @@ export interface Pandal {
   locality: string;
   latitude: number;
   longitude: number;
-  google_place_id: string;
+  google_place_id?: string;
   google_maps_url: string;
   nearest_metro: string;
   walking_distance: string;
