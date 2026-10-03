@@ -427,7 +427,6 @@ export default function RoutePlannerPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [addSearchQuery, setAddSearchQuery] = useState('');
   const [selectedAddZone, setSelectedAddZone] = useState<ZoneArea | 'All'>('All');
-  const [copied, setCopied] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -630,61 +629,6 @@ export default function RoutePlannerPage() {
     }
   };
 
-  const handleClearAll = () => {
-    setSelectedIds([]);
-    setActivePreset(null);
-  };
-
-  const handleShareRoute = async () => {
-    const routeText = `My Kolkata Durga Puja 2026 Itinerary (${selectedPandals.length} stops):\n` +
-      selectedPandals.map((p, idx) => `${idx + 1}. ${p.name} (${p.nearest_metro})`).join('\n') +
-      `\n\nPlan your route with Pandalé Kolkata!`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'My Pujo 2026 Itinerary | Pandalé',
-          text: routeText,
-          url: window.location.href,
-        });
-      } catch (err) {
-        // User dismissed
-      }
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
-
-  // Build full multi-stop Google Maps URL
-  const fullGoogleMapsRouteUrl = useMemo(() => {
-    if (selectedPandals.length === 0) return 'https://maps.google.com';
-    
-    if (selectedPandals.length === 1) {
-      return buildGoogleMapsUrl(
-        selectedPandals[0].latitude, 
-        selectedPandals[0].longitude, 
-        selectedPandals[0].google_place_id, 
-        selectedPandals[0].name
-      );
-    }
-
-    const origin = encodeURIComponent(`${selectedPandals[0].name}, Kolkata`);
-    const destination = encodeURIComponent(`${selectedPandals[selectedPandals.length - 1].name}, Kolkata`);
-
-    if (selectedPandals.length === 2) {
-      return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
-    }
-
-    const waypoints = selectedPandals
-      .slice(1, selectedPandals.length - 1)
-      .map((p) => encodeURIComponent(`${p.name}, Kolkata`))
-      .join('|');
-
-    return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${waypoints}&travelmode=transit`;
-  }, [selectedPandals]);
-
   // Crowd pill styling helper
   const getCrowdBadge = (level: string) => {
     switch (level) {
@@ -722,43 +666,6 @@ export default function RoutePlannerPage() {
           </p>
         </div>
 
-        {/* Global Route CTAs */}
-        <div className="flex items-center gap-2.5 flex-wrap shrink-0">
-          {selectedPandals.length > 0 && (
-            <>
-              <button
-                type="button"
-                onClick={handleClearAll}
-                title="Clear entire itinerary route"
-                className="px-3.5 py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-rose-300 dark:hover:border-rose-800/60 hover:bg-rose-50/60 dark:hover:bg-rose-950/20 text-stone-600 dark:text-stone-300 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group btn-jiggle"
-              >
-                <RotateCcw className="w-4 h-4 text-stone-400 group-hover:text-rose-500 group-hover:-rotate-90 transition-transform duration-200" />
-                <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleShareRoute}
-                title="Share Itinerary"
-                className="p-3 sm:px-4 sm:py-3 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] dark:hover:border-white/20 text-stone-700 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group btn-jiggle"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Forward className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />}
-                <span className="hidden sm:inline">{copied ? (isBn ? 'কপি হয়েছে!' : 'Copied!') : (isBn ? 'শেয়ার' : 'Share')}</span>
-              </button>
-
-              <a
-                href={fullGoogleMapsRouteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-[#D8261C]/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-200 group btn-jiggle"
-              >
-                <MapPin className="w-4 h-4 text-[#FDE047] group-hover:-translate-y-0.5 transition-transform duration-200" />
-                <span>{isBn ? 'গুগল ম্যাপসে সম্পূর্ণ রুট দেখুন' : 'Open Entire Route in Maps'}</span>
-                <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-              </a>
-            </>
-          )}
-        </div>
       </div>
 
       {/* 2. Preset Popular Pandal Routes (Smaller Cards Sliding Carousel) */}
