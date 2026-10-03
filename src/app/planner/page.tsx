@@ -278,14 +278,118 @@ const ZONE_METRO_HUBS: Record<string, HubStationOption[]> = {
   ],
 };
 
+interface AreaHub {
+  id: string;
+  name: string;
+  bengaliName: string;
+  area: string;
+  bengaliArea: string;
+  latitude: number;
+  longitude: number;
+  landmarks: string;
+  bengaliLandmarks: string;
+}
+
+// Prominent Kolkata destinations that aren't directly on a metro line
+const NON_METRO_AREA_HUBS: AreaHub[] = [
+  {
+    id: 'area-lake-town',
+    name: 'Lake Town & VIP Road',
+    bengaliName: 'লেক টাউন ও ভিআইপি রোড',
+    area: 'North Kolkata',
+    bengaliArea: 'উত্তর কলকাতা',
+    latitude: 22.5976,
+    longitude: 88.3978,
+    landmarks: 'Sree Bhumi, Dum Dum Park',
+    bengaliLandmarks: 'শ্রীভূমি, দমদম পার্ক'
+  },
+  {
+    id: 'area-behala-chowrasta',
+    name: 'Behala & DH Road',
+    bengaliName: 'বেহালা ও ডিএইচ রোড',
+    area: 'South Kolkata',
+    bengaliArea: 'দক্ষিণ কলকাতা',
+    latitude: 22.4965,
+    longitude: 88.3155,
+    landmarks: 'Behala Club, 41 Pally, Nutan Dal',
+    bengaliLandmarks: 'বেহালা ক্লাব, ৪১ পল্লী, নূতন দল'
+  },
+  {
+    id: 'area-kasba-bosepukur',
+    name: 'Kasba & Bosepukur',
+    bengaliName: 'কসবা ও বোসপুকুর',
+    area: 'South Kolkata',
+    bengaliArea: 'দক্ষিণ কলকাতা',
+    latitude: 22.5152,
+    longitude: 88.3845,
+    landmarks: 'Bosepukur Sitala Mandir, Parijat',
+    bengaliLandmarks: 'বোসপুকুর শীতলা মন্দির, পারিজাত'
+  },
+  {
+    id: 'area-santoshpur-jadavpur',
+    name: 'Santoshpur & Jadavpur',
+    bengaliName: 'সন্তোষপুর ও যাদবপুর',
+    area: 'South Kolkata',
+    bengaliArea: 'দক্ষিণ কলকাতা',
+    latitude: 22.4988,
+    longitude: 88.3754,
+    landmarks: 'Lake Pally, Sammilita, Trikon Park',
+    bengaliLandmarks: 'লেক পল্লী, সম্মিলিত, ত্রিকোণ পার্ক'
+  },
+  {
+    id: 'area-salt-lake-outer',
+    name: 'Salt Lake Outer & New Town',
+    bengaliName: 'সল্টলেক ও নিউ টাউন',
+    area: 'East Kolkata',
+    bengaliArea: 'পূর্ব কলকাতা',
+    latitude: 22.5855,
+    longitude: 88.4215,
+    landmarks: 'FD Block, BJ Block, New Town',
+    bengaliLandmarks: 'এফডি ব্লক, বিজে ব্লক, নিউ টাউন'
+  },
+  {
+    id: 'area-khidirpur-watgunge',
+    name: 'Khidirpur & Watgunge',
+    bengaliName: 'খিদিরপুর ও ওয়াটগঞ্জ',
+    area: 'Central Kolkata',
+    bengaliArea: 'মধ্য কলকাতা',
+    latitude: 22.5350,
+    longitude: 88.3240,
+    landmarks: '25 Pally, 74 Pally, Babu Bazar',
+    bengaliLandmarks: '২৫ পল্লী, ৭৪ পল্লী, বাবু বাজার'
+  },
+  {
+    id: 'area-gariahat-ballygunge',
+    name: 'Gariahat & Ballygunge',
+    bengaliName: 'গড়িয়াহাট ও বালিগঞ্জ',
+    area: 'South Kolkata',
+    bengaliArea: 'দক্ষিণ কলকাতা',
+    latitude: 22.5186,
+    longitude: 88.3655,
+    landmarks: 'Ekdalia Evergreen, Singhi Park',
+    bengaliLandmarks: 'একডালিয়া এভারগ্রিন, সিংহী পার্ক'
+  },
+  {
+    id: 'area-howrah-salkia',
+    name: 'Howrah, Salkia & Shibpur',
+    bengaliName: 'হাওড়া, সালকিয়া ও শিবপুর',
+    area: 'West Kolkata',
+    bengaliArea: 'পশ্চিম কলকাতা',
+    latitude: 22.5850,
+    longitude: 88.3300,
+    landmarks: 'Belur, Salkia, Shibpur',
+    bengaliLandmarks: 'বেলুড়, সালকিয়া, শিবপুর'
+  }
+];
+
 export default function RoutePlannerPage() {
   const { wishlist } = useWishlist();
   const { isVisited, toggleVisited } = useVisited();
   const { language } = useLanguage();
   const isBn = language === 'bn';
 
-  // Metro Line & Starting Metro Hub state
-  const [selectedMetroLine, setSelectedMetroLine] = useState<'blue' | 'green' | 'orange'>('blue');
+  // Metro Line & Starting Hub state (supports Metro lines + Non-Metro Area Hubs)
+  const [selectedMetroLine, setSelectedMetroLine] = useState<'blue' | 'green' | 'orange' | 'purple' | 'area'>('blue');
   const [activeStartingHub, setActiveStartingHub] = useState<string>('shyambazar');
 
   // Selected pandal IDs in route order (defaults to North Kolkata sequentially ordered from Shyambazar)
@@ -414,15 +518,17 @@ export default function RoutePlannerPage() {
     setActivePreset(preset.id);
   };
 
-  // Algorithm to auto-generate a sequential itinerary starting at the selected metro station
-  const generateSequentialRoute = (stationId: string) => {
-    const station = METRO_STATIONS_DATA.find((s) => s.id === stationId);
-    if (!station) return;
+  // Algorithm to auto-generate a sequential itinerary starting at the selected metro station or area hub
+  const generateSequentialRoute = (hubId: string) => {
+    const station = METRO_STATIONS_DATA.find((s) => s.id === hubId);
+    const areaHub = NON_METRO_AREA_HUBS.find((h) => h.id === hubId);
+    const hub = station || areaHub;
+    if (!hub) return;
 
-    // Closest pandals around the selected station
+    // Closest pandals around the selected hub
     const sorted = [...PANDALS_DATA].sort((a, b) => {
-      const distA = calculateDistanceKm(station.latitude, station.longitude, a.latitude, a.longitude);
-      const distB = calculateDistanceKm(station.latitude, station.longitude, b.latitude, b.longitude);
+      const distA = calculateDistanceKm(hub.latitude, hub.longitude, a.latitude, a.longitude);
+      const distB = calculateDistanceKm(hub.latitude, hub.longitude, b.latitude, b.longitude);
       return distA - distB;
     });
 
@@ -430,10 +536,10 @@ export default function RoutePlannerPage() {
     const orderedIds: string[] = [];
     const remaining = [...candidates];
 
-    let currentLat = station.latitude;
-    let currentLng = station.longitude;
+    let currentLat = hub.latitude;
+    let currentLng = hub.longitude;
 
-    // Step-by-step nearest neighbor routing starting from the metro station
+    // Step-by-step nearest neighbor routing starting from the selected hub
     while (remaining.length > 0) {
       let nearestIdx = 0;
       let minDistance = Infinity;
@@ -458,42 +564,63 @@ export default function RoutePlannerPage() {
     }
 
     setSelectedIds(orderedIds);
-    setActiveStartingHub(stationId);
+    setActiveStartingHub(hubId);
     setActivePreset(null);
   };
 
-  // Memoized active starting station details
-  const activeStartingStation = useMemo(() => {
+  // Memoized active starting station or area hub details
+  const activeStartingHubData = useMemo(() => {
     if (!activeStartingHub) return null;
-    return METRO_STATIONS_DATA.find((s) => s.id === activeStartingHub) || null;
-  }, [activeStartingHub]);
+    const station = METRO_STATIONS_DATA.find((s) => s.id === activeStartingHub);
+    if (station) {
+      return {
+        id: station.id,
+        name: station.name,
+        bengaliName: station.bengali_name,
+        latitude: station.latitude,
+        longitude: station.longitude,
+        type: 'metro' as const,
+        displayName: isBn && station.bengali_name ? `${station.bengali_name} মেট্রো স্টেশন` : `${station.name} Metro Station`,
+      };
+    }
+    const areaHub = NON_METRO_AREA_HUBS.find((h) => h.id === activeStartingHub);
+    if (areaHub) {
+      return {
+        id: areaHub.id,
+        name: areaHub.name,
+        bengaliName: areaHub.bengaliName,
+        latitude: areaHub.latitude,
+        longitude: areaHub.longitude,
+        type: 'area' as const,
+        displayName: isBn ? `${areaHub.bengaliName} এলাকা` : `${areaHub.name} Hub`,
+      };
+    }
+    return null;
+  }, [activeStartingHub, isBn]);
 
-  // Distance and walk time from the starting station to Stop 01
+  // Distance and walk time from the starting hub to Stop 01
   const distFromStationToFirst = useMemo(() => {
-    if (!activeStartingStation || selectedPandals.length === 0) return null;
+    if (!activeStartingHubData || selectedPandals.length === 0) return null;
     const first = selectedPandals[0];
     const km = calculateDistanceKm(
-      activeStartingStation.latitude,
-      activeStartingStation.longitude,
+      activeStartingHubData.latitude,
+      activeStartingHubData.longitude,
       first.latitude,
       first.longitude
     );
     return {
       km,
       text: km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`,
-      mins: Math.max(3, Math.round(km * 12)),
+      mins: Math.max(2, Math.round(km * 12)),
       autoMins: Math.max(3, Math.round(km * 3.2 + 1))
     };
-  }, [activeStartingStation, selectedPandals]);
+  }, [activeStartingHubData, selectedPandals]);
 
-  // Direct walk directions from starting metro hub to Stop 01
+  // Direct walk directions from starting hub to Stop 01
   const walkFromHubToFirstUrl = useMemo(() => {
-    if (!activeStartingStation || selectedPandals.length === 0) return null;
-    const cleanHub = activeStartingStation.name.toLowerCase().includes('metro')
-      ? activeStartingStation.name
-      : `${activeStartingStation.name} Metro Station`;
-    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${cleanHub}, Kolkata`)}&destination=${encodeURIComponent(`${selectedPandals[0].name}, Kolkata`)}&travelmode=walking`;
-  }, [activeStartingStation, selectedPandals]);
+    if (!activeStartingHubData || selectedPandals.length === 0) return null;
+    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${activeStartingHubData.displayName}, Kolkata`)}&destination=${encodeURIComponent(`${selectedPandals[0].name}, Kolkata`)}&travelmode=walking`;
+  }, [activeStartingHubData, selectedPandals]);
 
   const handleAppendPreset = (preset: typeof PRESET_CIRCUITS[0]) => {
     const newIds = preset.ids.filter((id) => !selectedIds.includes(id));
@@ -806,95 +933,142 @@ export default function RoutePlannerPage() {
                 🚇
               </span>
               <h3 className="font-editorial text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 tracking-tight">
-                {isBn ? 'গন্তব্য ও মেট্রো স্টেশন নির্বাচন করুন' : 'Select Destination & Starting Metro'}
+                {isBn ? 'গন্তব্য, মেট্রো বা এলাকা নির্বাচন করুন' : 'Select Destination Metro or Area Hub'}
               </h3>
             </div>
             <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 max-w-xl">
               {isBn 
-                ? 'আপনার যাত্রা শুরুর মেট্রো স্টেশন বেছে নিন। সিস্টেম স্বয়ংক্রিয়ভাবে স্টেশন থেকে সবচেয়ে কাছের প্যান্ডেল আগে রেখে ক্রমানুসারে নিখুঁত রুট তৈরি করবে।'
-                : 'Choose your destination hub to auto-generate a sequential itinerary ordered by walking proximity from that station.'}
+                ? 'মেট্রো লাইন বা এলাকাভিত্তিক হাব (যেমন লেক টাউন, বেহালা, কসবা) বেছে নিন। সিস্টেম নিকটবর্তী প্যান্ডেলগুলো সাজিয়ে সেরা রুট তৈরি করবে।'
+                : 'Choose a Metro line or Non-Metro area hub (Lake Town, Behala, Kasba, etc.) to auto-generate a sequential itinerary ordered by proximity.'}
             </p>
           </div>
         </div>
 
-        {/* 3 Metro Line Tabs: Blue Line, Green Line, Orange Line */}
+        {/* Destination Line & Area Tabs: Blue, Green, Orange, Purple & Area-Wise */}
         <div className="flex items-center gap-2 p-1 bg-stone-100 dark:bg-white/[0.05] rounded-xl overflow-x-auto no-scrollbar mb-3.5 relative z-10">
           {[
             { id: 'blue' as const, name: 'Blue Line', bengaliName: 'ব্লু লাইন', color: '#2563EB', activeClass: 'bg-blue-600 text-white' },
             { id: 'green' as const, name: 'Green Line', bengaliName: 'গ্রিন লাইন', color: '#059669', activeClass: 'bg-emerald-600 text-white' },
-            { id: 'orange' as const, name: 'Orange Line', bengaliName: 'অরেঞ্জ লাইন', color: '#EA580C', activeClass: 'bg-orange-600 text-white' }
-          ].map((line) => {
-            const isSelected = selectedMetroLine === line.id;
+            { id: 'orange' as const, name: 'Orange Line', bengaliName: 'অরেঞ্জ লাইন', color: '#EA580C', activeClass: 'bg-orange-600 text-white' },
+            { id: 'purple' as const, name: 'Purple Line (Behala)', bengaliName: 'পার্পল লাইন', color: '#9333EA', activeClass: 'bg-purple-600 text-white' },
+            { id: 'area' as const, name: '📍 Area-Wise (Non-Metro)', bengaliName: '📍 এলাকাভিত্তিক (মেট্রোহীন)', color: '#D8261C', activeClass: 'bg-[#D8261C] text-white' }
+          ].map((tab) => {
+            const isSelected = selectedMetroLine === tab.id;
             return (
               <button
-                key={line.id}
+                key={tab.id}
                 type="button"
                 onClick={() => {
-                  setSelectedMetroLine(line.id);
-                  const firstStation = METRO_STATIONS_DATA.find((s) => s.line_code === line.id);
-                  if (firstStation) {
-                    generateSequentialRoute(firstStation.id);
+                  setSelectedMetroLine(tab.id);
+                  if (tab.id === 'area') {
+                    generateSequentialRoute(NON_METRO_AREA_HUBS[0].id);
+                  } else {
+                    const firstStation = METRO_STATIONS_DATA.find((s) => s.line_code === tab.id);
+                    if (firstStation) {
+                      generateSequentialRoute(firstStation.id);
+                    }
                   }
                 }}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                   isSelected
-                    ? `${line.activeClass} shadow-xs`
+                    ? `${tab.activeClass} shadow-xs`
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'
                 }`}
               >
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: line.color }} />
-                <span>{isBn ? line.bengaliName : line.name}</span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: tab.color }} />
+                <span>{isBn ? tab.bengaliName : tab.name}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Metro Station Selector Chips — ONLY station names */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 relative z-10">
-          {METRO_STATIONS_DATA.filter((s) => s.line_code === selectedMetroLine).map((station) => {
-            const isSelected = activeStartingHub === station.id;
-            return (
-              <button
-                key={station.id}
-                type="button"
-                onClick={() => generateSequentialRoute(station.id)}
-                className={`px-3 py-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 group ${
-                  isSelected
-                    ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
-                    : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
-                }`}
-              >
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 ${
-                    selectedMetroLine === 'blue' ? 'bg-blue-600' : selectedMetroLine === 'green' ? 'bg-emerald-600' : 'bg-orange-600'
-                  }`}>
-                    M
-                  </span>
-                  <span className={`text-xs font-bold truncate ${
-                    isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
-                  }`}>
-                    {isBn ? station.bengali_name : station.name}
-                  </span>
-                </div>
-                {isSelected && (
-                  <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
-                    <Check className="w-2.5 h-2.5 stroke-[3]" />
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+        {/* Station or Area Selector Chips */}
+        {selectedMetroLine === 'area' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 relative z-10">
+            {NON_METRO_AREA_HUBS.map((hub) => {
+              const isSelected = activeStartingHub === hub.id;
+              return (
+                <button
+                  key={hub.id}
+                  type="button"
+                  onClick={() => generateSequentialRoute(hub.id)}
+                  className={`px-3 py-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 group ${
+                    isSelected
+                      ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
+                      : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-5 h-5 rounded-lg flex items-center justify-center text-xs bg-red-500/10 text-red-500 shrink-0 border border-red-500/20">
+                      📍
+                    </span>
+                    <div className="min-w-0">
+                      <div className={`text-xs font-bold truncate ${
+                        isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
+                      }`}>
+                        {isBn ? hub.bengaliName : hub.name}
+                      </div>
+                      <div className="text-[10px] text-stone-500 dark:text-stone-400 truncate">
+                        {isBn ? hub.bengaliLandmarks : hub.landmarks}
+                      </div>
+                    </div>
+                  </div>
+                  {isSelected && (
+                    <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 relative z-10">
+            {METRO_STATIONS_DATA.filter((s) => s.line_code === selectedMetroLine).map((station) => {
+              const isSelected = activeStartingHub === station.id;
+              return (
+                <button
+                  key={station.id}
+                  type="button"
+                  onClick={() => generateSequentialRoute(station.id)}
+                  className={`px-3 py-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 group ${
+                    isSelected
+                      ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
+                      : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 ${
+                      selectedMetroLine === 'blue' ? 'bg-blue-600' : selectedMetroLine === 'green' ? 'bg-emerald-600' : selectedMetroLine === 'orange' ? 'bg-orange-600' : 'bg-purple-600'
+                    }`}>
+                      M
+                    </span>
+                    <span className={`text-xs font-bold truncate ${
+                      isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
+                    }`}>
+                      {isBn && station.bengali_name ? station.bengali_name : station.name}
+                    </span>
+                  </div>
+                  {isSelected && (
+                    <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Live Route sequencing feedback strip */}
-        {activeStartingStation && (
+        {activeStartingHubData && (
           <div className="mt-3 pt-3 border-t border-stone-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-1.5 text-stone-700 dark:text-stone-300 flex-wrap">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
               <span className="font-medium">
                 {isBn ? 'যাত্রা শুরু:' : 'Starting Point:'}{' '}
                 <strong className="text-stone-900 dark:text-white font-bold">
-                  {isBn ? activeStartingStation.bengali_name : activeStartingStation.name} {isBn ? 'মেট্রো' : 'Metro'}
+                  {activeStartingHubData.displayName}
                 </strong>
               </span>
               {distFromStationToFirst && selectedPandals.length > 0 && (
@@ -1037,17 +1211,17 @@ export default function RoutePlannerPage() {
 
             return (
               <React.Fragment key={pandal.id}>
-                {/* Simple Top Walk Connector from Starting Metro Hub */}
-                {isFirst && activeStartingStation && distFromStationToFirst && (
+                {/* Simple Top Walk Connector from Starting Hub (Metro or Area) */}
+                {isFirst && activeStartingHubData && distFromStationToFirst && (
                   <div className="flex items-center justify-center mb-1">
                     <a
                       href={walkFromHubToFirstUrl || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-0.5 rounded-full bg-white/5 border border-white/10 hover:border-red-500/50 text-stone-300 text-[10px] sm:text-[11px] font-medium flex items-center gap-1.5 shadow-xs transition-all"
-                      title="Walk directions from starting metro station"
+                      title={isBn ? `${activeStartingHubData.displayName} থেকে দিকনির্দেশনা` : `Directions from ${activeStartingHubData.displayName}`}
                     >
-                      <span>🚶 Walk {distFromStationToFirst.text}</span>
+                      <span>{activeStartingHubData.type === 'area' ? '📍' : '🚶'} {activeStartingHubData.name}: {distFromStationToFirst.text}</span>
                       <span className="text-stone-500">•</span>
                       <span>~{distFromStationToFirst.mins} mins</span>
                       <ChevronRight className="w-3 h-3 text-stone-400" />
