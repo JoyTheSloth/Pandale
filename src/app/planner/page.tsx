@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PANDALS_DATA } from '@/data/pandals';
@@ -391,6 +391,7 @@ export default function RoutePlannerPage() {
   // Metro Line & Starting Hub state (supports Metro lines + Non-Metro Area Hubs)
   const [selectedMetroLine, setSelectedMetroLine] = useState<'blue' | 'green' | 'orange' | 'purple' | 'area'>('blue');
   const [activeStartingHub, setActiveStartingHub] = useState<string>('shyambazar');
+  const [stationPage, setStationPage] = useState<number>(1);
 
   // Selected pandal IDs in route order (defaults to North Kolkata sequentially ordered from Shyambazar)
   const [selectedIds, setSelectedIds] = useState<string[]>(() => {
@@ -629,6 +630,29 @@ export default function RoutePlannerPage() {
     }
   };
 
+  // Stations filtered by selected line
+  const activeLineStations = useMemo(() => {
+    return METRO_STATIONS_DATA.filter((s) => s.line_code === selectedMetroLine);
+  }, [selectedMetroLine]);
+
+  const STATIONS_PER_PAGE = 13;
+  const totalStationPages = Math.ceil(activeLineStations.length / STATIONS_PER_PAGE);
+
+  // Paginated slice for current page
+  const paginatedStations = useMemo(() => {
+    const start = (stationPage - 1) * STATIONS_PER_PAGE;
+    return activeLineStations.slice(start, start + STATIONS_PER_PAGE);
+  }, [activeLineStations, stationPage]);
+
+  // Keep stationPage synced if an active starting hub belongs to another page
+  useEffect(() => {
+    const index = activeLineStations.findIndex((s) => s.id === activeStartingHub);
+    if (index !== -1) {
+      const pageOfHub = Math.floor(index / STATIONS_PER_PAGE) + 1;
+      setStationPage(pageOfHub);
+    }
+  }, [activeStartingHub, activeLineStations]);
+
   // Crowd pill styling helper
   const getCrowdBadge = (level: string) => {
     switch (level) {
@@ -831,6 +855,7 @@ export default function RoutePlannerPage() {
                 type="button"
                 onClick={() => {
                   setSelectedMetroLine(tab.id);
+                  setStationPage(1);
                   if (tab.id === 'area') {
                     generateSequentialRoute(NON_METRO_AREA_HUBS[0].id);
                   } else {
@@ -898,40 +923,95 @@ export default function RoutePlannerPage() {
             })}
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2 relative z-10">
-            {METRO_STATIONS_DATA.filter((s) => s.line_code === selectedMetroLine).map((station) => {
-              const isSelected = activeStartingHub === station.id;
-              return (
-                <button
-                  key={station.id}
-                  type="button"
-                  onClick={() => generateSequentialRoute(station.id)}
-                  className={`p-2 sm:p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1 group ${
-                    isSelected
-                      ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
-                      : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
-                  }`}
-                >
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold text-white shrink-0 ${
-                      selectedMetroLine === 'blue' ? 'bg-blue-600' : selectedMetroLine === 'green' ? 'bg-emerald-600' : selectedMetroLine === 'orange' ? 'bg-orange-600' : 'bg-purple-600'
-                    }`}>
-                      M
+          <div className="space-y-2 relative z-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2">
+              {paginatedStations.map((station) => {
+                const isSelected = activeStartingHub === station.id;
+                return (
+                  <button
+                    key={station.id}
+                    type="button"
+                    onClick={() => generateSequentialRoute(station.id)}
+                    className={`p-2 sm:p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1 group ${
+                      isSelected
+                        ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
+                        : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold text-white shrink-0 ${
+                        selectedMetroLine === 'blue' ? 'bg-blue-600' : selectedMetroLine === 'green' ? 'bg-emerald-600' : selectedMetroLine === 'orange' ? 'bg-orange-600' : 'bg-purple-600'
+                      }`}>
+                        M
+                      </span>
+                      <span className={`text-[11px] sm:text-xs font-bold truncate ${
+                        isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
+                      }`}>
+                        {isBn && station.bengali_name ? station.bengali_name : station.name}
+                      </span>
+                    </div>
+                    {isSelected && (
+                      <span className="w-3.5 h-3.5 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
+                        <Check className="w-2 h-2 stroke-[3]" />
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Pagination Controls for Lines with > 1 Page */}
+            {totalStationPages > 1 && (
+              <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-stone-100 dark:border-white/5 text-xs">
+                <div className="text-[11px] text-stone-500 dark:text-stone-400 font-medium">
+                  {selectedMetroLine === 'blue' ? (
+                    <span>
+                      {stationPage === 1 
+                        ? (isBn ? 'উত্তর ও মধ্য কলকাতা (১-১৩)' : 'North & Central Kolkata (1–13)') 
+                        : (isBn ? 'দক্ষিণ কলকাতা (১৪-২৬)' : 'South Kolkata (14–26)')}
                     </span>
-                    <span className={`text-[11px] sm:text-xs font-bold truncate ${
-                      isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
-                    }`}>
-                      {isBn && station.bengali_name ? station.bengali_name : station.name}
-                    </span>
-                  </div>
-                  {isSelected && (
-                    <span className="w-3.5 h-3.5 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
-                      <Check className="w-2 h-2 stroke-[3]" />
+                  ) : (
+                    <span>
+                      {isBn 
+                        ? `পৃষ্ঠা ${stationPage} / ${totalStationPages}` 
+                        : `Page ${stationPage} of ${totalStationPages}`}
                     </span>
                   )}
-                </button>
-              );
-            })}
+                </div>
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    disabled={stationPage === 1}
+                    onClick={() => setStationPage((p) => Math.max(1, p - 1))}
+                    className="px-2 py-1 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 text-[11px] font-bold transition-all cursor-pointer"
+                  >
+                    {isBn ? '← পূর্ববর্তী' : '← Prev'}
+                  </button>
+                  {Array.from({ length: totalStationPages }, (_, i) => i + 1).map((pageNum) => (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      onClick={() => setStationPage(pageNum)}
+                      className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
+                        stationPage === pageNum
+                          ? 'bg-[#D8261C] text-white shadow-xs'
+                          : 'border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-white/5'
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    disabled={stationPage === totalStationPages}
+                    onClick={() => setStationPage((p) => Math.min(totalStationPages, p + 1))}
+                    className="px-2 py-1 rounded-lg border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-stone-100 dark:hover:bg-white/5 text-[11px] font-bold transition-all cursor-pointer"
+                  >
+                    {isBn ? 'পরবর্তী →' : 'Next →'}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
