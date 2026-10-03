@@ -17,9 +17,12 @@ import {
   Train, 
   Search,
   Sun,
-  Moon
+  Moon,
+  Heart
 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 interface KolkataMetroExplorerModalProps {
   isOpen?: boolean;
@@ -35,6 +38,8 @@ export default function KolkataMetroExplorerModal({
   isPage = false
 }: KolkataMetroExplorerModalProps) {
   const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
+  const { count } = useWishlist();
   const isDark = theme === 'dark';
 
   const [selectedStation, setSelectedStation] = useState<FullMetroStation | null>(null);
@@ -328,39 +333,103 @@ export default function KolkataMetroExplorerModal({
 
           {/* Interactive Content */}
           <div className="relative z-10">
-            {/* Row 1: Brand Squircle Badge & "Metro Map" Serif Title */}
-            <div className="px-4 sm:px-6 pt-3.5 pb-2 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            {/* Row 1: Brand Squircle Badge & "Metro Map" Serif Title + Action Controls Cluster */}
+            <div className="px-3.5 sm:px-6 pt-3 pb-2 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
                 {/* Crimson Gradient Squircle Badge */}
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#E11D48] via-[#C0153D] to-[#881337] border border-rose-400/35 flex items-center justify-center shadow-[0_4px_16px_rgba(225,29,72,0.45)] shrink-0">
-                  <Train className="w-6 h-6 text-white" />
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#E11D48] via-[#C0153D] to-[#881337] border border-rose-400/35 flex items-center justify-center shadow-[0_4px_16px_rgba(225,29,72,0.45)] shrink-0">
+                  <Train className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 {/* Editorial Title with Pink Accent Underline */}
                 <div className="flex flex-col">
-                  <div className="flex items-baseline text-2xl sm:text-3xl font-serif font-bold tracking-tight leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                  <div className="flex items-baseline text-xl sm:text-2xl font-serif font-bold tracking-tight leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                     <span className="text-white">Metro</span>
                     <span className="text-[#FB7185] ml-1.5 font-serif">Map</span>
                   </div>
-                  <div className="w-10 h-0.5 sm:h-1 rounded-full bg-gradient-to-r from-[#FB7185] to-rose-600 mt-1.5" />
+                  <div className="w-8 sm:w-10 h-0.5 sm:h-1 rounded-full bg-gradient-to-r from-[#FB7185] to-rose-600 mt-1 sm:mt-1.5" />
                 </div>
               </div>
 
-              {/* Close Button if opened in modal mode */}
-              {onClose && (
+              {/* Action Controls Cluster: Heart (Wishlist), Theme (Sun/Moon), Language (EN/বাং), and Close Button */}
+              <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                {/* Wishlist Link Button with Live Count Badge */}
+                <Link
+                  href="/wishlist"
+                  prefetch={true}
+                  aria-label="View Wishlist"
+                  title="My Wishlist"
+                  className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-stone-700/60 bg-stone-950/75 backdrop-blur-md flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-stone-200 hover:text-white hover:bg-stone-900 shadow-lg cursor-pointer group shrink-0"
+                >
+                  <Heart className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:scale-110 group-hover:text-rose-400" />
+                  {count > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-[#D8261C] text-white text-[9px] sm:text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow-md border border-white dark:border-stone-900">
+                      {count}
+                    </span>
+                  )}
+                </Link>
+
+                {/* Theme Toggle Button */}
                 <button
                   type="button"
-                  onClick={onClose}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer border border-stone-700/60 bg-stone-950/75 backdrop-blur-md text-stone-300 hover:text-white hover:bg-stone-900 shadow-lg active:scale-95"
-                  aria-label="Close Metro Map"
+                  onClick={toggleTheme}
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all cursor-pointer border border-stone-700/60 bg-stone-950/75 backdrop-blur-md text-amber-400 hover:bg-stone-900 shadow-lg active:scale-95 shrink-0"
+                  title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+                  aria-label="Toggle Theme"
                 >
-                  <X className="w-4.5 h-4.5" />
+                  {isDark ? (
+                    <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] transition-transform hover:rotate-90 duration-300" />
+                  ) : (
+                    <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-stone-300 transition-transform hover:-rotate-12 duration-300" />
+                  )}
                 </button>
-              )}
+
+                {/* Language Toggle Pill (EN / বাং) */}
+                <div className="flex items-center p-0.5 sm:p-1 rounded-full border border-stone-700/60 bg-stone-950/75 backdrop-blur-md shadow-lg shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('en')}
+                    aria-label="Switch language to English"
+                    title="English"
+                    className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold transition-all duration-150 cursor-pointer active:scale-90 ${
+                      language === 'en'
+                        ? 'bg-[#E11D48] text-white shadow-xs'
+                        : 'text-stone-300 hover:text-white'
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('bn')}
+                    aria-label="বাংলা ভাষায় পরিবর্তন করুন"
+                    title="বাংলা (Bengali)"
+                    className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold transition-all duration-150 cursor-pointer active:scale-90 ${
+                      language === 'bn'
+                        ? 'bg-[#E11D48] text-white shadow-xs'
+                        : 'text-stone-300 hover:text-white'
+                    }`}
+                  >
+                    বাং
+                  </button>
+                </div>
+
+                {/* Close Button if opened in modal mode */}
+                {onClose && (
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all cursor-pointer border border-stone-700/60 bg-stone-950/75 backdrop-blur-md text-stone-300 hover:text-white hover:bg-stone-900 shadow-lg active:scale-95 shrink-0 ml-0.5 sm:ml-1"
+                    aria-label="Close Metro Map"
+                  >
+                    <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Row 2: Translucent Pill Search Bar & Glowing Sun Theme Toggle */}
-            <div className="px-4 sm:px-6 pt-1 pb-2 flex items-center gap-3">
-              <div ref={searchContainerRef} className="relative z-50 flex-1">
+            {/* Row 2: Translucent Pill Search Bar */}
+            <div className="px-3.5 sm:px-6 pt-1 pb-2">
+              <div ref={searchContainerRef} className="relative z-50 w-full">
                 <Search className="w-5 h-5 text-[#F43F5E] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-20 shrink-0" strokeWidth={2.5} />
                 <input
                   type="text"
@@ -387,7 +456,7 @@ export default function KolkataMetroExplorerModal({
                       }
                     }
                   }}
-                  placeholder="Esplanade (or search any station...)"
+                  placeholder={language === 'bn' ? "এসপ্ল্যানেড (বা যেকোনো স্টেশন খুঁজুন...)" : "Esplanade (or search any station...)"}
                   className="w-full h-11 sm:h-12 pl-12 pr-11 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-1 focus:ring-rose-500/50 transition-all border border-stone-700/50 bg-stone-950/60 backdrop-blur-md text-stone-100 placeholder:text-stone-400 shadow-inner"
                 />
                 {mapSearchQuery && (
@@ -474,21 +543,6 @@ export default function KolkataMetroExplorerModal({
                   </div>
                 )}
               </div>
-
-              {/* Glowing Sun Theme Toggle */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all cursor-pointer border border-stone-700/60 bg-stone-950/75 backdrop-blur-md text-amber-400 hover:bg-stone-900 shadow-lg active:scale-95 shrink-0"
-                title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-                aria-label="Toggle Theme"
-              >
-                {isDark ? (
-                  <Sun className="w-5 h-5 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] transition-transform hover:rotate-90 duration-300" />
-                ) : (
-                  <Moon className="w-5 h-5 text-stone-300 transition-transform hover:-rotate-12 duration-300" />
-                )}
-              </button>
             </div>
 
             {/* Row 3: Crimson "All 5 Lines" & 3D Spherical Dot Capsules ("L1", "L2", "L3", "L4", "L6") */}
