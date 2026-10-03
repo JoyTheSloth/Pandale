@@ -4434,6 +4434,1424 @@ export const PANDALS_DATA: Pandal[] = [
     saves_count: 2250,
     created_at: '2026-08-01T00:00:00Z',
     updated_at: '2026-09-30T10:00:00Z'
+  },
+
+  // ── SOUTH KOLKATA (COMPLETE 2026 GUIDE BATCH) ────────────────
+  {
+    id: "akal-bodhan-chetla",
+    name: "Akal Bodhan",
+    slug: "akal-bodhan-chetla",
+    description: "A vibrant community celebration in Chetla commemorating the legendary invocation of Maa Durga with devotional warmth, traditional rituals, and innovative art themes.",
+    heritage_note: "A much-loved Chetla neighborhood Durga Puja known for heartfelt community engagement.",
+    theme: "Traditional Devotion & Eco-Artisan Aesthetics (2026)",
+    area: "South Kolkata",
+    locality: "Chetla, South Kolkata",
+    latitude: 22.5185,
+    longitude: 88.341,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Akal+Bodhan+Chetla+Durga+Puja+Kolkata",
+    nearest_metro: "Kalighat Metro Station",
+    walking_distance: "800m",
+    walking_time_mins: 10,
+    metro_details: [
+      {
+        station_id: "kalighat",
+        station_name: "Kalighat",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "800m",
+        walking_time_mins: 10,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Akal+Bodhan+Chetla+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Traditional",
+      "South Kolkata",
+      "Art & Theme",
+      "Near Metro"
+    ],
+    puja_committee: "Chetla Akal Bodhan Puja Committee",
+    best_time: "Evening (6:00 PM – 10:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Community reported",
+      last_updated: "10 mins ago",
+      notes: "Smooth crowd flow with Chetla Agrani nearby."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "ab-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Akal Bodhan Chetla festive idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 83,
+    saves_count: 720,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "alipore-sarbojanin",
+    name: "Alipore Sarbojanin",
+    slug: "alipore-sarbojanin",
+    description: "Steeped in rich heritage in the quiet avenues of Alipore, Alipore Sarbojanin showcases aristocratic Bengali traditions combined with thoughtful thematic pandal architecture.",
+    heritage_note: "One of Alipore's prominent heritage pujas with graceful traditional idol sculpting.",
+    theme: "Colonial Bengal Heritage & Serene Divinity (2026)",
+    area: "South Kolkata",
+    locality: "Alipore, South Kolkata",
+    latitude: 22.527,
+    longitude: 88.3375,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Alipore+Sarbojanin+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "1.2 km",
+    walking_time_mins: 15,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.2 km",
+        walking_time_mins: 15,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Alipore+Sarbojanin+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Heritage",
+      "Traditional",
+      "South Kolkata",
+      "Peaceful"
+    ],
+    puja_committee: "Alipore Sarbojanin Durgotsav Committee",
+    best_time: "Afternoon to Early Evening (4:00 PM – 7:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "20 mins ago",
+      notes: "Pleasant and family-friendly atmosphere."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "as-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Alipore Sarbojanin graceful idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 82,
+    saves_count: 650,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "deshopriyo-park",
+    name: "Deshopriyo Park",
+    slug: "deshopriyo-park",
+    description: "Famed across India for its record-breaking, colossal installations and breathtaking lighting spectacles, Deshopriyo Park is an unavoidable crown jewel of South Kolkata Durga Puja.",
+    heritage_note: "A legendary mega-pandal celebrated for grand scale, architectural marvels, and monumental crowds.",
+    theme: "Grand Indian Architectural Marvel & Divine Radiance (2026)",
+    area: "South Kolkata",
+    locality: "Deshapriya Park, Kalighat / Gariahat",
+    latitude: 22.519,
+    longitude: 88.3565,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Deshopriyo+Park+Durga+Puja+Kolkata",
+    nearest_metro: "Kalighat Metro Station",
+    walking_distance: "900m",
+    walking_time_mins: 11,
+    metro_details: [
+      {
+        station_id: "kalighat",
+        station_name: "Kalighat",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "900m",
+        walking_time_mins: 11,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Deshopriyo+Park+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Popular",
+      "Trending",
+      "Mega Pandal",
+      "Near Metro"
+    ],
+    puja_committee: "Deshapriya Park Durgotsav Committee",
+    best_time: "Late Night (12:30 AM – 4:30 AM) to beat rush",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "5 mins ago",
+      notes: "Massive queue lines along Rashbehari Avenue; plan midnight darshan."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "dp-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Deshopriyo Park grand festive lighting",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 98,
+    saves_count: 2450,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "somaj-sebi-sangha",
+    name: "Somaj Sebi",
+    slug: "somaj-sebi-sangha",
+    description: "Renowned for socially conscious, thought-provoking art installations, Samaj Sebi Sangha consistently wins accolades for combining deep human empathy with exquisite aesthetic execution.",
+    heritage_note: "A multi-award-winning South Kolkata powerhouse on Lake View Road celebrated for social narrative concepts.",
+    theme: "Threads of Compassion: Social Harmony & Living Art (2026)",
+    area: "South Kolkata",
+    locality: "Lake View Road, South Kolkata",
+    latitude: 22.5168,
+    longitude: 88.354,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Samaj+Sebi+Sangha+Durga+Puja+Kolkata",
+    nearest_metro: "Kalighat Metro Station",
+    walking_distance: "1.1 km",
+    walking_time_mins: 13,
+    metro_details: [
+      {
+        station_id: "kalighat",
+        station_name: "Kalighat",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.1 km",
+        walking_time_mins: 13,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Kalighat+Metro+Station&destination=Samaj+Sebi+Sangha+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "Award Winning",
+      "Social Theme"
+    ],
+    puja_committee: "Samaj Sebi Sangha",
+    best_time: "Midnight or Early Morning (1:00 AM – 4:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "8 mins ago",
+      notes: "High footfall due to proximity with Ballygunge Cultural and Tridhara."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "sss-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Samaj Sebi intricate thematic artistry",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 95,
+    saves_count: 1820,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "bhawanipur-sarbojanin",
+    name: "Bhawanipur Sarbojanin",
+    slug: "bhawanipur-sarbojanin",
+    description: "One of the oldest community pujas in the heritage heart of Bhawanipur, presenting timeless traditional idol craftsmanship, authentic rituals, and nostalgic neighborhood warmth.",
+    heritage_note: "A cornerstone of Bhawanipur's cultural history with over eight decades of devotion.",
+    theme: "Traditional Sabeki Puja & Heritage Echoes (2026)",
+    area: "South Kolkata",
+    locality: "Bhawanipur, South Kolkata",
+    latitude: 22.532,
+    longitude: 88.347,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Bhawanipur+Sarbojanin+Durga+Puja+Kolkata",
+    nearest_metro: "Netaji Bhavan Metro Station",
+    walking_distance: "500m",
+    walking_time_mins: 6,
+    metro_details: [
+      {
+        station_id: "netaji-bhavan",
+        station_name: "Netaji Bhavan",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "500m",
+        walking_time_mins: 6,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Bhawanipur+Sarbojanin+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Heritage",
+      "Traditional",
+      "Near Metro",
+      "South Kolkata"
+    ],
+    puja_committee: "Bhawanipur Sarbojanin Durgotsav",
+    best_time: "Morning Anjali or Evening 6:00 PM – 9:00 PM",
+    crowd_status: {
+      level: "moderate",
+      source: "Community reported",
+      last_updated: "15 mins ago",
+      notes: "Very close to Netaji Bhavan metro station exit."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bs-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Bhawanipur Sarbojanin traditional idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 84,
+    saves_count: 780,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "haridebpur-athletic-club",
+    name: "Haridebpur Athletic Club",
+    slug: "haridebpur-athletic-club",
+    description: "A vibrant sporting and cultural institution in Haridebpur creating high-concept artistic pandals that engage youth and families alike.",
+    heritage_note: "Haridebpur's beloved community club known for lively festival cultural evenings.",
+    theme: "Bengal Folk Rhythms & Terracotta Splendor (2026)",
+    area: "South Kolkata",
+    locality: "Haridebpur, South Kolkata",
+    latitude: 22.486,
+    longitude: 88.3365,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Haridebpur+Athletic+Club+Durga+Puja+Kolkata",
+    nearest_metro: "Mahanayak Uttam Kumar (Tollygunge) Metro Station",
+    walking_distance: "2.5 km",
+    walking_time_mins: 28,
+    metro_details: [
+      {
+        station_id: "tollygunge",
+        station_name: "Mahanayak Uttam Kumar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.5 km",
+        walking_time_mins: 28,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Tollygunge+Metro+Station&destination=Haridebpur+Athletic+Club+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Popular",
+      "Cultural"
+    ],
+    puja_committee: "Haridebpur Athletic Club Puja Committee",
+    best_time: "Evening (7:00 PM – 11:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "15 mins ago",
+      notes: "Short auto ride from Tollygunge metro station."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "hac-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Haridebpur Athletic Club illuminated pandal",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 81,
+    saves_count: 590,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "santoshpur-pally-mangal-samity",
+    name: "Santosh Pur Pally Mangal Samity",
+    slug: "santoshpur-pally-mangal-samity",
+    description: "A celebrated community centerpiece in Santoshpur showcasing exquisite indigenous art forms, master craftsperson creations, and divine idol aesthetics.",
+    heritage_note: "A cornerstone of Santoshpur's vibrant Durga Puja circuit for over six decades.",
+    theme: "Rural Bengal Weaves & Earthen Heritage (2026)",
+    area: "South Kolkata",
+    locality: "Santoshpur, South Kolkata",
+    latitude: 22.4975,
+    longitude: 88.384,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Santoshpur+Pally+Mangal+Samity+Durga+Puja+Kolkata",
+    nearest_metro: "Kavi Subhash Metro Station",
+    walking_distance: "2.2 km",
+    walking_time_mins: 25,
+    metro_details: [
+      {
+        station_id: "kavi-subhash",
+        station_name: "Kavi Subhash",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.2 km",
+        walking_time_mins: 25,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Kavi+Subhash+Metro+Station&destination=Santoshpur+Pally+Mangal+Samity+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Folk Art",
+      "Handicraft"
+    ],
+    puja_committee: "Santoshpur Pally Mangal Samity",
+    best_time: "Evening (6:30 PM – 10:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Community reported",
+      last_updated: "12 mins ago",
+      notes: "Easily accessible via auto from Santoshpur Jadavpur connector."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "spms-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Santoshpur Pally Mangal Samity aesthetic installation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 85,
+    saves_count: 810,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "jodhpur-park",
+    name: "Jodhpur Park",
+    slug: "jodhpur-park",
+    description: "One of the most prestigious Durga Pujas in South Kolkata, Jodhpur Park commands admiration with innovative thematic brilliance, artistic installations, and pristine environmental consciousness.",
+    heritage_note: "A major South Kolkata crowd-puller celebrated for thoughtful themes and immaculate execution.",
+    theme: "Harmony of Nature & Human Spirituality (2026)",
+    area: "South Kolkata",
+    locality: "Jodhpur Park, South Kolkata",
+    latitude: 22.503,
+    longitude: 88.367,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Jodhpur+Park+Durga+Puja+Kolkata",
+    nearest_metro: "Rabindra Sarobar Metro Station",
+    walking_distance: "1.8 km",
+    walking_time_mins: 22,
+    metro_details: [
+      {
+        station_id: "rabindra-sarobar",
+        station_name: "Rabindra Sarobar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.8 km",
+        walking_time_mins: 22,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Jodhpur+Park+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "South Kolkata",
+      "Popular",
+      "Trending"
+    ],
+    puja_committee: "Jodhpur Park Sharadiya Utsav Committee",
+    best_time: "Late Evening or Midnight (10:00 PM – 2:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "7 mins ago",
+      notes: "Pair with nearby Babu Bagan and Selimpur for a South Kolkata circuit."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "jp-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Jodhpur Park breathtaking night view",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 96,
+    saves_count: 2150,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "babu-bagan",
+    name: "Babu Bagan",
+    slug: "babu-bagan",
+    description: "Famous throughout the city for mind-boggling architectural replicas made from coins, stamps, or temple carvings, Babu Bagan Sarbojanin in Dhakuria is a visual spectacle.",
+    heritage_note: "Known for jaw-dropping miniature architecture replicas that draw visitors from across Bengal.",
+    theme: "Grand Indian Temple Replica in Intricate Craftwork (2026)",
+    area: "South Kolkata",
+    locality: "Dhakuria, South Kolkata",
+    latitude: 22.5085,
+    longitude: 88.3685,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Babu+Bagan+Sarbojanin+Durga+Puja+Kolkata",
+    nearest_metro: "Rabindra Sarobar Metro Station",
+    walking_distance: "1.6 km",
+    walking_time_mins: 19,
+    metro_details: [
+      {
+        station_id: "rabindra-sarobar",
+        station_name: "Rabindra Sarobar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.6 km",
+        walking_time_mins: 19,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Babu+Bagan+Sarbojanin+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Architecture Replica",
+      "South Kolkata",
+      "Popular"
+    ],
+    puja_committee: "Babu Bagan Sarbojanin Durgotsav",
+    best_time: "Late Night (11:00 PM – 3:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "6 mins ago",
+      notes: "Substantial queues; Dhakuria railway station is also right adjacent."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bb-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Babu Bagan intricate temple recreation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 95,
+    saves_count: 1950,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "salimpur-pally",
+    name: "Salimpur",
+    slug: "salimpur-pally",
+    description: "Nestled between Dhakuria and Jodhpur Park, Selimpur Pally is celebrated for boundary-pushing contemporary art installations, dynamic lighting, and immersive spatial design.",
+    heritage_note: "An artistic pioneer in South Kolkata, repeatedly winning critical praise for innovative concepts.",
+    theme: "Sensory Symphony: Light, Sound & Sacred Space (2026)",
+    area: "South Kolkata",
+    locality: "Selimpur / Dhakuria, South Kolkata",
+    latitude: 22.507,
+    longitude: 88.3695,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Selimpur+Pally+Durga+Puja+Kolkata",
+    nearest_metro: "Rabindra Sarobar Metro Station",
+    walking_distance: "1.7 km",
+    walking_time_mins: 20,
+    metro_details: [
+      {
+        station_id: "rabindra-sarobar",
+        station_name: "Rabindra Sarobar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.7 km",
+        walking_time_mins: 20,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Selimpur+Pally+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "South Kolkata",
+      "Contemporary Art"
+    ],
+    puja_committee: "Selimpur Pally Durgotsav",
+    best_time: "Night (9:00 PM – 1:30 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "9 mins ago",
+      notes: "Walking distance from Babu Bagan and 95 Pally."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "sp-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Selimpur Pally contemporary lighting installation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 93,
+    saves_count: 1720,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "selimpur-95-pally",
+    name: "95 Pally",
+    slug: "selimpur-95-pally",
+    description: "A key constituent of the legendary Dhakuria-Selimpur holy trinity of pandals, 95 Pally enchants pandal-hoppers with eco-friendly handicrafts and philosophical artistry.",
+    heritage_note: "A standout South Kolkata venue famous for meaningful community storytelling and craftsmanship.",
+    theme: "Eternal Circles: Eco-Crafts & Folk Cosmology (2026)",
+    area: "South Kolkata",
+    locality: "Selimpur / Jodhpur Park, South Kolkata",
+    latitude: 22.506,
+    longitude: 88.369,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=95+Pally+Selimpur+Durga+Puja+Kolkata",
+    nearest_metro: "Rabindra Sarobar Metro Station",
+    walking_distance: "1.7 km",
+    walking_time_mins: 20,
+    metro_details: [
+      {
+        station_id: "rabindra-sarobar",
+        station_name: "Rabindra Sarobar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.7 km",
+        walking_time_mins: 20,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=95+Pally+Selimpur+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Eco-friendly",
+      "Crafts"
+    ],
+    puja_committee: "95 Pally Sarbojanin Durgotsav",
+    best_time: "Night (8:30 PM – 1:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Estimated",
+      last_updated: "11 mins ago",
+      notes: "Directly linked along the Selimpur-Dhakuria pedestrian route."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "95p-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "95 Pally artistic earthen idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 91,
+    saves_count: 1480,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kendua-shanti-sangha",
+    name: "Kendua Shanti Sangha",
+    slug: "kendua-shanti-sangha",
+    description: "Located in the Garia-Kendua belt near Naktala, Kendua Shanti Sangha presents heartfelt, artistically rich pandals focusing on peace, environment, and regional craftsmanship.",
+    heritage_note: "A prominent South Kolkata neighborhood puja with decades of festive tradition.",
+    theme: "Sanctuary of Peace & Green Earth (2026)",
+    area: "South Kolkata",
+    locality: "Kendua / Garia, South Kolkata",
+    latitude: 22.472,
+    longitude: 88.378,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kendua+Shanti+Sangha+Durga+Puja+Kolkata",
+    nearest_metro: "Kavi Nazrul (Garia Bazar) Metro Station",
+    walking_distance: "850m",
+    walking_time_mins: 11,
+    metro_details: [
+      {
+        station_id: "kavi-nazrul",
+        station_name: "Kavi Nazrul",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "850m",
+        walking_time_mins: 11,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Kavi+Nazrul+Metro+Station&destination=Kendua+Shanti+Sangha+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Near Metro",
+      "Peaceful"
+    ],
+    puja_committee: "Kendua Shanti Sangha Club",
+    best_time: "Evening (6:00 PM – 9:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "25 mins ago",
+      notes: "Convenient stop on the Kavi Nazrul metro stretch."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "kss-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kendua Shanti Sangha serene atmosphere",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 80,
+    saves_count: 530,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kidderpore-75-pally",
+    name: "75 Pally",
+    slug: "kidderpore-75-pally",
+    description: "The premier Durga Puja of Kidderpore, 75 Pally is known for vibrant community energy, magnificent illumination across the port city avenues, and innovative idol artistry.",
+    heritage_note: "A standout South-West Kolkata puja with a legacy of exuberant festive celebrations.",
+    theme: "Harbor of Heritage & Divine Strength (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.535,
+    longitude: 88.326,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kidderpore+75+Pally+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.4 km",
+    walking_time_mins: 28,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.4 km",
+        walking_time_mins: 28,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Kidderpore+75+Pally+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Community",
+      "South Kolkata",
+      "Illumination",
+      "Kidderpore"
+    ],
+    puja_committee: "Kidderpore 75 Pally Durgotsav",
+    best_time: "Evening (7:00 PM – 11:00 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "14 mins ago",
+      notes: "Crowded on Circular Garden Reach Road; accessible via bus or cab."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "k75p-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kidderpore 75 Pally illuminated pandal",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 87,
+    saves_count: 940,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kidderpore-25-pally",
+    name: "25 Pally",
+    slug: "kidderpore-25-pally",
+    description: "An iconic neighborhood fixture in Kidderpore featuring ornate idol decoration, colorful fabric installations, and warm neighborhood hospitality.",
+    heritage_note: "One of Kidderpore's oldest and most respected community pujas.",
+    theme: "Traditional Dokra & Bengali Folk Motifs (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.5335,
+    longitude: 88.3245,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kidderpore+25+Pally+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.5 km",
+    walking_time_mins: 29,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.5 km",
+        walking_time_mins: 29,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Kidderpore+25+Pally+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Traditional",
+      "South Kolkata",
+      "Folk Art",
+      "Kidderpore"
+    ],
+    puja_committee: "Kidderpore 25 Pally Puja Committee",
+    best_time: "Evening (6:30 PM – 10:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "20 mins ago",
+      notes: "Short walk from 75 Pally and Nabarag."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "k25p-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kidderpore 25 Pally traditional idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 82,
+    saves_count: 670,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "nabarag-kidderpore",
+    name: "Nabarag",
+    slug: "nabarag-kidderpore",
+    description: "Renowned in Kidderpore for colorful thematic presentations and community harmony, Nabarag draws visitors exploring the port district circuit.",
+    heritage_note: "A long-standing cultural club fostering communal unity through Durga Puja celebrations.",
+    theme: "Colors of Harmony & Living Traditions (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.534,
+    longitude: 88.3275,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Nabarag+Club+Kidderpore+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.3 km",
+    walking_time_mins: 27,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.3 km",
+        walking_time_mins: 27,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Nabarag+Club+Kidderpore+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Community",
+      "Kidderpore"
+    ],
+    puja_committee: "Kidderpore Nabarag Club",
+    best_time: "Evening (7:00 PM – 10:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "30 mins ago",
+      notes: "Easily covered along with Kidderpore 75 and 25 Pally."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "nbk-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Nabarag Kidderpore vibrant celebration",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 81,
+    saves_count: 580,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kabi-tirtha-kidderpore",
+    name: "Kabi Trittha",
+    slug: "kabi-tirtha-kidderpore",
+    description: "Named in honor of Kolkata's rich poetic traditions, Kabi Tirtha in Kidderpore presents literate and culturally resonant Durga Puja themes with profound artistic depth.",
+    heritage_note: "A cultural beacon in Kidderpore paying homage to legendary Bengali poets and artists.",
+    theme: "Poetry in Clay: Literary Echoes of Bengal (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.536,
+    longitude: 88.325,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kabi+Tirtha+Kidderpore+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.5 km",
+    walking_time_mins: 29,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.5 km",
+        walking_time_mins: 29,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Kabi+Tirtha+Kidderpore+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Culture",
+      "Kidderpore"
+    ],
+    puja_committee: "Kabi Tirtha Sarbojanin Durgotsav",
+    best_time: "Evening (6:00 PM – 9:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "25 mins ago",
+      notes: "Warm community reception."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "ktk-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kabi Tirtha evocative art display",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 80,
+    saves_count: 510,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "yubak-sangha-kidderpore",
+    name: "Yubak Sangha",
+    slug: "yubak-sangha-kidderpore",
+    description: "A dynamic youth-driven puja in Kidderpore known for electrifying dhak beats, dazzling illuminations, and energetic traditional idol immersion rituals.",
+    heritage_note: "A spirited Kidderpore club drawing energetic crowds during evening arati.",
+    theme: "Divine Energy & Eternal Youth (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.5325,
+    longitude: 88.3235,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kidderpore+Yubak+Sangha+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.6 km",
+    walking_time_mins: 30,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.6 km",
+        walking_time_mins: 30,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Kidderpore+Yubak+Sangha+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Youth & Energy",
+      "South Kolkata",
+      "Traditional",
+      "Kidderpore"
+    ],
+    puja_committee: "Kidderpore Yubak Sangha",
+    best_time: "Evening Sandhya Arati (7:00 PM – 9:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "30 mins ago",
+      notes: "Fantastic dhaki performances during evening arati."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Dashami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "ysk-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kidderpore Yubak Sangha evening devotion",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 79,
+    saves_count: 480,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "pally-sharadiya-kidderpore",
+    name: "Pally Sharadiya",
+    slug: "pally-sharadiya-kidderpore",
+    description: "An intimate, authentic neighborhood Sharadotsav in Kidderpore marked by deep spiritual reverence, community feasting, and artisanal clay idols.",
+    heritage_note: "A cornerstone of neighborhood camaraderie in central Kidderpore.",
+    theme: "Simplicity & Sacred Matriarchal Grace (2026)",
+    area: "South Kolkata",
+    locality: "Kidderpore, South Kolkata",
+    latitude: 22.5345,
+    longitude: 88.328,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Pally+Sharadiya+Kidderpore+Durga+Puja+Kolkata",
+    nearest_metro: "Jatin Das Park Metro Station",
+    walking_distance: "2.3 km",
+    walking_time_mins: 27,
+    metro_details: [
+      {
+        station_id: "jatin-das-park",
+        station_name: "Jatin Das Park",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "2.3 km",
+        walking_time_mins: 27,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Jatin+Das+Park+Metro+Station&destination=Pally+Sharadiya+Kidderpore+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Traditional",
+      "South Kolkata",
+      "Peaceful",
+      "Kidderpore"
+    ],
+    puja_committee: "Kidderpore Pally Sharadiya Committee",
+    best_time: "Morning Anjali or Evening 6:00 PM – 9:00 PM",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "35 mins ago",
+      notes: "Tranquil ambiance ideal for families."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "psk-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Pally Sharadiya sacred traditional altar",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 78,
+    saves_count: 450,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "sd-park-thakurpukur",
+    name: "SD Park Thakur Pukur",
+    slug: "sd-park-thakurpukur",
+    description: "A major crowd magnet along the Diamond Harbour Road corridor in Thakurpukur, SD Park is celebrated for massive artistic structures, water features, and festive lighting.",
+    heritage_note: "A landmark Thakurpukur festival attraction drawing visitors from across South-West Kolkata.",
+    theme: "Water Cascades & Ancient Temple Splendors (2026)",
+    area: "South Kolkata",
+    locality: "Thakurpukur, South Kolkata",
+    latitude: 22.464,
+    longitude: 88.308,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=SD+Park+Thakurpukur+Durga+Puja+Kolkata",
+    nearest_metro: "Thakurpukur Metro Station",
+    walking_distance: "500m",
+    walking_time_mins: 6,
+    metro_details: [
+      {
+        station_id: "thakurpukur",
+        station_name: "Thakurpukur",
+        line: "Purple Line (Joka-Esplanade)",
+        line_code: "purple",
+        walking_distance: "500m",
+        walking_time_mins: 6,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Thakurpukur+Metro+Station&destination=SD+Park+Thakurpukur+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "Near Metro",
+      "South Kolkata",
+      "Water Theme"
+    ],
+    puja_committee: "SD Park Thakurpukur Sarbojanin Durgotsav",
+    best_time: "Evening (6:30 PM – 11:00 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "10 mins ago",
+      notes: "Convenient 6-minute walk from Thakurpukur Metro on Purple Line."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "sdp-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "SD Park Thakurpukur grand illuminated structure",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 92,
+    saves_count: 1610,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "tridents-club-behala",
+    name: "Trident's Club",
+    slug: "tridents-club-behala",
+    description: "A stylish and contemporary puja near Behala Chowrasta, Trident's Club captivates visitors with modern architectural aesthetics, intelligent lighting, and artisanal idols.",
+    heritage_note: "A vibrant Behala club known for pioneering creative concepts in South-West Kolkata.",
+    theme: "Contemporary Geometries & Mythic Grace (2026)",
+    area: "South Kolkata",
+    locality: "Behala Chowrasta, South Kolkata",
+    latitude: 22.495,
+    longitude: 88.315,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Tridents+Club+Behala+Durga+Puja+Kolkata",
+    nearest_metro: "Behala Chowrasta Metro Station",
+    walking_distance: "700m",
+    walking_time_mins: 9,
+    metro_details: [
+      {
+        station_id: "behala-chowrasta",
+        station_name: "Behala Chowrasta",
+        line: "Purple Line (Joka-Esplanade)",
+        line_code: "purple",
+        walking_distance: "700m",
+        walking_time_mins: 9,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Tridents+Club+Behala+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "Near Metro",
+      "South Kolkata",
+      "Contemporary Art"
+    ],
+    puja_committee: "Trident's Club Behala",
+    best_time: "Evening (7:00 PM – 11:30 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "15 mins ago",
+      notes: "Close to Behala Chowrasta metro; pair with Behala Nutan Dal."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "tc-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Trident's Club Behala sleek modern installation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 89,
+    saves_count: 1250,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "barisha-club",
+    name: "Banisha Club",
+    slug: "barisha-club",
+    description: "Nationally acclaimed for unforgettable poignant themes addressing migrant crises and social resilience, Barisha Club in Sakherbazar is an emotional and aesthetic powerhouse.",
+    heritage_note: "A critically lauded South Kolkata club that makes global headlines with humanitarian themes.",
+    theme: "Voices of Earth: Solace, Shelter & Resilience (2026)",
+    area: "South Kolkata",
+    locality: "Barisha / Sakherbazar, South Kolkata",
+    latitude: 22.487,
+    longitude: 88.312,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Barisha+Club+Durga+Puja+Kolkata",
+    nearest_metro: "Sakherbazar Metro Station",
+    walking_distance: "650m",
+    walking_time_mins: 8,
+    metro_details: [
+      {
+        station_id: "sakherbazar",
+        station_name: "Sakherbazar",
+        line: "Purple Line (Joka-Esplanade)",
+        line_code: "purple",
+        walking_distance: "650m",
+        walking_time_mins: 8,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Sakherbazar+Metro+Station&destination=Barisha+Club+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "Award Winning",
+      "Near Metro",
+      "Trending"
+    ],
+    puja_committee: "Barisha Club Sarbojanin Durgotsav",
+    best_time: "Night (8:00 PM – 1:30 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "6 mins ago",
+      notes: "High demand; easy transit via Purple Line Sakherbazar station."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bc-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Barisha Club profound emotional installation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 97,
+    saves_count: 2380,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "behala-tarun-dal",
+    name: "Behala Tarun Dol",
+    slug: "behala-tarun-dal",
+    description: "An integral stop on the Behala puja trail, Behala Tarun Dal captivates crowds with intricate cane, bamboo, and terracotta craftwork surrounding an artistic Durga pratima.",
+    heritage_note: "A venerable Behala club with decades of community devotion and folk art celebrations.",
+    theme: "Indigenous Bamboo & Terracotta Tapestry (2026)",
+    area: "South Kolkata",
+    locality: "Behala, South Kolkata",
+    latitude: 22.498,
+    longitude: 88.318,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Behala+Tarun+Dal+Durga+Puja+Kolkata",
+    nearest_metro: "Behala Chowrasta Metro Station",
+    walking_distance: "800m",
+    walking_time_mins: 10,
+    metro_details: [
+      {
+        station_id: "behala-chowrasta",
+        station_name: "Behala Chowrasta",
+        line: "Purple Line (Joka-Esplanade)",
+        line_code: "purple",
+        walking_distance: "800m",
+        walking_time_mins: 10,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Behala+Chowrasta+Metro+Station&destination=Behala+Tarun+Dal+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "Near Metro",
+      "South Kolkata",
+      "Folk Art"
+    ],
+    puja_committee: "Behala Tarun Dal Durgotsav",
+    best_time: "Evening (7:00 PM – 11:00 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "12 mins ago",
+      notes: "Easily walked from Behala Chowrasta metro station."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "btd-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Behala Tarun Dal folk craft pandal",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 88,
+    saves_count: 1140,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "buro-shibtola",
+    name: "Buro Shibtola",
+    slug: "buro-shibtola",
+    description: "Nestled between New Alipore and Taratala near the historic Shiva temple, Buro Shibtola presents deeply spiritual, nature-oriented Durga Puja themes amidst serene surroundings.",
+    heritage_note: "A historic locality puja known for religious sanctity and pristine aesthetic presentations.",
+    theme: "Ancient Banyan & Sacred Forest Shrine (2026)",
+    area: "South Kolkata",
+    locality: "New Alipore / Buroshibtalla, South Kolkata",
+    latitude: 22.511,
+    longitude: 88.328,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Buro+Shibtola+Durga+Puja+Kolkata",
+    nearest_metro: "Rabindra Sarobar Metro Station",
+    walking_distance: "1.2 km",
+    walking_time_mins: 15,
+    metro_details: [
+      {
+        station_id: "rabindra-sarobar",
+        station_name: "Rabindra Sarobar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.2 km",
+        walking_time_mins: 15,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Buro+Shibtola+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "South Kolkata",
+      "Spiritual",
+      "New Alipore"
+    ],
+    puja_committee: "Buro Shibtala Durgotsav Committee",
+    best_time: "Afternoon to Early Evening (4:30 PM – 8:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "20 mins ago",
+      notes: "Close to Suruchi Sangha in New Alipore."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bst-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Buro Shibtola sacred festive pavilion",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 83,
+    saves_count: 730,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
   }
 ];
-
