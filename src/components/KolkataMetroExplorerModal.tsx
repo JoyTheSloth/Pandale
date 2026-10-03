@@ -311,9 +311,9 @@ export default function KolkataMetroExplorerModal({
       onClick={(e) => e.stopPropagation()}
     >
         {/* EXACT DESIGN HEADER: ARTWORK BACKGROUND, BRAND, SEARCH & 3D LINE CHIPS */}
-        <div className="relative z-30 shrink-0 border-b border-rose-950/40 overflow-hidden">
+        <div className="relative z-40 shrink-0 border-b border-rose-950/40">
           {/* Background Illustration & Festive Deep Crimson Vignette */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-t-3xl">
             <div 
               className="absolute inset-0 bg-cover bg-no-repeat"
               style={{ 
