@@ -405,26 +405,23 @@ export default function CreatorConnectModal() {
               ) : (
                 /* Dignified Default View (No QR Code shoving — witty, entrepreneurial, clean) */
                 <div className="space-y-2.5 animate-in fade-in duration-200">
-                  {/* Witty Header Card */}
-                  <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl shadow-xs text-center space-y-1.5 border border-stone-200/80 dark:border-white/10">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-mono font-bold">
-                      ☕ Pandalé Creator Hub
+                  {/* Creator Hub Header */}
+                  <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl shadow-xs text-center space-y-1 border border-stone-200/80 dark:border-white/10">
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-mono font-bold">
+                      ☕ Creator Hub
                     </span>
                     <h4 className="font-editorial text-sm sm:text-base font-bold text-stone-900 dark:text-white leading-tight">
-                      &ldquo;Love Pandalé? Help me out by buying me a coffee 😂&rdquo;
+                      Love Pandalé? Support the creator ☕
                     </h4>
-                    <p className="text-[11px] text-stone-600 dark:text-stone-300 leading-relaxed">
-                      Metro routes, crowd alerts &amp; 40+ pandals built on 3 hours of sleep! Here are a few ways to support or connect:
-                    </p>
                   </div>
 
-                  {/* 4 Dignified Option Cards */}
+                  {/* 4 Sleek Option Cards */}
                   <div className="space-y-2">
-                    {/* Option 1: Buy Me a Coffee (Interactive reveal, no money mention) */}
+                    {/* Option 1: Buy Me a Coffee */}
                     <button
                       type="button"
                       onClick={() => setShowQr(true)}
-                      className="w-full p-3 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/15 to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 border border-amber-500/40 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
+                      className="w-full p-2.5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-amber-500 text-stone-950 flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:rotate-12 transition-transform">
@@ -432,15 +429,15 @@ export default function CreatorConnectModal() {
                         </div>
                         <div className="leading-tight">
                           <div className="text-xs font-bold text-amber-950 dark:text-amber-200">
-                            Buy Me a Coffee ☕
+                            Buy Me a Coffee
                           </div>
-                          <div className="text-[10.5px] text-stone-600 dark:text-stone-400 font-normal">
-                            Tap to view UPI &amp; QR payment details
+                          <div className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">
+                            UPI, GPay &amp; QR
                           </div>
                         </div>
                       </div>
                       <div className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-950 text-[11px] font-bold shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shadow-2xs">
-                        <span>Buy Coffee</span>
+                        <span>Donate</span>
                         <ArrowRight className="w-3 h-3" />
                       </div>
                     </button>
@@ -450,7 +447,7 @@ export default function CreatorConnectModal() {
                       href="https://flatzy.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full p-2.5 rounded-2xl bg-gradient-to-r from-blue-600/10 to-indigo-600/10 hover:from-blue-600/15 hover:to-indigo-600/15 border border-blue-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
+                      className="w-full p-2.5 rounded-2xl bg-blue-600/10 hover:bg-blue-600/15 border border-blue-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:scale-105 transition-transform">
@@ -458,10 +455,10 @@ export default function CreatorConnectModal() {
                         </div>
                         <div className="leading-tight">
                           <div className="text-xs font-bold text-blue-950 dark:text-blue-200">
-                            Checking out my startup Flatzy?
+                            Flatzy
                           </div>
-                          <div className="text-[10.5px] text-stone-600 dark:text-stone-400 font-normal">
-                            Flat dhundh rahe ho? Verified brokers in Kolkata!
+                          <div className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">
+                            Find verified flats in Kolkata
                           </div>
                         </div>
                       </div>
@@ -473,19 +470,18 @@ export default function CreatorConnectModal() {
                       href={jobWhatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full p-2.5 rounded-2xl bg-gradient-to-r from-emerald-600/10 to-teal-600/10 hover:from-emerald-600/15 hover:to-teal-600/15 border border-emerald-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
+                      className="w-full p-2.5 rounded-2xl bg-emerald-600/10 hover:bg-emerald-600/15 border border-emerald-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-[#25D366] text-white flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                           <WhatsAppIcon className="w-4.5 h-4.5 text-white" />
                         </div>
                         <div className="leading-tight">
-                          <div className="text-xs font-bold text-emerald-950 dark:text-emerald-200 flex items-center gap-1.5">
-                            <span>Got that remote job for me? 🤝</span>
-                            <span className="text-[9.5px] font-semibold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-mono">WhatsApp</span>
+                          <div className="text-xs font-bold text-emerald-950 dark:text-emerald-200">
+                            Hire Me / Remote Roles
                           </div>
-                          <div className="text-[10.5px] text-stone-600 dark:text-stone-400 font-normal">
-                            Direct WhatsApp chat · Full-Stack &amp; Next.js builder
+                          <div className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">
+                            Full-Stack &amp; Next.js developer
                           </div>
                         </div>
                       </div>
@@ -500,15 +496,15 @@ export default function CreatorConnectModal() {
                       className="w-full p-2.5 rounded-2xl bg-stone-100 hover:bg-stone-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-stone-200 dark:border-white/10 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
                     >
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-purple-600/90 text-white flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                        <div className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                           👨‍💻
                         </div>
                         <div className="leading-tight">
                           <div className="text-xs font-bold text-stone-900 dark:text-white">
-                            Check out my portfolio
+                            Portfolio
                           </div>
-                          <div className="text-[10.5px] text-stone-500 dark:text-stone-400 font-normal">
-                            joydeepdas-portfolio.vercel.app · UI/UX &amp; Gen AI
+                          <div className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">
+                            joydeepdas-portfolio.vercel.app
                           </div>
                         </div>
                       </div>
