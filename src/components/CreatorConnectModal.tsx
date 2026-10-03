@@ -49,6 +49,7 @@ export default function CreatorConnectModal() {
 
   const email = 'joy.thesloth@gmail.com';
   const upiId = 'joy.thesloth@okicici';
+  const gpayUpiUrl = `upi://pay?pa=${upiId}&pn=Joydeep%20Das&cu=INR&tn=${encodeURIComponent('Puja treat dedo')}&aid=uGICAgKCA0KWEbQ`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent("Hi Joydeep! I'm interested in building a website / digital product.")}`;
   const jobWhatsappUrl = `https://wa.me/?text=${encodeURIComponent("Hi Joydeep! I saw Pandalé and would love to discuss a job opportunity / freelance project.")}`;
 
@@ -279,17 +280,18 @@ export default function CreatorConnectModal() {
 
               {/* Action Bar */}
               <div className="p-3 bg-[#F0F2F5] dark:bg-[#202C33] border-t border-stone-200 dark:border-white/5 space-y-2">
-                <button
-                  type="button"
+                <a
+                  href={gpayUpiUrl}
                   onClick={() => {
-                    setActiveTab('help');
-                    setShowQr(false);
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(upiId).catch(() => {});
+                    }
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#FFDD00] hover:bg-[#FFEA47] text-stone-950 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#FFDD00] hover:bg-[#FFEA47] text-stone-950 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer text-center"
                 >
-                  <Coffee className="w-4 h-4 text-stone-900" />
-                  <span>Buy me a coffee ☕</span>
-                </button>
+                  <Coffee className="w-4 h-4 text-stone-900 shrink-0" />
+                  <span>Buy me a coffee (puja treat dedo) ☕</span>
+                </a>
 
                 {/* Quick Secondary Contact Drawer (Email & Instagram) */}
                 <div className="pt-1 flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400">
