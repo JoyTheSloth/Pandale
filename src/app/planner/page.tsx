@@ -1015,6 +1015,16 @@ export default function RoutePlannerPage() {
               }
             }
 
+            const cleanDistance = pandal.walking_distance.includes('km')
+              ? pandal.walking_distance
+              : (pandal.walking_distance.endsWith('m') ? pandal.walking_distance : `${pandal.walking_distance}m`);
+
+            const cleanLocation = pandal.locality
+              ? (pandal.locality.toLowerCase().includes(pandal.area.toLowerCase())
+                  ? pandal.locality
+                  : `${pandal.locality}, ${pandal.area}`)
+              : pandal.area;
+
             const walkFromStationUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${metroStationName}, Kolkata`)}&destination=${encodeURIComponent(`${pandal.name}, Kolkata`)}&travelmode=walking`;
 
             const getLineStyle = (code: string) => {
@@ -1073,27 +1083,27 @@ export default function RoutePlannerPage() {
                   </div>
                 )}
 
-                {/* Stop Row with Left Timeline Track Node & Main Card (Matches screenshot exactly) */}
-                <div className="relative flex items-center gap-3 sm:gap-4">
+                {/* Stop Row with Left Timeline Track Node & Main Card */}
+                <div className="relative flex items-center gap-2.5 sm:gap-4">
                   {/* Left Column (Timeline Node with red glowing circle) */}
-                  <div className="relative z-10 shrink-0 flex items-center justify-center w-11 sm:w-12">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-b from-[#E62837] via-[#D82030] to-[#A81422] text-white font-serif font-bold text-sm sm:text-base flex items-center justify-center shadow-[0_0_22px_rgba(230,40,55,0.5)] ring-2 ring-red-500/30">
+                  <div className="relative z-10 shrink-0 flex items-center justify-center w-9 sm:w-11">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-b from-[#E62837] via-[#D82030] to-[#A81422] text-white font-serif font-bold text-xs sm:text-base flex items-center justify-center shadow-[0_0_20px_rgba(230,40,55,0.5)] ring-2 ring-red-500/30">
                       {String(index + 1).padStart(2, '0')}
                     </div>
                   </div>
 
                   {/* Main Stop Card */}
                   <div className="flex-1 min-w-0 bg-[#130B10] dark:bg-[#130B10] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 shadow-2xl relative hover:border-white/15 transition-all group">
-                    <div className="flex items-center justify-between gap-3 sm:gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 
                       {/* Middle Details */}
-                      <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch py-0.5">
+                      <div className="flex-1 min-w-0 space-y-2">
                         {/* Title Row */}
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
                             <Link
                               href={`/pandal/${pandal.slug}`}
-                              className="font-editorial text-base sm:text-lg font-bold text-[#EAA6A9] hover:text-white transition-colors truncate"
+                              className="font-editorial text-base sm:text-lg font-bold text-[#EAA6A9] hover:text-white transition-colors"
                             >
                               {pandal.name}
                             </Link>
@@ -1104,42 +1114,61 @@ export default function RoutePlannerPage() {
                             )}
                           </div>
 
-                          {/* Locality Subtitle */}
-                          <div className="flex items-center gap-1.5 text-xs text-stone-300 mt-1 truncate">
+                          {/* Locality & Theme Subtitle (No truncation, fully readable) */}
+                          <div className="flex items-center gap-1.5 text-xs text-stone-300 mt-1 flex-wrap">
                             <MapPin className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                            <span className="truncate">{pandal.locality || pandal.area}, {pandal.area}</span>
+                            <span className="font-medium text-stone-200">{cleanLocation}</span>
+                            {pandal.theme && (
+                              <>
+                                <span className="text-stone-500">•</span>
+                                <span className="text-stone-400">{pandal.theme}</span>
+                              </>
+                            )}
                           </div>
                         </div>
 
-                        {/* Metro Section */}
-                        <div className="mt-2.5">
+                        {/* Metro Section with Distance & Walking Duration */}
+                        <div className="pt-2 border-t border-white/[0.06] space-y-1.5">
                           <a
                             href={walkFromStationUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 group/metro cursor-pointer"
+                            className="inline-flex items-center gap-2 group/metro cursor-pointer"
                             title="Walking directions from station"
                           >
                             <div className="w-6 h-6 rounded-lg bg-[#0052FF] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
                               M
                             </div>
-                            <span className="text-xs sm:text-sm font-semibold text-white group-hover/metro:underline truncate">
+                            <span className="text-xs sm:text-sm font-semibold text-white group-hover/metro:underline">
                               {metroStationName}
                             </span>
                             <ChevronRight className="w-3.5 h-3.5 text-stone-400 shrink-0 group-hover/metro:translate-x-0.5 transition-transform" />
                           </a>
 
-                          {/* Metro Line Pill */}
-                          <div className="mt-1.5 inline-flex">
-                            <span className={`px-3.5 py-0.5 rounded-full text-xs font-medium border shadow-xs ${metroStyle.pill}`}>
+                          {/* Metro Line Pill + Distance & Walking Time */}
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`px-3 py-0.5 rounded-full text-xs font-medium border shadow-xs ${metroStyle.pill}`}>
                               {metroLine}
                             </span>
+
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-stone-300">
+                              <Footprints className="w-3 h-3 text-amber-400" />
+                              <span>{cleanDistance}</span>
+                              <span className="text-stone-500">•</span>
+                              <span>~{pandal.walking_time_mins}m walk</span>
+                            </span>
+
+                            {(pandal.walking_distance.toLowerCase().includes('auto') || pandal.walking_time_mins >= 12) && (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/25 text-amber-300">
+                                <span>🛺 Auto: ~{Math.max(3, Math.round(pandal.walking_time_mins / 3.5))}m</span>
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
 
                       {/* Right Action Column */}
-                      <div className="flex flex-col justify-between items-end shrink-0 pl-1 sm:pl-2 self-stretch py-0.5">
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-between shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/[0.06] gap-2">
                         {/* Details Arrow Button */}
                         <Link
                           href={`/pandal/${pandal.slug}`}
@@ -1151,9 +1180,9 @@ export default function RoutePlannerPage() {
                         </Link>
 
                         {/* Bottom Buttons (Google Maps Pin & Remove) */}
-                        <div className="flex items-center gap-1 sm:gap-1.5">
-                          {/* Reorder Up/Down (Visible on hover to preserve full functionality) */}
-                          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1.5">
+                          {/* Reorder Up/Down */}
+                          <div className="flex items-center gap-1 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                             <button
                               type="button"
                               onClick={() => handleMoveUp(index)}
