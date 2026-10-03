@@ -1453,5 +1453,112 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Jessore+Road+Metro+Station&destination=Arjunpur%20Amra%20Sabai%20Club%2C%20Kolkata"
       }
     ]
+  },
+  {
+    "id": "joka",
+    "name": "Joka",
+    "bengali_name": "জোকা",
+    "line": "Purple Line (Joka-Majherhat)",
+    "line_code": "purple",
+    "latitude": 22.4518,
+    "longitude": 88.3032,
+    "nearby_pandals": []
+  },
+  {
+    "id": "thakurpukur",
+    "name": "Thakurpukur",
+    "bengali_name": "ঠাকুরপুকুর",
+    "line": "Purple Line (Joka-Majherhat)",
+    "line_code": "purple",
+    "latitude": 22.4655,
+    "longitude": 88.3082,
+    "nearby_pandals": []
+  },
+  {
+    "id": "majherhat",
+    "name": "Majherhat",
+    "bengali_name": "মাঝেরহাট",
+    "line": "Purple Line (Joka-Majherhat)",
+    "line_code": "purple",
+    "latitude": 22.5186,
+    "longitude": 88.3218,
+    "nearby_pandals": [
+      {
+        "pandal_id": "behala-29-pally",
+        "pandal_name": "Behala 29 Pally",
+        "pandal_slug": "behala-29-pally",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Majherhat+Metro+Station&destination=Behala%2029%20Pally%2C%20Kolkata"
+      }
+    ]
+  },
+  {
+    "id": "jyotirindra-nandi",
+    "name": "Jyotirindra Nandi",
+    "bengali_name": "জ্যোতিরিন্দ্র নন্দী",
+    "line": "Orange Line (Kavi Subhash-Beleghata)",
+    "line_code": "orange",
+    "latitude": 22.4889,
+    "longitude": 88.3975,
+    "nearby_pandals": [
+      {
+        "pandal_id": "santoshpur-lake-pally",
+        "pandal_name": "Santoshpur Lake Pally",
+        "pandal_slug": "santoshpur-lake-pally",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Jyotirindra+Nandi+Metro+Station&destination=Santoshpur%20Lake%20Pally%2C%20Kolkata"
+      }
+    ]
+  },
+  {
+    "id": "barun-sengupta",
+    "name": "Barun Sengupta (Science City)",
+    "bengali_name": "বরুণ সেনগুপ্ত",
+    "line": "Orange Line (Kavi Subhash-Beleghata)",
+    "line_code": "orange",
+    "latitude": 22.5385,
+    "longitude": 88.3965,
+    "nearby_pandals": [
+      {
+        "pandal_id": "milan-tirtha",
+        "pandal_name": "Milan Tirtha",
+        "pandal_slug": "milan-tirtha",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Barun+Sengupta+Metro+Station&destination=Milan%20Tirtha%2C%20Kolkata"
+      }
+    ]
+  },
+  {
+    "id": "beleghata",
+    "name": "Beleghata",
+    "bengali_name": "বেলেঘাটা",
+    "line": "Orange Line (Kavi Subhash-Beleghata)",
+    "line_code": "orange",
+    "latitude": 22.5525,
+    "longitude": 88.3978,
+    "nearby_pandals": []
+  },
+  {
+    "id": "dum-dum-cantt",
+    "name": "Dum Dum Cantonment",
+    "bengali_name": "দমদম ক্যান্টনমেন্ট",
+    "line": "Yellow Line (Noapara-Jaihind)",
+    "line_code": "yellow",
+    "latitude": 22.6455,
+    "longitude": 88.4045,
+    "nearby_pandals": []
+  },
+  {
+    "id": "jai-hind",
+    "name": "Jaihind Metro (Airport)",
+    "bengali_name": "জয় হিন্দ মেট্রো (বিমানবন্দর)",
+    "line": "Yellow Line (Noapara-Jaihind)",
+    "line_code": "yellow",
+    "latitude": 22.6545,
+    "longitude": 88.4465,
+    "nearby_pandals": []
   }
 ];

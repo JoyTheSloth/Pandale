@@ -28,11 +28,11 @@ import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
 export default function MetroGuidePage() {
   const { language } = useLanguage();
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
-  const [selectedLine, setSelectedLine] = useState<'all' | 'blue' | 'green' | 'orange' | 'purple'>('all');
+  const [selectedLine, setSelectedLine] = useState<'all' | 'blue' | 'green' | 'orange' | 'purple' | 'yellow'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedStationId, setExpandedStationId] = useState<string | null>('shyambazar');
 
-  // Four Square Metro Line Cards
+  // Metro Line Cards
   const METRO_LINE_CARDS = [
     {
       id: 'blue' as const,
@@ -42,7 +42,7 @@ export default function MetroGuidePage() {
       corridor: 'North-South Arterial',
       hex: '#2563EB',
       pandalCount: 12,
-      stationsCount: 8,
+      stationsCount: 26,
       image: '/brand/metro-blue-line.jpg',
       badgeClass: 'bg-blue-600 text-white shadow-xs',
       borderDefault: 'border-blue-500/30 hover:border-blue-500 dark:border-blue-500/20',
@@ -59,7 +59,7 @@ export default function MetroGuidePage() {
       corridor: 'East-West Corridor',
       hex: '#059669',
       pandalCount: 7,
-      stationsCount: 6,
+      stationsCount: 12,
       image: '/brand/metro-green-line.jpg',
       badgeClass: 'bg-emerald-600 text-white shadow-xs',
       borderDefault: 'border-emerald-500/30 hover:border-emerald-500 dark:border-emerald-500/20',
@@ -72,11 +72,11 @@ export default function MetroGuidePage() {
       id: 'orange' as const,
       name: 'Orange Line',
       bengaliName: 'অরেঞ্জ লাইন',
-      route: 'Kavi Subhash ↔ VIP Bazar',
+      route: 'Kavi Subhash ↔ Beleghata (Hemanta Mukhopadhyay)',
       corridor: 'EM Bypass Corridor',
       hex: '#EA580C',
       pandalCount: 3,
-      stationsCount: 4,
+      stationsCount: 9,
       image: '/brand/metro-orange-line.jpg',
       badgeClass: 'bg-orange-600 text-white shadow-xs',
       borderDefault: 'border-orange-500/30 hover:border-orange-500 dark:border-orange-500/20',
@@ -89,11 +89,11 @@ export default function MetroGuidePage() {
       id: 'purple' as const,
       name: 'Purple Line',
       bengaliName: 'পার্পল লাইন',
-      route: 'Joka ↔ Taratala / Esplanade',
+      route: 'Joka ↔ Majherhat',
       corridor: 'Diamond Harbour Road',
       hex: '#9333EA',
       pandalCount: 7,
-      stationsCount: 4,
+      stationsCount: 7,
       image: '/brand/metro-purple-line.jpg',
       badgeClass: 'bg-purple-600 text-white shadow-xs',
       borderDefault: 'border-purple-500/30 hover:border-purple-500 dark:border-purple-500/20',
@@ -101,6 +101,23 @@ export default function MetroGuidePage() {
       activeRing: 'ring-4 ring-purple-500/30 shadow-xl shadow-purple-500/20',
       bgGradient: 'from-purple-600/15 via-purple-500/5 to-transparent dark:from-purple-900/30 dark:via-purple-950/20 dark:to-transparent',
       accentBg: 'bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800/60'
+    },
+    {
+      id: 'yellow' as const,
+      name: 'Yellow Line',
+      bengaliName: 'ইয়েলো লাইন',
+      route: 'Noapara ↔ Jaihind Metro',
+      corridor: 'Airport Corridor',
+      hex: '#EAB308',
+      pandalCount: 4,
+      stationsCount: 4,
+      image: '/brand/kolkata-metro-header-bg.jpg',
+      badgeClass: 'bg-yellow-500 text-stone-950 shadow-xs',
+      borderDefault: 'border-yellow-500/30 hover:border-yellow-500 dark:border-yellow-500/20',
+      activeBorder: 'border-yellow-500',
+      activeRing: 'ring-4 ring-yellow-500/30 shadow-xl shadow-yellow-500/20',
+      bgGradient: 'from-yellow-500/15 via-yellow-500/5 to-transparent dark:from-yellow-900/30 dark:via-yellow-950/20 dark:to-transparent',
+      accentBg: 'bg-yellow-50 dark:bg-yellow-950/60 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800/60'
     }
   ];
 
@@ -204,14 +221,14 @@ export default function MetroGuidePage() {
               onClick={() => setSelectedLine('all')}
               className="text-xs font-bold text-[#D8261C] dark:text-amber-400 hover:underline flex items-center gap-1 bg-white/80 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-white/10 shadow-2xs transition-all"
             >
-              <span>Show All Lines (24 Stations)</span>
+              <span>{language === 'bn' ? 'সব লাইন দেখুন' : 'Show All Lines'}</span>
               <X className="w-3 h-3" />
             </button>
           )}
         </div>
 
-        {/* The Four Cards Grid Featuring Generated Metro Images */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5">
+        {/* Metro Lines Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
           {METRO_LINE_CARDS.map((line) => {
             const isSelected = selectedLine === line.id;
             return (

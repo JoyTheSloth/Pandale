@@ -10,8 +10,11 @@ export type ZoneArea =
 export type MetroLineName = 
   | 'Blue Line (North-South)'
   | 'Green Line (East-West)'
+  | 'Purple Line (Joka-Majherhat)'
   | 'Purple Line (Joka-Esplanade)'
+  | 'Orange Line (Kavi Subhash-Beleghata)'
   | 'Orange Line (Kavi Subhash-Airport)'
+  | 'Yellow Line (Noapara-Jaihind)'
   | 'Yellow Line (Airport-Noapara)';
 
 
