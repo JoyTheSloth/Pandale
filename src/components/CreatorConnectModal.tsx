@@ -266,7 +266,7 @@ export default function CreatorConnectModal() {
                 {/* Message Bubble 3 (Business & Web Dev) */}
                 <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[94%] space-y-1 relative">
                   <p className="text-xs text-stone-700 dark:text-stone-200 font-medium">
-                    Want a custom Next.js web app or digital product? Let&rsquo;s connect! 🚀
+                    Website like this for your business? Let&rsquo;s connect. 🚀
                   </p>
                   <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
                     <span>11:44 AM</span>
