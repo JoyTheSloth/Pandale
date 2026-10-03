@@ -922,25 +922,25 @@ export default function RoutePlannerPage() {
 
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
-        <div className="space-y-4">
+        <div className="space-y-2">
           {/* Itinerary Header & Route Actions */}
-          <div className="flex items-center justify-between pt-2 pb-1 px-1">
-            <div className="flex items-center gap-2.5">
-              <h2 className="text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-100">
+          <div className="flex items-center justify-between pt-1 pb-1 px-1">
+            <div className="flex items-center gap-2">
+              <h2 className="text-base sm:text-xl font-bold font-editorial text-stone-900 dark:text-stone-100">
                 {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#FEF2F2] dark:bg-[#2A1215] text-[#D8261C] border border-[#D8261C]/20 shadow-2xs">
+              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#FEF2F2] dark:bg-[#2A1215] text-[#D8261C] border border-[#D8261C]/20 shadow-2xs">
                 {selectedPandals.length} {isBn ? 'প্যান্ডেল' : 'Stops'}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(true)}
-                className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95"
+                className="px-2.5 sm:px-3 py-1 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center gap-1 shadow-xs transition-all cursor-pointer active:scale-95"
               >
-                <Plus className="w-3.5 h-3.5 text-[#D8261C]" />
+                <Plus className="w-3 h-3 text-[#D8261C]" />
                 <span className="hidden sm:inline">{isBn ? 'প্যান্ডেল যোগ করুন' : 'Add Stop'}</span>
                 <span className="sm:hidden">{isBn ? 'যোগ' : 'Add'}</span>
               </button>
@@ -948,10 +948,10 @@ export default function RoutePlannerPage() {
               <button
                 type="button"
                 onClick={handleClearAll}
-                className="px-3.5 py-1.5 rounded-full bg-rose-50/80 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-400 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-95"
+                className="px-2.5 sm:px-3 py-1 rounded-full bg-rose-50/80 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-400 text-xs font-bold flex items-center gap-1 shadow-xs transition-all cursor-pointer active:scale-95"
                 title="Clear entire itinerary route"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3 h-3" />
                 <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
               </button>
             </div>
@@ -1050,131 +1050,130 @@ export default function RoutePlannerPage() {
               <React.Fragment key={pandal.id}>
                 {/* Simple Top Walk Connector from Starting Metro Hub */}
                 {isFirst && activeStartingStation && distFromStationToFirst && (
-                  <div className="flex items-center justify-center mb-3">
+                  <div className="flex items-center justify-center mb-1">
                     <a
                       href={walkFromHubToFirstUrl || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-red-500/50 text-stone-300 text-xs font-medium flex items-center gap-2 shadow-sm transition-all"
+                      className="px-3 py-0.5 rounded-full bg-white/5 border border-white/10 hover:border-red-500/50 text-stone-300 text-[10px] sm:text-[11px] font-medium flex items-center gap-1.5 shadow-xs transition-all"
                       title="Walk directions from starting metro station"
                     >
                       <span>🚶 Walk {distFromStationToFirst.text}</span>
                       <span className="text-stone-500">•</span>
                       <span>~{distFromStationToFirst.mins} mins</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
+                      <ChevronRight className="w-3 h-3 text-stone-400" />
                     </a>
                   </div>
                 )}
 
-                {/* Clean & Simple Stop Card */}
-                <div className="flex items-center gap-3 sm:gap-4">
-                  {/* Number Circle Badge */}
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-[#E62837] to-[#A81422] text-white font-mono font-bold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-md">
+                {/* Ultra-Thin & Sleek Stop Card */}
+                <div className="flex items-center gap-1.5 sm:gap-2.5">
+                  {/* Compact Number Circle Badge */}
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-b from-[#E62837] to-[#A81422] text-white font-mono font-bold text-[10px] sm:text-xs flex items-center justify-center shrink-0 shadow-xs">
                     {String(index + 1).padStart(2, '0')}
                   </div>
 
-                  {/* Card Content */}
-                  <div className="flex-1 min-w-0 bg-[#140C10] dark:bg-[#140C10] border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg hover:border-white/20 transition-all">
+                  {/* Slim Card Content */}
+                  <div className="flex-1 min-w-0 bg-[#140C10] dark:bg-[#140C10] border border-white/10 rounded-xl py-1.5 px-2.5 sm:py-2 sm:px-3.5 flex items-center justify-between gap-2 shadow-xs hover:border-white/20 transition-all">
                     {/* Left Info: Title, Area, Metro Station & Line */}
-                    <div className="min-w-0 flex-1 space-y-1.5">
-                      {/* Title & Crown */}
-                      <div className="flex items-center gap-2 flex-wrap">
+                    <div className="min-w-0 flex-1 space-y-0.5">
+                      {/* Row 1: Title, Crown & Location */}
+                      <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
                         <Link
                           href={`/pandal/${pandal.slug}`}
-                          className="font-editorial text-base sm:text-lg font-bold text-[#EAA6A9] hover:text-white transition-colors"
+                          className="font-editorial text-xs sm:text-sm font-bold text-[#EAA6A9] hover:text-white transition-colors"
                         >
                           {pandal.name}
                         </Link>
                         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                          <span className="text-xs" title="Must Visit">👑</span>
+                          <span className="text-[10px]" title="Must Visit">👑</span>
                         )}
+                        <span className="text-stone-600 hidden sm:inline text-xs">•</span>
+                        <span className="text-[10px] sm:text-[11px] text-stone-400 inline-flex items-center gap-0.5">
+                          <MapPin className="w-2.5 h-2.5 text-purple-400 shrink-0" />
+                          <span>{cleanLocation}</span>
+                        </span>
                       </div>
 
-                      {/* Location */}
-                      <p className="text-xs text-stone-400 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                        <span>{cleanLocation}</span>
-                      </p>
-
-                      {/* Metro: Station & Line */}
-                      <div className="text-xs flex items-center gap-2 flex-wrap pt-0.5">
+                      {/* Row 2: Metro Station & Line */}
+                      <div className="text-[10px] sm:text-[11px] flex items-center gap-1 sm:gap-1.5 flex-wrap">
                         <a
                           href={walkFromStationUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 font-semibold text-white hover:text-blue-300 transition-colors"
+                          className="inline-flex items-center gap-1 font-semibold text-white hover:text-blue-300 transition-colors"
                           title="Directions from metro"
                         >
-                          <span className="w-4 h-4 rounded bg-[#0052FF] text-white font-bold text-[9px] flex items-center justify-center shrink-0">M</span>
+                          <span className="w-3 h-3 rounded bg-[#0052FF] text-white font-bold text-[7px] flex items-center justify-center shrink-0">M</span>
                           <span>{metroStationName}</span>
                         </a>
                         <span className="text-stone-600">•</span>
-                        <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-medium border ${metroStyle.pill}`}>
+                        <span className={`px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-medium border ${metroStyle.pill}`}>
                           {metroLine}
                         </span>
                       </div>
                     </div>
 
-                    {/* Right Action Icons: Reorder, Map, Details, Delete */}
-                    <div className="flex items-center gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+                    {/* Right Action Icons: Compact button row */}
+                    <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleMoveUp(index)}
                         disabled={isFirst}
-                        className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
+                        className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
                         title="Move earlier in route"
                       >
-                        <ArrowUp className="w-3.5 h-3.5" />
+                        <ArrowUp className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                       </button>
                       <button
                         type="button"
                         onClick={() => handleMoveDown(index)}
                         disabled={isLast}
-                        className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
+                        className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
                         title="Move later in route"
                       >
-                        <ArrowDown className="w-3.5 h-3.5" />
+                        <ArrowDown className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                       </button>
                       <a
                         href={exactMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-red-500 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
+                        className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded bg-white/5 hover:bg-white/15 text-red-500 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
                         title="Open in Google Maps"
                       >
-                        <MapPin className="w-3.5 h-3.5 text-red-500" />
+                        <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-red-500" />
                       </a>
                       <Link
                         href={`/pandal/${pandal.slug}`}
-                        className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                        className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded bg-white/5 hover:bg-white/15 text-stone-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
                         title="View pandal details"
                       >
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                       </Link>
                       <button
                         type="button"
                         onClick={() => handleRemovePandal(pandal.id)}
-                        className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
+                        className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded bg-white/5 hover:bg-white/15 text-stone-400 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
                         title="Remove stop"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Trash2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                       </button>
                     </div>
                   </div>
                 </div>
 
-                {/* Clean Simple Connector Between Stops */}
+                {/* Ultra-thin connector between stops */}
                 {!isLast && nextPandal && (
-                  <div className="flex items-center gap-3 sm:gap-4 my-2">
-                    <div className="w-9 sm:w-10 shrink-0 flex justify-center">
-                      <div className="w-0.5 h-6 border-l border-dashed border-red-500/40" />
+                  <div className="flex items-center gap-1.5 sm:gap-2.5 my-0.5 py-0.5">
+                    <div className="w-6 sm:w-7 shrink-0 flex justify-center">
+                      <div className="w-0.5 h-3 border-l border-dashed border-red-500/40" />
                     </div>
-                    <div className="flex-1 flex items-center justify-center">
-                      <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-stone-400 flex items-center gap-2">
-                        <span className="w-3.5 h-3.5 rounded bg-[#0052FF] text-white font-bold text-[8px] flex items-center justify-center">M</span>
-                        <span>Transit: <strong className="text-red-400">{distanceToNext < 1 ? `${Math.round(distanceToNext * 1000)} m` : `${distanceToNext.toFixed(1)} km`}</strong></span>
+                    <div className="flex-1 flex items-center">
+                      <span className="px-2 py-0.2 rounded-full bg-white/5 border border-white/10 text-[9.5px] text-stone-400 flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded bg-[#0052FF] text-white font-bold text-[6px] flex items-center justify-center">M</span>
+                        <span>Transit: <strong className="text-red-400 font-medium">{distanceToNext < 1 ? `${Math.round(distanceToNext * 1000)} m` : `${distanceToNext.toFixed(1)} km`}</strong></span>
                         <span className="text-stone-600">•</span>
-                        <span>~{Math.max(3, Math.round(distanceToNext * 12))} mins on foot</span>
+                        <span>~{Math.max(3, Math.round(distanceToNext * 12))}m walk</span>
                       </span>
                     </div>
                   </div>
