@@ -282,8 +282,8 @@ export default function RoutePlannerPage() {
   const { language } = useLanguage();
   const isBn = language === 'bn';
 
-  // Zone & Starting Metro Hub state
-  const [selectedHubZone, setSelectedHubZone] = useState<ZoneArea>('North Kolkata');
+  // Metro Line & Starting Metro Hub state
+  const [selectedMetroLine, setSelectedMetroLine] = useState<'blue' | 'green' | 'orange'>('blue');
   const [activeStartingHub, setActiveStartingHub] = useState<string>('shyambazar');
 
   // Selected pandal IDs in route order (defaults to North Kolkata sequentially ordered from Shyambazar)
@@ -410,23 +410,21 @@ export default function RoutePlannerPage() {
   const handleApplyPreset = (preset: typeof PRESET_CIRCUITS[0]) => {
     setSelectedIds(preset.ids);
     setActivePreset(preset.id);
-    setSelectedHubZone(preset.zone as ZoneArea);
-    const hubs = ZONE_METRO_HUBS[preset.zone];
-    if (hubs && hubs.length > 0) {
-      setActiveStartingHub(hubs[0].id);
-    }
   };
 
-  // Algorithm to auto-generate a sequential itinerary starting at the selected metro hub
-  const generateSequentialRoute = (stationId: string, zone: ZoneArea) => {
+  // Algorithm to auto-generate a sequential itinerary starting at the selected metro station
+  const generateSequentialRoute = (stationId: string) => {
     const station = METRO_STATIONS_DATA.find((s) => s.id === stationId);
     if (!station) return;
 
-    let candidates = PANDALS_DATA.filter((p) => p.area === zone);
-    if (candidates.length === 0) {
-      candidates = PANDALS_DATA.slice(0, 7);
-    }
+    // Closest pandals around the selected station
+    const sorted = [...PANDALS_DATA].sort((a, b) => {
+      const distA = calculateDistanceKm(station.latitude, station.longitude, a.latitude, a.longitude);
+      const distB = calculateDistanceKm(station.latitude, station.longitude, b.latitude, b.longitude);
+      return distA - distB;
+    });
 
+    const candidates = sorted.slice(0, 8);
     const orderedIds: string[] = [];
     const remaining = [...candidates];
 
@@ -459,7 +457,6 @@ export default function RoutePlannerPage() {
 
     setSelectedIds(orderedIds);
     setActiveStartingHub(stationId);
-    setSelectedHubZone(zone);
     setActivePreset(null);
   };
 
@@ -799,7 +796,7 @@ export default function RoutePlannerPage() {
         {/* Subtle decorative glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-red-500/5 dark:bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Top Header Row with Title and Compact Stats Strip */}
+        {/* Top Header Row with Title */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 relative z-10">
           <div>
             <div className="flex items-center gap-2">
@@ -816,97 +813,72 @@ export default function RoutePlannerPage() {
                 : 'Choose your destination hub to auto-generate a sequential itinerary ordered by walking proximity from that station.'}
             </p>
           </div>
-
-          {/* Compact summary metrics badge */}
-          {selectedPandals.length > 0 && (
-            <div className="flex items-center gap-2 bg-stone-50 dark:bg-white/[0.04] border border-stone-200/70 dark:border-white/10 rounded-xl px-3 py-2 shrink-0 self-start sm:self-auto">
-              <div className="text-center px-2 border-r border-stone-200 dark:border-white/10">
-                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
-                <span className="text-sm font-bold font-editorial text-stone-900 dark:text-white">{routeStats.totalStops}</span>
-              </div>
-              <div className="text-center px-2 border-r border-stone-200 dark:border-white/10">
-                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'দূরত্ব' : 'Distance'}</span>
-                <span className="text-sm font-bold font-editorial text-[#D8261C] dark:text-red-400">{routeStats.totalDistance} km</span>
-              </div>
-              <div className="text-center px-2">
-                <span className="block text-[9px] uppercase font-mono text-stone-400 font-bold">{isBn ? 'সময়' : 'Time'}</span>
-                <span className="text-sm font-bold font-editorial text-amber-600 dark:text-amber-400">~{routeStats.estimatedHours}h</span>
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Zone Filter Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-stone-100 dark:bg-white/[0.05] rounded-xl overflow-x-auto no-scrollbar mb-3.5 relative z-10">
-          {(['North Kolkata', 'South Kolkata', 'Central Kolkata', 'East Kolkata'] as ZoneArea[]).map((zone) => {
-            const isSelected = selectedHubZone === zone;
-            const zoneBnMap: Record<string, string> = {
-              'North Kolkata': 'উত্তর কলকাতা',
-              'South Kolkata': 'দক্ষিণ কলকাতা',
-              'Central Kolkata': 'মধ্য কলকাতা',
-              'East Kolkata': 'পূর্ব কলকাতা',
-            };
+        {/* 3 Metro Line Tabs: Blue Line, Green Line, Orange Line */}
+        <div className="flex items-center gap-2 p-1 bg-stone-100 dark:bg-white/[0.05] rounded-xl overflow-x-auto no-scrollbar mb-3.5 relative z-10">
+          {[
+            { id: 'blue' as const, name: 'Blue Line', bengaliName: 'ব্লু লাইন', color: '#2563EB', activeClass: 'bg-blue-600 text-white' },
+            { id: 'green' as const, name: 'Green Line', bengaliName: 'গ্রিন লাইন', color: '#059669', activeClass: 'bg-emerald-600 text-white' },
+            { id: 'orange' as const, name: 'Orange Line', bengaliName: 'অরেঞ্জ লাইন', color: '#EA580C', activeClass: 'bg-orange-600 text-white' }
+          ].map((line) => {
+            const isSelected = selectedMetroLine === line.id;
             return (
               <button
-                key={zone}
+                key={line.id}
                 type="button"
                 onClick={() => {
-                  setSelectedHubZone(zone);
-                  const firstHub = ZONE_METRO_HUBS[zone]?.[0];
-                  if (firstHub) {
-                    generateSequentialRoute(firstHub.id, zone);
+                  setSelectedMetroLine(line.id);
+                  const firstStation = METRO_STATIONS_DATA.find((s) => s.line_code === line.id);
+                  if (firstStation) {
+                    generateSequentialRoute(firstStation.id);
                   }
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                   isSelected
-                    ? 'bg-[#D8261C] text-white shadow-xs'
+                    ? `${line.activeClass} shadow-xs`
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'
                 }`}
               >
-                {isBn ? zoneBnMap[zone] || zone : zone}
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: line.color }} />
+                <span>{isBn ? line.bengaliName : line.name}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Metro Station Selector Chips / Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 relative z-10">
-          {(ZONE_METRO_HUBS[selectedHubZone] || []).map((hub) => {
-            const isSelected = activeStartingHub === hub.id;
+        {/* Metro Station Selector Chips — ONLY station names */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 relative z-10">
+          {METRO_STATIONS_DATA.filter((s) => s.line_code === selectedMetroLine).map((station) => {
+            const isSelected = activeStartingHub === station.id;
             return (
               <button
-                key={hub.id}
+                key={station.id}
                 type="button"
-                onClick={() => generateSequentialRoute(hub.id, selectedHubZone)}
-                className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between group ${
+                onClick={() => generateSequentialRoute(station.id)}
+                className={`px-3 py-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 group ${
                   isSelected
                     ? 'bg-red-50/80 dark:bg-red-950/40 border-[#D8261C] dark:border-red-500/60 shadow-xs ring-1 ring-[#D8261C]/30'
                     : 'bg-stone-50/60 dark:bg-white/[0.02] border-stone-200/80 dark:border-white/5 hover:border-stone-300 dark:hover:border-white/20 hover:bg-stone-100/70 dark:hover:bg-white/[0.04]'
                 }`}
               >
-                <div className="flex items-center justify-between gap-1.5 w-full mb-1">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 ${
-                      hub.lineColor === 'blue' ? 'bg-blue-600' : hub.lineColor === 'green' ? 'bg-emerald-600' : 'bg-purple-600'
-                    }`}>
-                      M
-                    </span>
-                    <span className={`text-xs font-bold truncate ${
-                      isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
-                    }`}>
-                      {isBn ? hub.bengaliName : hub.name}
-                    </span>
-                  </div>
-                  {isSelected && (
-                    <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
-                      <Check className="w-2.5 h-2.5 stroke-[3]" />
-                    </span>
-                  )}
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 ${
+                    selectedMetroLine === 'blue' ? 'bg-blue-600' : selectedMetroLine === 'green' ? 'bg-emerald-600' : 'bg-orange-600'
+                  }`}>
+                    M
+                  </span>
+                  <span className={`text-xs font-bold truncate ${
+                    isSelected ? 'text-[#D8261C] dark:text-red-400' : 'text-stone-900 dark:text-stone-100'
+                  }`}>
+                    {isBn ? station.bengali_name : station.name}
+                  </span>
                 </div>
-
-                <div className="flex items-center justify-between gap-1 text-[10px] text-stone-500 dark:text-stone-400 mt-1">
-                  <span className="truncate">{isBn ? hub.bengaliSubtitle : hub.subtitle}</span>
-                </div>
+                {isSelected && (
+                  <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0">
+                    <Check className="w-2.5 h-2.5 stroke-[3]" />
+                  </span>
+                )}
               </button>
             );
           })}
@@ -938,7 +910,7 @@ export default function RoutePlannerPage() {
 
             <button
               type="button"
-              onClick={() => generateSequentialRoute(activeStartingHub, selectedHubZone)}
+              onClick={() => generateSequentialRoute(activeStartingHub)}
               className="text-[11px] font-bold text-[#D8261C] hover:text-[#B91C1C] flex items-center gap-1 cursor-pointer transition-colors"
             >
               <RotateCcw className="w-3 h-3" />
