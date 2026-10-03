@@ -20,27 +20,7 @@ export default function Header() {
   const isPandalsSection = pathname === '/pandals' || pathname.startsWith('/pandal');
 
   if (pathname === '/map') {
-    return (
-      <header className="z-40 w-full pt-3 sm:pt-4 pb-1 px-4 sm:px-8 pointer-events-none sticky top-0 flex justify-end">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
-          className={`pointer-events-auto w-10 h-10 md:w-11 md:h-11 rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-85 transition-all duration-200 cursor-pointer group ${
-            theme === 'dark'
-              ? 'bg-[#1C1917] border border-white/20 text-white hover:border-amber-400'
-              : 'bg-white border border-stone-200 text-stone-800 hover:border-[#D8261C]'
-          }`}
-        >
-          {theme === 'dark' ? (
-            <Sun className="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-200" />
-          ) : (
-            <Moon className="w-5 h-5 text-stone-700 group-hover:-rotate-12 transition-transform duration-200" />
-          )}
-        </button>
-      </header>
-    );
+    return null;
   }
 
   return (

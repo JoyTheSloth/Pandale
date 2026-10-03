@@ -264,253 +264,253 @@ export default function KolkataMetroExplorerModal({
       }
       onClick={(e) => e.stopPropagation()}
     >
-        {/* COMPREHENSIVE HEADER & FILTER SECTION WITH ARTISTIC DURGA PUJA / METRO BANNER */}
-        <div className={`relative z-30 shrink-0 border-b ${isDark ? 'border-stone-800' : 'border-stone-200/80'} overflow-visible`}>
-          {/* Background Illustration */}
-          <div className={`absolute inset-0 overflow-hidden ${isPage ? '' : 'rounded-t-3xl'} pointer-events-none`}>
-            <div 
-              className="absolute inset-0 bg-cover bg-no-repeat"
-              style={{ 
-                backgroundImage: `url('/brand/kolkata-metro-header-bg.jpg')`,
-                backgroundPosition: 'center 42%'
-              }}
-            />
-            {/* Subtle Festive Wash - Vivid & Highly Visible Artwork in Both Light & Dark Theme */}
-            <div className={`absolute inset-0 transition-opacity duration-300 ${isDark ? 'bg-gradient-to-r from-black/85 via-black/70 to-black/60' : 'bg-gradient-to-r from-white/55 via-white/35 to-white/20'}`} />
-            <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-black/70 via-transparent to-transparent' : 'bg-gradient-to-t from-white/40 via-transparent to-transparent'}`} />
-          </div>
+        {/* COMPACT & SLEEK TRANSIT COMMAND BAR */}
+        <div className={`relative z-30 shrink-0 border-b ${isDark ? 'bg-stone-950/95 border-white/10' : 'bg-white/95 border-stone-200'} backdrop-blur-xl transition-colors duration-200`}>
+          {/* Subtle warm festive accent glow along top border */}
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent pointer-events-none" />
 
-          {/* Interactive Header & Search Content */}
-          <div className="relative z-10">
-            {/* TOP HEADER: MODERN TRANSIT COMMAND BAR */}
-            <div className={`px-4 py-3 sm:px-6 sm:py-3.5 border-b ${isDark ? 'border-white/10' : 'border-stone-200/50'} flex items-center justify-between gap-4`}>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 text-white flex items-center justify-center shadow-lg shadow-stone-900/25 ring-1 ring-amber-400/50 shrink-0">
-                  <Train className="w-5 h-5 text-amber-400" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h2 className={`text-base sm:text-lg font-extrabold tracking-tight ${isDark ? 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]' : 'text-stone-950 drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]'}`}>
-                      Kolkata Metro Explorer
-                    </h2>
-                  </div>
-                  <p className={`text-[11px] sm:text-xs font-semibold ${isDark ? 'text-stone-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]' : 'text-stone-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]'}`}>
-                    Official Schematic Transit Network &bull; Durga Puja Pandal Connections
-                  </p>
-                </div>
+          {/* Row 1: Brand Badge + Station Search + Theme/Close Actions */}
+          <div className="px-3 sm:px-5 pt-2.5 pb-2 flex items-center justify-between gap-2.5">
+            {/* Brand / Metro Badge */}
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 text-stone-950 flex items-center justify-center shadow-sm font-bold shrink-0">
+                <Train className="w-4 h-4 text-stone-950" />
               </div>
+              <div className="hidden xs:block sm:block">
+                <div className="flex items-center gap-1.5">
+                  <h2 className={`text-sm sm:text-base font-extrabold tracking-tight leading-tight ${isDark ? 'text-white' : 'text-stone-950'}`}>
+                    Kolkata Metro
+                  </h2>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse hidden sm:inline-block" />
+                </div>
+                <p className={`text-[10px] leading-none hidden sm:block ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
+                  Puja Transit Network
+                </p>
+              </div>
+            </div>
 
-              {/* Close Button */}
+            {/* Integrated Pill Search Input */}
+            <div ref={searchContainerRef} className="relative z-50 flex-1 max-w-md sm:max-w-lg">
+              <Search className={`w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none ${isDark ? 'text-stone-400' : 'text-stone-500'}`} />
+              <input
+                type="text"
+                value={mapSearchQuery}
+                onFocus={() => { setIsSearchFocused(true); setShowDropdown(true); }}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setMapSearchQuery(val);
+                  setIsSearchFocused(true);
+                  setShowDropdown(true);
+                  if (val.trim().length >= 3) {
+                    const matchStation = allStations.find(
+                      (s) => s.name.toLowerCase().includes(val.trim().toLowerCase())
+                    );
+                    if (matchStation) {
+                      setUserHereStation(matchStation);
+                      setSelectedStation(matchStation);
+                      if (zoom > 1) {
+                        setPan({
+                          x: (525 - matchStation.x) * 0.7,
+                          y: (675 - matchStation.y) * 0.7
+                        });
+                      }
+                    }
+                  }
+                }}
+                placeholder="Search station (e.g. Kalighat, Esplanade...)"
+                className={`w-full h-8.5 sm:h-9 pl-8.5 pr-8 py-1.5 rounded-full text-xs focus:outline-none focus:ring-2 shadow-xs transition-all border ${
+                  isDark 
+                    ? 'bg-stone-900/90 border-stone-800 text-stone-100 placeholder-stone-400 focus:border-amber-400 focus:ring-amber-400/20' 
+                    : 'bg-stone-100/90 border-stone-300/80 text-stone-900 placeholder-stone-500 focus:border-amber-500 focus:ring-amber-500/20 focus:bg-white'
+                }`}
+              />
+              {mapSearchQuery && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMapSearchQuery('');
+                    setUserHereStation(null);
+                    setIsSearchFocused(false);
+                  }}
+                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer p-1 transition-colors ${isDark ? 'text-stone-400 hover:text-white' : 'text-stone-400 hover:text-stone-700'}`}
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+
+              {/* Station Recommendation Dropdown */}
+              {showDropdown && searchMatchedStations.length > 0 && (
+                <div className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto divide-y z-[100] border backdrop-blur-xl ${
+                  isDark 
+                    ? 'bg-stone-900 border-stone-700 divide-stone-800 text-stone-100 shadow-2xl shadow-black/80' 
+                    : 'bg-white border-stone-200 divide-stone-100 text-stone-900 shadow-2xl shadow-stone-900/20'
+                }`}>
+                  <div className={`px-3.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                    isDark ? 'bg-stone-800/80 text-amber-400' : 'bg-stone-100 text-[#D8261C]'
+                  }`}>
+                    {mapSearchQuery.trim() ? (
+                      <>
+                        <Search className="w-3 h-3 text-[#D8261C]" />
+                        <span>Stations Matching &quot;{mapSearchQuery}&quot;:</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3 h-3 text-amber-500" />
+                        <span>Iconic Puja Stations (Tap to Locate):</span>
+                      </>
+                    )}
+                  </div>
+
+                  {searchMatchedStations.map((st) => (
+                    <button
+                      key={st.id}
+                      type="button"
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        handleSelectHereStation(st);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        handleSelectHereStation(st);
+                      }}
+                      className={`w-full px-3.5 py-2.5 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
+                        isDark ? 'hover:bg-stone-800/90' : 'hover:bg-red-50/60'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span 
+                          className="w-3 h-3 rounded-full shrink-0 shadow-2xs" 
+                          style={{ backgroundColor: METRO_FULL_MAP_DATA[st.line].color }} 
+                        />
+                        <div>
+                          <p className={`font-bold transition-colors ${
+                            isDark ? 'text-stone-100 group-hover:text-amber-400' : 'text-stone-900 group-hover:text-[#D8261C]'
+                          }`}>
+                            {st.name}
+                          </p>
+                          <p className={`text-[10px] ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
+                            {st.bengaliName}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[9.5px] font-mono uppercase px-2 py-0.5 rounded-full ${
+                          isDark ? 'bg-stone-800 text-stone-300' : 'bg-stone-100 text-stone-600'
+                        }`}>
+                          {st.zone}
+                        </span>
+                        <span className="text-[10px] font-bold text-[#D8261C] dark:text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                          Locate →
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Actions: Theme Toggle & Close (if modal) */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className={`h-8.5 w-8.5 sm:h-9 sm:w-9 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
+                  isDark
+                    ? 'bg-stone-900 border-stone-800 text-amber-400 hover:bg-stone-800 hover:border-stone-700 shadow-sm'
+                    : 'bg-stone-100 border-stone-200 text-stone-700 hover:bg-stone-200/70 hover:text-stone-950 shadow-sm'
+                }`}
+                title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+                aria-label="Toggle Theme"
+              >
+                {isDark ? (
+                  <Sun className="w-4 h-4 transition-transform hover:rotate-90 duration-300 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 transition-transform hover:-rotate-12 duration-300 text-stone-700" />
+                )}
+              </button>
+
               {onClose && (
                 <button
                   type="button"
                   onClick={onClose}
-                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all cursor-pointer hover:rotate-90 backdrop-blur-sm shadow-md border ${
+                  className={`h-8.5 w-8.5 sm:h-9 sm:w-9 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
                     isDark 
-                      ? 'bg-stone-900/90 hover:bg-stone-800 text-stone-300 hover:text-white border-stone-700' 
-                      : 'bg-white/95 hover:bg-white text-stone-800 hover:text-stone-950 border-stone-300/90'
+                      ? 'bg-stone-900 border-stone-800 text-stone-300 hover:text-white hover:bg-stone-800' 
+                      : 'bg-stone-100 border-stone-200 text-stone-700 hover:text-stone-950 hover:bg-stone-200'
                   }`}
                   aria-label="Close Metro Map"
                 >
-                  <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
+          </div>
 
-            {/* SUB-HEADER: TRANSIT FILTER PILLS (TOP) & CURVED SEARCH BAR (BELOW) */}
-            <div className="px-3 sm:px-5 py-2.5 flex flex-col gap-2">
-              {/* Row 1: Line Filter Segmented Pills */}
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 w-full">
+          {/* Row 2: Micro Line Selector Pills */}
+          <div className="px-3 sm:px-5 pb-2.5 pt-0.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <button
+              type="button"
+              onClick={() => setLineFilter('all')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-semibold h-7 flex items-center shrink-0 cursor-pointer active:scale-95 transition-all ${
+                lineFilter === 'all'
+                  ? (isDark ? 'bg-amber-400 text-stone-950 font-bold shadow-xs' : 'bg-stone-950 text-white font-bold shadow-xs')
+                  : (isDark ? 'bg-stone-900 text-stone-300 border border-stone-800 hover:border-stone-700' : 'bg-stone-100 text-stone-700 border border-stone-200 hover:bg-stone-200/60')
+              }`}
+            >
+              All 5 Lines
+            </button>
+
+            {Object.entries(METRO_FULL_MAP_DATA).map(([id, line]) => {
+              const isSelected = lineFilter === id;
+              const shortNumber = id === 'blue' ? 'L1' : id === 'green' ? 'L2' : id === 'purple' ? 'L3' : id === 'yellow' ? 'L4' : 'L6';
+
+              return (
                 <button
+                  key={id}
                   type="button"
-                  onClick={() => setLineFilter('all')}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold h-7.5 flex items-center shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-200 ${
-                    lineFilter === 'all'
-                      ? (isDark ? 'bg-amber-400 text-stone-950 font-bold shadow-amber-400/20 shadow-sm' : 'bg-stone-900 text-white shadow-xs')
-                      : (isDark 
-                          ? 'bg-stone-900/90 backdrop-blur-sm text-stone-300 border border-stone-700 hover:bg-stone-800 hover:text-white shadow-xs' 
-                          : 'bg-white/95 backdrop-blur-sm text-stone-800 border border-stone-300/80 hover:bg-white hover:text-stone-950 shadow-xs')
+                  onClick={() => setLineFilter(isSelected ? 'all' : id)}
+                  className={`px-2.5 py-1 rounded-full text-[11px] font-semibold h-7 shrink-0 flex items-center gap-1.5 border cursor-pointer active:scale-95 transition-all ${
+                    isSelected
+                      ? 'text-white border-transparent shadow-xs'
+                      : (isDark
+                          ? 'bg-stone-900 text-stone-300 border-stone-800 hover:border-stone-700'
+                          : 'bg-stone-100 text-stone-700 border-stone-200 hover:bg-stone-200/60')
                   }`}
-                >
-                  All 5 Lines
-                </button>
-
-                {Object.entries(METRO_FULL_MAP_DATA).map(([id, line]) => {
-                  const isSelected = lineFilter === id;
-                  const shortNumber = id === 'blue' ? 'L1' : id === 'green' ? 'L2' : id === 'purple' ? 'L3' : id === 'yellow' ? 'L4' : 'L6';
-
-                  return (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setLineFilter(isSelected ? 'all' : id)}
-                      className={`px-2.5 py-1.5 rounded-full text-xs font-semibold h-7.5 shrink-0 flex items-center gap-1.5 border cursor-pointer hover:scale-105 active:scale-95 transition-all duration-200 ${
-                        isSelected
-                          ? 'text-white border-transparent shadow-xs'
-                          : (isDark
-                              ? 'bg-stone-900/90 backdrop-blur-sm text-stone-300 border-stone-700 hover:bg-stone-800 hover:text-white shadow-xs'
-                              : 'bg-white/95 backdrop-blur-sm text-stone-800 border border-stone-300/80 hover:bg-white hover:text-stone-950 shadow-xs')
-                      }`}
-                      style={{
-                        backgroundColor: isSelected ? line.color : undefined,
-                        boxShadow: isSelected ? `0 2px 8px ${line.glowColor}` : undefined
-                      }}
-                    >
-                      <span 
-                        className="w-1.5 h-1.5 rounded-full shrink-0 group-hover:scale-125 transition-transform" 
-                        style={{ backgroundColor: isSelected ? '#FFFFFF' : line.color }} 
-                      />
-                      <span>{line.name.split(' ')[0]}</span>
-                      <span 
-                        className={`text-[9px] px-1.5 py-0.5 rounded-full font-mono font-bold leading-none ${
-                          isSelected ? 'bg-white/25 text-white' : (isDark ? 'bg-stone-800 text-stone-400' : 'bg-stone-100 text-stone-500')
-                        }`}
-                      >
-                        {shortNumber}
-                      </span>
-                    </button>
-                  );
-                })}
-
-                <div className={`w-px h-4 mx-0.5 hidden sm:block shrink-0 ${isDark ? 'bg-stone-700' : 'bg-stone-300/80'}`} />
-
-                <button
-                  type="button"
-                  onClick={() => setShowOperationalOnly(!showOperationalOnly)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium h-7.5 shrink-0 border cursor-pointer flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all duration-200 ${
-                    showOperationalOnly
-                      ? (isDark ? 'bg-amber-950/80 text-amber-300 border-amber-800 shadow-2xs' : 'bg-amber-100 text-amber-900 border-amber-300 shadow-2xs')
-                      : (isDark 
-                          ? 'bg-stone-900/90 backdrop-blur-sm text-stone-300 border-stone-700 hover:bg-stone-800' 
-                          : 'bg-white/95 backdrop-blur-sm text-stone-800 border border-stone-300/80 hover:bg-white shadow-xs')
-                  }`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full ${showOperationalOnly ? 'bg-amber-500' : (isDark ? 'bg-stone-600' : 'bg-stone-400')}`} />
-                  <span>{showOperationalOnly ? 'Operational Only' : 'Include Planned'}</span>
-                </button>
-              </div>
-
-              {/* Row 2: Curved Search Bar with Generous Padding & Non-Clipped Dropdown */}
-              <div ref={searchContainerRef} className="relative z-50 w-full">
-                <Search className={`w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none ${isDark ? 'text-stone-400' : 'text-stone-500'}`} />
-                <input
-                  type="text"
-                  value={mapSearchQuery}
-                  onFocus={() => { setIsSearchFocused(true); setShowDropdown(true); }}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    setMapSearchQuery(val);
-                    setIsSearchFocused(true);
-                    setShowDropdown(true);
-                    if (val.trim().length >= 3) {
-                      const matchStation = allStations.find(
-                        (s) => s.name.toLowerCase().includes(val.trim().toLowerCase())
-                      );
-                      if (matchStation) {
-                        setUserHereStation(matchStation);
-                        setSelectedStation(matchStation);
-                        if (zoom > 1) {
-                          setPan({
-                            x: (525 - matchStation.x) * 0.7,
-                            y: (675 - matchStation.y) * 0.7
-                          });
-                        }
-                      }
-                    }
+                  style={{
+                    backgroundColor: isSelected ? line.color : undefined,
+                    boxShadow: isSelected ? `0 2px 8px ${line.glowColor}` : undefined
                   }}
-                  placeholder="Search station (e.g. Esplanade, Kalighat, Salt Lake...)"
-                  className={`w-full h-10 pl-10 pr-9 py-2 rounded-full text-xs sm:text-[13px] focus:outline-none focus:ring-2 shadow-xs transition-all backdrop-blur-sm border ${
-                    isDark 
-                      ? 'bg-stone-900/95 border-stone-700 text-stone-100 placeholder-stone-400 focus:border-amber-400 focus:ring-amber-400/25 focus:bg-stone-900' 
-                      : 'bg-white/95 border-stone-300/90 text-stone-900 placeholder-stone-500 focus:border-amber-500 focus:ring-amber-500/25 focus:bg-white'
-                  }`}
-                />
-                {mapSearchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMapSearchQuery('');
-                      setUserHereStation(null);
-                      setIsSearchFocused(false);
-                    }}
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 transition-colors ${isDark ? 'text-stone-400 hover:text-white' : 'text-stone-400 hover:text-stone-700'}`}
+                >
+                  <span 
+                    className="w-1.5 h-1.5 rounded-full shrink-0" 
+                    style={{ backgroundColor: isSelected ? '#FFFFFF' : line.color }} 
+                  />
+                  <span>{line.name.split(' ')[0]}</span>
+                  <span 
+                    className={`text-[9px] px-1 py-0.2 rounded font-mono font-bold leading-none ${
+                      isSelected ? 'bg-white/25 text-white' : (isDark ? 'bg-stone-800 text-stone-400' : 'bg-stone-200 text-stone-600')
+                    }`}
                   >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
+                    {shortNumber}
+                  </span>
+                </button>
+              );
+            })}
 
-                {/* Dropdown: only when showDropdown is explicitly true */}
-                {showDropdown && searchMatchedStations.length > 0 && (
-                  <div className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto divide-y z-[100] border backdrop-blur-xl ${
-                    isDark 
-                      ? 'bg-stone-900 border-stone-700 divide-stone-800 text-stone-100 shadow-2xl shadow-black/80' 
-                      : 'bg-white border-stone-200 divide-stone-100 text-stone-900 shadow-2xl shadow-stone-900/20'
-                  }`}>
-                    {/* Header inside dropdown */}
-                    <div className={`px-3.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                      isDark ? 'bg-stone-800/80 text-amber-400' : 'bg-stone-100 text-[#D8261C]'
-                    }`}>
-                      {mapSearchQuery.trim() ? (
-                        <>
-                          <Search className="w-3 h-3 text-[#D8261C]" />
-                          <span>Stations Matching &quot;{mapSearchQuery}&quot;:</span>
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="w-3 h-3 text-amber-500" />
-                          <span>Iconic Puja Stations (Tap to Locate):</span>
-                        </>
-                      )}
-                    </div>
+            <div className={`w-px h-4 mx-0.5 shrink-0 ${isDark ? 'bg-stone-800' : 'bg-stone-200'}`} />
 
-                    {searchMatchedStations.map((st) => (
-                      <button
-                        key={st.id}
-                        type="button"
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          handleSelectHereStation(st);
-                        }}
-                        onTouchEnd={(e) => {
-                          e.preventDefault();
-                          handleSelectHereStation(st);
-                        }}
-                        className={`w-full px-3.5 py-2.5 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
-                          isDark ? 'hover:bg-stone-800/90' : 'hover:bg-red-50/60'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span 
-                            className="w-3 h-3 rounded-full shrink-0 shadow-2xs" 
-                            style={{ backgroundColor: METRO_FULL_MAP_DATA[st.line].color }} 
-                          />
-                          <div>
-                            <p className={`font-bold transition-colors ${
-                              isDark ? 'text-stone-100 group-hover:text-amber-400' : 'text-stone-900 group-hover:text-[#D8261C]'
-                            }`}>
-                              {st.name}
-                            </p>
-                            <p className={`text-[10px] ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                              {st.bengaliName}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className={`text-[9.5px] font-mono uppercase px-2 py-0.5 rounded-full ${
-                            isDark ? 'bg-stone-800 text-stone-300' : 'bg-stone-100 text-stone-600'
-                          }`}>
-                            {st.zone}
-                          </span>
-                          <span className="text-[10px] font-bold text-[#D8261C] dark:text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Locate →
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowOperationalOnly(!showOperationalOnly)}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-medium h-7 shrink-0 border cursor-pointer flex items-center gap-1.5 active:scale-95 transition-all ${
+                showOperationalOnly
+                  ? (isDark ? 'bg-amber-950/80 text-amber-300 border-amber-800 shadow-2xs' : 'bg-amber-100 text-amber-900 border-amber-300 shadow-2xs')
+                  : (isDark ? 'bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700' : 'bg-stone-100 text-stone-600 border-stone-200 hover:bg-stone-200/60')
+              }`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${showOperationalOnly ? 'bg-amber-500' : (isDark ? 'bg-stone-600' : 'bg-stone-400')}`} />
+              <span>{showOperationalOnly ? 'Operational Only' : 'All Tracks'}</span>
+            </button>
           </div>
         </div>
 
@@ -558,22 +558,6 @@ export default function KolkataMetroExplorerModal({
               title="Reset View"
             >
               <RotateCcw className="w-3.5 h-3.5 transition-transform duration-300 group-hover:-rotate-180" />
-            </button>
-            <div className={`w-full h-px ${isDark ? 'bg-stone-800' : 'bg-stone-100'}`} />
-            {/* Quick Map Theme Toggle */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-85 hover:scale-110 group ${
-                isDark ? 'hover:bg-stone-800 text-amber-400' : 'hover:bg-stone-100 text-stone-600 hover:text-stone-950'
-              }`}
-              title={isDark ? "Switch to Light Map Theme" : "Switch to Dark Map Theme"}
-            >
-              {isDark ? (
-                <Sun className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-115 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 transition-transform duration-300 group-hover:-rotate-20 group-hover:scale-115 text-stone-700" />
-              )}
             </button>
           </div>
 
