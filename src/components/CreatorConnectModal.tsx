@@ -457,7 +457,7 @@ export default function CreatorConnectModal() {
                             Checking out my startup Flatzy?
                           </div>
                           <div className="text-[10.5px] text-stone-600 dark:text-stone-400 font-normal">
-                            Flat dhundh rahe ho? Zero brokerage in Kolkata!
+                            Flat dhundh rahe ho? Verified brokers in Kolkata!
                           </div>
                         </div>
                       </div>
