@@ -31,7 +31,8 @@ import {
   ChevronRight,
   ChevronLeft,
   ArrowRight,
-  Users
+  Users,
+  Flame
 } from 'lucide-react';
 import { calculateDistanceKm, formatDistance, buildGoogleMapsUrl } from '@/lib/geo';
 import { ZoneArea, Pandal } from '@/types';
@@ -48,7 +49,7 @@ const PRESET_CIRCUITS = [
     stopsCount: 7,
     badge: '7 Iconic Pandals',
     bengaliBadge: '৭টি আইকনিক প্যান্ডেল',
-    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
+    image: '/brand/zone-north-durga.jpg',
     landmarks: 'Shyambazar • Hatibagan • Kumartuli',
     bengaliLandmarks: 'শ্যামবাজার • হাতিবাগান • কুমারটুলি',
     description: 'Bagbazar, Hatibagan, Tala Prattay, Kumartuli & Ahiritola',
@@ -74,7 +75,7 @@ const PRESET_CIRCUITS = [
     stopsCount: 6,
     badge: '6 Iconic Pandals',
     bengaliBadge: '৬টি আইকনিক প্যান্ডেল',
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
+    image: '/brand/zone-south-durga.jpg',
     landmarks: 'Maddox Square • Suruchi • Singhi Park',
     bengaliLandmarks: 'ম্যাডক্স স্কোয়ার • সুরুচি • সিংহী পার্ক',
     description: 'Maddox Square, Ekdalia, Singhi Park, Suruchi & Badamtala',
@@ -92,7 +93,7 @@ const PRESET_CIRCUITS = [
     stopsCount: 4,
     badge: '4 Iconic Pandals',
     bengaliBadge: '৪টি আইকনিক প্যান্ডেল',
-    image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
+    image: '/brand/zone-central-durga.jpg',
     landmarks: 'College Square • Lebutala • Sealdah',
     bengaliLandmarks: 'কলেজ স্কোয়ার • লেবুবাগান • শিয়ালদহ',
     description: 'College Square, Santosh Mitra Square & Sealdah',
@@ -110,7 +111,7 @@ const PRESET_CIRCUITS = [
     stopsCount: 4,
     badge: '4 Iconic Pandals',
     bengaliBadge: '৪টি আইকনিক প্যান্ডেল',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
+    image: '/brand/zone-east-durga.jpg',
     landmarks: 'Salt Lake FD Block • BJ Block • Central Park',
     bengaliLandmarks: 'সল্টলেক এফডি ব্লক • বিজে ব্লক • সেন্ট্রাল পার্ক',
     description: 'FD Block, BJ Block, Central Park & New Town',
@@ -1159,7 +1160,11 @@ export default function RoutePlannerPage() {
                           {pandal.name}
                         </Link>
                         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                          <span className="text-[11px]" title="Must Visit">👑</span>
+                          <span className="inline-flex items-center gap-0.5 text-xs select-none" title="Must Visit">
+                            <Flame className="w-3 h-3 text-orange-500 fill-orange-500" />
+                            <Flame className="w-3 h-3 text-amber-400 fill-amber-400" />
+                            <Flame className="w-3 h-3 text-orange-500 fill-orange-500" />
+                          </span>
                         )}
                         <span className="text-stone-600 hidden sm:inline text-xs">•</span>
                         <span className="text-[11px] sm:text-xs text-stone-400 inline-flex items-center gap-1">

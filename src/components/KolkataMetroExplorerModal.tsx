@@ -521,10 +521,7 @@ export default function KolkataMetroExplorerModal({
                             <p className={`font-bold transition-colors ${
                               isDark ? 'text-stone-100 group-hover:text-amber-400' : 'text-stone-900 group-hover:text-[#D8261C]'
                             }`}>
-                              {st.name}
-                            </p>
-                            <p className={`text-[10px] ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                              {st.bengaliName}
+                              {language === 'bn' ? st.bengaliName : st.name}
                             </p>
                           </div>
                         </div>
@@ -874,21 +871,23 @@ export default function KolkataMetroExplorerModal({
                       >
                         {station.name}
                       </text>
-                      <text
-                        x="0"
-                        y="10.5"
-                        textAnchor={labelOnRight ? 'start' : 'end'}
-                        fill={isUserHere ? '#F59E0B' : isSelected ? '#EF4444' : (isDark ? '#E2E8F0' : '#475569')}
-                        stroke={isDark ? '#000000' : '#FFFFFF'}
-                        strokeWidth={isDark ? 3 : 2.5}
-                        strokeLinejoin="round"
-                        paintOrder="stroke fill"
-                        fontSize="8.5"
-                        fontFamily="sans-serif"
-                        className="select-none font-medium"
-                      >
-                        {station.bengaliName}
-                      </text>
+                      {language === 'bn' && (
+                        <text
+                          x="0"
+                          y="10.5"
+                          textAnchor={labelOnRight ? 'start' : 'end'}
+                          fill={isUserHere ? '#F59E0B' : isSelected ? '#EF4444' : (isDark ? '#E2E8F0' : '#475569')}
+                          stroke={isDark ? '#000000' : '#FFFFFF'}
+                          strokeWidth={isDark ? 3 : 2.5}
+                          strokeLinejoin="round"
+                          paintOrder="stroke fill"
+                          fontSize="8.5"
+                          fontFamily="sans-serif"
+                          className="select-none font-medium"
+                        >
+                          {station.bengaliName}
+                        </text>
+                      )}
                     </g>
                   </g>
                 );

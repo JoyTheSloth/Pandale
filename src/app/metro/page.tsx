@@ -24,15 +24,27 @@ import {
 } from 'lucide-react';
 import { buildGoogleMapsUrl } from '@/lib/geo';
 import { useLanguage } from '@/context/LanguageContext';
+import PandalCard from '@/components/PandalCard';
 
 export default function MetroGuidePage() {
   const { language } = useLanguage();
   const [selectedLine, setSelectedLine] = useState<'all' | 'blue' | 'green' | 'orange' | 'purple' | 'yellow'>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedStationId, setExpandedStationId] = useState<string | null>('shyambazar');
+  const [expandedStationId, setExpandedStationId] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownSearch, setDropdownSearch] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // Track which line groups are expanded in the dropdown (all collapsed by default)
+  const [expandedLineGroups, setExpandedLineGroups] = useState<Set<string>>(new Set());
+  const [showNoMetro, setShowNoMetro] = useState(false);
+  const toggleLineGroup = (lineCode: string) => {
+    setExpandedLineGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(lineCode)) next.delete(lineCode);
+      else next.add(lineCode);
+      return next;
+    });
+  };
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -170,6 +182,52 @@ export default function MetroGuidePage() {
       s.line.toLowerCase().includes(q)
     );
   }, [dropdownSearch]);
+
+  // Stations grouped by line for the sub-dropdown (Blue & Green only)
+  const LINE_GROUP_META: { code: 'blue'|'green'; label: string; bengaliLabel: string; hex: string }[] = [
+    { code: 'blue',  label: 'Blue Line',  bengaliLabel: 'ব্লু লাইন',  hex: '#2563EB' },
+    { code: 'green', label: 'Green Line', bengaliLabel: 'গ্রিন লাইন', hex: '#059669' },
+  ];
+  const groupedDropdownStations = useMemo(() => {
+    return LINE_GROUP_META.map((meta) => ({
+      ...meta,
+      stations: METRO_STATIONS_DATA.filter((s) => s.line_code === meta.code),
+    })).filter((g) => g.stations.length > 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Set of pandals linked to any metro station in METRO_STATIONS_DATA
+  const metroLinkedPandalIds = useMemo(() => {
+    const ids = new Set<string>();
+    METRO_STATIONS_DATA.forEach((station) => {
+      station.nearby_pandals.forEach((p) => {
+        if (p.pandal_id) ids.add(p.pandal_id.toLowerCase());
+        if (p.pandal_slug) ids.add(p.pandal_slug.toLowerCase());
+      });
+    });
+    return ids;
+  }, []);
+
+  // Pandals not directly served by Kolkata Metro stations
+  const otherPandals = useMemo(() => {
+    return PANDALS_DATA.filter((p) => {
+      const isLinked = metroLinkedPandalIds.has(p.id.toLowerCase()) || metroLinkedPandalIds.has(p.slug.toLowerCase());
+      return !isLinked;
+    });
+  }, [metroLinkedPandalIds]);
+
+  const [noMetroSearch, setNoMetroSearch] = useState('');
+  const filteredNoMetroPandals = useMemo(() => {
+    if (!noMetroSearch.trim()) return otherPandals;
+    const q = noMetroSearch.toLowerCase().trim();
+    return otherPandals.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.area.toLowerCase().includes(q) ||
+        (p.locality && p.locality.toLowerCase().includes(q)) ||
+        (p.nearest_metro && p.nearest_metro.toLowerCase().includes(q))
+    );
+  }, [otherPandals, noMetroSearch]);
 
   // Handle station selection from dropdown
   const handleSelectDropdownStation = (st: (typeof METRO_STATIONS_DATA)[0]) => {
@@ -359,14 +417,45 @@ export default function MetroGuidePage() {
 
       {/* 2. FOUR SQUARE LINE CARDS (BLUE, GREEN, ORANGE, PURPLE) */}
       <div className="space-y-3 pt-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono uppercase tracking-wider text-[#D8261C] dark:text-amber-400 font-bold flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Metro Line Corridors
+              <Sparkles className="w-3.5 h-3.5" />
+              {showNoMetro
+                ? (language === 'bn' ? 'মেট্রো বহির্ভূত পুজো পরিক্রমা' : 'Non-Metro Pandals')
+                : (language === 'bn' ? 'মেট্রো লাইন করিডোর' : 'Metro Line Corridors')}
             </span>
           </div>
 
-          {selectedLine !== 'all' && (
+          {/* Metro / No Metro Toggle Button (styled like English / Bengali toggle) */}
+          <div className="flex items-center p-1 rounded-full bg-white dark:bg-[#1C1917] border border-stone-200 dark:border-white/20 shadow-md">
+            <button
+              type="button"
+              onClick={() => setShowNoMetro(false)}
+              aria-label="Show pandals accessible by Kolkata Metro"
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-150 cursor-pointer hover:scale-105 active:scale-90 ${
+                !showNoMetro
+                  ? 'bg-[#D8261C] text-white shadow-xs'
+                  : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'
+              }`}
+            >
+              {language === 'bn' ? 'মেট্রো' : 'Metro'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowNoMetro(true)}
+              aria-label="Show pandals not directly connected by metro"
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-150 cursor-pointer hover:scale-105 active:scale-90 ${
+                showNoMetro
+                  ? 'bg-[#D8261C] text-white shadow-xs'
+                  : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'
+              }`}
+            >
+              {language === 'bn' ? 'মেট্রো ছাড়া' : 'No Metro'}
+            </button>
+          </div>
+
+          {!showNoMetro && selectedLine !== 'all' && (
             <button
               type="button"
               onClick={() => setSelectedLine('all')}
@@ -378,22 +467,82 @@ export default function MetroGuidePage() {
           )}
         </div>
 
-        {/* Metro Lines: Row 1 (Blue & Green) and Row 2 (Orange, Purple, Yellow in one line) */}
-        <div className="space-y-3 sm:space-y-4">
-          {/* Row 1: Primary Arterial Corridors (Blue Line & Green Line) in 2 columns */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {METRO_LINE_CARDS.slice(0, 2).map((line) => renderLineCard(line, false))}
-          </div>
+        {/* Metro Lines: shown only in Metro view */}
+        {!showNoMetro && (
+          <div className="space-y-3 sm:space-y-4">
+            {/* Row 1: Primary Arterial Corridors (Blue Line & Green Line) in 2 columns */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {METRO_LINE_CARDS.slice(0, 2).map((line) => renderLineCard(line, false))}
+            </div>
 
-          {/* Row 2: Secondary Corridors (Orange Line, Purple Line, Yellow Line) all in one line (3 columns) */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4">
-            {METRO_LINE_CARDS.slice(2, 5).map((line) => renderLineCard(line, true))}
+            {/* Row 2: Secondary Corridors (Orange Line, Purple Line, Yellow Line) all in one line (3 columns) */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              {METRO_LINE_CARDS.slice(2, 5).map((line) => renderLineCard(line, true))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
-      {/* 3. STATIONS CARD CONTAINER — MATCHING REFERENCE MOCKUP */}
-      <div className="bg-white dark:bg-[#1C1917] rounded-[2.2rem] border border-stone-200 dark:border-white/10 shadow-2xl p-4 sm:p-7 space-y-4">
+      {/* NO METRO PANDALS SECTION */}
+      {showNoMetro && (
+        <div className="space-y-6">
+          {/* Header Card with Count and Live Search */}
+          <div className="bg-white dark:bg-[#1C1917] rounded-[2rem] border border-stone-200 dark:border-white/10 shadow-xl p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold font-editorial text-stone-900 dark:text-white">
+                  {language === 'bn' ? 'মেট্রো বহির্ভূত পুজো পরিক্রমা' : 'Pandals without Direct Metro'} ({filteredNoMetroPandals.length})
+                </h2>
+                <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-0.5">
+                  {language === 'bn'
+                    ? `মোট ${otherPandals.length}টি পুজো যা সরাসরি মেট্রো স্টেশনের কাছে নয় — ট্যাক্সি, বাস, অটো বা হেঁটে পৌঁছানো যাবে।`
+                    : `${otherPandals.length} pandals located outside direct walking distance of Kolkata Metro. Best reached by bus, auto, cab, or walking routes.`}
+                </p>
+              </div>
+
+              {/* Search input for Non-Metro pandals */}
+              <div className="relative w-full sm:w-72">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+                <input
+                  type="text"
+                  placeholder={language === 'bn' ? 'পুজো বা এলাকা খুঁজুন...' : 'Search pandal or area...'}
+                  value={noMetroSearch}
+                  onChange={(e) => setNoMetroSearch(e.target.value)}
+                  className="w-full pl-9 pr-8 py-2 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-white/10 text-xs font-medium text-stone-900 dark:text-white placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]"
+                />
+                {noMetroSearch && (
+                  <button
+                    type="button"
+                    onClick={() => setNoMetroSearch('')}
+                    aria-label="Clear search"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-white"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Cards Grid using standard PandalCard */}
+          {filteredNoMetroPandals.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredNoMetroPandals.map((pandal) => (
+                <PandalCard key={pandal.id} pandal={pandal} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-white dark:bg-[#1C1917] rounded-3xl border border-stone-200 dark:border-white/10">
+              <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
+                {language === 'bn' ? 'কোনো পুজো খুঁজে পাওয়া যায়নি' : 'No pandals found matching your search'}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 3. STATIONS CARD CONTAINER — shown only in Metro view */}
+      {!showNoMetro && <div className="bg-white dark:bg-[#1C1917] rounded-[2.2rem] border border-stone-200 dark:border-white/10 shadow-2xl p-4 sm:p-7 space-y-4">
         
         {/* Card Header: Stations Count & Search Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-200/80 dark:border-white/10">
@@ -463,52 +612,173 @@ export default function MetroGuidePage() {
                     </div>
                   </div>
 
-                  {/* Stations Scrollable List */}
-                  <div className="overflow-y-auto divide-y divide-stone-100 dark:divide-stone-800/60 max-h-64">
-                    {dropdownStations.length === 0 ? (
-                      <div className="p-4 text-center text-xs text-stone-500">
-                        {language === 'bn' ? 'কোনো স্টেশন পাওয়া যায়নি' : 'No stations found'}
-                      </div>
+                  {/* Stations Scrollable List — grouped by line or flat when searching */}
+                  <div className="overflow-y-auto max-h-72">
+                    {dropdownSearch.trim() ? (
+                      /* ── FLAT SEARCH RESULTS ── */
+                      dropdownStations.length === 0 ? (
+                        <div className="p-4 text-center text-xs text-stone-500">
+                          {language === 'bn' ? 'কোনো স্টেশন পাওয়া যায়নি' : 'No stations found'}
+                        </div>
+                      ) : (
+                        <div className="divide-y divide-stone-100 dark:divide-stone-800/60">
+                          {dropdownStations.map((st) => {
+                            const isCurrent = expandedStationId === st.id;
+                            const lineBadge = getLineStyles(st.line_code);
+                            return (
+                              <button
+                                key={st.id}
+                                type="button"
+                                onClick={() => handleSelectDropdownStation(st)}
+                                className={`w-full px-3 py-2 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
+                                  isCurrent
+                                    ? 'bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold'
+                                    : 'hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200'
+                                }`}
+                              >
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${lineBadge.bg}`} />
+                                  <div className="truncate">
+                                    <p className="leading-tight truncate font-semibold">
+                                      {language === 'bn' && st.bengali_name ? st.bengali_name : st.name}
+                                    </p>
+                                    <p className="text-[10px] text-stone-500 dark:text-stone-400 font-normal truncate">{st.line}</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
+                                    {st.nearby_pandals.length} {language === 'bn' ? 'পুজো' : 'pujas'}
+                                  </span>
+                                  {isCurrent && <Check className="w-3.5 h-3.5 text-[#D8261C] shrink-0" />}
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )
                     ) : (
-                      dropdownStations.map((st) => {
-                        const isCurrent = expandedStationId === st.id;
-                        const lineBadge = getLineStyles(st.line_code);
-                        return (
-                          <button
-                            key={st.id}
-                            type="button"
-                            onClick={() => handleSelectDropdownStation(st)}
-                            className={`w-full px-3 py-2 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
-                              isCurrent
-                                ? 'bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold'
-                                : 'hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 truncate">
-                              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${lineBadge.bg}`} />
-                              <div className="truncate">
-                                <p className="leading-tight truncate">
-                                  {st.name}
-                                  {st.bengali_name && (
-                                    <span className="ml-1.5 text-[10.5px] font-normal text-stone-600 dark:text-stone-400">
-                                      {st.bengali_name}
-                                    </span>
-                                  )}
-                                </p>
-                                <p className="text-[10px] text-stone-600 dark:text-stone-400 font-normal truncate">
-                                  {st.line}
-                                </p>
+                      /* ── GROUPED BY LINE (Blue & Green) + Other Pandals ── */
+                      <div>
+                        {groupedDropdownStations.map((group) => {
+                          const isGroupOpen = expandedLineGroups.has(group.code);
+                          return (
+                            <div key={group.code}>
+                              {/* Line Group Header */}
+                              <button
+                                type="button"
+                                onClick={() => toggleLineGroup(group.code)}
+                                className="w-full flex items-center justify-between px-3 py-2 sticky top-0 z-10 bg-stone-50 dark:bg-stone-900 border-b border-stone-200 dark:border-stone-700/70 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800/70 transition-colors group"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm"
+                                    style={{ backgroundColor: group.hex }}
+                                  />
+                                  <span className="text-[11px] font-bold text-stone-700 dark:text-stone-200">
+                                    {language === 'bn' ? group.bengaliLabel : group.label}
+                                  </span>
+                                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-500 dark:text-stone-400">
+                                    {group.stations.length}
+                                  </span>
+                                </div>
+                                <ChevronDown
+                                  className={`w-3 h-3 text-stone-400 transition-transform duration-200 ${
+                                    isGroupOpen ? 'rotate-180' : ''
+                                  }`}
+                                />
+                              </button>
+
+                              {/* Stations under this line */}
+                              {isGroupOpen && (
+                                <div className="divide-y divide-stone-100 dark:divide-stone-800/40">
+                                  {group.stations.map((st) => {
+                                    const isCurrent = expandedStationId === st.id;
+                                    return (
+                                      <button
+                                        key={st.id}
+                                        type="button"
+                                        onClick={() => handleSelectDropdownStation(st)}
+                                        className={`w-full pl-7 pr-3 py-2 text-left flex items-center justify-between text-xs transition-colors cursor-pointer group ${
+                                          isCurrent
+                                            ? 'bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold'
+                                            : 'hover:bg-stone-50 dark:hover:bg-stone-800/60 text-stone-800 dark:text-stone-200'
+                                        }`}
+                                      >
+                                        <div className="flex items-center gap-2 truncate">
+                                          <span
+                                            className="w-1.5 h-1.5 rounded-full shrink-0 opacity-60"
+                                            style={{ backgroundColor: group.hex }}
+                                          />
+                                          <span className="truncate font-medium leading-tight">
+                                            {language === 'bn' && st.bengali_name ? st.bengali_name : st.name}
+                                          </span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                                          {st.nearby_pandals.length > 0 && (
+                                            <span className="text-[9.5px] font-mono px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400">
+                                              {st.nearby_pandals.length} {language === 'bn' ? 'পুজো' : 'pujas'}
+                                            </span>
+                                          )}
+                                          {isCurrent && <Check className="w-3 h-3 text-[#D8261C] shrink-0" />}
+                                        </div>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+
+                        {/* ── OTHER PANDALS (not near Blue/Green) ── */}
+                        {otherPandals.length > 0 && (
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() => toggleLineGroup('other')}
+                              className="w-full flex items-center justify-between px-3 py-2 sticky top-0 z-10 bg-stone-50 dark:bg-stone-900 border-b border-stone-200 dark:border-stone-700/70 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800/70 transition-colors"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full shrink-0 bg-stone-400 dark:bg-stone-500" />
+                                <span className="text-[11px] font-bold text-stone-700 dark:text-stone-200">
+                                  {language === 'bn' ? 'অন্যান্য পুজো' : 'Other Pandals'}
+                                </span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-500 dark:text-stone-400">
+                                  {otherPandals.length}
+                                </span>
                               </div>
-                            </div>
-                            <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
-                                {st.nearby_pandals.length} {language === 'bn' ? 'পুজো' : 'pujas'}
-                              </span>
-                              {isCurrent && <Check className="w-3.5 h-3.5 text-[#D8261C] shrink-0" />}
-                            </div>
-                          </button>
-                        );
-                      })
+                              <ChevronDown
+                                className={`w-3 h-3 text-stone-400 transition-transform duration-200 ${
+                                  expandedLineGroups.has('other') ? 'rotate-180' : ''
+                                }`}
+                              />
+                            </button>
+
+                            {expandedLineGroups.has('other') && (
+                              <div className="divide-y divide-stone-100 dark:divide-stone-800/40">
+                                {otherPandals.map((pandal) => (
+                                  <Link
+                                    key={pandal.id}
+                                    href={`/pandals/${pandal.slug}`}
+                                    onClick={() => setIsDropdownOpen(false)}
+                                    className="w-full pl-7 pr-3 py-2 flex items-center justify-between text-xs hover:bg-stone-50 dark:hover:bg-stone-800/60 text-stone-800 dark:text-stone-200 transition-colors group"
+                                  >
+                                    <div className="flex items-center gap-2 truncate">
+                                      <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-stone-400 opacity-60" />
+                                      <span className="truncate font-medium leading-tight">{pandal.name}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1 shrink-0 ml-2">
+                                      <span className="text-[9px] text-stone-400 dark:text-stone-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        {language === 'bn' ? 'দেখুন' : 'View'} →
+                                      </span>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -592,7 +862,7 @@ export default function MetroGuidePage() {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white group-hover:text-[#D8261C] transition-colors truncate">
-                            {station.name}
+                            {language === 'bn' && station.bengali_name ? station.bengali_name : station.name}
                           </h3>
                           {isSearchedMatch && (
                             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-xs flex items-center gap-1 border border-amber-300 animate-pulse shrink-0">
@@ -601,30 +871,19 @@ export default function MetroGuidePage() {
                             </span>
                           )}
                           <span className="bg-red-50 dark:bg-red-950/50 text-[#D8261C] dark:text-red-300 font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-red-200/60 dark:border-red-900/40 shrink-0">
-                            {station.nearby_pandals.length} {station.nearby_pandals.length === 1 ? 'Pandal' : 'Pandals'}
+                            {station.nearby_pandals.length} {language === 'bn' ? 'টি পুজো' : (station.nearby_pandals.length === 1 ? 'Pandal' : 'Pandals')}
                           </span>
-                        </div>
-                        <div className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 truncate font-medium">
-                          {station.bengali_name}
                         </div>
                       </div>
                     </div>
 
-                    {/* Right: Time, Steps, Distance stats + Circular Chevron Button */}
+                    {/* Right: Time & Distance stats + Circular Chevron Button */}
                     <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-                      <div className="text-right flex flex-col items-end">
-                        {/* Time & Distance */}
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900 dark:text-stone-100">
-                          <Clock className="w-3.5 h-3.5 text-[#D8261C]" />
-                          <span>{minWalkTime} min</span>
-                          <span className="text-stone-300 dark:text-stone-600">•</span>
-                          <span className="text-stone-700 dark:text-stone-300 font-semibold">{walkDistance}</span>
-                        </div>
-                        {/* Steps */}
-                        <div className="flex items-center gap-1 text-[11px] font-semibold text-amber-800 dark:text-amber-400 mt-0.5">
-                          <Footprints className="w-3 h-3 text-[#D8261C]" />
-                          <span>~{approxSteps.toLocaleString()} steps</span>
-                        </div>
+                      <div className="text-right flex items-center gap-1.5 text-xs font-bold text-stone-900 dark:text-stone-100">
+                        <Clock className="w-3.5 h-3.5 text-[#D8261C]" />
+                        <span>{minWalkTime} {language === 'bn' ? 'মিনিট' : 'min'}</span>
+                        <span className="text-stone-300 dark:text-stone-600">•</span>
+                        <span className="text-stone-700 dark:text-stone-300 font-semibold">{walkDistance}</span>
                       </div>
 
                       <div
@@ -691,15 +950,11 @@ export default function MetroGuidePage() {
                                     {pandalLocality}
                                   </p>
                                   
-                                  {/* 3 Metric Pills: Time, Steps, Distance */}
+                                  {/* Metric Pills: Time, Distance */}
                                   <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 flex-wrap text-[9px] sm:text-[10px] font-bold">
                                     <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
                                       <Clock className="w-2.5 h-2.5" />
                                       <span>{item.walking_time_mins} min</span>
-                                    </span>
-                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/50 dark:border-amber-900/40">
-                                      <Footprints className="w-2.5 h-2.5" />
-                                      <span>~{itemSteps.toLocaleString()} steps</span>
                                     </span>
                                     <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
                                       <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
@@ -743,7 +998,7 @@ export default function MetroGuidePage() {
           )}
         </div>
 
-      </div>
+      </div>}
 
     </div>
   );

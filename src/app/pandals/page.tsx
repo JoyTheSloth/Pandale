@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { PANDALS_DATA } from '@/data/pandals';
 import PandalCard from '@/components/PandalCard';
@@ -8,13 +9,16 @@ import SearchAndFilters from '@/components/SearchAndFilters';
 import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
-import { Sparkles, AlertCircle, Loader2 } from 'lucide-react';
+import { Sparkles, AlertCircle, Loader2, Flame, ArrowRight } from 'lucide-react';
 import { useLocation } from '@/context/LocationContext';
+import { useLanguage } from '@/context/LanguageContext';
 import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
 
 function PandalsContent() {
   const searchParams = useSearchParams();
   const { wishlist } = useWishlist();
+  const { language } = useLanguage();
+  const isBn = language === 'bn';
 
   // Query parameter defaults
   const initialZone = (searchParams.get('zone') as ZoneArea) || 'All';
@@ -175,9 +179,39 @@ function PandalsContent() {
             Kolkata Pandal Guide
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-1 font-medium">
-            Showing {filteredPandals.length} authentic 2026 Kolkata Durga Puja pandals
+            {filteredPandals.length} pandals · Durga Puja 2026
           </p>
         </div>
+
+        {/* Famous Pandals CTA */}
+        <Link
+          href="/hopping"
+          className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#D8261C] via-[#C41E15] to-[#99140E] hover:from-[#B91C1C] hover:via-[#A81710] hover:to-[#88130E] text-white p-2.5 sm:px-4 sm:py-2.5 shadow-lg shadow-red-600/25 hover:shadow-xl hover:shadow-red-600/35 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 border border-white/20 flex items-center justify-between gap-3 shrink-0 sm:self-end w-full sm:w-auto"
+        >
+          {/* Shimmer light sweep */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 shadow-inner border border-white/25 group-hover:scale-110 transition-transform duration-200">
+              <Flame className="w-4 h-4 text-amber-300 fill-amber-300 animate-pulse" />
+            </div>
+            <div className="text-left">
+              <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm leading-tight text-white tracking-tight">
+                <span>{isBn ? 'বিখ্যাত পুজো সার্কিট' : 'Famous Pandals'}</span>
+                <span className="text-[9.5px] font-mono px-1.5 py-0.5 rounded-full bg-amber-400 text-stone-950 font-extrabold uppercase tracking-wider">
+                  Top 48
+                </span>
+              </div>
+              <p className="text-[10.5px] text-white/80 font-medium leading-tight mt-0.5 hidden xs:block">
+                {isBn ? 'অঞ্চলভিত্তিক রুট ও ৩-ইন-১ সার্কিট' : 'Zone-Wise 3-in-a-Line Circuits'}
+              </p>
+            </div>
+          </div>
+
+          <div className="w-7 h-7 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-white group-hover:text-[#D8261C] transition-all duration-200 ml-2">
+            <ArrowRight className="w-3.5 h-3.5 text-white group-hover:text-[#D8261C] group-hover:translate-x-0.5 transition-all duration-200" />
+          </div>
+        </Link>
       </div>
 
       {/* Search and Filters component */}

@@ -38,20 +38,20 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
-        {/* 2. Top Row: Flatzy Sponsor Banner — Positioned halfway overlapping the top black edge */}
-        <div className="-mt-[21.4%] mb-8 sm:mb-12 relative z-20">
+        {/* 2. Top Row: Flatzy Sponsor Banner — Centered & smaller on desktop */}
+        <div className="w-full max-w-lg sm:max-w-xl md:max-w-2xl mx-auto -mt-12 sm:-mt-16 md:-mt-20 mb-8 sm:mb-12 relative z-20">
           <a
             href="https://flatzy.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             title="Flat dhundh rahe ho? Visit Flatzy Kolkata"
-            className="block relative w-full aspect-[1024/438] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-amber-400/80 transition-all duration-300 group active:scale-[0.99]"
+            className="block relative w-full aspect-[1024/438] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-500/40 shadow-[0_16px_40px_rgba(0,0,0,0.85)] hover:border-amber-400/80 transition-all duration-300 group active:scale-[0.99]"
           >
             <Image
               src="/brand/flatzy-banner.png"
               alt="Flatzy — Flat dhundh rahe ho? Visit Flatzy"
               fill
-              sizes="(max-width: 768px) 100vw, 1200px"
+              sizes="(max-width: 768px) 100vw, 672px"
               className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-102"
               priority
             />

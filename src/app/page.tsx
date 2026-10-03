@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -10,16 +10,18 @@ import {
   Train 
 } from 'lucide-react';
 import { PANDALS_DATA } from '@/data/pandals';
-import PandalCard from '@/components/PandalCard';
+import SpotlightCarousel from '@/components/SpotlightCarousel';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function HomePage() {
   const { language } = useLanguage();
   const isBn = language === 'bn';
 
-  // Featured Pandals (Must Visit)
-  const featuredPandals = useMemo(() => {
-    return PANDALS_DATA.filter((p) => p.tags.includes('Must Visit')).slice(0, 6);
+  // Iconic Spotlight Pandals (Top Must Visit & Highest Trending)
+  const iconicPandals = useMemo(() => {
+    return PANDALS_DATA.filter((p) => p.tags.includes('Must Visit') || p.tags.includes('Trending'))
+      .sort((a, b) => (b.trending_score || 0) - (a.trending_score || 0))
+      .slice(0, 8);
   }, []);
 
   return (
@@ -41,7 +43,7 @@ export default function HomePage() {
 
         {/* DESKTOP: 16:9 landscape hero — shown md and above */}
         <Image
-          src="/brand/hero-desktop.jpg"
+          src="/brand/hero-desktop-v2.jpg"
           alt="Pandalé — Kolkata Durga Puja & Metro Guide 2026"
           fill
           priority
@@ -180,7 +182,7 @@ export default function HomePage() {
               metro: 'Blue Line (Shyambazar / Shovabazar)',
               pandalsCount: isBn ? '১৮টি বিখ্যাত প্যান্ডেল' : '18 Famous Pandals',
               landmarks: 'Bagbazar • Kumartuli • Hatibagan • Kashi Bose',
-              image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
+              image: '/brand/zone-north-durga.jpg',
             },
             {
               id: 'south',
@@ -189,7 +191,7 @@ export default function HomePage() {
               metro: 'Blue Line (Kalighat / Jatin Das Park)',
               pandalsCount: isBn ? '১৫টি বিখ্যাত প্যান্ডেল' : '15 Famous Pandals',
               landmarks: 'Ekdalia • Suruchi • Tridhara • Maddox',
-              image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
+              image: '/brand/zone-south-durga.jpg',
             },
             {
               id: 'central',
@@ -198,7 +200,7 @@ export default function HomePage() {
               metro: 'Blue & Green (Central / Sealdah)',
               pandalsCount: isBn ? '৭টি বিখ্যাত প্যান্ডেল' : '7 Famous Pandals',
               landmarks: 'Santosh Mitra • College Sq • Md. Ali Park',
-              image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
+              image: '/brand/zone-central-durga.jpg',
             },
             {
               id: 'east',
@@ -207,7 +209,7 @@ export default function HomePage() {
               metro: 'Green Line (Sector V / Karunamoyee)',
               pandalsCount: isBn ? '৮টি বিখ্যাত প্যান্ডেল' : '8 Famous Pandals',
               landmarks: 'Salt Lake FD Block • BJ Block • Phoolbagan',
-              image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
+              image: '/brand/zone-east-durga.jpg',
             }
           ].map((zone) => (
             <Link
@@ -215,12 +217,8 @@ export default function HomePage() {
               href={`/hopping?zone=${zone.id}`}
               className="text-left cursor-pointer group min-w-[280px] sm:min-w-0 flex-1 snap-center bg-white dark:bg-[#1A1210] rounded-[2.5rem] border border-[#E7E5E4] dark:border-white/8 p-5 sm:p-6 shadow-luxe shadow-luxe-hover hover:border-[#F59E0B] dark:hover:border-[#F59E0B]/40 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
             >
-              {/* Card Header: Arrow ↗ top-right & Centered Title */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-100 dark:bg-red-950/50 text-[#D8261C] dark:text-amber-400 border border-red-200 dark:border-red-900/40 group-hover:scale-105 transition-transform">
-                    Tap to View Circuit
-                  </span>
+                <div className="flex items-center justify-end mb-2">
                   <div className="w-8 h-8 rounded-full bg-[#FAF8F5] group-hover:bg-[#D8261C] group-hover:text-white text-[#1C1917] flex items-center justify-center group-hover:scale-115 transition-all duration-300 shadow-2xs">
                     <ArrowRight className="w-4 h-4 -rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   </div>
@@ -268,15 +266,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. FEATURED MUST-VISIT PANDALS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-12">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-3 border-b border-[#E9E2D8] dark:border-white/10">
+      {/* 3. IN THE SPOTLIGHT — AUTOMATIC MOVING COVER FLOW CAROUSEL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-3 border-b border-[#E9E2D8] dark:border-white/10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold">
-              {isBn ? 'বিশেষ নির্বাচন' : 'Curated Selection'}
+            <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] font-semibold flex items-center gap-1.5">
+              <span>✦</span>
+              <span>{isBn ? 'আলোর কেন্দ্রবিন্দুতে' : 'In the Spotlight'}</span>
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold font-editorial text-[#181513] dark:text-[#FAF8F5] mt-1">
-              {isBn ? '২০২৬ সালের সেরা প্যান্ডেল' : 'Iconic Pandals of 2026'}
+              {isBn ? '২০২৬ সালের সেরা মণ্ডপ' : 'Iconic Pandals of 2026'}
             </h2>
           </div>
           <Link
@@ -288,11 +287,8 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-          {featuredPandals.map((pandal, idx) => (
-            <PandalCard key={pandal.id} pandal={pandal} priority={idx < 3} />
-          ))}
-        </div>
+        {/* The Automatic Moving Spotlight Carousel */}
+        <SpotlightCarousel pandals={iconicPandals} />
       </section>
 
       </div>

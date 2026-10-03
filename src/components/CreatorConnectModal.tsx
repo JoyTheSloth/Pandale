@@ -11,13 +11,9 @@ import {
   Mail,
   Download,
   Coffee,
-  Briefcase,
-  Home,
   ArrowRight,
   ArrowLeft,
-  QrCode,
   MessageCircle,
-  Sparkles,
   Zap
 } from 'lucide-react';
 
@@ -135,58 +131,47 @@ export default function CreatorConnectModal() {
       {isOpen && (
         <div
           ref={dialogRef}
-          className="fixed bottom-28 right-4 sm:bottom-24 sm:right-8 z-50 w-[350px] sm:w-[395px] max-w-[calc(100vw-2rem)] rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 dark:border-white/10 bg-[#EFEAE2] dark:bg-[#0B141A] flex flex-col animate-in slide-in-from-bottom-6 zoom-in-95 duration-200"
+          className="fixed bottom-28 right-4 sm:bottom-24 sm:right-8 z-50 w-[350px] sm:w-[395px] max-w-[calc(100vw-2rem)] rounded-3xl overflow-hidden shadow-2xl border border-rose-900/30 dark:border-rose-500/20 bg-[#EFEAE2] dark:bg-[#0B141A] flex flex-col animate-in slide-in-from-bottom-6 zoom-in-95 duration-200"
         >
-          {/* A. Header */}
-          <div className="bg-[#075E54] dark:bg-[#1F2C34] text-white p-3 sm:p-3.5 shadow-md">
-            <div className="flex items-center justify-between mb-2.5">
-              <div className="flex items-center gap-2.5">
-                {/* Creator Face Avatar with Online Dot */}
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-400/80 shadow-xs relative bg-stone-800">
-                    <Image
-                      src="/creator/face.jpg"
-                      alt="Joydeep Das"
-                      fill
-                      sizes="40px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#25D366] border-2 border-[#075E54] dark:border-[#1F2C34] animate-pulse" />
-                </div>
+          {/* A. Header — Custom Graphic Hero Banner */}
+          <div className="relative w-full aspect-[16/9] bg-[#0C0207] overflow-hidden select-none">
+            <Image
+              src="/creator/whatsapp-header.png"
+              alt="Joydeep Das — Creator & Pandalé Builder"
+              fill
+              priority
+              unoptimized
+              className="object-cover object-center pointer-events-none"
+              sizes="(max-width: 640px) 350px, 395px"
+            />
 
-                {/* Creator Info */}
-                <div className="leading-tight">
-                  <h3 className="font-bold text-sm sm:text-base text-white flex items-center gap-1.5">
-                    <span>Joydeep Das</span>
-                    <span className="text-[9.5px] font-mono bg-emerald-700/80 px-1.5 py-0.5 rounded text-emerald-100 font-semibold">Creator</span>
-                  </h3>
-                  <p className="text-[10.5px] text-emerald-100/90 font-medium">
-                    Online · Pandalé Builder
-                  </p>
-                </div>
-              </div>
-
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white hover:scale-110 hover:rotate-90 active:scale-85 transition-all duration-200 cursor-pointer"
-                aria-label="Close chat dialog"
-              >
-                <X className="w-4 h-4" />
-              </button>
+            {/* Accessible Screen Reader Information */}
+            <div className="sr-only">
+              <h3>Joydeep Das - Creator</h3>
+              <p>Online · Pandalé Builder</p>
             </div>
 
-            {/* Quick Navigation Tabs: Chat vs Sponsor Cha */}
-            <div className="grid grid-cols-2 gap-1.5 p-1 bg-black/20 rounded-xl text-xs font-bold">
+            {/* Interactive Close Button precisely positioned over top-right header button */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/75 text-white/90 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-90 cursor-pointer z-20 border border-white/20 backdrop-blur-xs shadow-lg"
+              aria-label="Close chat dialog"
+            >
+              <X className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+            </button>
+          </div>
+
+          {/* Quick Navigation Tabs: Chat vs Sponsor Cha */}
+          <div className="bg-[#0B141A] border-b border-white/10 p-2 sm:p-2.5">
+            <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/5 dark:bg-black/40 rounded-xl text-xs font-bold border border-white/5">
               <button
                 type="button"
                 onClick={() => setActiveTab('chat')}
                 className={`py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   activeTab === 'chat'
-                    ? 'bg-white text-stone-900 shadow-xs'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                    ? 'bg-[#E51E3E] text-white shadow-xs font-semibold'
+                    : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <MessageCircle className="w-3.5 h-3.5" />
@@ -200,8 +185,8 @@ export default function CreatorConnectModal() {
                 }}
                 className={`py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   activeTab === 'help'
-                    ? 'bg-amber-400 text-stone-900 shadow-xs'
-                    : 'text-amber-200 hover:text-white hover:bg-white/10'
+                    ? 'bg-amber-400 text-stone-950 shadow-xs font-semibold'
+                    : 'text-amber-200/80 hover:text-amber-100 hover:bg-white/10'
                 }`}
               >
                 <Coffee className="w-3.5 h-3.5 text-amber-500" />
@@ -235,33 +220,6 @@ export default function CreatorConnectModal() {
                   </div>
                 </div>
 
-                {/* Message Bubble 2: Friendly "Buy Me a Coffee" Card */}
-                <div className="bg-gradient-to-br from-amber-500/15 via-rose-500/10 to-amber-500/10 dark:from-amber-950/40 dark:to-rose-950/30 p-3 rounded-2xl rounded-tl-xs border border-amber-500/30 shadow-xs space-y-2 max-w-[94%]">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-base">☕</span>
-                    <span className="font-bold text-xs text-amber-950 dark:text-amber-200">
-                      Support the Project
-                    </span>
-                  </div>
-                  <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
-                    &ldquo;Enjoying Pandalé? Buy me a coffee or support my work ☕&rdquo;
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveTab('help');
-                      setShowQr(false);
-                    }}
-                    className="w-full py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 via-[#D8261C] to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
-                  >
-                    <span>Buy Me a Coffee</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                  <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 pt-0.5 font-mono">
-                    <span>11:43 AM</span>
-                    <CheckCheck className="w-3.5 h-3.5 text-[#53BDEB]" />
-                  </div>
-                </div>
 
                 {/* Message Bubble 3 (Business & Web Dev) */}
                 <div className="bg-white dark:bg-[#202C33] p-3 rounded-2xl rounded-tl-xs shadow-xs text-stone-800 dark:text-stone-100 text-xs sm:text-sm leading-relaxed max-w-[94%] space-y-1 relative">
@@ -284,9 +242,9 @@ export default function CreatorConnectModal() {
                       navigator.clipboard.writeText(upiId).catch(() => {});
                     }
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#FFDD00] hover:bg-[#FFEA47] text-stone-950 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer text-center"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-150 cursor-pointer text-center"
                 >
-                  <Coffee className="w-4 h-4 text-stone-900 shrink-0" />
+                  <Coffee className="w-4 h-4 text-white shrink-0" />
                   <span>Buy me a coffee (puja treat dedo) ☕</span>
                 </a>
 

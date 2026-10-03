@@ -13,7 +13,7 @@ import {
   Clock, 
   ArrowRight, 
   Users, 
-  Check 
+  Flame
 } from 'lucide-react';
 import { buildGoogleMapsUrl } from '@/lib/geo';
 
@@ -24,7 +24,7 @@ interface PandalCardProps {
 
 export default function PandalCard({ pandal, priority = false }: PandalCardProps) {
   const { isSaved, toggleWishlist } = useWishlist();
-  const { isVisited, toggleVisited } = useVisited();
+  const { isVisited } = useVisited();
   const { language } = useLanguage();
   const isBn = language === 'bn';
   const saved = isSaved(pandal.id);
@@ -63,24 +63,40 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
       visited ? 'border-emerald-500/50 dark:border-emerald-500/40 bg-emerald-50/10 dark:bg-emerald-950/10' : 'border-[#EFE8DD] dark:border-white/10'
     }`}>
       
-      {/* Top-Right Visited / Completed Checkbox (stored in cookies) */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleVisited(pandal.id);
-        }}
-        title={visited ? (isBn ? 'দর্শন সম্পন্ন (চিহ্নিত)' : 'Visited (Saved in cookies)') : (isBn ? 'দর্শন সম্পন্ন হিসেবে চিহ্নিত করুন' : 'Mark as Visited (Saves to cookies)')}
-        aria-label={visited ? 'Marked as visited' : 'Mark as visited'}
-        className={`absolute top-2.5 right-2.5 z-20 w-7.5 h-7.5 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:scale-110 active:scale-90 backdrop-blur-md border ${
-          visited
-            ? 'bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-900/30'
-            : 'bg-white/95 dark:bg-[#20161C]/95 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-transparent hover:text-emerald-600 dark:hover:text-emerald-400 border-stone-300 dark:border-white/20'
-        }`}
-      >
-        <Check className={`w-4 h-4 stroke-[3] transition-all duration-150 ${visited ? 'scale-100 opacity-100 text-white' : 'scale-75 opacity-0 hover:opacity-70'}`} />
-      </button>
+      {/* Top-Right Action Controls: Wishlist (Heart) + Location (MapPin) */}
+      <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5">
+        {/* Wishlist Button (Left of Location) */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleWishlist(pandal.id);
+          }}
+          aria-label={saved ? 'Remove from wishlist' : 'Save to wishlist'}
+          title={saved ? (isBn ? 'সংরক্ষিত তালিকা থেকে সরান' : 'Remove from wishlist') : (isBn ? 'সংরক্ষিত তালিকায় যোগ করুন' : 'Save to wishlist')}
+          className={`w-8 h-8 rounded-xl backdrop-blur-md transition-all flex items-center justify-center cursor-pointer shadow-xs hover:shadow-md active:scale-75 hover:scale-110 duration-150 border ${
+            saved
+              ? 'bg-[#D8261C] text-white border-[#FDE047] shadow-sm shadow-red-600/30'
+              : 'border-stone-200/90 dark:border-white/15 bg-white/95 dark:bg-[#20161C]/95 text-stone-600 dark:text-stone-300 hover:text-[#D8261C] hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-300 dark:hover:border-red-800/60'
+          }`}
+        >
+          <Heart className={`w-4 h-4 transition-transform duration-200 ${saved ? 'fill-[#FDE047] text-[#FDE047] scale-110' : ''}`} />
+        </button>
+
+        {/* Location Icon Button (Opens Google Maps) */}
+        <a
+          href={exactMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          title={isBn ? 'গুগল ম্যাপসে অবস্থান ও দিকনির্দেশ দেখুন' : 'Get Directions on Google Maps'}
+          aria-label="Get Directions on Google Maps"
+          className="w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md hover:scale-110 active:scale-90 backdrop-blur-md border border-stone-200/90 dark:border-white/15 bg-white/95 dark:bg-[#20161C]/95 text-[#D8261C] hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-300 dark:hover:border-red-800/60 group/loc"
+        >
+          <MapPin className="w-4 h-4 text-[#D8261C] transition-transform duration-200 group-hover/loc:scale-110" />
+        </a>
+      </div>
 
       {/* 1. LEFT (mobile) / TOP (desktop): MEDIA / IMAGE CONTAINER */}
       <div className="relative w-32 sm:w-40 md:w-full shrink-0 rounded-2xl overflow-hidden shadow-inner group/media min-h-[145px] sm:min-h-[160px] md:min-h-[180px] md:mb-3">
@@ -104,32 +120,17 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
           </span>
         </div>
 
-        {/* Top-Right Heart / Save Wishlist Button */}
-        <div className="absolute top-2 right-2 z-10">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleWishlist(pandal.id);
-            }}
-            aria-label={saved ? 'Remove from wishlist' : 'Save to wishlist'}
-            className={`w-6.5 h-6.5 rounded-full backdrop-blur-md transition-all flex items-center justify-center cursor-pointer shadow-sm active:scale-75 hover:scale-115 duration-150 ${
-              saved
-                ? 'bg-[#D8261C] text-white border border-[#FDE047]'
-                : 'bg-black/60 hover:bg-black/80 text-white/90'
-            }`}
-          >
-            <Heart className={`w-3 h-3 transition-transform ${saved ? 'fill-[#FDE047] text-[#FDE047] scale-110' : ''}`} />
-          </button>
-        </div>
 
-        {/* Bottom Floating Must-Visit Tag */}
+        {/* Bottom Floating Must-Visit Tag: 3 Fire Icons without written text */}
         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-          <div className="absolute bottom-2 left-2 right-2 z-10">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FFF4E5]/95 dark:bg-amber-950/90 text-[#8C5E28] dark:text-amber-300 text-[9px] font-bold shadow-xs border border-amber-300/40 backdrop-blur-md truncate">
-              <span>👑</span>
-              <span>{isBn ? 'দর্শনীয়' : 'Must Visit'}</span>
+          <div className="absolute bottom-2 left-2 z-10">
+            <span 
+              className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-black/70 dark:bg-black/80 backdrop-blur-md border border-orange-500/30 shadow-md"
+              title={isBn ? 'অবশ্য দর্শনীয়' : 'Must Visit'}
+            >
+              <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
+              <Flame className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+              <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
             </span>
           </div>
         )}
@@ -139,7 +140,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
       <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 space-y-1.5">
         
         {/* Locality, Category & Title */}
-        <div className="pr-8 md:pr-2">
+        <div className="pr-20">
           <div className="flex items-center justify-between gap-1 text-[9.5px] font-mono uppercase tracking-wider text-amber-800 dark:text-amber-400 font-bold mb-0.5 truncate">
             <span>{pandal.locality}</span>
           </div>
@@ -151,9 +152,6 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             {pandal.name}
           </Link>
 
-          <p className="text-[11px] text-stone-600 dark:text-stone-300 font-medium leading-tight line-clamp-1 mt-0.5">
-            {pandal.theme}
-          </p>
         </div>
 
         {/* Metro Transit Pill (Compact Row) */}
@@ -183,25 +181,15 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
             <span>{getCrowdLabel(pandal.crowd_status.level)}</span>
           </div>
 
-          {/* Action Buttons: Explore + Maps */}
-          <div className="flex items-center gap-1.5 shrink-0">
+          {/* Action Button: Explore */}
+          <div className="flex items-center shrink-0">
             <Link
               href={`/pandal/${pandal.slug}`}
-              className="py-1 px-2.5 rounded-lg bg-[#7B0D11] hover:bg-[#680A0E] text-white font-bold text-[11px] inline-flex items-center gap-1 shadow-xs hover:scale-105 active:scale-95 transition-all duration-150"
+              className="group/btn py-1.5 px-3.5 rounded-xl bg-gradient-to-r from-[#D8261C] via-[#C91F16] to-[#A81710] hover:from-[#B91C1C] hover:via-[#A81710] hover:to-[#88130E] text-white font-bold text-xs inline-flex items-center gap-1.5 shadow-sm shadow-red-600/25 hover:shadow-md hover:shadow-red-600/35 hover:scale-105 active:scale-95 transition-all duration-200 border border-white/20"
             >
               <span>{isBn ? 'দেখুন' : 'Explore'}</span>
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
             </Link>
-
-            <a
-              href={exactMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={isBn ? 'গুগল ম্যাপসে দেখুন' : 'Open in Google Maps'}
-              className="w-6.5 h-6.5 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1A1215] flex items-center justify-center text-[#D8261C] hover:border-[#D8261C] hover:scale-110 active:scale-90 transition-all shadow-2xs cursor-pointer"
-            >
-              <MapPin className="w-3 h-3 text-[#D8261C]" />
-            </a>
           </div>
         </div>
 

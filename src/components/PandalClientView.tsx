@@ -21,6 +21,7 @@ import {
   Check, 
   Footprints
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import InstagramIcon from '@/components/icons/InstagramIcon';
 import PandalCard from '@/components/PandalCard';
 
@@ -29,12 +30,21 @@ interface PandalClientViewProps {
 }
 
 export default function PandalClientView({ pandal }: PandalClientViewProps) {
+  const router = useRouter();
   const { isSaved, toggleWishlist } = useWishlist();
   const { isVisited, toggleVisited } = useVisited();
   const [copied, setCopied] = useState(false);
   const [activeGalleryTab, setActiveGalleryTab] = useState<'all' | 'official' | 'latest' | 'instagram' | 'community'>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
 
   const saved = isSaved(pandal.id);
   const visited = isVisited(pandal.id);
@@ -107,13 +117,22 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
     <div className="w-full pb-20">
       
       {/* Back button & Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 flex items-center justify-between">
+        <button
+          type="button"
+          onClick={handleBack}
+          aria-label="Back to previous page"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white px-3 py-1.5 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-800 transition-all duration-150 hover:-translate-x-0.5 active:scale-95 cursor-pointer shadow-xs border border-stone-200 dark:border-white/10 group"
+        >
+          <ArrowLeft className="w-4 h-4 text-[#D8261C] group-hover:-translate-x-0.5 transition-transform duration-150" />
+          <span>Back</span>
+        </button>
+
         <Link
           href="/pandals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8E857B] hover:text-[#181513] dark:text-stone-400 dark:hover:text-white transition-all duration-150 hover:-translate-x-1 group"
+          className="text-xs font-semibold text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white transition-colors"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-150" />
-          <span>Back to All Pandals</span>
+          All Pandals →
         </Link>
       </div>
 
@@ -132,10 +151,19 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
           {/* Top Hero Badges */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-stone-900/90 text-[#181513] dark:text-stone-100 backdrop-blur-md shadow-sm border border-transparent dark:border-white/10">
+              <button
+                type="button"
+                onClick={handleBack}
+                aria-label="Go back"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-black/60 hover:bg-black/85 text-white backdrop-blur-md border border-white/20 shadow-md cursor-pointer transition-all hover:scale-105 active:scale-95 group"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                <span>Back</span>
+              </button>
+              <span className="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-stone-900/90 text-[#181513] dark:text-stone-100 backdrop-blur-md shadow-sm border border-transparent dark:border-white/10">
                 {pandal.area}
               </span>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/50 text-white backdrop-blur-md border border-white/20">
+              <span className="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-black/50 text-white backdrop-blur-md border border-white/20">
                 {pandal.locality}
               </span>
             </div>
@@ -241,20 +269,12 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
 
             {/* 2026 Theme */}
             <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                  Artistic Concept
-                </span>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-900/50">
-                  2026 Preview
-                </span>
-              </div>
-              <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white">
-                Thematic Architecture & Artistry
-              </h2>
-              <p className="text-sm sm:text-base text-[#5C554E] dark:text-stone-300 leading-relaxed">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
+                2026 Theme
+              </span>
+              <h2 className="text-xl font-bold font-editorial text-[#181513] dark:text-white">
                 {pandal.theme}
-              </p>
+              </h2>
               <div className="flex flex-wrap gap-2 pt-2">
                 {pandal.tags.map((t) => (
                   <span
@@ -458,7 +478,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
               {/* Best Visiting Time */}
               <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
-                  Recommended Visiting Window:
+                  Best Time
                 </span>
                 <p className="text-xs font-medium text-[#181513] dark:text-stone-100 flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-[#C99726]" />
@@ -469,7 +489,7 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
               {/* Recommended Days */}
               <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1.5">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
-                  Optimal Days:
+                  Days
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {pandal.recommended_days.map((day) => (

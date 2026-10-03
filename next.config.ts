@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "instagram.com" },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/pandals/:slug',
+        destination: '/pandal/:slug',
+      },
+    ];
+  },
 };
 
 

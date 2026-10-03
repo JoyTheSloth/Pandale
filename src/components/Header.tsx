@@ -17,7 +17,7 @@ export default function Header() {
   const { count } = useWishlist();
   const { location, fetchCurrentLocation } = useLocation();
 
-  const isPandalsSection = pathname === '/pandals' || pathname.startsWith('/pandal');
+  const isPandalsSection = pathname === '/pandals';
 
   if (pathname === '/map') {
     return null;
@@ -29,91 +29,139 @@ export default function Header() {
         pathname === '/' ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex flex-col">
-        <div className="flex items-center justify-between">
-        
+      <div className="max-w-7xl mx-auto relative flex items-center justify-between w-full">
         {/* Left: Brand Pill on Home vs Zomato-style Interactive Location on Pandals */}
-        {isPandalsSection ? (
-          <button
-            type="button"
-            onClick={fetchCurrentLocation}
-            title={language === 'bn' ? 'বর্তমান অবস্থান নির্ণয় করতে ট্যাপ করুন' : 'Tap to ping & detect your live GPS location'}
-            className="pointer-events-auto inline-flex items-center gap-2 md:gap-3 py-1 px-1 -ml-1 text-left group hover:opacity-90 active:scale-95 transition-all cursor-pointer select-none"
-          >
-            {/* Zomato-style MapPin / Loading Spinner */}
-            <div className="relative shrink-0 flex items-center justify-center">
-              {location.status === 'loading' ? (
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-red-100 dark:bg-red-950/60 flex items-center justify-center">
-                  <Loader2 className="w-4 h-4 md:w-5 md:h-5 text-[#D8261C] animate-spin" />
-                </div>
-              ) : (
-                <div className="relative">
-                  <MapPin className="w-5 h-5 md:w-7 md:h-7 text-[#D8261C] fill-[#D8261C]/20 stroke-[2.2] group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                  <span className={`absolute -top-0.5 -right-0.5 w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ring-2 ring-white dark:ring-stone-900 ${
-                    location.isLiveGps ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'
-                  }`} />
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col min-w-0">
-              {/* Primary Location Name with Zomato Chevron */}
-              <div className="flex items-center gap-1 leading-tight">
-                <span className="text-base md:text-xl font-bold text-stone-900 dark:text-white tracking-tight">
-                  {location.status === 'loading' 
-                    ? (language === 'bn' ? 'অবস্থান খোঁজা হচ্ছে...' : 'Pinging location...') 
-                    : location.areaName || (language === 'bn' ? 'কলকাতা' : 'Kolkata')}
-                </span>
-                <ChevronDown className="w-3.5 h-3.5 md:w-4 md:h-4 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200 group-hover:translate-y-0.5 transition-all shrink-0" />
+        <div className="flex items-center shrink-0 z-10">
+          {isPandalsSection ? (
+            <button
+              type="button"
+              onClick={fetchCurrentLocation}
+              title={language === 'bn' ? 'বর্তমান অবস্থান নির্ণয় করতে ট্যাপ করুন' : 'Tap to ping & detect your live GPS location'}
+              className="pointer-events-auto inline-flex items-center gap-2 md:gap-3 py-1 px-1 -ml-1 text-left group hover:opacity-90 active:scale-95 transition-all cursor-pointer select-none"
+            >
+              {/* Zomato-style MapPin / Loading Spinner */}
+              <div className="relative shrink-0 flex items-center justify-center">
+                {location.status === 'loading' ? (
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-red-100 dark:bg-red-950/60 flex items-center justify-center">
+                    <Loader2 className="w-4 h-4 md:w-5 md:h-5 text-[#D8261C] animate-spin" />
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <MapPin className="w-5 h-5 md:w-7 md:h-7 text-[#D8261C] fill-[#D8261C]/20 stroke-[2.2] group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                    <span className={`absolute -top-0.5 -right-0.5 w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ring-2 ring-white dark:ring-stone-900 ${
+                      location.isLiveGps ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'
+                    }`} />
+                  </div>
+                )}
               </div>
 
-              {/* Subtitle: Suburb or GPS hint */}
-              <span className="text-[10.5px] md:text-xs text-stone-500 dark:text-stone-400 font-medium leading-none mt-0.5 truncate max-w-[190px] md:max-w-sm">
-                {location.status === 'loading'
-                  ? (language === 'bn' ? 'জিপিএস সংযোগ করা হচ্ছে...' : 'Pinging GPS device...')
-                  : location.status === 'error'
-                    ? (language === 'bn' ? 'জিপিএস অক্ষম · আবার চেষ্টা করুন' : 'GPS off · Tap to ping')
-                    : location.isLiveGps
-                      ? `${location.suburb}`
-                      : (language === 'bn' ? 'বর্তমান অবস্থান খুঁজতে ট্যাপ করুন 📍' : 'Tap to ping live location 📍')}
-              </span>
-            </div>
-          </button>
-        ) : (
-          <Link 
-            href="/" 
-            prefetch={true}
-            className={`pointer-events-auto inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full shadow-lg active:scale-95 transition-all group ${
+              <div className="flex flex-col min-w-0">
+                {/* Primary Location Name with Zomato Chevron */}
+                <div className="flex items-center gap-1 leading-tight">
+                  <span className="text-base md:text-xl font-bold text-stone-900 dark:text-white tracking-tight">
+                    {location.status === 'loading' 
+                      ? (language === 'bn' ? 'অবস্থান খোঁজা হচ্ছে...' : 'Pinging location...') 
+                      : location.areaName || (language === 'bn' ? 'কলকাতা' : 'Kolkata')}
+                  </span>
+                  <ChevronDown className="w-3.5 h-3.5 md:w-4 md:h-4 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200 group-hover:translate-y-0.5 transition-all shrink-0" />
+                </div>
+
+                {/* Subtitle: Suburb or GPS hint */}
+                <span className="text-[10.5px] md:text-xs text-stone-500 dark:text-stone-400 font-medium leading-none mt-0.5 truncate max-w-[190px] md:max-w-sm">
+                  {location.status === 'loading'
+                    ? (language === 'bn' ? 'জিপিএস সংযোগ করা হচ্ছে...' : 'Pinging GPS device...')
+                    : location.status === 'error'
+                      ? (language === 'bn' ? 'জিপিএস অক্ষম · আবার চেষ্টা করুন' : 'GPS off · Tap to ping')
+                      : location.isLiveGps
+                        ? `${location.suburb}`
+                        : (language === 'bn' ? 'বর্তমান অবস্থান খুঁজতে ট্যাপ করুন 📍' : 'Tap to ping live location 📍')}
+                </span>
+              </div>
+            </button>
+          ) : (
+            <Link 
+              href="/" 
+              prefetch={true}
+              className={`pointer-events-auto inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full shadow-lg active:scale-95 transition-all group ${
+                pathname === '/'
+                  ? 'bg-black/45 backdrop-blur-md border border-white/20 hover:border-white/40'
+                  : 'bg-white/95 dark:bg-[#1C1917]/95 backdrop-blur-md border border-stone-200 dark:border-white/20 hover:border-[#D8261C] dark:hover:border-amber-400'
+              }`}
+            >
+              <Image
+                src="/brand/pandale-icon.png"
+                alt="Pandalé"
+                width={28}
+                height={28}
+                className="w-7 h-7 object-contain rounded-lg shrink-0 group-hover:scale-105 transition-transform"
+                priority
+              />
+              <div className="flex flex-col text-left">
+                <span className={`text-base sm:text-lg font-bold font-editorial tracking-tight leading-tight ${
+                  pathname === '/' ? 'text-white' : 'text-[#1C1917] dark:text-[#FAF8F5]'
+                }`}>
+                  Pandal<span className="text-[#D8261C]">é</span>
+                </span>
+                <span className={`text-[8px] font-mono tracking-widest uppercase leading-none mt-0.5 font-bold ${
+                  pathname === '/' ? 'text-[#E7E5E4]/80' : 'text-stone-600 dark:text-stone-400'
+                }`}>
+                  {language === 'bn' ? 'কলকাতা পুজো গাইড' : 'Kolkata Pujo Guide'}
+                </span>
+              </div>
+            </Link>
+          )}
+        </div>
+
+        {/* Center: Desktop-only horizontal nav bar on the EXACT SAME LINE */}
+        <nav
+          className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2 z-10"
+          aria-label="Desktop navigation"
+        >
+          <div
+            className={`pointer-events-auto inline-flex items-center gap-1 p-1 rounded-full shadow-lg transition-all ${
               pathname === '/'
-                ? 'bg-black/45 backdrop-blur-md border border-white/20 hover:border-white/40'
-                : 'bg-white/95 dark:bg-[#1C1917]/95 backdrop-blur-md border border-stone-200 dark:border-white/20 hover:border-[#D8261C] dark:hover:border-amber-400'
+                ? 'bg-black/45 backdrop-blur-md border border-white/20'
+                : 'bg-white/95 dark:bg-[#1C1917]/95 backdrop-blur-md border border-stone-200 dark:border-white/20'
             }`}
           >
-            <Image
-              src="/brand/pandale-icon.png"
-              alt="Pandalé"
-              width={28}
-              height={28}
-              className="w-7 h-7 object-contain rounded-lg shrink-0 group-hover:scale-105 transition-transform"
-              priority
-            />
-            <div className="flex flex-col text-left">
-              <span className={`text-base sm:text-lg font-bold font-editorial tracking-tight leading-tight ${
-                pathname === '/' ? 'text-white' : 'text-[#1C1917] dark:text-[#FAF8F5]'
-              }`}>
-                Pandal<span className="text-[#D8261C]">é</span>
-              </span>
-              <span className={`text-[8px] font-mono tracking-widest uppercase leading-none mt-0.5 font-bold ${
-                pathname === '/' ? 'text-[#E7E5E4]/80' : 'text-stone-600 dark:text-stone-400'
-              }`}>
-                {language === 'bn' ? 'কলকাতা পুজো গাইড' : 'Kolkata Pujo Guide'}
-              </span>
-            </div>
-          </Link>
-        )}
+            {(
+              [
+                { href: '/',        label: language === 'bn' ? 'হোম' : 'Home',          icon: Home,     exact: true  },
+                { href: '/pandals', label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass,  exact: false },
+                { href: '/metro',   label: language === 'bn' ? 'মেট্রো' : 'Metro',        icon: Train,    exact: false },
+                { href: '/planner', label: language === 'bn' ? 'প্ল্যানার' : 'Planner',  icon: Route,    exact: false },
+                { href: '/map',     label: language === 'bn' ? 'মেট্রো ম্যাপ' : 'Metro Map', icon: Map, exact: false },
+              ] as Array<{ href: string; label: string; icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; exact: boolean; badge?: number }>
+            ).map(({ href, label, icon: Icon, exact, badge }) => {
+              const isActive = exact ? pathname === href : pathname.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  prefetch={true}
+                  className={`flex items-center gap-1.5 px-3 md:px-3.5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 relative ${
+                    isActive
+                      ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/30'
+                      : pathname === '/'
+                        ? 'text-white/80 hover:text-white hover:bg-white/15'
+                        : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" strokeWidth={isActive ? 2.5 : 1.8} />
+                  <span>{label}</span>
+                  {badge !== undefined && badge > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-amber-400 text-black text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow">
+                      {badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
 
         {/* Right Action Controls: Wishlist, Theme Toggle & Language Toggle */}
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-2 md:gap-3 shrink-0 z-10">
           
           {/* Wishlist Link Button with Live Count Badge */}
           <Link
@@ -196,44 +244,6 @@ export default function Header() {
             </button>
           </div>
         </div>
-        </div>
-
-        {/* Desktop-only horizontal nav bar — hidden on mobile (BottomNav handles it) */}
-        <nav className="hidden md:flex items-center gap-1 mt-3 pb-1" aria-label="Desktop navigation">
-          {(
-            [
-              { href: '/',        label: language === 'bn' ? 'হোম' : 'Home',      icon: Home,    exact: true  },
-              { href: '/pandals', label: language === 'bn' ? 'প্যান্ডেল' : 'Pandals', icon: Compass, exact: false },
-              { href: '/metro',   label: language === 'bn' ? 'মেট্রো' : 'Metro',    icon: Train,   exact: false },
-              { href: '/planner', label: language === 'bn' ? 'প্ল্যানার' : 'Planner',  icon: Route,   exact: false },
-              { href: '/map',     label: language === 'bn' ? 'মেট্রো ম্যাপ' : 'Metro Map', icon: Map,    exact: false },
-            ] as Array<{ href: string; label: string; icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; exact: boolean; badge?: number }>
-          ).map(({ href, label, icon: Icon, exact, badge }) => {
-            const isActive = exact ? pathname === href : pathname.startsWith(href);
-            return (
-              <Link
-                key={href}
-                href={href}
-                prefetch={true}
-                className={`pointer-events-auto flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 relative ${
-                  isActive
-                    ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/30'
-                    : pathname === '/'
-                      ? 'text-white/80 hover:text-white hover:bg-white/15'
-                      : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10'
-                }`}
-              >
-                <Icon className="w-4 h-4" strokeWidth={isActive ? 2.5 : 1.8} />
-                <span>{label}</span>
-                {badge !== undefined && badge > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-amber-400 text-black text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow">
-                    {badge}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
-        </nav>
       </div>
     </header>
   );

@@ -16,12 +16,14 @@ import {
   Check, 
   Compass, 
   Navigation,
-  ChevronRight
+  ChevronRight,
+  Flame
 } from 'lucide-react';
 import { FAMOUS_PUJO_CIRCUITS, PujoZoneCircuit, CircuitPandal } from '@/data/famousPujoCircuits';
 import { PANDALS_DATA } from '@/data/pandals';
 import { useLanguage } from '@/context/LanguageContext';
 import { useWishlist } from '@/context/WishlistContext';
+import SpotlightCarousel from '@/components/SpotlightCarousel';
 
 type ZoneKey = 'north' | 'south' | 'east' | 'central';
 
@@ -29,56 +31,41 @@ const ZONE_CARDS_META: {
   id: ZoneKey;
   titleEn: string;
   titleBn: string;
-  subtitleEn: string;
-  subtitleBn: string;
   pandalsCount: string;
-  metroLine: string;
-  metroBadge: string;
+  flames: number;
   image: string;
 }[] = [
   {
     id: 'north',
     titleEn: 'North Zone',
     titleBn: 'উত্তর সার্কিট',
-    subtitleEn: 'Shyambazar, Shovabazar & Dum Dum Hub',
-    subtitleBn: 'শ্যামবাজার, শোভাবাজার ও দমদম',
     pandalsCount: '18 Famous Pandals',
-    metroLine: 'Blue Line (North-South)',
-    metroBadge: 'bg-blue-600 text-white',
-    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
+    flames: 3,
+    image: '/brand/zone-north-durga.jpg',
   },
   {
     id: 'south',
     titleEn: 'South Zone',
     titleBn: 'দক্ষিণ সার্কিট',
-    subtitleEn: 'Kalighat, Gariahat & Ballygunge Hub',
-    subtitleBn: 'কালীঘাট, গড়িয়াহাট ও বালিগঞ্জ',
     pandalsCount: '15 Famous Pandals',
-    metroLine: 'Blue Line (Kalighat / Jatin Das Park)',
-    metroBadge: 'bg-blue-600 text-white',
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80',
+    flames: 3,
+    image: '/brand/zone-south-durga.jpg',
   },
   {
     id: 'east',
     titleEn: 'East Zone',
     titleBn: 'পূর্ব সার্কিট',
-    subtitleEn: 'Salt Lake, Sector V & Tech Corridors',
-    subtitleBn: 'সল্টলেক ও টেক করিডোর',
     pandalsCount: '8 Famous Pandals',
-    metroLine: 'Green Line (East-West)',
-    metroBadge: 'bg-emerald-600 text-white',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
+    flames: 2,
+    image: '/brand/zone-east-durga.jpg',
   },
   {
     id: 'central',
     titleEn: 'Central Zone',
     titleBn: 'মধ্য সার্কিট',
-    subtitleEn: 'Central, MG Road & Sealdah Hub',
-    subtitleBn: 'সেন্ট্রাল, এমজি রোড ও শিয়ালদহ',
     pandalsCount: '7 Famous Pandals',
-    metroLine: 'Blue & Green Line (Central / Sealdah)',
-    metroBadge: 'bg-amber-600 text-white',
-    image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=700&q=80',
+    flames: 2,
+    image: '/brand/zone-central-durga.jpg',
   }
 ];
 
@@ -138,7 +125,7 @@ function ZoneHoppingContent() {
     if (match && match.images && match.images.length > 0) {
       return match.images[0].url;
     }
-    return 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80';
+    return '/brand/zone-north-durga.jpg';
   };
 
   const getPandalSlug = (pandal: CircuitPandal): string => {
@@ -150,6 +137,24 @@ function ZoneHoppingContent() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      {/* Back button */}
+      <div className="flex items-center justify-between mb-6">
+        <button
+          type="button"
+          onClick={() => {
+            if (typeof window !== 'undefined' && window.history.length > 1) {
+              router.back();
+            } else {
+              router.push('/');
+            }
+          }}
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white px-3 py-1.5 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-800 transition-all duration-150 hover:-translate-x-0.5 active:scale-95 cursor-pointer shadow-xs border border-stone-200 dark:border-white/10 group"
+        >
+          <ArrowRight className="w-4 h-4 text-[#D8261C] rotate-180 group-hover:-translate-x-0.5 transition-transform duration-150" />
+          <span>Back</span>
+        </button>
+      </div>
+
       {/* 1. TOP HEADER & BREADCRUMB */}
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-950/60 text-[#D8261C] dark:text-amber-400 font-mono text-xs font-bold border border-red-200 dark:border-red-900/40 mb-3">
@@ -165,6 +170,28 @@ function ZoneHoppingContent() {
             : 'Explore famous pandals arranged three in a line, complete with nearest metro station details, walking durations, and direct walking directions.'}
         </p>
       </div>
+
+
+      {/* 1.5 SPOTLIGHT CAROUSEL — top pandals for active zone */}
+      {(() => {
+        const ZONE_AREA_MAP: Record<ZoneKey, string> = {
+          north: 'North Kolkata',
+          south: 'South Kolkata',
+          east: 'East Kolkata',
+          central: 'Central Kolkata',
+        };
+        const areaLabel = ZONE_AREA_MAP[activeZone];
+        const zonePandals = PANDALS_DATA
+          .filter((p) => p.area === areaLabel)
+          .sort((a, b) => b.trending_score - a.trending_score)
+          .slice(0, 8);
+        if (zonePandals.length === 0) return null;
+        return (
+          <div className="mb-10">
+            <SpotlightCarousel pandals={zonePandals} />
+          </div>
+        );
+      })()}
 
       {/* 2. CARDS ABOVE: NORTH ZONE, SOUTH ZONE, EAST ZONE, CENTRAL ZONE */}
       <div className="mb-10">
@@ -224,15 +251,20 @@ function ZoneHoppingContent() {
                   <h3 className="text-xl sm:text-2xl font-bold font-editorial leading-tight">
                     {isBn ? zone.titleBn : zone.titleEn}
                   </h3>
-                  <p className={`text-xs mt-1 font-medium ${isActive ? 'text-white/80' : 'text-stone-500 dark:text-stone-400'}`}>
-                    {isBn ? zone.subtitleBn : zone.subtitleEn}
-                  </p>
                 </div>
 
-                {/* Metro Line Indicator Tag */}
-                <div className="relative z-10 pt-2 border-t border-current/15 flex items-center gap-1.5 text-[11px] font-mono font-semibold">
-                  <Train className="w-3.5 h-3.5 shrink-0" />
-                  <span className="truncate">{zone.metroLine}</span>
+                {/* Flame Icons — fame indicator */}
+                <div className="relative z-10 pt-2 border-t border-current/15 flex items-center gap-0.5">
+                  {Array.from({ length: zone.flames }).map((_, i) => (
+                    <Flame
+                      key={i}
+                      className={`w-4 h-4 ${
+                        isActive
+                          ? i === 0 ? 'text-orange-300 fill-orange-300' : 'text-amber-300 fill-amber-300'
+                          : i === 0 ? 'text-orange-500 fill-orange-500' : 'text-amber-400 fill-amber-400'
+                      }`}
+                    />
+                  ))}
                 </div>
               </button>
             );
@@ -292,15 +324,16 @@ function ZoneHoppingContent() {
       </div>
 
       {/* 4. SQUARE CARDS LIST: THREE IN A LINE WITH METRO STATION NAME */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
         {filteredPandals.map((pandal, index) => {
           const imageUrl = getPandalImage(pandal);
           const slug = getPandalSlug(pandal);
           const isBookmarked = wishlist.includes(pandal.id);
 
           return (
-            <div
+            <Link
               key={pandal.id}
+              href={`/pandal/${slug}`}
               className="relative aspect-square rounded-[2rem] overflow-hidden border border-stone-200 dark:border-white/10 bg-stone-900 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between p-5 select-none"
             >
               {/* Full Bleed Image with Dynamic Zoom on Hover */}
@@ -308,102 +341,90 @@ function ZoneHoppingContent() {
                 src={imageUrl}
                 alt={pandal.name}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
 
-              {/* Rich Glass Vignette Gradient for Perfect Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/35 group-hover:via-black/50 transition-colors duration-300" />
+              {/* Richer vignette — heavier at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 group-hover:via-black/45 transition-colors duration-300" />
 
-              {/* TOP HEADER: Prominent Metro Station Name & Distance + Wishlist */}
+              {/* TOP: Flames left, icons right */}
               <div className="relative z-10 flex items-start justify-between gap-2">
-                <div className="flex flex-col gap-1.5">
-                  {/* Station Name Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600/90 text-white font-mono text-xs font-bold backdrop-blur-md shadow-md border border-white/20">
-                    <Train className="w-3.5 h-3.5 text-yellow-300 shrink-0" />
-                    <span className="truncate max-w-[210px]">{pandal.nearestStation}</span>
-                  </div>
+                {/* Flame Icons */}
+                {(() => {
+                  const match = PANDALS_DATA.find(p => p.id === pandal.id || p.slug === pandal.slug);
+                  const score = match?.trending_score ?? 70;
+                  const flames = score >= 95 ? 3 : score >= 80 ? 2 : 1;
+                  return (
+                    <div className="inline-flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-orange-500/30 shadow-sm">
+                      {Array.from({ length: flames }).map((_, i) => (
+                        <Flame key={i} className={`w-4 h-4 ${i === 0 ? 'text-orange-500 fill-orange-500' : 'text-amber-400 fill-amber-400'}`} />
+                      ))}
+                    </div>
+                  );
+                })()}
 
-                  {/* Walking Time Badge */}
-                  <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-black/60 text-amber-300 font-mono text-[11px] font-semibold backdrop-blur-md border border-white/10 w-fit">
-                    <Footprints className="w-3 h-3 shrink-0" />
-                    <span>{pandal.walkTimeToStationMins} mins walk ({pandal.distanceToStation})</span>
-                  </div>
-                </div>
-
-                {/* Wishlist Heart Button */}
-                <button
-                  type="button"
-                  onClick={() => toggleWishlist(pandal.id)}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-200 cursor-pointer shrink-0 ${
-                    isBookmarked
-                      ? 'bg-red-600 text-white border-red-500 shadow-md scale-105'
-                      : 'bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border-white/20 hover:scale-110'
-                  }`}
-                  aria-label="Save to wishlist"
-                >
-                  <Heart className={`w-4 h-4 ${isBookmarked ? 'fill-current text-white' : ''}`} />
-                </button>
-              </div>
-
-              {/* BOTTOM CONTENT: Index Number, Title, Highlight Quote & Action Buttons */}
-              <div className="relative z-10">
-                {/* Index Pill + Bengali subtitle */}
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="w-6 h-6 rounded-full bg-gradient-to-r from-red-600 to-amber-600 text-white font-mono text-xs font-bold flex items-center justify-center shadow-xs">
-                    {index + 1}
-                  </span>
-                  <span className="text-xs text-amber-200/90 font-medium font-bengali">
-                    {pandal.bengaliName}
-                  </span>
-                </div>
-
-                {/* Primary Pandal Name */}
-                <h3 className="text-xl sm:text-2xl font-bold font-editorial text-white leading-tight tracking-tight drop-shadow-sm group-hover:text-amber-300 transition-colors">
-                  {pandal.name}
-                </h3>
-
-                {/* Snippet / Highlight */}
-                <p className="text-xs text-stone-200 line-clamp-2 mt-1.5 font-sans leading-snug drop-shadow-xs">
-                  {pandal.highlight}
-                </p>
-
-                {/* Next Stop Indicator if present */}
-                {pandal.nextPandalName && (
-                  <div className="mt-2 text-[11px] font-mono text-yellow-300/90 flex items-center gap-1 truncate">
-                    <span>➡️ Next stop:</span>
-                    <span className="font-bold underline decoration-yellow-400/50">{pandal.nextPandalName}</span>
-                    {pandal.distanceToNextPandal && (
-                      <span className="text-stone-300">({pandal.distanceToNextPandal})</span>
-                    )}
-                  </div>
-                )}
-
-                {/* Action Buttons: View Details & Walk Route */}
-                <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/15">
-                  <Link
-                    href={`/pandal/${slug}`}
-                    className="px-3 py-2 rounded-xl bg-white/20 hover:bg-white text-white hover:text-stone-900 font-bold text-xs flex items-center justify-center gap-1.5 backdrop-blur-md transition-all duration-200 border border-white/25 active:scale-95"
+                {/* Wishlist + Location icons */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(pandal.id); }}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-200 cursor-pointer shrink-0 ${
+                      isBookmarked
+                        ? 'bg-red-600 text-white border-red-500 shadow-md'
+                        : 'bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border-white/20'
+                    }`}
+                    aria-label="Save to wishlist"
                   >
-                    <span>View Details</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                    <Heart className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : ''}`} />
+                  </button>
 
                   <a
                     href={pandal.googleMapsDirectionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all duration-200 active:scale-95 group/walk"
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/50 text-white/80 hover:text-white hover:bg-black/70 backdrop-blur-md border border-white/20 transition-all duration-200 shrink-0"
+                    aria-label="Open in Google Maps"
                   >
-                    <span>Walk Route</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-yellow-300 group-hover/walk:translate-x-0.5 group-hover/walk:-translate-y-0.5 transition-transform" />
+                    <MapPin className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
-            </div>
+
+              {/* BOTTOM: index + name + metro */}
+              <div className="relative z-10 space-y-2">
+                {/* Index pill row */}
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-xs font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/20">
+                    {index + 1}
+                  </span>
+                  {isBn && (
+                    <span className="text-[11px] text-amber-300/90 font-medium font-bengali truncate leading-none">
+                      {pandal.bengaliName}
+                    </span>
+                  )}
+                </div>
+
+                {/* Pandal Name */}
+                <h3 className="text-base sm:text-lg font-black font-editorial text-white leading-tight tracking-tight drop-shadow-md group-hover:text-amber-300 transition-colors line-clamp-2">
+                  {isBn ? pandal.bengaliName : pandal.name}
+                </h3>
+
+                {/* Metro station compact pill */}
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 max-w-full overflow-hidden">
+                  <Train className="w-3 h-3 text-blue-300 shrink-0" />
+                  <span className="text-[10.5px] font-mono font-semibold text-white/85 truncate">
+                    {pandal.nearestStation} · {pandal.walkTimeToStationMins}m walk
+                  </span>
+                </div>
+              </div>
+            </Link>
+
           );
         })}
       </div>
+
 
       {/* Empty State */}
       {filteredPandals.length === 0 && (

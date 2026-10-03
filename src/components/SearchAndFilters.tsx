@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, SlidersHorizontal, X, Train, Flame, Sparkles, MapPin, Heart, Compass, Check, LocateFixed } from 'lucide-react';
 import { ZoneArea } from '@/types';
 
@@ -56,6 +57,12 @@ export default function SearchAndFilters({
   totalCount
 }: SearchAndFiltersProps) {
   const [showMobileFilterModal, setShowMobileFilterModal] = useState(false);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  const isMouseDownOnBackdrop = useRef(false);
 
   const zones: (ZoneArea | 'All')[] = [
     'All',
@@ -115,15 +122,19 @@ export default function SearchAndFilters({
           <span className="hidden sm:inline">Near Me</span>
         </button>
 
-        {/* Mobile Filter Sheet Button */}
+        {/* Filter Modal Button */}
         <button
           type="button"
-          onClick={() => setShowMobileFilterModal(true)}
-          className="md:hidden px-3.5 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200 text-xs font-semibold flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 cursor-pointer"
+          onClick={() => {
+            setShowMobileFilterModal(true);
+          }}
+          title="Filters & Sorting"
+          className="px-3.5 py-3.5 rounded-2xl bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-800 dark:text-stone-200 text-xs font-semibold flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 cursor-pointer hover:border-[#D8261C]/50"
         >
-          <SlidersHorizontal className="w-4 h-4 text-stone-500 dark:text-stone-400" />
+          <SlidersHorizontal className="w-4 h-4 text-stone-500 dark:text-stone-400 pointer-events-none" />
+          <span className="hidden sm:inline pointer-events-none">Filters</span>
           {activeFilterCount > 0 && (
-            <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white text-[10px] flex items-center justify-center font-bold">
+            <span className="w-4 h-4 rounded-full bg-[#D8261C] text-white text-[10px] flex items-center justify-center font-bold pointer-events-none">
               {activeFilterCount}
             </span>
           )}
@@ -233,28 +244,46 @@ export default function SearchAndFilters({
         </div>
       </div>
 
-      {/* Mobile Filter Drawer / Bottom Sheet */}
-      {showMobileFilterModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end md:hidden animate-fade-in">
-          <div className="w-[85%] max-w-sm h-full bg-[#FFFDF9] dark:bg-[#140E13] p-5 flex flex-col justify-between overflow-y-auto border-l border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100">
-            <div className="space-y-6">
-              
-              <div className="flex items-center justify-between pb-3 border-b border-stone-200 dark:border-white/10">
-                <h3 className="text-lg font-bold font-editorial text-stone-900 dark:text-white">Filters & Sorting</h3>
-                <button
-                  onClick={() => setShowMobileFilterModal(false)}
-                  className="p-1 rounded-full text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+      {/* Filter Modal Card rendered directly to body via portal */}
+      {showMobileFilterModal && mounted && createPortal(
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
+          {/* Backdrop scrim without blur */}
+          <div
+            className="fixed inset-0 bg-black/40"
+            onMouseDown={() => {
+              isMouseDownOnBackdrop.current = true;
+            }}
+            onClick={() => {
+              if (isMouseDownOnBackdrop.current) {
+                setShowMobileFilterModal(false);
+              }
+              isMouseDownOnBackdrop.current = false;
+            }}
+          />
 
+          {/* Compact Modal Card */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 w-[90%] max-w-[340px] max-h-[85vh] bg-[#FFFDF9] dark:bg-[#140E13] p-4 sm:p-5 rounded-2xl flex flex-col justify-between overflow-hidden border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 shadow-2xl"
+          >
+            <div className="flex items-center justify-between pb-2.5 border-b border-stone-200 dark:border-white/10 shrink-0">
+              <h3 className="text-sm font-bold font-editorial text-stone-900 dark:text-white">Filters & Sorting</h3>
+              <button
+                type="button"
+                onClick={() => setShowMobileFilterModal(false)}
+                className="p-1 rounded-full text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto space-y-3 my-2.5 pr-1">
               {/* Sort by */}
               <div>
-                <label className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-2">
+                <label className="text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-1.5">
                   Sort Pandals By
                 </label>
-                <div className="grid grid-cols-1 gap-1.5">
+                <div className="grid grid-cols-1 gap-1">
                   {[
                     { id: 'trending', label: '🔥 Trending Score' },
                     { id: 'popular', label: '👑 Most Saved' },
@@ -265,14 +294,14 @@ export default function SearchAndFilters({
                     <button
                       key={s.id}
                       onClick={() => onSortChange(s.id)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition-colors ${
+                      className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
                         sortBy === s.id
                           ? 'bg-[#D8261C] text-white shadow-xs'
-                          : 'bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100'
+                          : 'bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-[#251B24]'
                       }`}
                     >
                       <span>{s.label}</span>
-                      {sortBy === s.id && <Check className="w-4 h-4 text-amber-200" />}
+                      {sortBy === s.id && <Check className="w-3.5 h-3.5 text-amber-200" />}
                     </button>
                   ))}
                 </div>
@@ -280,87 +309,85 @@ export default function SearchAndFilters({
 
               {/* Quick Toggle Filters */}
               <div>
-                <label className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-2">
+                <label className="text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-1.5">
                   Experience Tags
                 </label>
-                <div className="space-y-2">
-                  
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                <div className="space-y-1.5">
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <Train className="w-4 h-4 text-blue-600 dark:text-blue-400" /> Near Metro Station (&lt;10m)
+                      <Train className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Near Metro (&lt;10m)
                     </span>
                     <input
                       type="checkbox"
                       checked={nearMetroOnly}
                       onChange={onNearMetroToggle}
-                      className="accent-[#D8261C] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <Sparkles className="w-4 h-4 text-[#D8261C] dark:text-amber-400" /> Must Visit Selection
+                      <Sparkles className="w-3.5 h-3.5 text-[#D8261C] dark:text-amber-400" /> Must Visit Selection
                     </span>
                     <input
                       type="checkbox"
                       checked={mustVisitOnly}
                       onChange={onMustVisitToggle}
-                      className="accent-[#D8261C] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <Flame className="w-4 h-4 text-amber-600 dark:text-amber-400" /> Trending Pandals
+                      <Flame className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" /> Trending Pandals
                     </span>
                     <input
                       type="checkbox"
                       checked={trendingOnly}
                       onChange={onTrendingToggle}
-                      className="accent-[#D8261C] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Less Crowded
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" /> Less Crowded
                     </span>
                     <input
                       type="checkbox"
                       checked={lessCrowdedOnly}
                       onChange={onLessCrowdedToggle}
-                      className="accent-[#D8261C] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer">
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <Heart className="w-4 h-4 text-rose-500" /> My Saved Wishlist
+                      <Heart className="w-3.5 h-3.5 text-rose-500" /> My Saved Wishlist
                     </span>
                     <input
                       type="checkbox"
                       checked={wishlistOnly}
                       onChange={onWishlistToggle}
-                      className="accent-[#D8261C] w-4 h-4 rounded"
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
-
                 </div>
               </div>
-
             </div>
 
-            <div className="pt-4 border-t border-stone-200 dark:border-white/10">
+            <div className="pt-2.5 border-t border-stone-200 dark:border-white/10 shrink-0">
               <button
+                type="button"
                 onClick={() => setShowMobileFilterModal(false)}
-                className="w-full py-3 rounded-xl bg-[#D8261C] text-white font-semibold text-sm shadow-md active:scale-98 transition-transform"
+                className="w-full py-2.5 rounded-xl bg-[#D8261C] text-white font-semibold text-xs shadow-md active:scale-98 transition-transform cursor-pointer"
               >
                 Apply Filters ({totalCount} Pandals)
               </button>
             </div>
-
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </div>

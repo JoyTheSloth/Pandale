@@ -94,7 +94,7 @@ export default function BottomNav() {
                   relative flex flex-col items-center justify-center overflow-hidden select-none
                   transition-colors duration-200
                   ${isActive
-                    ? 'bg-[#FEF2F2] dark:bg-[#3B1516] border border-[#D8261C]/30 dark:border-[#D8261C]/50 text-[#D8261C] px-3.5 py-1.5 rounded-2xl shadow-inner nav-pill-in'
+                    ? 'bg-[#D8261C] text-white px-3.5 py-1.5 rounded-2xl shadow-md shadow-[#D8261C]/30 nav-pill-in border border-[#D8261C]'
                     : 'text-[#78716C] dark:text-[#A8A29E] hover:text-[#D8261C] dark:hover:text-white px-2.5 py-1.5'
                   }
                   ${isPressed ? 'nav-bounce' : ''}
@@ -102,7 +102,7 @@ export default function BottomNav() {
               >
                 {/* Ripple burst */}
                 {hasRipple && (
-                  <span className="nav-ripple absolute inset-0 m-auto w-9 h-9 rounded-full bg-[#D8261C]/18 pointer-events-none" />
+                  <span className={`nav-ripple absolute inset-0 m-auto w-9 h-9 rounded-full ${isActive ? 'bg-white/25' : 'bg-[#D8261C]/18'} pointer-events-none`} />
                 )}
 
                 {/* Icon */}
@@ -110,11 +110,13 @@ export default function BottomNav() {
                   <Icon
                     strokeWidth={isActive ? 2.5 : 1.8}
                     className={`w-5 h-5 transition-colors duration-200 ${
-                      isActive ? 'text-[#D8261C]' : 'text-[#78716C] dark:text-[#A8A29E]'
+                      isActive ? 'text-white' : 'text-[#78716C] dark:text-[#A8A29E]'
                     }`}
                   />
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="nav-badge absolute -top-1.5 -right-2 bg-[#D8261C] text-white text-[9px] font-bold h-3.5 w-3.5 rounded-full flex items-center justify-center shadow-sm">
+                    <span className={`nav-badge absolute -top-1.5 -right-2 text-[9px] font-bold h-3.5 w-3.5 rounded-full flex items-center justify-center shadow-sm ${
+                      isActive ? 'bg-white text-[#D8261C]' : 'bg-[#D8261C] text-white'
+                    }`}>
                       {item.badge}
                     </span>
                   )}
@@ -123,7 +125,7 @@ export default function BottomNav() {
                 {/* Label */}
                 <span className={`text-[10px] mt-0.5 tracking-tight transition-colors duration-200 ${
                   isActive
-                    ? 'text-[#D8261C] font-bold nav-label-in'
+                    ? 'text-white font-bold nav-label-in'
                     : 'text-[#78716C] dark:text-[#A8A29E] font-medium'
                 }`}>
                   {item.label}
@@ -131,7 +133,7 @@ export default function BottomNav() {
 
                 {/* Active dot */}
                 {isActive && (
-                  <div className="nav-dot-pop w-1 h-1 rounded-full bg-[#D8261C] mt-0.5 shadow-sm shadow-[#D8261C]/60" />
+                  <div className="nav-dot-pop w-1 h-1 rounded-full bg-white mt-0.5 shadow-sm shadow-white/80" />
                 )}
               </Link>
             );

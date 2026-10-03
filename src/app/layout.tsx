@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
 import CreatorConnectModal from '@/components/CreatorConnectModal';
 import InstallPrompt from '@/components/InstallPrompt';
+import { Analytics } from '@vercel/analytics/next';
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -137,6 +138,7 @@ export default function RootLayout({
             </WishlistProvider>
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
