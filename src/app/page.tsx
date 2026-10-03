@@ -148,9 +148,13 @@ export default function HomePage() {
         {/* Centered Editorial Header with User Requested Caption */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           {/* Visible Caption Banner */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900/40 text-[#D8261C] dark:text-amber-300 text-xs sm:text-sm font-editorial font-semibold shadow-xs mb-3">
-            <span>🥁🌺</span>
-            <span>&ldquo;The wait is almost over... ❤️✨ Kolkata Durga Puja is knocking at the door!&rdquo;</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900/40 text-[#D8261C] dark:text-amber-300 text-[11px] sm:text-xs md:text-sm font-editorial font-semibold shadow-xs mb-3 whitespace-nowrap">
+            <span className="shrink-0">🥁🌺</span>
+            <span>
+              {isBn 
+                ? '“পুজো এসে গেল... মা আসছেন! ❤️✨”' 
+                : '“The wait is almost over... Durga Puja is here! ❤️✨”'}
+            </span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1C1917] dark:text-[#FAF8F5] leading-[1.15]">
