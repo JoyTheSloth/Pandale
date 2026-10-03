@@ -223,6 +223,109 @@ export default function MetroGuidePage() {
     }
   };
 
+  // Reusable Line Card Renderer (supports compact mode for 3-column rows)
+  const renderLineCard = (line: (typeof METRO_LINE_CARDS)[0], isCompact = false) => {
+    const isSelected = selectedLine === line.id;
+    return (
+      <button
+        key={line.id}
+        type="button"
+        onClick={() => setSelectedLine(isSelected ? 'all' : line.id)}
+        className={`group w-full flex flex-col justify-between text-left transition-all duration-300 relative overflow-hidden cursor-pointer select-none active:scale-[0.98] ${
+          isCompact
+            ? 'rounded-2xl sm:rounded-[1.75rem] p-2 sm:p-3'
+            : 'rounded-[1.75rem] p-2.5 sm:p-3.5'
+        } ${
+          isSelected
+            ? `${line.activeBorder} ${line.activeRing} bg-gradient-to-b ${line.bgGradient} bg-white dark:bg-[#1D1119] shadow-xl`
+            : `bg-white dark:bg-[#1A1217] hover:bg-white dark:hover:bg-[#20151C] border ${line.borderDefault} shadow-md hover:shadow-xl hover:-translate-y-1`
+        }`}
+      >
+        {/* Background decorative gradient */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${line.bgGradient} opacity-20 dark:opacity-40 pointer-events-none`} />
+
+        {/* 1. Metro Train Image Window */}
+        <div className={`relative w-full aspect-[16/11] sm:aspect-[16/10] overflow-hidden shadow-inner group-hover:shadow-md transition-all shrink-0 mb-1.5 sm:mb-2 ${
+          isCompact ? 'rounded-xl sm:rounded-2xl' : 'rounded-2xl'
+        }`}>
+          <Image
+            src={line.image}
+            alt={line.name}
+            fill
+            sizes="(max-width: 768px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+          />
+          {/* Subtle Cinematic Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35 pointer-events-none" />
+
+          {/* Top-Left Floating Line Badge */}
+          <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-10 flex items-center gap-1">
+            <span
+              className={`rounded-full font-mono font-bold text-white shadow-xs backdrop-blur-md flex items-center gap-1 border border-white/20 ${
+                isCompact ? 'px-1.5 py-0.5 text-[8px] sm:text-[9.5px]' : 'px-2 py-0.5 text-[9px] sm:text-[9.5px]'
+              }`}
+              style={{ backgroundColor: line.hex }}
+            >
+              <Train className="w-2.5 h-2.5 shrink-0" />
+              <span className="truncate">{line.name}</span>
+            </span>
+          </div>
+
+          {/* Top-Right Select Status Button */}
+          <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10">
+            <div
+              className={`rounded-full flex items-center justify-center transition-all ${
+                isCompact ? 'w-5 h-5' : 'w-5.5 h-5.5'
+              } ${
+                isSelected
+                  ? 'bg-[#D8261C] text-white shadow-xs ring-1 ring-white/50'
+                  : 'bg-black/60 text-white/90 backdrop-blur-md group-hover:bg-white group-hover:text-stone-900'
+              }`}
+            >
+              {isSelected ? (
+                <Check className="w-3 h-3 stroke-[2.5]" />
+              ) : (
+                <ArrowUpRight className="w-3 h-3 stroke-[2.5]" />
+              )}
+            </div>
+          </div>
+
+          {/* Bottom Floating Stats (Stations & Pandals) */}
+          <div className="absolute bottom-1.5 inset-x-1.5 z-10 flex items-center justify-between gap-1">
+            <span className={`rounded-md font-mono font-semibold bg-black/75 backdrop-blur-md text-white border border-white/15 truncate ${
+              isCompact ? 'px-1 py-0.5 text-[7.5px] sm:text-[8.5px]' : 'px-1.5 py-0.5 text-[8.5px]'
+            }`}>
+              {line.stationsCount} {language === 'bn' ? 'স্টেশন' : 'Stns'}
+            </span>
+            <span className={`rounded-md font-mono font-bold bg-[#D8261C] text-white shadow-xs truncate ${
+              isCompact ? 'px-1 py-0.5 text-[7.5px] sm:text-[8.5px]' : 'px-1.5 py-0.5 text-[8.5px]'
+            }`}>
+              {line.pandalCount} {language === 'bn' ? 'পুজো' : 'Pandals'}
+            </span>
+          </div>
+        </div>
+
+        {/* 2. Content Area */}
+        <div className="relative z-10 px-0.5 space-y-0.5">
+          <div className="flex items-center gap-1.5">
+            <span
+              className="w-2 h-2 rounded-full shrink-0 animate-pulse"
+              style={{ backgroundColor: line.hex }}
+            />
+            <h3 className={`font-bold text-stone-900 dark:text-white leading-tight tracking-tight truncate ${
+              isCompact ? 'text-xs sm:text-base' : 'text-sm sm:text-base'
+            }`}>
+              {language === 'bn' ? line.bengaliName : line.name}
+            </h3>
+          </div>
+          <p className="text-[10px] sm:text-[11px] text-stone-600 dark:text-stone-300 font-semibold line-clamp-1">
+            {line.route}
+          </p>
+        </div>
+      </button>
+    );
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 w-full space-y-6 sm:space-y-8">
       
@@ -275,93 +378,17 @@ export default function MetroGuidePage() {
           )}
         </div>
 
-        {/* Metro Lines Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
-          {METRO_LINE_CARDS.map((line) => {
-            const isSelected = selectedLine === line.id;
-            return (
-              <button
-                key={line.id}
-                type="button"
-                onClick={() => setSelectedLine(isSelected ? 'all' : line.id)}
-                className={`group w-full rounded-[1.75rem] p-2.5 sm:p-3 flex flex-col justify-between text-left transition-all duration-300 relative overflow-hidden cursor-pointer select-none active:scale-[0.98] ${
-                  isSelected
-                    ? `${line.activeBorder} ${line.activeRing} bg-gradient-to-b ${line.bgGradient} bg-white dark:bg-[#1D1119] shadow-xl`
-                    : `bg-white dark:bg-[#1A1217] hover:bg-white dark:hover:bg-[#20151C] border ${line.borderDefault} shadow-md hover:shadow-xl hover:-translate-y-1`
-                }`}
-              >
-                {/* Background decorative gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${line.bgGradient} opacity-20 dark:opacity-40 pointer-events-none`} />
+        {/* Metro Lines: Row 1 (Blue & Green) and Row 2 (Orange, Purple, Yellow in one line) */}
+        <div className="space-y-3 sm:space-y-4">
+          {/* Row 1: Primary Arterial Corridors (Blue Line & Green Line) in 2 columns */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {METRO_LINE_CARDS.slice(0, 2).map((line) => renderLineCard(line, false))}
+          </div>
 
-                {/* 1. Metro Train Image Window */}
-                <div className="relative w-full aspect-[16/11] sm:aspect-[16/10] rounded-2xl overflow-hidden shadow-inner group-hover:shadow-md transition-all shrink-0 mb-2">
-                  <Image
-                    src={line.image}
-                    alt={line.name}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                  />
-                  {/* Subtle Cinematic Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35 pointer-events-none" />
-
-                  {/* Top-Left Floating Line Badge */}
-                  <div className="absolute top-2 left-2 z-10 flex items-center gap-1">
-                    <span
-                      className="px-2 py-0.5 rounded-full text-[9px] sm:text-[9.5px] font-mono font-bold text-white shadow-xs backdrop-blur-md flex items-center gap-1 border border-white/20"
-                      style={{ backgroundColor: line.hex }}
-                    >
-                      <Train className="w-2.5 h-2.5" />
-                      <span>{line.name}</span>
-                    </span>
-                  </div>
-
-                  {/* Top-Right Select Status Button */}
-                  <div className="absolute top-2 right-2 z-10">
-                    <div
-                      className={`w-5.5 h-5.5 rounded-full flex items-center justify-center transition-all ${
-                        isSelected
-                          ? 'bg-[#D8261C] text-white shadow-xs ring-1 ring-white/50'
-                          : 'bg-black/60 text-white/90 backdrop-blur-md group-hover:bg-white group-hover:text-stone-900'
-                      }`}
-                    >
-                      {isSelected ? (
-                        <Check className="w-3 h-3 stroke-[2.5]" />
-                      ) : (
-                        <ArrowUpRight className="w-3 h-3 stroke-[2.5]" />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bottom Floating Stats (Stations & Pandals) */}
-                  <div className="absolute bottom-1.5 inset-x-1.5 z-10 flex items-center justify-between gap-1">
-                    <span className="px-1.5 py-0.5 rounded-md text-[8.5px] font-mono font-semibold bg-black/75 backdrop-blur-md text-white border border-white/15 truncate">
-                      {line.stationsCount} {language === 'bn' ? 'স্টেশন' : 'Stations'}
-                    </span>
-                    <span className="px-1.5 py-0.5 rounded-md text-[8.5px] font-mono font-bold bg-[#D8261C] text-white shadow-xs truncate">
-                      {line.pandalCount} {language === 'bn' ? 'প্যান্ডেল' : 'Pandals'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 2. Content Area */}
-                <div className="relative z-10 px-0.5 space-y-0.5">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="w-2 h-2 rounded-full shrink-0 animate-pulse"
-                      style={{ backgroundColor: line.hex }}
-                    />
-                    <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white leading-tight tracking-tight truncate">
-                      {language === 'bn' ? line.bengaliName : line.name}
-                    </h3>
-                  </div>
-                  <p className="text-[11px] text-stone-600 dark:text-stone-300 font-semibold line-clamp-1">
-                    {line.route}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
+          {/* Row 2: Secondary Corridors (Orange Line, Purple Line, Yellow Line) all in one line (3 columns) */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            {METRO_LINE_CARDS.slice(2, 5).map((line) => renderLineCard(line, true))}
+          </div>
         </div>
       </div>
 
