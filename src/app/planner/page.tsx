@@ -978,15 +978,69 @@ export default function RoutePlannerPage() {
               pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
             );
 
-            const cleanMetroName = pandal.nearest_metro.toLowerCase().includes('metro')
-              ? pandal.nearest_metro
-              : `${pandal.nearest_metro} ${isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}`;
+            // Extract clean metro station name and line
+            const metroDetail = pandal.metro_details?.[0];
+            let metroStationName = '';
+            let metroLine = 'Blue Line (North-South)';
+            let metroLineCode: 'blue' | 'green' | 'orange' | 'purple' | 'yellow' = 'blue';
 
-            const cleanDistance = pandal.walking_distance.includes('km')
-              ? pandal.walking_distance
-              : (pandal.walking_distance.endsWith('m') ? pandal.walking_distance : `${pandal.walking_distance}m`);
+            if (metroDetail) {
+              metroStationName = metroDetail.station_name.toLowerCase().includes('metro')
+                ? metroDetail.station_name
+                : `${metroDetail.station_name} ${isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}`;
+              metroLine = metroDetail.line;
+              metroLineCode = (metroDetail.line_code as typeof metroLineCode) || 'blue';
+            } else {
+              const rawMetro = pandal.nearest_metro || '';
+              const cleanKey = rawMetro.replace(/\s*metro(?:\s*station)?/i, '').trim().toLowerCase();
+              const matchedStation = METRO_STATIONS_DATA.find(s =>
+                s.id.toLowerCase() === cleanKey ||
+                s.name.toLowerCase() === cleanKey ||
+                s.name.toLowerCase().includes(cleanKey) ||
+                cleanKey.includes(s.name.toLowerCase())
+              );
 
-            const walkFromStationUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${cleanMetroName}, Kolkata`)}&destination=${encodeURIComponent(`${pandal.name}, Kolkata`)}&travelmode=walking`;
+              if (matchedStation) {
+                metroStationName = isBn && matchedStation.bengali_name
+                  ? `${matchedStation.bengali_name} মেট্রো স্টেশন`
+                  : `${matchedStation.name} Metro Station`;
+                metroLine = matchedStation.line;
+                metroLineCode = matchedStation.line_code;
+              } else {
+                metroStationName = rawMetro.toLowerCase().includes('metro')
+                  ? rawMetro
+                  : `${rawMetro} ${isBn ? 'মেট্রো স্টেশন' : 'Metro Station'}`;
+                metroLine = 'Blue Line (North-South)';
+                metroLineCode = 'blue';
+              }
+            }
+
+            const getLineStyle = (code: string) => {
+              switch (code) {
+                case 'green':
+                  return {
+                    badgeBg: 'bg-emerald-600',
+                    lineTag: 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/40'
+                  };
+                case 'orange':
+                  return {
+                    badgeBg: 'bg-amber-600',
+                    lineTag: 'bg-amber-50 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300 border-amber-200 dark:border-amber-800/40'
+                  };
+                case 'purple':
+                  return {
+                    badgeBg: 'bg-purple-600',
+                    lineTag: 'bg-purple-50 text-purple-800 dark:bg-purple-950/50 dark:text-purple-300 border-purple-200 dark:border-purple-800/40'
+                  };
+                case 'blue':
+                default:
+                  return {
+                    badgeBg: 'bg-blue-600',
+                    lineTag: 'bg-blue-50 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 dark:border-blue-800/40'
+                  };
+              }
+            };
+            const metroStyle = getLineStyle(metroLineCode);
 
             return (
               <React.Fragment key={pandal.id}>
@@ -1073,96 +1127,74 @@ export default function RoutePlannerPage() {
                   </div>
                 )}
 
-                {/* Compact Pandal Stop Card */}
-                <div className="group relative bg-white dark:bg-[#1A1215] rounded-2xl border border-stone-200 dark:border-white/10 p-2.5 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
-                  <div className="flex items-center gap-3">
+                {/* User-Friendly Pandal Stop Card (Clean stop badge, no images, only station name & line) */}
+                <div className="group relative bg-white dark:bg-[#1A1215] rounded-2xl border border-stone-200 dark:border-white/10 p-3 sm:p-3.5 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-3.5">
 
-                    {/* Thumbnail */}
-                    <div className="relative w-16 h-16 sm:w-[72px] sm:h-[72px] shrink-0 rounded-xl overflow-hidden shadow-sm">
-                      <Image
-                        src={pandal.featured_image}
-                        alt={pandal.name}
-                        fill
-                        sizes="80px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-                      {/* Stop number badge */}
-                      <span className="absolute bottom-1 left-1 px-1.5 py-px rounded-full bg-[#D8261C] text-white text-[8px] font-mono font-bold tracking-wider">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
+                    {/* Prominent Stop Sequence Indicator */}
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#D8261C] to-red-700 text-white font-mono font-bold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-xs border border-white/20">
+                      {String(index + 1).padStart(2, '0')}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       {/* Title row */}
-                      <div className="flex items-start justify-between gap-1">
+                      <div className="flex items-start justify-between gap-1.5">
                         <div className="min-w-0">
-                          <Link
-                            href={`/pandal/${pandal.slug}`}
-                            className="font-editorial text-sm font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1 block"
-                          >
-                            {pandal.name}
-                          </Link>
-                          <p className="text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
-                            {pandal.area} · {pandal.theme}
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <Link
+                              href={`/pandal/${pandal.slug}`}
+                              className="font-editorial text-sm sm:text-base font-bold text-[#7A1515] dark:text-rose-300 tracking-tight leading-tight hover:text-[#991B1B] dark:hover:text-rose-200 transition-colors line-clamp-1"
+                            >
+                              {pandal.name}
+                            </Link>
+                            {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
+                              <span className="px-1.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[9px] font-bold border border-amber-200/60 dark:border-amber-900/40 shrink-0" title="Must Visit">
+                                👑
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-[11px] text-stone-500 dark:text-stone-400 truncate mt-0.5">
+                            {pandal.locality || pandal.area} {pandal.theme ? `· ${pandal.theme}` : ''}
                           </p>
                         </div>
-                        {/* Badges */}
+
+                        {/* Badges / Links */}
                         <div className="flex items-center gap-1 shrink-0">
                           {isFirst && activeStartingStation && distFromStationToFirst && (
-                            <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[9px] font-bold border border-emerald-200 dark:border-emerald-800/40 flex items-center gap-1">
-                              <span>🎯 {isBn ? 'স্টেশনের নিকটতম' : 'Nearest Stop'} ({distFromStationToFirst.text})</span>
+                            <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[9px] font-bold border border-emerald-200 dark:border-emerald-800/40 items-center gap-1">
+                              🎯 {isBn ? 'স্টেশনের নিকটতম' : 'Nearest Stop'}
                             </span>
-                          )}
-                          {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
-                            <span className="px-1.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[9px] font-bold border border-amber-200/60 dark:border-amber-900/40">👑</span>
                           )}
                           <Link
                             href={`/pandal/${pandal.slug}`}
-                            className="w-5.5 h-5.5 rounded-full bg-stone-100 dark:bg-white/10 flex items-center justify-center hover:bg-[#D8261C] hover:text-white hover:scale-115 active:scale-85 transition-all duration-150 cursor-pointer"
+                            className="w-6 h-6 rounded-full bg-stone-100 dark:bg-white/10 flex items-center justify-center hover:bg-[#D8261C] hover:text-white transition-all text-stone-500 dark:text-stone-300"
                             aria-label="View pandal details"
                           >
-                            <ArrowUpRight className="w-3 h-3" />
+                            <ArrowUpRight className="w-3.5 h-3.5" />
                           </Link>
                         </div>
                       </div>
 
-                      {/* Metro info row: Station Distance & Walk / Auto Duration */}
-                      <div className="flex items-center justify-between gap-1.5 mt-2 pt-1.5 border-t border-stone-100 dark:border-white/5 flex-wrap">
+                      {/* Metro Info: Only mentions metro station name and which line */}
+                      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-stone-100 dark:border-white/5 flex-wrap">
                         <div className="flex items-center gap-1.5 min-w-0">
-                          <div className="w-4.5 h-4.5 rounded-md bg-[#0052FF] text-white font-bold flex items-center justify-center text-[9px] shrink-0">M</div>
-                          <span className="text-[10px] sm:text-[11px] text-stone-800 dark:text-stone-200 font-bold truncate">{cleanMetroName}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-[10px] shrink-0 flex-wrap">
-                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-bold border border-stone-200 dark:border-white/10">
-                            <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
-                            <span>{cleanDistance}</span>
+                          <div className={`w-4.5 h-4.5 rounded-md ${metroStyle.badgeBg} text-white font-bold flex items-center justify-center text-[9px] shrink-0 shadow-2xs`}>
+                            M
+                          </div>
+                          <span className="text-xs font-semibold text-stone-800 dark:text-stone-200 truncate">
+                            {metroStationName}
                           </span>
-                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 font-bold border border-red-200/50 dark:border-red-900/40">
-                            <Clock className="w-2.5 h-2.5" />
-                            <span>{pandal.walking_time_mins}m walk</span>
-                          </span>
-                          {(pandal.walking_distance.toLowerCase().includes('auto') || pandal.walking_time_mins >= 12) && (
-                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-bold border border-amber-200/60 dark:border-amber-900/40">
-                              <span>🛺 Auto: ~{pandal.walking_distance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(pandal.walking_time_mins / 3.5))}m</span>
-                            </span>
-                          )}
-                          <a
-                            href={walkFromStationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1 rounded-md text-stone-400 hover:text-[#D8261C] hover:bg-stone-100 dark:hover:bg-white/10 transition-colors"
-                            title="Walking directions from station to pandal"
-                          >
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
                         </div>
+                        <span className="text-stone-300 dark:text-stone-600 text-xs hidden sm:inline">•</span>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${metroStyle.lineTag} shrink-0`}>
+                          {metroLine}
+                        </span>
                       </div>
                     </div>
 
                     {/* Action buttons */}
-                    <div className="flex flex-col items-center gap-1.5 shrink-0">
+                    <div className="flex flex-col items-center gap-1.5 shrink-0 pl-1 border-l border-stone-100 dark:border-white/5">
                       <div className="flex flex-col items-center bg-stone-100 dark:bg-white/[0.06] rounded-xl border border-stone-200 dark:border-white/10">
                         <button
                           type="button"
