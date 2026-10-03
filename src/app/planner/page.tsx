@@ -1021,8 +1021,8 @@ export default function RoutePlannerPage() {
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
         <div className="space-y-2">
-          {/* Centered Itinerary Header Banner with Festive Border & Pattern */}
-          <div className="relative py-3.5 px-4 my-2.5 rounded-2xl bg-stone-50/90 dark:bg-[#181316] border border-stone-200/90 dark:border-white/10 overflow-hidden shadow-2xs">
+          {/* Festive Itinerary Header Banner: Title on Left, Stops Badge on Right */}
+          <div className="relative py-3 px-4 sm:px-5 my-2.5 rounded-2xl bg-stone-50/90 dark:bg-[#181316] border border-stone-200/90 dark:border-white/10 overflow-hidden shadow-2xs">
             {/* Subtle Festive Micro-Pattern Background */}
             <div 
               className="absolute inset-0 opacity-[0.05] dark:opacity-[0.10] pointer-events-none"
@@ -1035,14 +1035,15 @@ export default function RoutePlannerPage() {
             <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-[#D8261C]/40 to-transparent" />
             <div className="absolute bottom-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-[#D8261C]/40 to-transparent" />
 
-            <div className="relative z-10 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-center">
-              <span className="text-[#D8261C] text-xs font-mono select-none opacity-80">✦</span>
-              <h2 className="text-lg sm:text-2xl font-bold font-editorial text-stone-900 dark:text-stone-100 tracking-tight">
-                {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
-              </h2>
-              <span className="text-[#D8261C] text-xs font-mono select-none opacity-80">✦</span>
+            <div className="relative z-10 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-[#D8261C] text-xs font-mono select-none opacity-80">✦</span>
+                <h2 className="text-base sm:text-xl font-bold font-editorial text-stone-900 dark:text-stone-100 tracking-tight">
+                  {isBn ? 'আপনার পরিক্রমা পথ' : 'Your Itinerary Path'}
+                </h2>
+              </div>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D8261C] text-white shadow-xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D8261C] text-white shadow-xs shrink-0">
                 <span className="font-mono font-black">{selectedPandals.length}</span>
                 <span className="text-[11px] font-medium opacity-95">{isBn ? 'প্যান্ডেল' : 'Stops'}</span>
               </span>
