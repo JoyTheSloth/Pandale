@@ -1129,44 +1129,21 @@ export default function RoutePlannerPage() {
                       </div>
                     </div>
 
-                    {/* Right Action Icons: Move, Map, Details & Big Visited Checkbox */}
-                    <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => handleMoveUp(index)}
-                        disabled={isFirst}
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
-                        title="Move earlier in route"
-                      >
-                        <ArrowUp className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleMoveDown(index)}
-                        disabled={isLast}
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white disabled:opacity-20 flex items-center justify-center transition-all cursor-pointer"
-                        title="Move later in route"
-                      >
-                        <ArrowDown className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      </button>
+                    {/* Right Action Icons: Location & Big Visited Checkbox */}
+                    <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                      {/* Location: Open in Google Maps */}
                       <a
                         href={exactMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 hover:bg-white/15 text-red-500 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/5 hover:bg-white/15 text-red-500 hover:text-red-400 border border-white/10 hover:border-red-500/40 flex items-center justify-center transition-all cursor-pointer active:scale-95"
                         title="Open in Google Maps"
+                        aria-label="Open in Google Maps"
                       >
-                        <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+                        <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-red-500" />
                       </a>
-                      <Link
-                        href={`/pandal/${pandal.slug}`}
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 hover:bg-white/15 text-stone-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
-                        title="View pandal details"
-                      >
-                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      </Link>
 
-                      {/* Big Checkbox in each card (stored in cookies) */}
+                      {/* Big Checkbox (stored in cookies) */}
                       <button
                         type="button"
                         onClick={() => toggleVisited(pandal.id)}
