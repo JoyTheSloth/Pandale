@@ -315,7 +315,7 @@ export default function KolkataMetroExplorerModal({
             {/* Row 2: Translucent Pill Search Bar & Glowing Sun Theme Toggle */}
             <div className="px-4 sm:px-6 pt-1 pb-2 flex items-center gap-3">
               <div ref={searchContainerRef} className="relative z-50 flex-1">
-                <Search className="w-4.5 h-4.5 text-[#F43F5E] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-5 h-5 text-[#F43F5E] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-20 shrink-0" strokeWidth={2.5} />
                 <input
                   type="text"
                   value={mapSearchQuery}
@@ -342,7 +342,7 @@ export default function KolkataMetroExplorerModal({
                     }
                   }}
                   placeholder="Esplanade (or search any station...)"
-                  className="w-full h-11 sm:h-12 pl-11 pr-11 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-1 focus:ring-rose-500/50 transition-all border border-stone-700/50 bg-stone-950/60 backdrop-blur-md text-stone-100 placeholder:text-stone-400 shadow-inner"
+                  className="w-full h-11 sm:h-12 pl-12 pr-11 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-1 focus:ring-rose-500/50 transition-all border border-stone-700/50 bg-stone-950/60 backdrop-blur-md text-stone-100 placeholder:text-stone-400 shadow-inner"
                 />
                 {mapSearchQuery && (
                   <button
