@@ -269,23 +269,19 @@ export default function KolkataMetroExplorerModal({
           {/* Subtle warm festive accent glow along top border */}
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent pointer-events-none" />
 
-          {/* Row 1: Brand Badge + Station Search + Theme/Close Actions */}
-          <div className="px-4 sm:px-6 pt-3.5 pb-2.5 sm:pt-4 sm:pb-3 flex items-center justify-between gap-3">
+          {/* Centralized Title: Metro Map */}
+          <div className="pt-3.5 sm:pt-4 pb-1 px-4 text-center">
+            <h1 className={`text-base sm:text-lg font-bold tracking-tight ${isDark ? 'text-white' : 'text-stone-950'}`}>
+              Metro Map
+            </h1>
+          </div>
+
+          {/* Search & Actions Row */}
+          <div className="px-4 sm:px-6 pt-1.5 pb-2.5 sm:pb-3 flex items-center justify-between gap-3">
             {/* Brand / Metro Badge */}
             <div className="flex items-center gap-2.5 shrink-0">
               <div className="w-9.5 h-9.5 sm:w-10 sm:h-10 rounded-2xl bg-amber-400 text-stone-950 flex items-center justify-center shadow-sm font-bold shrink-0">
                 <Train className="w-5 h-5 text-stone-950" />
-              </div>
-              <div className="hidden xs:block sm:block">
-                <div className="flex items-center gap-1.5">
-                  <h2 className={`text-sm sm:text-base font-extrabold tracking-tight leading-tight ${isDark ? 'text-white' : 'text-stone-950'}`}>
-                    Kolkata Metro
-                  </h2>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse hidden sm:inline-block" />
-                </div>
-                <p className={`text-[10px] leading-none hidden sm:block ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                  Puja Transit Network
-                </p>
               </div>
             </div>
 
