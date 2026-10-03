@@ -925,7 +925,7 @@ export default function RoutePlannerPage() {
       {/* 4. Step-by-Step Route Chain (Redesigned Iconic Station Cards & Connectors) */}
       {selectedPandals.length > 0 ? (
         <div className="space-y-2">
-          {/* Itinerary Header & Route Actions */}
+          {/* Itinerary Header */}
           <div className="flex items-center justify-between pt-1 pb-1 px-1">
             <div className="flex items-center gap-2">
               <h2 className="text-base sm:text-xl font-bold font-editorial text-stone-900 dark:text-stone-100">
@@ -934,28 +934,6 @@ export default function RoutePlannerPage() {
               <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#FEF2F2] dark:bg-[#2A1215] text-[#D8261C] border border-[#D8261C]/20 shadow-2xs">
                 {selectedPandals.length} {isBn ? 'প্যান্ডেল' : 'Stops'}
               </span>
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => setIsAddModalOpen(true)}
-                className="px-2.5 sm:px-3 py-1 rounded-full bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 hover:border-[#D8261C] text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center gap-1 shadow-xs transition-all cursor-pointer active:scale-95"
-              >
-                <Plus className="w-3 h-3 text-[#D8261C]" />
-                <span className="hidden sm:inline">{isBn ? 'প্যান্ডেল যোগ করুন' : 'Add Stop'}</span>
-                <span className="sm:hidden">{isBn ? 'যোগ' : 'Add'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleClearAll}
-                className="px-2.5 sm:px-3 py-1 rounded-full bg-rose-50/80 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-400 text-xs font-bold flex items-center gap-1 shadow-xs transition-all cursor-pointer active:scale-95"
-                title="Clear entire itinerary route"
-              >
-                <RotateCcw className="w-3 h-3" />
-                <span>{isBn ? 'রুট মুছুন' : 'Clear Route'}</span>
-              </button>
             </div>
           </div>
           {selectedPandals.map((pandal, index) => {
