@@ -5853,5 +5853,683 @@ export const PANDALS_DATA: Pandal[] = [
     saves_count: 730,
     created_at: "2026-08-01T00:00:00Z",
     updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  // ── NORTH KOLKATA (COMPLETE 2026 GUIDE BATCH) ────────────────
+  {
+    id: "beniatola-sarbojanin",
+    name: "Beniatola",
+    slug: "beniatola-sarbojanin",
+    description: "A deeply revered traditional community celebration in Beniatola, North Kolkata, famed for classical sabeki pratima styling, intricate daaker saaj decorations, and historic neighborhood warmth.",
+    heritage_note: "One of Beniatola's oldest and most evocative traditional pujas in the Sovabazar precinct.",
+    theme: "Heritage Daaker Saaj & Classical Sabeki Splendor (2026)",
+    area: "North Kolkata",
+    locality: "Beniatola, Sovabazar, North Kolkata",
+    latitude: 22.596,
+    longitude: 88.361,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Beniatola+Durga+Puja+Kolkata",
+    nearest_metro: "Sovabazar Sutanuti Metro Station",
+    walking_distance: "500m",
+    walking_time_mins: 6,
+    metro_details: [
+      {
+        station_id: "shovabazar",
+        station_name: "Sovabazar Sutanuti",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "500m",
+        walking_time_mins: 6,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Beniatola+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Heritage",
+      "Traditional",
+      "Near Metro",
+      "North Kolkata",
+      "Sabeki"
+    ],
+    puja_committee: "Beniatola Sarbojanin Durgotsav",
+    best_time: "Evening (6:00 PM – 9:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Community reported",
+      last_updated: "12 mins ago",
+      notes: "Short stroll from Sovabazar Sutanuti Metro; close to Kumartuli."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bnt-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Beniatola classical sabeki Durga idol",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 86,
+    saves_count: 910,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "shobhabajar-sarbojanin",
+    name: "Shobhabajar Sarbojanin",
+    slug: "shobhabajar-sarbojanin",
+    description: "An iconic community puja in the historic Sovabazar neighborhood, celebrating centuried urban Bengali cultural identity with majestic pandal decor and timeless devotion.",
+    heritage_note: "A cornerstone of Sovabazar's living heritage drawing visitors across the historic North Kolkata circuit.",
+    theme: "Vintage Kolkata Nostalgia & Golden Era Art (2026)",
+    area: "North Kolkata",
+    locality: "Sovabazar, North Kolkata",
+    latitude: 22.5975,
+    longitude: 88.364,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Sovabazar+Sarbojanin+Durga+Puja+Kolkata",
+    nearest_metro: "Sovabazar Sutanuti Metro Station",
+    walking_distance: "350m",
+    walking_time_mins: 4,
+    metro_details: [
+      {
+        station_id: "shovabazar",
+        station_name: "Sovabazar Sutanuti",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "350m",
+        walking_time_mins: 4,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Sovabazar+Sarbojanin+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Heritage",
+      "Near Metro",
+      "North Kolkata"
+    ],
+    puja_committee: "Sovabazar Sarbojanin Durgotsav Samiti",
+    best_time: "Afternoon to Early Evening (4:00 PM – 8:00 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "8 mins ago",
+      notes: "Very close to Sovabazar metro station and Rajbari."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "sbzs-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Sovabazar Sarbojanin graceful festive shrine",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 91,
+    saves_count: 1420,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kakurgachi-yubak-brindra",
+    name: "Kakurgachi Yubak Brindra",
+    slug: "kakurgachi-yubak-brindra",
+    description: "A major powerhouse in Kankurgachi celebrated for high-concept innovative installations, massive illumination gates across the thoroughfare, and youth-led vitality.",
+    heritage_note: "A standout Eastern and North-Eastern Kolkata crowd-puller known for artistic grandeur.",
+    theme: "Cosmic Awakening: Celestial Light & Clay Harmony (2026)",
+    area: "North Kolkata",
+    locality: "Kankurgachi, North-East Kolkata",
+    latitude: 22.578,
+    longitude: 88.388,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kakurgachi+Yubak+Brindra+Durga+Puja+Kolkata",
+    nearest_metro: "Phoolbagan Metro Station",
+    walking_distance: "750m",
+    walking_time_mins: 9,
+    metro_details: [
+      {
+        station_id: "phoolbagan",
+        station_name: "Phoolbagan",
+        line: "Green Line (East-West)",
+        line_code: "green",
+        walking_distance: "750m",
+        walking_time_mins: 9,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Kakurgachi+Yubak+Brindra+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "Near Metro",
+      "Illumination"
+    ],
+    puja_committee: "Kakurgachi Yubak Brindra Club",
+    best_time: "Night (8:00 PM – 1:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "10 mins ago",
+      notes: "Easily accessible via Green Line Metro Phoolbagan station."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "kyb-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kakurgachi Yubak Brindra vibrant illuminated pandal",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 93,
+    saves_count: 1740,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "kakurgachi-mitali-sangha",
+    name: "Kakurgachi Mitali Sangha",
+    slug: "kakurgachi-mitali-sangha",
+    description: "Renowned for socially poignant themes and sublime handcrafted architectural structures, Mitali Sangha in Kankurgachi draws connoisseurs of thematic festival art.",
+    heritage_note: "A multi-award winning neighborhood club respected for sensitive thematic narratives.",
+    theme: "Eco-Artisan Traditions & Riverine Bengal Lore (2026)",
+    area: "North Kolkata",
+    locality: "Kankurgachi, North-East Kolkata",
+    latitude: 22.5765,
+    longitude: 88.387,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Kakurgachi+Mitali+Sangha+Durga+Puja+Kolkata",
+    nearest_metro: "Phoolbagan Metro Station",
+    walking_distance: "800m",
+    walking_time_mins: 10,
+    metro_details: [
+      {
+        station_id: "phoolbagan",
+        station_name: "Phoolbagan",
+        line: "Green Line (East-West)",
+        line_code: "green",
+        walking_distance: "800m",
+        walking_time_mins: 10,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Kakurgachi+Mitali+Sangha+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "Award Winning",
+      "Near Metro",
+      "Eco-friendly"
+    ],
+    puja_committee: "Mitali Sangha Kankurgachi",
+    best_time: "Evening (7:00 PM – 11:30 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "14 mins ago",
+      notes: "Short walk from Phoolbagan Metro; pair with Kakurgachi Yubak Brindra."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "kms-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Kakurgachi Mitali Sangha artisanal decor",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 90,
+    saves_count: 1390,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "baranagar-netaji-colony",
+    name: "Baranagar Netaji Colony Low Land",
+    slug: "baranagar-netaji-colony",
+    description: "A landmark puja in northern suburban Kolkata, Netaji Colony Low Land is famed for colossal experiential set designs, immersive natural ecosystems, and massive footfalls.",
+    heritage_note: "One of Baranagar's largest and most famous pujas that rivals central city pandals in grandeur.",
+    theme: "Enchanted Forest of Divinity & Sacred Biospheres (2026)",
+    area: "North Kolkata",
+    locality: "Baranagar / Sinthi More, North Kolkata",
+    latitude: 22.645,
+    longitude: 88.375,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Baranagar+Netaji+Colony+Low+Land+Durga+Puja+Kolkata",
+    nearest_metro: "Baranagar Metro Station",
+    walking_distance: "900m",
+    walking_time_mins: 11,
+    metro_details: [
+      {
+        station_id: "baranagar",
+        station_name: "Baranagar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "900m",
+        walking_time_mins: 11,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Baranagar+Metro+Station&destination=Baranagar+Netaji+Colony+Low+Land+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Art & Theme",
+      "Near Metro",
+      "Mega Pandal"
+    ],
+    puja_committee: "Netaji Colony Low Land Sarbojanin Durgotsav",
+    best_time: "Night (8:00 PM – 1:30 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "5 mins ago",
+      notes: "High crowd levels; 11-min walk from Baranagar Blue Line Metro terminal."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "bnc-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Netaji Colony Low Land monumental structure",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 96,
+    saves_count: 2210,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "baranagar-dada-bhai-sangha",
+    name: "Baranagar Dada Bhai Sangha",
+    slug: "baranagar-dada-bhai-sangha",
+    description: "A vibrant Baranagar tradition known for warm neighborhood hospitality, community welfare initiatives, and artistic pandals honoring regional folk craftspeople.",
+    heritage_note: "A beloved Sinthi More neighborhood club with half a century of festive traditions.",
+    theme: "Clay, Jute & Brass: Artisans of Rural Bengal (2026)",
+    area: "North Kolkata",
+    locality: "Baranagar / Sinthi More, North Kolkata",
+    latitude: 22.639,
+    longitude: 88.378,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Baranagar+Dada+Bhai+Sangha+Durga+Puja+Kolkata",
+    nearest_metro: "Noapara Metro Station",
+    walking_distance: "1.2 km",
+    walking_time_mins: 15,
+    metro_details: [
+      {
+        station_id: "noapara",
+        station_name: "Noapara",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.2 km",
+        walking_time_mins: 15,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Noapara+Metro+Station&destination=Baranagar+Dada+Bhai+Sangha+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "North Kolkata",
+      "Folk Art",
+      "Community"
+    ],
+    puja_committee: "Dada Bhai Sangha Baranagar",
+    best_time: "Evening (6:30 PM – 10:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "20 mins ago",
+      notes: "Convenient to visit when touring northern metro stations."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "dbs-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Baranagar Dada Bhai Sangha illuminated facade",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 83,
+    saves_count: 760,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "karbagan-sarbojanin",
+    name: "Karbagan Sarbojanin Durga Puja",
+    slug: "karbagan-sarbojanin",
+    description: "Situated in the historic Maniktala-Ultadanga corridor, Karbagan Sarbojanin is famed for delicate artisanal craftsmanship using non-toxic earthen materials, cloth, and musical motifs.",
+    heritage_note: "A revered cultural stop on the Ultadanga puja circuit celebrating authentic artistry.",
+    theme: "Symphony of Clay & Weaves (2026)",
+    area: "North Kolkata",
+    locality: "Karbagan, Ultadanga / Maniktala, North Kolkata",
+    latitude: 22.591,
+    longitude: 88.378,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Karbagan+Sarbojanin+Durga+Puja+Kolkata",
+    nearest_metro: "Shyambazar Metro Station",
+    walking_distance: "1.1 km",
+    walking_time_mins: 13,
+    metro_details: [
+      {
+        station_id: "shyambazar",
+        station_name: "Shyambazar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.1 km",
+        walking_time_mins: 13,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Karbagan+Sarbojanin+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "North Kolkata",
+      "Handicraft",
+      "Eco-friendly"
+    ],
+    puja_committee: "Karbagan Sarbojanin Durgotsav Committee",
+    best_time: "Evening (6:30 PM – 10:30 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Community reported",
+      last_updated: "18 mins ago",
+      notes: "Close to Telanga Bagan and Gouribari."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "kbg-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Karbagan Sarbojanin intricate handicraft display",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 87,
+    saves_count: 1050,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "ultadanga-pallyshree",
+    name: "Ultadanga Pallyshree",
+    slug: "ultadanga-pallyshree",
+    description: "A much-beloved North Kolkata community puja near Ultadanga junction, recognized for innovative thematic installations and deep social consciousness.",
+    heritage_note: "A cornerstone of Ultadanga's festive pride for decades.",
+    theme: "Sacred Roots: Forest Shrines & Ancient Lore (2026)",
+    area: "North Kolkata",
+    locality: "Ultadanga, North Kolkata",
+    latitude: 22.5925,
+    longitude: 88.382,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Ultadanga+Pallyshree+Durga+Puja+Kolkata",
+    nearest_metro: "Shyambazar Metro Station",
+    walking_distance: "1.3 km",
+    walking_time_mins: 16,
+    metro_details: [
+      {
+        station_id: "shyambazar",
+        station_name: "Shyambazar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.3 km",
+        walking_time_mins: 16,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Ultadanga+Pallyshree+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Art & Theme",
+      "North Kolkata",
+      "Community",
+      "Popular"
+    ],
+    puja_committee: "Ultadanga Pallyshree Puja Committee",
+    best_time: "Evening (7:00 PM – 11:00 PM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Estimated",
+      last_updated: "15 mins ago",
+      notes: "Easily linked with Ultadanga Sangrami and Telanga Bagan."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "ups-1",
+        url: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80",
+        caption: "Ultadanga Pallyshree illuminated night scene",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 85,
+    saves_count: 880,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "ultadanga-sangrami",
+    name: "Ultadanga Sangrami",
+    slug: "ultadanga-sangrami",
+    description: "Celebrated for energetic youth participation, spirited cultural evenings, and creative pandal styling reflecting the resilient fighting spirit of the city.",
+    heritage_note: "A vibrant club in Ultadanga known for community sports and grand festival celebrations.",
+    theme: "Resilience & Hope: A Kolkata Odyssey (2026)",
+    area: "North Kolkata",
+    locality: "Ultadanga, North Kolkata",
+    latitude: 22.594,
+    longitude: 88.3835,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Ultadanga+Sangrami+Durga+Puja+Kolkata",
+    nearest_metro: "Shyambazar Metro Station",
+    walking_distance: "1.4 km",
+    walking_time_mins: 17,
+    metro_details: [
+      {
+        station_id: "shyambazar",
+        station_name: "Shyambazar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.4 km",
+        walking_time_mins: 17,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Ultadanga+Sangrami+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Youth & Energy",
+      "North Kolkata",
+      "Art & Theme"
+    ],
+    puja_committee: "Ultadanga Sangrami Club",
+    best_time: "Evening (7:00 PM – 11:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "22 mins ago",
+      notes: "Short rickshaw ride from Shyambazar or Ultadanga station."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "usg-1",
+        url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+        caption: "Ultadanga Sangrami majestic festive backdrop",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 84,
+    saves_count: 810,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "ultadanga-yuba-brindra",
+    name: "Ultadanga Yuba Brindra",
+    slug: "ultadanga-yuba-brindra",
+    description: "A vibrant neighborhood celebration creating imaginative, kid-friendly and family-oriented installations with bright festive illumination and joyous music.",
+    heritage_note: "A popular Ultadanga neighborhood club drawing crowds across North Kolkata.",
+    theme: "Kaleidoscope of Festive Joy (2026)",
+    area: "North Kolkata",
+    locality: "Ultadanga, North Kolkata",
+    latitude: 22.5915,
+    longitude: 88.381,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Ultadanga+Yuba+Brindra+Durga+Puja+Kolkata",
+    nearest_metro: "Shyambazar Metro Station",
+    walking_distance: "1.2 km",
+    walking_time_mins: 15,
+    metro_details: [
+      {
+        station_id: "shyambazar",
+        station_name: "Shyambazar",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "1.2 km",
+        walking_time_mins: 15,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Ultadanga+Yuba+Brindra+Durga+Puja+Kolkata"
+      }
+    ],
+    tags: [
+      "Community",
+      "North Kolkata",
+      "Illumination"
+    ],
+    puja_committee: "Ultadanga Yuba Brindra",
+    best_time: "Evening (6:30 PM – 10:00 PM)",
+    crowd_status: {
+      level: "moderate",
+      source: "Estimated",
+      last_updated: "25 mins ago",
+      notes: "Family-friendly atmosphere."
+    },
+    recommended_days: [
+      "Saptami",
+      "Ashtami",
+      "Nabami"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "uyb-1",
+        url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+        caption: "Ultadanga Yuba Brindra festive lighting display",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 82,
+    saves_count: 670,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
+  },
+
+  {
+    id: "prafullakanan-baguihati",
+    name: "Praffulakanan",
+    slug: "prafullakanan-baguihati",
+    description: "A premier Durga Puja along the VIP Road corridor in Baguihati, Praffulakanan attracts massive crowds with opulent architectural recreations and glittering illumination gates.",
+    heritage_note: "One of the topmost attractions on the VIP Road and North-East Kolkata festive highway.",
+    theme: "Royal Palace of Rajasthan: Mirrors & Sandstone (2026)",
+    area: "Airport Corridor",
+    locality: "Prafulla Kanan, Baguihati / VIP Road, Kolkata",
+    latitude: 22.607,
+    longitude: 88.423,
+    google_maps_url: "https://www.google.com/maps/search/?api=1&query=Prafulla+Kanan+Durga+Puja+Baguihati+Kolkata",
+    nearest_metro: "Dum Dum Metro Station",
+    walking_distance: "3.2 km",
+    walking_time_mins: 38,
+    metro_details: [
+      {
+        station_id: "dum-dum",
+        station_name: "Dum Dum",
+        line: "Blue Line (North-South)",
+        line_code: "blue",
+        walking_distance: "3.2 km",
+        walking_time_mins: 38,
+        directions_url: "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Prafulla+Kanan+Durga+Puja+Baguihati+Kolkata"
+      }
+    ],
+    tags: [
+      "Must Visit",
+      "Architecture Replica",
+      "Airport Corridor",
+      "VIP Road",
+      "Popular"
+    ],
+    puja_committee: "Prafulla Kanan Sarbojanin Durgotsav",
+    best_time: "Night (9:00 PM – 2:00 AM)",
+    crowd_status: {
+      level: "heavy",
+      source: "Community reported",
+      last_updated: "6 mins ago",
+      notes: "Heavily crowded on VIP Road; auto / cab recommended from Dum Dum Metro."
+    },
+    recommended_days: [
+      "Shashti",
+      "Saptami",
+      "Ashtami",
+      "Nabami",
+      "Tonight"
+    ],
+    featured_image: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80",
+    images: [
+      {
+        id: "pfk-1",
+        url: "https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=1200&q=80",
+        caption: "Prafulla Kanan grand royal palace installation",
+        category: "official"
+      }
+    ],
+    latest_images: [],
+    trending_score: 95,
+    saves_count: 2100,
+    created_at: "2026-08-01T00:00:00Z",
+    updated_at: "2026-09-30T10:00:00Z"
   }
 ];
