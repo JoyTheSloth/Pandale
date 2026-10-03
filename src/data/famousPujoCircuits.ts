@@ -16,10 +16,12 @@ export interface CircuitPandal {
   };
   highlight: string;
   googleMapsDirectionsUrl: string;
+  slug?: string;
+  image?: string;
 }
 
 export interface PujoZoneCircuit {
-  id: 'north' | 'central' | 'south';
+  id: 'north' | 'central' | 'south' | 'east';
   name: string;
   shortName: string;
   bengaliName: string;
@@ -32,7 +34,7 @@ export interface PujoZoneCircuit {
   pandals: CircuitPandal[];
 }
 
-export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south', PujoZoneCircuit> = {
+export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east', PujoZoneCircuit> = {
   north: {
     id: 'north',
     name: 'North Zone Circuit',
@@ -212,6 +214,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south', PujoZon
       },
       {
         id: 'sreebhumi-sporting-club',
+        slug: 'sree-bhumi-sporting-club',
         name: 'Sreebhumi Sporting Club',
         bengaliName: 'শ্রীভূমি স্পোর্টিং ক্লাব',
         nearestStation: 'Belgachia / Dum Dum Metro',
@@ -221,7 +224,98 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south', PujoZon
         address: 'Lake Town, VIP Road',
         coordinates: { lat: 22.5976, lng: 88.3978 },
         highlight: 'Towering monumental palace architecture with dazzling chandeliers and pure gold jewelry.',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Sree+Bhumi+Sporting+Club&travelmode=walking'
+      },
+      {
+        id: 'beniatola-sarbojanin',
+        slug: 'beniatola-sarbojanin',
+        name: 'Beniatola Sarbojanin',
+        bengaliName: 'বেনিয়াটোলা সর্বজনীন',
+        nearestStation: 'Shovabazar Sutanuti Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '550m',
+        walkTimeToStationMins: 7,
+        address: 'Beniatola Ghat Road, Sovabazar',
+        coordinates: { lat: 22.5962, lng: 88.3625 },
+        highlight: 'Renowned for authentic heritage artistic aesthetics, traditional lighting, and Sabeki idol.',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Beniatola+Sarbojanin+Durgotsav&travelmode=walking'
+      },
+      {
+        id: 'jagat-mukherjee-park',
+        slug: 'jagat-mukherjee-park',
+        name: 'Jagat Mukherjee Park',
+        bengaliName: 'জগৎ মুখার্জি পার্ক',
+        nearestStation: 'Shovabazar Sutanuti Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '400m',
+        walkTimeToStationMins: 5,
+        address: 'Jagat Mukherjee Park, Sovabazar',
+        coordinates: { lat: 22.5995, lng: 88.3672 },
+        highlight: 'Imaginative walk-through mechanical and underwater themed pandal structures.',
+        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Shovabazar+Sutanuti+Metro+Station&destination=Jagat+Mukherjee+Park+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'chhorbagan-sarbojanin',
+        slug: 'chorbagan-sarbojanin',
+        name: 'Chhorbagan Sarbojanin',
+        bengaliName: 'চোরবাগান সর্বজনীন',
+        nearestStation: 'Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '300m',
+        walkTimeToStationMins: 4,
+        address: 'Chorbagan, Muktaram Babu Street',
+        coordinates: { lat: 22.5835, lng: 88.3621 },
+        highlight: 'Heritage craftsmanship with subtle emotional artistic themes and classical touch.',
+        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Chorbagan+Sarbojanin+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'nalin-sarkar-street',
+        slug: 'nalin-sarkar-street',
+        name: 'Nalin Sarkar Street',
+        bengaliName: 'নলিন সরকার স্ট্রিট',
+        nearestStation: 'Shyambazar Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '500m',
+        walkTimeToStationMins: 6,
+        address: 'Nalin Sarkar Street, Hatibagan',
+        coordinates: { lat: 22.5968, lng: 88.3742 },
+        highlight: 'Celebrated for innovative miniature art installations and intricate wall reliefs.',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Nalin+Sarkar+Street+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'hatibagan-nobin-pally',
+        slug: 'hatibagan-nobin-pally',
+        name: 'Hatibagan Nobin Pally',
+        bengaliName: 'হাতিবাগান নবীন পল্লী',
+        nearestStation: 'Shyambazar Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '450m',
+        walkTimeToStationMins: 5,
+        address: 'Bidhan Sarani, Hatibagan',
+        coordinates: { lat: 22.5978, lng: 88.3725 },
+        highlight: 'Lively community ambiance, experimental motifs and exquisite traditional Protima.',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Hatibagan+Nobin+Pally+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'bidhan-sarani-atlas',
+        slug: 'bidhan-sarani-atlas-club',
+        name: 'Bidhan Sarani Atlas',
+        bengaliName: 'বিধান সরণি অ্যাটলাস',
+        nearestStation: 'Shyambazar / Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '600m',
+        walkTimeToStationMins: 7,
+        address: 'Bidhan Sarani, Sovabazar Crossing',
+        coordinates: { lat: 22.5942, lng: 88.3695 },
+        highlight: 'One of the prominent boulevard pujas anchoring the North Kolkata festival corridor.',
+        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Bidhan+Sarani+Atlas+Durga+Puja&travelmode=walking'
       }
     ]
   },
@@ -576,6 +670,154 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south', PujoZon
         coordinates: { lat: 22.4722, lng: 88.3638 },
         highlight: 'Massive experimental conceptual theme installations that define South Kolkata festive circuit.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Gitanjali+Metro+Station&destination=Naktala+Udayan+Sangha&travelmode=walking'
+      }
+    ]
+  },
+  east: {
+    id: 'east',
+    name: 'East Zone Circuit',
+    shortName: 'East',
+    bengaliName: 'পূর্ব সার্কিট',
+    tagline: 'Planned Township Architectural Marvels, Modern Illumination & Tech Corridors',
+    captionText: 'Futuristic pandals, expansive open parks and Green Line connectivity! 🌿🚇',
+    primaryStations: ['Karunamoyee', 'Central Park', 'Phoolbagan', 'Salt Lake Stadium', 'City Centre'],
+    totalPandals: 8,
+    approxCircuitWalkKm: '3.6 km total circuit',
+    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+    pandals: [
+      {
+        id: 'salt-lake-fd-block',
+        slug: 'salt-lake-fd-block',
+        name: 'Salt Lake FD Block',
+        bengaliName: 'সল্টলেক এফডি ব্লক',
+        nearestStation: 'Karunamoyee Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '600m',
+        walkTimeToStationMins: 7,
+        distanceToNextPandal: '850m (10 mins)',
+        nextPandalName: 'Salt Lake BJ Block',
+        address: 'FD Block Park, Sector III, Salt Lake',
+        coordinates: { lat: 22.5786, lng: 88.4112 },
+        highlight: 'Famous for monumental architectural themes and family-friendly spacious park setting.',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=FD+Block+Durga+Puja+Salt+Lake&travelmode=walking'
+      },
+      {
+        id: 'salt-lake-bj-block',
+        slug: 'salt-lake-bj-block',
+        name: 'Salt Lake BJ Block',
+        bengaliName: 'সল্টলেক বিজে ব্লক',
+        nearestStation: 'Karunamoyee / Central Park Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '750m',
+        walkTimeToStationMins: 9,
+        distanceToNextPandal: '600m (7 mins)',
+        nextPandalName: 'Salt Lake AK Block',
+        address: 'BJ Block, Sector II, Salt Lake',
+        coordinates: { lat: 22.5824, lng: 88.4136 },
+        highlight: 'Aesthetic eco-conscious artistry and intricate lighting installations.',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=BJ+Block+Durga+Puja+Salt+Lake&travelmode=walking'
+      },
+      {
+        id: 'salt-lake-ak-block',
+        slug: 'salt-lake-ak-block',
+        name: 'Salt Lake AK Block',
+        bengaliName: 'সল্টলেক একে ব্লক',
+        nearestStation: 'Karunamoyee Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '800m',
+        walkTimeToStationMins: 10,
+        distanceToNextPandal: '700m (8 mins)',
+        nextPandalName: 'Salt Lake AJ Block',
+        address: 'AK Block, Sector II, Salt Lake',
+        coordinates: { lat: 22.5855, lng: 88.4172 },
+        highlight: 'Award-winning conceptual designs and peaceful residential festive ambiance.',
+        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Karunamoyee+Metro+Station&destination=AK+Block+Durga+Puja+Salt+Lake&travelmode=walking'
+      },
+      {
+        id: 'salt-lake-aj-block',
+        slug: 'salt-lake-aj-block',
+        name: 'Salt Lake AJ Block',
+        bengaliName: 'সল্টলেক এজে ব্লক',
+        nearestStation: 'Central Park / Karunamoyee Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '650m',
+        walkTimeToStationMins: 8,
+        distanceToNextPandal: '1.2 km (Auto 4 mins)',
+        nextPandalName: 'Phoolbagan Sarbojanin',
+        address: 'AJ Block Park, Salt Lake',
+        coordinates: { lat: 22.5888, lng: 88.4195 },
+        highlight: 'Vibrant cultural programs and artistic Bengal heritage theme interpretations.',
+        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=AJ+Block+Durga+Puja+Salt+Lake&travelmode=walking'
+      },
+      {
+        id: 'phoolbagan-sarbojanin',
+        slug: 'phoolbagan-sarbojanin',
+        name: 'Phoolbagan Sarbojanin',
+        bengaliName: 'ফুলবাগান সর্বজনীন',
+        nearestStation: 'Phoolbagan Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '250m',
+        walkTimeToStationMins: 3,
+        distanceToNextPandal: '800m (9 mins)',
+        nextPandalName: 'Kakurgachi Yubak Brinda',
+        address: 'Phoolbagan Crossing, Kankurgachi',
+        coordinates: { lat: 22.5712, lng: 88.3965 },
+        highlight: 'Steps away from Green Line metro, featuring magnificent illumination gates.',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Phoolbagan+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'kakurgachi-yubak-brinda',
+        slug: 'kakurgachi-yubak-brinda',
+        name: 'Kakurgachi Yubak Brinda',
+        bengaliName: 'কাঁকুড়গাছি যুবক বৃন্দ',
+        nearestStation: 'Phoolbagan Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '450m',
+        walkTimeToStationMins: 5,
+        distanceToNextPandal: '650m (7 mins)',
+        nextPandalName: 'Beleghata 33 Pally',
+        address: 'Kakurgachi, VIP Market vicinity',
+        coordinates: { lat: 22.5745, lng: 88.3921 },
+        highlight: 'Dynamic youth-driven social welfare themes and grand idols.',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Kakurgachi+Yubak+Brinda&travelmode=walking'
+      },
+      {
+        id: 'beleghata-33-pally',
+        slug: 'beleghata-33-pally',
+        name: 'Beleghata 33 Pally',
+        bengaliName: 'বেলেঘাটা ৩৩ পল্লী',
+        nearestStation: 'Phoolbagan / Sealdah Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '700m',
+        walkTimeToStationMins: 8,
+        distanceToNextPandal: '550m (6 mins)',
+        nextPandalName: 'Swabhumi Heritage',
+        address: 'Subhash Sarobar vicinty, Beleghata',
+        coordinates: { lat: 22.5645, lng: 88.3985 },
+        highlight: 'Thought-provoking environmental sustainability concepts and nostalgia themes.',
+        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Beleghata+33+Pally+Durga+Puja&travelmode=walking'
+      },
+      {
+        id: 'swabhumi-heritage',
+        slug: 'swabhumi-heritage-pandal',
+        name: 'Swabhumi Heritage Pandal',
+        bengaliName: 'স্বভূমি হেরিটেজ প্যান্ডেল',
+        nearestStation: 'Salt Lake Stadium / Phoolbagan Metro',
+        nearestStationLine: 'Green Line',
+        distanceToStation: '500m',
+        walkTimeToStationMins: 6,
+        address: 'Swabhumi Urban Micro-village, EM Bypass',
+        coordinates: { lat: 22.5721, lng: 88.4042 },
+        highlight: 'Authentic royal Rajasthani & Bengal craft fusion with artisanal food stalls.',
+        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Salt+Lake+Stadium+Metro+Station&destination=Swabhumi+Heritage+Park&travelmode=walking'
       }
     ]
   }

@@ -12,12 +12,10 @@ import {
 import { PANDALS_DATA } from '@/data/pandals';
 import PandalCard from '@/components/PandalCard';
 import { useLanguage } from '@/context/LanguageContext';
-import FamousPandalCircuitModal from '@/components/FamousPandalCircuitModal';
 
 export default function HomePage() {
   const { language } = useLanguage();
   const isBn = language === 'bn';
-  const [circuitModalZone, setCircuitModalZone] = useState<'north' | 'central' | 'south' | null>(null);
 
   // Featured Pandals (Must Visit)
   const featuredPandals = useMemo(() => {
@@ -173,17 +171,15 @@ export default function HomePage() {
           {[
             {
               id: 'north',
-              circuitKey: 'north' as const,
               title: isBn ? 'উত্তর সার্কিট' : 'North Zone',
-              subtitle: isBn ? '১২টি বিখ্যাত পুজো • শ্যামবাজার ও শোভাবাজার' : '12 Famous Pandals • Shyambazar & Shovabazar Hub',
+              subtitle: isBn ? '১৮টি বিখ্যাত পুজো • শ্যামবাজার ও শোভাবাজার' : '18 Famous Pandals • Shyambazar & Shovabazar Hub',
               metro: 'Blue Line (Shyambazar / Shovabazar)',
-              pandalsCount: isBn ? '১২টি বিখ্যাত প্যান্ডেল' : '12 Famous Pandals',
+              pandalsCount: isBn ? '১৮টি বিখ্যাত প্যান্ডেল' : '18 Famous Pandals',
               landmarks: 'Bagbazar • Kumartuli • Hatibagan • Kashi Bose',
               image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=700&q=80',
             },
             {
               id: 'south',
-              circuitKey: 'south' as const,
               title: isBn ? 'দক্ষিণ সার্কিট' : 'South Zone',
               subtitle: isBn ? '১৫টি বিখ্যাত পুজো • কালীঘাট ও গড়িয়াহাট' : '15 Famous Pandals • Kalighat & Gariahat Hub',
               metro: 'Blue Line (Kalighat / Jatin Das Park)',
@@ -193,7 +189,6 @@ export default function HomePage() {
             },
             {
               id: 'central',
-              circuitKey: 'central' as const,
               title: isBn ? 'মধ্য সার্কিট' : 'Central Zone',
               subtitle: isBn ? '৭টি বিখ্যাত পুজো • সেন্ট্রাল ও এমজি রোড' : '7 Famous Pandals • Central & MG Road Hub',
               metro: 'Blue & Green (Central / Sealdah)',
@@ -203,25 +198,17 @@ export default function HomePage() {
             },
             {
               id: 'east',
-              circuitKey: null,
               title: isBn ? 'পূর্ব সার্কিট' : 'East Zone',
-              subtitle: isBn ? 'সল্টলেক ও টেক করিডোর' : 'Salt Lake & Tech Corridors',
+              subtitle: isBn ? '৮টি বিখ্যাত পুজো • সল্টলেক ও টেক করিডোর' : '8 Famous Pandals • Salt Lake & Tech Corridors',
               metro: 'Green Line (Sector V / Karunamoyee)',
-              pandalsCount: isBn ? 'সল্টলেক ও নিউ টাউন' : 'Salt Lake & New Town',
-              landmarks: 'Salt Lake FD Block • Sree Bhumi',
+              pandalsCount: isBn ? '৮টি বিখ্যাত প্যান্ডেল' : '8 Famous Pandals',
+              landmarks: 'Salt Lake FD Block • BJ Block • Phoolbagan',
               image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80',
             }
           ].map((zone) => (
-            <button
+            <Link
               key={zone.id}
-              type="button"
-              onClick={() => {
-                if (zone.circuitKey) {
-                  setCircuitModalZone(zone.circuitKey);
-                } else {
-                  window.location.href = '/pandals?zone=East+Kolkata';
-                }
-              }}
+              href={`/hopping?zone=${zone.id}`}
               className="text-left cursor-pointer group min-w-[280px] sm:min-w-0 flex-1 snap-center bg-white dark:bg-[#1A1210] rounded-[2.5rem] border border-[#E7E5E4] dark:border-white/8 p-5 sm:p-6 shadow-luxe shadow-luxe-hover hover:border-[#F59E0B] dark:hover:border-[#F59E0B]/40 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
             >
               {/* Card Header: Arrow ↗ top-right & Centered Title */}
@@ -272,7 +259,7 @@ export default function HomePage() {
                   <span className="truncate">{zone.metro}</span>
                 </div>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </section>
@@ -304,14 +291,7 @@ export default function HomePage() {
         </div>
       </section>
 
-        {/* Famous Pandal Circuit Modal with Station Distances */}
-        <FamousPandalCircuitModal
-          isOpen={!!circuitModalZone}
-          onClose={() => setCircuitModalZone(null)}
-          initialZone={circuitModalZone || 'north'}
-        />
       </div>
-
     </div>
   );
 }

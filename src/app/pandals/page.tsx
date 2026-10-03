@@ -9,7 +9,6 @@ import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
 import { Sparkles, AlertCircle, Loader2, ArrowRight, Train } from 'lucide-react';
-import FamousPandalCircuitModal from '@/components/FamousPandalCircuitModal';
 import KolkataMetroExplorerModal from '@/components/KolkataMetroExplorerModal';
 import { useLocation } from '@/context/LocationContext';
 import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
@@ -26,7 +25,6 @@ function PandalsContent() {
 
   // Filter states
   const [isMetroExplorerOpen, setIsMetroExplorerOpen] = useState(false);
-  const [circuitModalZone, setCircuitModalZone] = useState<'north' | 'central' | 'south' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedZone, setSelectedZone] = useState<ZoneArea | 'All'>(initialZone);
   const [nearMetroOnly, setNearMetroOnly] = useState(initialNearMetro);
@@ -253,13 +251,6 @@ function PandalsContent() {
       <KolkataMetroExplorerModal
         isOpen={isMetroExplorerOpen}
         onClose={() => setIsMetroExplorerOpen(false)}
-      />
-
-      {/* Famous Pandal Circuit Modal with Station Distances */}
-      <FamousPandalCircuitModal
-        isOpen={!!circuitModalZone}
-        onClose={() => setCircuitModalZone(null)}
-        initialZone={circuitModalZone || 'north'}
       />
 
     </div>
