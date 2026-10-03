@@ -25,7 +25,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-16 md:gap-24 overflow-hidden">
+    <div className="w-full flex flex-col overflow-hidden">
       
       {/* 1. HERO SECTION — RESPONSIVE: mobile 9:16 poster / desktop 16:9 full-bleed */}
       <section className="relative w-full h-[100dvh] overflow-hidden bg-[#0C0108]">
@@ -87,7 +87,65 @@ export default function HomePage() {
         </button>
       </section>
 
-      {/* 2. EXPLORE BY NEIGHBORHOODS (ARCHED DOME CARDS) */}
+      {/* 1.5 MOVING MARQUEE TICKER BANNER — TOTAL PANDALS IN THE LIST */}
+      <Link
+        href="/pandals"
+        className="w-full bg-gradient-to-r from-[#140207] via-[#2A0510] to-[#140207] border-y border-amber-500/25 py-3 sm:py-3.5 overflow-hidden flex items-center relative group select-none shadow-md hover:border-amber-400/50 transition-colors z-10"
+        title={isBn ? 'সম্পূর্ণ মণ্ডপ তালিকা দেখুন' : 'View all pandals in the list'}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="animate-marquee whitespace-nowrap flex items-center gap-8 sm:gap-12 text-xs sm:text-sm font-medium tracking-wide">
+          {[1, 2].map((groupKey) => (
+            <div key={groupKey} className="flex items-center gap-8 sm:gap-12 shrink-0">
+              <span className="flex items-center gap-2 text-white font-semibold">
+                <span className="flex h-2.5 w-2.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D8261C]"></span>
+                </span>
+                <span className="text-amber-300 font-bold font-mono text-sm sm:text-base">
+                  {PANDALS_DATA.length}
+                </span>
+                <span className="text-white/95 uppercase tracking-wider text-[11px] sm:text-xs font-semibold">
+                  {isBn ? 'টি মণ্ডপ বর্তমানে তালিকায় অন্তর্ভুক্ত' : 'Total Pandals in the List Right Now'}
+                </span>
+              </span>
+
+              <span className="text-amber-500/60 text-xs">✦</span>
+
+              <span className="flex items-center gap-2 text-white/80 text-[11px] sm:text-xs font-mono uppercase tracking-wider">
+                <span>🚇</span>
+                <span>{isBn ? 'মেট্রো স্টেশন ও হাঁটার রুট ম্যাপিং' : 'Full Metro Stations & Walking Routes'}</span>
+              </span>
+
+              <span className="text-amber-500/60 text-xs">✦</span>
+
+              <span className="flex items-center gap-2 text-amber-200 text-[11px] sm:text-xs font-semibold uppercase tracking-wider">
+                <span>🌺</span>
+                <span>{isBn ? 'দুর্গাপূজা ২০২৬ সম্পূর্ণ গাইড' : 'Durga Puja 2026 Live Guide'}</span>
+              </span>
+
+              <span className="text-amber-500/60 text-xs">✦</span>
+
+              <span className="flex items-center gap-2 text-white/80 text-[11px] sm:text-xs font-mono uppercase tracking-wider">
+                <span>📍</span>
+                <span>{isBn ? 'উত্তর · দক্ষিণ · মধ্য · পূর্ব · এয়ারপোর্ট করিডোর' : 'North · South · Central · East · Airport Corridor'}</span>
+              </span>
+
+              <span className="text-amber-500/60 text-xs">✦</span>
+
+              <span className="flex items-center gap-2 text-white/80 text-[11px] sm:text-xs font-mono uppercase tracking-wider">
+                <span>🥁</span>
+                <span>{isBn ? 'লাইভ ভিড় এবং আরতির সময়সূচী' : 'Live Crowd Status & Timings'}</span>
+              </span>
+
+              <span className="text-amber-500/60 text-xs">✦</span>
+            </div>
+          ))}
+        </div>
+      </Link>
+
+      <div className="w-full flex flex-col gap-16 md:gap-24 pt-10 md:pt-14">
+        {/* 2. EXPLORE BY NEIGHBORHOODS (ARCHED DOME CARDS) */}
       <section id="explore-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-mt-20">
         {/* Centered Editorial Header with User Requested Caption */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
@@ -246,12 +304,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Famous Pandal Circuit Modal with Station Distances */}
-      <FamousPandalCircuitModal
-        isOpen={!!circuitModalZone}
-        onClose={() => setCircuitModalZone(null)}
-        initialZone={circuitModalZone || 'north'}
-      />
+        {/* Famous Pandal Circuit Modal with Station Distances */}
+        <FamousPandalCircuitModal
+          isOpen={!!circuitModalZone}
+          onClose={() => setCircuitModalZone(null)}
+          initialZone={circuitModalZone || 'north'}
+        />
+      </div>
 
     </div>
   );

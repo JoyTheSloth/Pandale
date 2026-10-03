@@ -270,6 +270,22 @@ html.dark .leaflet-container {
   animation: jiggle 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 .animate-periodic-jiggle {
   animation: periodic-jiggle 4s ease-in-out infinite;
 }
