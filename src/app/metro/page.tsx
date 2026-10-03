@@ -196,9 +196,6 @@ export default function MetroGuidePage() {
             <span className="text-xs font-mono uppercase tracking-wider text-[#D8261C] dark:text-amber-400 font-bold flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" /> Metro Line Corridors
             </span>
-            <span className="text-[11px] text-stone-500 font-medium">
-              (Tap a card to filter stations)
-            </span>
           </div>
 
           {selectedLine !== 'all' && (
@@ -283,7 +280,7 @@ export default function MetroGuidePage() {
                 </div>
 
                 {/* 2. Content Area */}
-                <div className="relative z-10 px-0.5 space-y-0.5 mb-1.5">
+                <div className="relative z-10 px-0.5 space-y-0.5">
                   <div className="flex items-center gap-1.5">
                     <span
                       className="w-2 h-2 rounded-full shrink-0 animate-pulse"
@@ -296,30 +293,6 @@ export default function MetroGuidePage() {
                   <p className="text-[11px] text-stone-600 dark:text-stone-300 font-semibold line-clamp-1">
                     {line.route}
                   </p>
-                </div>
-
-                {/* 3. Bottom Bar: Action Cue + Chevron */}
-                <div className="flex items-center justify-between relative z-10 pt-1.5 border-t border-stone-200/80 dark:border-white/10 w-full text-[10.5px] font-bold px-0.5">
-                  <span
-                    className={
-                      isSelected
-                        ? 'text-[#D8261C] dark:text-amber-400'
-                        : 'text-stone-600 dark:text-stone-400 group-hover:text-stone-900 dark:group-hover:text-white'
-                    }
-                  >
-                    {isSelected
-                      ? (language === 'bn' ? 'নির্বাচিত লাইন' : 'Active Line')
-                      : (language === 'bn' ? 'স্টেশন ফিল্টার' : 'Filter Stations')}
-                  </span>
-                  <div
-                    className={`w-5 h-5 rounded-full flex items-center justify-center transition-transform duration-300 ${
-                      isSelected
-                        ? 'bg-[#D8261C] text-white shadow-xs'
-                        : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 group-hover:translate-x-0.5'
-                    }`}
-                  >
-                    <ChevronRight className="w-3 h-3" />
-                  </div>
                 </div>
               </button>
             );
