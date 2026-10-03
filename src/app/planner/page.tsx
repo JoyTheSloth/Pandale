@@ -1084,18 +1084,7 @@ export default function RoutePlannerPage() {
 
                   {/* Main Stop Card */}
                   <div className="flex-1 min-w-0 bg-[#130B10] dark:bg-[#130B10] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 shadow-2xl relative hover:border-white/15 transition-all group">
-                    <div className="flex items-center gap-3 sm:gap-4">
-
-                      {/* Thumbnail Image */}
-                      <div className="relative w-20 sm:w-24 h-28 sm:h-32 rounded-2xl overflow-hidden shrink-0 shadow-lg border border-white/10 bg-stone-900">
-                        <Image
-                          src={pandal.featured_image}
-                          alt={pandal.name}
-                          fill
-                          sizes="(max-width: 640px) 80px, 96px"
-                          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                        />
-                      </div>
+                    <div className="flex items-center justify-between gap-3 sm:gap-4">
 
                       {/* Middle Details */}
                       <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch py-0.5">
