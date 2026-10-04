@@ -20,9 +20,12 @@ import { buildGoogleMapsUrl } from '@/lib/geo';
 interface PandalCardProps {
   pandal: Pandal;
   priority?: boolean;
+  overrideMetroName?: string;
+  overrideWalkMins?: number;
+  overrideWalkDistance?: string;
 }
 
-export default function PandalCard({ pandal, priority = false }: PandalCardProps) {
+export default function PandalCard({ pandal, priority = false, overrideMetroName, overrideWalkMins, overrideWalkDistance }: PandalCardProps) {
   const { isSaved, toggleWishlist } = useWishlist();
   const { isVisited } = useVisited();
   const { language } = useLanguage();
@@ -37,13 +40,20 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
     pandal.locality ? `${pandal.name}, ${pandal.locality}` : pandal.name
   );
 
+  // Use override metro data if provided (e.g. from selected station on metro page)
+  const displayMetroName = overrideMetroName
+    ? (overrideMetroName.toLowerCase().includes('metro') ? overrideMetroName : `${overrideMetroName} ${isBn ? 'মেট্রো' : 'Metro'}`)
+    : pandal.nearest_metro.toLowerCase().includes('metro')
+      ? pandal.nearest_metro
+      : `${pandal.nearest_metro} ${isBn ? 'মেট্রো' : 'Metro'}`;
+  const displayWalkMins = overrideWalkMins ?? pandal.walking_time_mins;
+  const displayWalkDistance = overrideWalkDistance ?? pandal.walking_distance;
+
   // Clean up metro station name
-  const cleanMetroName = pandal.nearest_metro.toLowerCase().includes('metro')
-    ? pandal.nearest_metro
-    : `${pandal.nearest_metro} ${isBn ? 'মেট্রো' : 'Metro'}`;
+  const cleanMetroName = displayMetroName;
 
   // Clean up distance
-  const cleanDistance = pandal.walking_distance.replace(/m\s*m/gi, 'm').trim();
+  const cleanDistance = displayWalkDistance.replace(/m\s*m/gi, 'm').trim();
 
   // Dynamic crowd styling based on level
   const getCrowdLabel = (level: string) => {
@@ -167,7 +177,7 @@ export default function PandalCard({ pandal, priority = false }: PandalCardProps
 
             <span className="flex items-center gap-0.5 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
               <Clock className="w-2.5 h-2.5" />
-              <span>{pandal.walking_time_mins}m</span>
+              <span>{displayWalkMins}m</span>
               <span className="text-stone-400 font-normal hidden sm:inline">({cleanDistance.split(' ')[0]})</span>
             </span>
           </div>

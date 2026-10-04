@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { METRO_STATIONS_DATA } from '@/data/metro';
 import { PANDALS_DATA } from '@/data/pandals';
+import { calculateDistanceKm } from '@/lib/geo';
 import { 
   Train, 
   MapPin, 
@@ -37,6 +38,12 @@ export default function MetroGuidePage() {
   // Track which line groups are expanded in the dropdown (all collapsed by default)
   const [expandedLineGroups, setExpandedLineGroups] = useState<Set<string>>(new Set());
   const [showNoMetro, setShowNoMetro] = useState(false);
+  // "From Station" — the station selected in the dropdown as the starting point
+  const [fromStationId, setFromStationId] = useState<string | null>(null);
+  const fromStation = useMemo(
+    () => METRO_STATIONS_DATA.find((s) => s.id === fromStationId) ?? null,
+    [fromStationId]
+  );
   const toggleLineGroup = (lineCode: string) => {
     setExpandedLineGroups((prev) => {
       const next = new Set(prev);
@@ -229,11 +236,12 @@ export default function MetroGuidePage() {
     );
   }, [otherPandals, noMetroSearch]);
 
-  // Handle station selection from dropdown
+  // Handle station selection from dropdown — sets "from" station + expands + scrolls
   const handleSelectDropdownStation = (st: (typeof METRO_STATIONS_DATA)[0]) => {
     if (selectedLine !== 'all' && selectedLine !== st.line_code) {
       setSelectedLine('all');
     }
+    setFromStationId(st.id);
     setExpandedStationId(st.id);
     setIsDropdownOpen(false);
     setDropdownSearch('');
@@ -577,9 +585,9 @@ export default function MetroGuidePage() {
                 <div className="flex items-center gap-1.5 truncate max-w-[190px] sm:max-w-[160px]">
                   <MapPin className={`w-3.5 h-3.5 shrink-0 ${isDropdownOpen ? 'text-white' : 'text-[#D8261C]'}`} />
                   <span className="truncate">
-                    {activeStation
-                      ? (language === 'bn' && activeStation.bengali_name ? activeStation.bengali_name : activeStation.name)
-                      : (language === 'bn' ? 'স্টেশনে লাফ দিন' : 'Jump to Station')}
+                    {fromStation
+                      ? `${language === 'bn' ? 'থেকে:' : 'From:'} ${language === 'bn' && fromStation.bengali_name ? fromStation.bengali_name : fromStation.name}`
+                      : (language === 'bn' ? 'শুরু স্টেশন বেছে নিন' : 'Select Starting Station')}
                   </span>
                 </div>
                 <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -902,7 +910,15 @@ export default function MetroGuidePage() {
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-dashed border-stone-200 dark:border-white/10 animate-in fade-in slide-in-from-top-2 duration-200 space-y-3">
                       <div className="flex items-center justify-between text-xs font-semibold text-stone-600 dark:text-stone-400 px-1">
-                        <span>Connected Pandals from {station.name}:</span>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span>Connected Pandals from {station.name}:</span>
+                          {fromStation && fromStation.id !== station.id && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 text-[10px] font-bold">
+                              <Footprints className="w-3 h-3" />
+                              {language === 'bn' ? 'দূরত্ব থেকে:' : 'Distance via'} {fromStation.name}
+                            </span>
+                          )}
+                        </div>
                         <a
                           href={`https://www.google.com/maps/search/?api=1&query=${station.latitude},${station.longitude}`}
                           target="_blank"
@@ -921,8 +937,27 @@ export default function MetroGuidePage() {
                           const pandalSlug = pandal?.slug || item.pandal_id;
                           const pandalImage = pandal?.featured_image || `/pandals/${item.pandal_id}.jpg`;
                           const pandalLocality = pandal?.locality || `${station.name} Area`;
-                          const itemSteps = Math.round(item.walking_time_mins * 125);
-                          const walkUrl = item.directions_url || `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${station.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
+
+                          // If user selected a fromStation different from this station,
+                          // compute distance from that station to this pandal
+                          let displayWalkMins = item.walking_time_mins;
+                          let displayWalkDistance = item.walking_distance;
+                          let walkUrl = item.directions_url || `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${station.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
+
+                          if (fromStation && fromStation.id !== station.id && pandal) {
+                            const distKm = calculateDistanceKm(
+                              fromStation.latitude, fromStation.longitude,
+                              pandal.latitude, pandal.longitude
+                            );
+                            // ~5 km/h walking speed
+                            displayWalkMins = Math.round(distKm / 5 * 60);
+                            displayWalkDistance = distKm < 1
+                              ? `${Math.round(distKm * 1000)}m`
+                              : `${distKm.toFixed(1)} km`;
+                            walkUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${fromStation.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
+                          }
+
+                          const itemSteps = Math.round(displayWalkMins * 125);
 
                           return (
                             <div
@@ -954,15 +989,15 @@ export default function MetroGuidePage() {
                                   <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 flex-wrap text-[9px] sm:text-[10px] font-bold">
                                     <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
                                       <Clock className="w-2.5 h-2.5" />
-                                      <span>{item.walking_time_mins} min</span>
+                                      <span>{displayWalkMins} min</span>
                                     </span>
                                     <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
                                       <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
-                                      <span>{item.walking_distance}</span>
+                                      <span>{displayWalkDistance}</span>
                                     </span>
-                                    {(item.walking_distance.toLowerCase().includes('auto') || item.walking_time_mins >= 12) && (
+                                    {(displayWalkDistance.toLowerCase().includes('auto') || displayWalkMins >= 12) && (
                                       <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/50 font-bold">
-                                        <span>🛺 Auto: ~{item.walking_distance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(item.walking_time_mins / 3.5))} min</span>
+                                        <span>🛺 Auto: ~{displayWalkDistance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(displayWalkMins / 3.5))} min</span>
                                       </span>
                                     )}
                                   </div>
