@@ -1,5 +1,8 @@
 import { Pandal } from '@/types';
 import { ADDITIONAL_SOUTH_PANDALS } from './additional_south_pandals';
+import { ADDITIONAL_NORTH_PANDALS } from './additional_north_pandals';
+import { ADDITIONAL_HOWRAH_PANDALS } from './additional_howrah_pandals';
+import { ADDITIONAL_SUBURBS_PANDALS } from './additional_suburbs_pandals';
 
 export const PANDALS_DATA: Pandal[] = [
   {
@@ -6530,5 +6533,8 @@ export const PANDALS_DATA: Pandal[] = [
     created_at: "2026-08-01T00:00:00Z",
     updated_at: "2026-09-30T10:00:00Z"
   },
-  ...ADDITIONAL_SOUTH_PANDALS
+  ...ADDITIONAL_SOUTH_PANDALS,
+  ...ADDITIONAL_NORTH_PANDALS,
+  ...ADDITIONAL_HOWRAH_PANDALS,
+  ...ADDITIONAL_SUBURBS_PANDALS
 ];

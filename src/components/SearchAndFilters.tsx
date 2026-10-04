@@ -69,7 +69,8 @@ export default function SearchAndFilters({
     'North Kolkata',
     'South Kolkata',
     'Central Kolkata',
-    'East Kolkata'
+    'East Kolkata',
+    'Howrah'
   ];
 
   const activeFilterCount =
@@ -159,6 +160,48 @@ export default function SearchAndFilters({
             </button>
           );
         })}
+      </div>
+
+      {/* Quick-filter emoji chip strip */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+        {/* Near Metro */}
+        <button
+          type="button"
+          onClick={onNearMetroToggle}
+          className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-sm ${
+            nearMetroOnly
+              ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-600/25'
+              : 'bg-white dark:bg-[#1A1218] border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:border-blue-400 hover:text-blue-600'
+          }`}
+        >
+          🚇 Near Metro
+        </button>
+
+        {/* Near Me */}
+        <button
+          type="button"
+          onClick={onNearMeToggle}
+          className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-sm ${
+            isNearMeActive
+              ? 'bg-[#D8261C] border-[#D8261C] text-white shadow-md shadow-[#D8261C]/25'
+              : 'bg-white dark:bg-[#1A1218] border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:border-[#D8261C]/50 hover:text-[#D8261C]'
+          }`}
+        >
+          📍 Near Me
+        </button>
+
+        {/* Most Famous */}
+        <button
+          type="button"
+          onClick={onPopularToggle}
+          className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-sm ${
+            popularOnly
+              ? 'bg-purple-600 border-purple-600 text-white shadow-md shadow-purple-600/25'
+              : 'bg-white dark:bg-[#1A1218] border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:border-purple-400 hover:text-purple-600'
+          }`}
+        >
+          👑 Most Famous
+        </button>
       </div>
 
       {/* Desktop Quick Attribute Tags */}

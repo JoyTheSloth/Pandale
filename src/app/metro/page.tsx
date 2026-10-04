@@ -12,6 +12,7 @@ import {
   Footprints, 
   Search, 
   ChevronRight, 
+  ChevronLeft,
   ChevronDown,
   LayoutGrid, 
   X, 
@@ -38,12 +39,26 @@ export default function MetroGuidePage() {
   // Track which line groups are expanded in the dropdown (all collapsed by default)
   const [expandedLineGroups, setExpandedLineGroups] = useState<Set<string>>(new Set());
   const [showNoMetro, setShowNoMetro] = useState(false);
+  // Non-Metro Sub-area tab and pagination state (styled like planner station selector)
+  const [activeNoMetroZone, setActiveNoMetroZone] = useState<string>('all');
+  const [noMetroPage, setNoMetroPage] = useState<number>(1);
   // "From Station" — the station selected in the dropdown as the starting point
   const [fromStationId, setFromStationId] = useState<string | null>(null);
   const fromStation = useMemo(
     () => METRO_STATIONS_DATA.find((s) => s.id === fromStationId) ?? null,
     [fromStationId]
   );
+  // Track which stations have their pandals list expanded beyond 6 cards
+  const [expandedStationPandals, setExpandedStationPandals] = useState<Set<string>>(new Set());
+
+  const toggleShowAllStationPandals = (stationId: string) => {
+    setExpandedStationPandals((prev) => {
+      const next = new Set(prev);
+      if (next.has(stationId)) next.delete(stationId);
+      else next.add(stationId);
+      return next;
+    });
+  };
   const toggleLineGroup = (lineCode: string) => {
     setExpandedLineGroups((prev) => {
       const next = new Set(prev);
@@ -159,7 +174,7 @@ export default function MetroGuidePage() {
 
   // Filter stations by line and search query
   const filteredStations = useMemo(() => {
-    let list = METRO_STATIONS_DATA;
+    let list = METRO_STATIONS_DATA.filter((s) => s.nearby_pandals.length > 0);
     if (selectedLine !== 'all') {
       list = list.filter((s) => s.line_code === selectedLine);
     }
@@ -190,10 +205,13 @@ export default function MetroGuidePage() {
     );
   }, [dropdownSearch]);
 
-  // Stations grouped by line for the sub-dropdown (Blue & Green only)
-  const LINE_GROUP_META: { code: 'blue'|'green'; label: string; bengaliLabel: string; hex: string }[] = [
-    { code: 'blue',  label: 'Blue Line',  bengaliLabel: 'ব্লু লাইন',  hex: '#2563EB' },
-    { code: 'green', label: 'Green Line', bengaliLabel: 'গ্রিন লাইন', hex: '#059669' },
+  // Stations grouped by line for the sub-dropdown (all 5 lines)
+  const LINE_GROUP_META: { code: 'blue'|'green'|'orange'|'purple'|'yellow'; label: string; bengaliLabel: string; hex: string }[] = [
+    { code: 'blue',   label: 'Blue Line',   bengaliLabel: 'ব্লু লাইন',    hex: '#2563EB' },
+    { code: 'green',  label: 'Green Line',  bengaliLabel: 'গ্রিন লাইন',   hex: '#059669' },
+    { code: 'orange', label: 'Orange Line', bengaliLabel: 'অরেঞ্জ লাইন',  hex: '#EA580C' },
+    { code: 'purple', label: 'Purple Line', bengaliLabel: 'পার্পল লাইন',  hex: '#9333EA' },
+    { code: 'yellow', label: 'Yellow Line', bengaliLabel: 'ইয়েলো লাইন',  hex: '#CA8A04' },
   ];
   const groupedDropdownStations = useMemo(() => {
     return LINE_GROUP_META.map((meta) => ({
@@ -224,17 +242,113 @@ export default function MetroGuidePage() {
   }, [metroLinkedPandalIds]);
 
   const [noMetroSearch, setNoMetroSearch] = useState('');
-  const filteredNoMetroPandals = useMemo(() => {
-    if (!noMetroSearch.trim()) return otherPandals;
-    const q = noMetroSearch.toLowerCase().trim();
-    return otherPandals.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.area.toLowerCase().includes(q) ||
-        (p.locality && p.locality.toLowerCase().includes(q)) ||
-        (p.nearest_metro && p.nearest_metro.toLowerCase().includes(q))
-    );
-  }, [otherPandals, noMetroSearch]);
+  // Active Area Hub selection (defaults to Lake Town & VIP Road matching screenshot)
+  const [activeAreaHubId, setActiveAreaHubId] = useState<string>('area-lake-town');
+
+  // Prominent Non-Metro Area Hubs (exact match to planner selector)
+  const NON_METRO_AREA_HUBS = [
+    {
+      id: 'area-lake-town',
+      name: 'Lake Town & VIP Road',
+      bengaliName: 'লেক টাউন ও ভিআইপি রোড',
+      landmarks: 'Sree Bhumi, Dum Dum Park',
+      bengaliLandmarks: 'শ্রীভূমি, দমদম পার্ক',
+      matchKeywords: ['lake town', 'vip road', 'sree bhumi', 'dum dum park', 'patipukur', 'bangur']
+    },
+    {
+      id: 'area-behala-chowrasta',
+      name: 'Behala & DH Road',
+      bengaliName: 'বেহালা ও ডিএইচ রোড',
+      landmarks: 'Behala Club, 41 Pally, Nutan Dal',
+      bengaliLandmarks: 'বেহালা ক্লাব, ৪১ পল্লী, নূতন দল',
+      matchKeywords: ['behala', 'dh road', 'diamond harbour', 'barisha', 'nutan dal', '41 pally']
+    },
+    {
+      id: 'area-sodepur-agarpara',
+      name: 'Sodepur & Agarpara',
+      bengaliName: 'সোদপুর ও আগরপাড়া',
+      landmarks: 'Tarapukur, Adarshanagar, Sahid Colony',
+      bengaliLandmarks: 'তারাপুকুর, আদর্শ নগর, শহীদ কলোনি',
+      matchKeywords: ['sodepur', 'agarpara', 'panihati', 'tarapukur', 'adarshanagar', 'sukchar']
+    },
+    {
+      id: 'area-kasba-bosepukur',
+      name: 'Kasba & Bosepukur',
+      bengaliName: 'কসবা ও বোসপুকুর',
+      landmarks: 'Bosepukur Sitala Mandir, Parijat',
+      bengaliLandmarks: 'বোসপুকুর শীতলা মন্দির, পারিজাত',
+      matchKeywords: ['kasba', 'bosepukur', 'parijat', 'sitala']
+    },
+    {
+      id: 'area-santoshpur-jadavpur',
+      name: 'Santoshpur & Jadavpur',
+      bengaliName: 'সন্তোষপুর ও যাদবপুর',
+      landmarks: 'Lake Pally, Sammilita, Trikon Park',
+      bengaliLandmarks: 'লেক পল্লী, সম্মিলিত, ত্রিকোণ পার্ক',
+      matchKeywords: ['santoshpur', 'jadavpur', 'lake pally', 'sammilita', 'trikon']
+    },
+    {
+      id: 'area-salt-lake-outer',
+      name: 'Salt Lake Outer & New Town',
+      bengaliName: 'সল্টলেক ও নিউ টাউন',
+      landmarks: 'FD Block, BJ Block, New Town',
+      bengaliLandmarks: 'এফডি ব্লক, বিজে ব্লক, নিউ টাউন',
+      matchKeywords: ['salt lake', 'new town', 'fd block', 'bj block', 'action area', 'ultadanga']
+    },
+    {
+      id: 'area-khidirpur-watgunge',
+      name: 'Khidirpur & Watgunge',
+      bengaliName: 'খিদিরপুর ও ওয়াটগঞ্জ',
+      landmarks: '25 Pally, 74 Pally, Babu Bazar',
+      bengaliLandmarks: '২৫ পল্লী, ৭৪ পল্লী, বাবু বাজার',
+      matchKeywords: ['khidirpur', 'kidderpore', 'watgunge', 'babu bazar', '25 pally', '74 pally']
+    },
+    {
+      id: 'area-gariahat-ballygunge',
+      name: 'Gariahat & Ballygunge',
+      bengaliName: 'গড়িয়াহাট ও বালিগঞ্জ',
+      landmarks: 'Ekdalia Evergreen, Singhi Park',
+      bengaliLandmarks: 'একডালিয়া এভারগ্রিন, সিংহী পার্ক',
+      matchKeywords: ['gariahat', 'ballygunge', 'ekdalia', 'singhi park', 'maddox']
+    },
+    {
+      id: 'area-howrah-salkia',
+      name: 'Howrah, Salkia & Shibpur',
+      bengaliName: 'হাওড়া, সালকিয়া ও শিবপুর',
+      landmarks: 'Belur, Salkia, Shibpur',
+      bengaliLandmarks: 'বেলুড়, সালকিয়া, শিবপুর',
+      matchKeywords: ['howrah', 'salkia', 'shibpur', 'belur', 'bally', 'mandirtala', 'kadamtala', 'tikiapara']
+    }
+  ];
+
+  // Filter pandals belonging to the active Area Hub (or search query)
+  const activeHubPandals = useMemo(() => {
+    const hub = NON_METRO_AREA_HUBS.find((h) => h.id === activeAreaHubId);
+    let list = otherPandals;
+
+    if (noMetroSearch.trim()) {
+      const q = noMetroSearch.toLowerCase().trim();
+      return list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.area.toLowerCase().includes(q) ||
+          (p.locality && p.locality.toLowerCase().includes(q)) ||
+          (p.nearest_metro && p.nearest_metro.toLowerCase().includes(q))
+      );
+    }
+
+    if (!hub) return list;
+
+    // Filter by matching keywords against pandal locality, area, tags, or name
+    const matched = list.filter((p) => {
+      const targetStr = `${p.name} ${p.locality} ${p.area} ${p.tags.join(' ')}`.toLowerCase();
+      return hub.matchKeywords.some((kw) => targetStr.includes(kw));
+    });
+
+    // If a hub matches specific pandals, return them; otherwise fallback to area
+    if (matched.length > 0) return matched;
+    return list.slice(0, 8);
+  }, [otherPandals, activeAreaHubId, noMetroSearch]);
 
   // Handle station selection from dropdown — sets "from" station + expands + scrolls
   const handleSelectDropdownStation = (st: (typeof METRO_STATIONS_DATA)[0]) => {
@@ -491,32 +605,88 @@ export default function MetroGuidePage() {
         )}
       </div>
 
-      {/* NO METRO PANDALS SECTION */}
+      {/* NO METRO PANDALS SECTION (Directly 2 Small Cards per line) */}
       {showNoMetro && (
         <div className="space-y-6">
-          {/* Header Card with Count and Live Search */}
-          <div className="bg-white dark:bg-[#1C1917] rounded-[2rem] border border-stone-200 dark:border-white/10 shadow-xl p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          {/* Main Card Container with Dark Rounded Aesthetic matching the screenshot */}
+          <div className="bg-[#181513] text-white rounded-[2rem] border border-stone-800/80 p-4 sm:p-6 shadow-2xl space-y-3">
+            
+            {/* Exactly 2 Small Cards in One Line (Strict 2 columns on all devices) */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              {NON_METRO_AREA_HUBS.map((hub) => {
+                const isSelected = activeAreaHubId === hub.id;
+                return (
+                  <button
+                    key={hub.id}
+                    type="button"
+                    onClick={() => setActiveAreaHubId(hub.id)}
+                    className={`p-2.5 sm:p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 sm:gap-3 ${
+                      isSelected
+                        ? 'bg-red-950/40 border-red-500 shadow-md ring-1 ring-red-500/50'
+                        : 'bg-stone-900/70 border-stone-800/90 hover:border-stone-700 hover:bg-stone-800/80'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      {/* Red/Pinkish pin icon container matching screenshot */}
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-pink-950/60 text-pink-400 flex items-center justify-center text-[10px] sm:text-xs shrink-0 border border-pink-900/40 shadow-2xs">
+                        📍
+                      </div>
+                      <div className="min-w-0">
+                        <div className={`text-[11px] sm:text-sm font-bold truncate ${
+                          isSelected ? 'text-red-400 font-extrabold' : 'text-stone-100'
+                        }`}>
+                          {language === 'bn' ? hub.bengaliName : hub.name}
+                        </div>
+                        <div className="text-[9px] sm:text-[11px] text-stone-400 truncate mt-0.5">
+                          {language === 'bn' ? hub.bengaliLandmarks : hub.landmarks}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Circular Red Checkmark when selected */}
+                    {isSelected && (
+                      <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#D8261C] text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+          </div>
+
+          {/* Connected Pandals for the Selected Area Hub */}
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-[#1C1917] rounded-2xl p-4 sm:p-5 border border-stone-200 dark:border-white/10 shadow-sm">
               <div>
-                <h2 className="text-lg sm:text-xl font-bold font-editorial text-stone-900 dark:text-white">
-                  {language === 'bn' ? 'মেট্রো বহির্ভূত পুজো পরিক্রমা' : 'Pandals without Direct Metro'} ({filteredNoMetroPandals.length})
-                </h2>
-                <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-0.5">
+                <h3 className="text-base sm:text-lg font-bold font-editorial text-stone-900 dark:text-white flex items-center gap-2">
+                  <span>📍</span>
+                  <span>
+                    {language === 'bn'
+                      ? `${NON_METRO_AREA_HUBS.find(h => h.id === activeAreaHubId)?.bengaliName} পুজো তালিকা`
+                      : `Pandals in ${NON_METRO_AREA_HUBS.find(h => h.id === activeAreaHubId)?.name}`}
+                  </span>
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-950/60 text-[#D8261C] dark:text-red-300 border border-red-200 dark:border-red-900/40">
+                    {activeHubPandals.length}
+                  </span>
+                </h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
                   {language === 'bn'
-                    ? `মোট ${otherPandals.length}টি পুজো যা সরাসরি মেট্রো স্টেশনের কাছে নয় — ট্যাক্সি, বাস, অটো বা হেঁটে পৌঁছানো যাবে।`
-                    : `${otherPandals.length} pandals located outside direct walking distance of Kolkata Metro. Best reached by bus, auto, cab, or walking routes.`}
+                    ? 'মেট্রো ছাড়া বাস, অটো, রিকশা বা গাড়ি দিয়ে সহজেই পৌঁছানো যায়।'
+                    : 'Accessible easily via local suburban trains, buses, autos, or cabs.'}
                 </p>
               </div>
 
-              {/* Search input for Non-Metro pandals */}
-              <div className="relative w-full sm:w-72">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+              {/* Search input for filtering within this hub */}
+              <div className="relative w-full sm:w-64">
+                <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                 <input
                   type="text"
-                  placeholder={language === 'bn' ? 'পুজো বা এলাকা খুঁজুন...' : 'Search pandal or area...'}
+                  placeholder={language === 'bn' ? 'পুজো খুঁজুন...' : 'Filter pandals...'}
                   value={noMetroSearch}
                   onChange={(e) => setNoMetroSearch(e.target.value)}
-                  className="w-full pl-9 pr-8 py-2 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-white/10 text-xs font-medium text-stone-900 dark:text-white placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#D8261C]"
+                  className="w-full pl-8 pr-7 py-2 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-white/10 text-xs text-stone-900 dark:text-white placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-[#D8261C]"
                 />
                 {noMetroSearch && (
                   <button
@@ -530,22 +700,22 @@ export default function MetroGuidePage() {
                 )}
               </div>
             </div>
-          </div>
 
-          {/* Cards Grid using standard PandalCard */}
-          {filteredNoMetroPandals.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredNoMetroPandals.map((pandal) => (
-                <PandalCard key={pandal.id} pandal={pandal} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-white dark:bg-[#1C1917] rounded-3xl border border-stone-200 dark:border-white/10">
-              <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
-                {language === 'bn' ? 'কোনো পুজো খুঁজে পাওয়া যায়নি' : 'No pandals found matching your search'}
-              </p>
-            </div>
-          )}
+            {/* Pandal Cards Grid — exactly 2 cards in 1 line */}
+            {activeHubPandals.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                {activeHubPandals.map((pandal) => (
+                  <PandalCard key={pandal.id} pandal={pandal} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-white dark:bg-[#1C1917] rounded-3xl border border-stone-200 dark:border-white/10">
+                <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
+                  {language === 'bn' ? 'এই এলাকায় কোনো পুজো পাওয়া যায়নি' : 'No pandals found in this area'}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
@@ -847,6 +1017,31 @@ export default function MetroGuidePage() {
               const walkDistance = nearestPandal ? nearestPandal.walking_distance.split('(')[0].trim() : '450m';
               const approxSteps = Math.round(minWalkTime * 125);
 
+              // ── FROM-STATION INTER-STATION DISTANCE ──
+              const isFromStation = fromStation?.id === station.id;
+              let stopsAway: number | null = null;
+              let metroDistKm: number | null = null;
+              let sameLine = false;
+              if (fromStation && !isFromStation) {
+                // Straight-line distance between the two stations
+                metroDistKm = calculateDistanceKm(
+                  fromStation.latitude, fromStation.longitude,
+                  station.latitude, station.longitude
+                );
+                if (fromStation.line_code === station.line_code) {
+                  // Count stop difference on the same line
+                  const sameLineStations = METRO_STATIONS_DATA.filter(
+                    (s) => s.line_code === station.line_code
+                  );
+                  const fromIdx = sameLineStations.findIndex((s) => s.id === fromStation.id);
+                  const toIdx   = sameLineStations.findIndex((s) => s.id === station.id);
+                  if (fromIdx !== -1 && toIdx !== -1) {
+                    stopsAway = Math.abs(toIdx - fromIdx);
+                    sameLine = true;
+                  }
+                }
+              }
+
               return (
                 <div
                   key={station.id}
@@ -885,14 +1080,51 @@ export default function MetroGuidePage() {
                       </div>
                     </div>
 
-                    {/* Right: Time & Distance stats + Circular Chevron Button */}
+                    {/* Right: Metro-distance (if from-station set) OR walk-time fallback + Chevron */}
                     <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-                      <div className="text-right flex items-center gap-1.5 text-xs font-bold text-stone-900 dark:text-stone-100">
-                        <Clock className="w-3.5 h-3.5 text-[#D8261C]" />
-                        <span>{minWalkTime} {language === 'bn' ? 'মিনিট' : 'min'}</span>
-                        <span className="text-stone-300 dark:text-stone-600">•</span>
-                        <span className="text-stone-700 dark:text-stone-300 font-semibold">{walkDistance}</span>
-                      </div>
+                      {isFromStation ? (
+                        /* This IS the origin station */
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-gradient-to-r from-[#D8261C] to-amber-500 text-white shadow-sm border border-amber-300/60 shrink-0 animate-pulse">
+                          <MapPin className="w-3 h-3" />
+                          <span>{language === 'bn' ? 'শুরু এখান থেকে' : 'FROM HERE'}</span>
+                        </span>
+                      ) : fromStation && metroDistKm !== null ? (
+                        /* Show inter-station metro distance */
+                        <div className="text-right flex items-center gap-1.5 text-xs font-bold">
+                          {sameLine && stopsAway !== null && metroDistKm !== null ? (
+                            <>
+                              <Train className="w-3.5 h-3.5 text-[#D8261C] shrink-0" />
+                              <span className="text-stone-900 dark:text-stone-100">
+                                {metroDistKm < 1
+                                  ? `${Math.round(metroDistKm * 1000)}m`
+                                  : `${metroDistKm.toFixed(1)} km`}
+                              </span>
+                              <span className="text-stone-300 dark:text-stone-600">•</span>
+                              <span className="text-stone-600 dark:text-stone-400 font-semibold">
+                                ~{Math.round(stopsAway * 2.5)} min
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <Train className="w-3.5 h-3.5 text-purple-500 shrink-0" />
+                              <span className="text-stone-900 dark:text-stone-100">
+                                {metroDistKm < 1
+                                  ? `${Math.round(metroDistKm * 1000)}m`
+                                  : `${metroDistKm.toFixed(1)} km`}
+                              </span>
+                              <span className="text-[9px] text-purple-400 font-semibold">interchange</span>
+                            </>
+                          )}
+                        </div>
+                      ) : (
+                        /* Default: walk time to nearest pandal */
+                        <div className="text-right flex items-center gap-1.5 text-xs font-bold text-stone-900 dark:text-stone-100">
+                          <Clock className="w-3.5 h-3.5 text-[#D8261C]" />
+                          <span>{minWalkTime} {language === 'bn' ? 'মিনিট' : 'min'}</span>
+                          <span className="text-stone-300 dark:text-stone-600">•</span>
+                          <span className="text-stone-700 dark:text-stone-300 font-semibold">{walkDistance}</span>
+                        </div>
+                      )}
 
                       <div
                         className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
@@ -930,101 +1162,128 @@ export default function MetroGuidePage() {
                         </a>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3.5 pt-1">
-                        {station.nearby_pandals.map((item) => {
-                          const pandal = PANDALS_DATA.find((p) => p.id === item.pandal_id);
-                          const pandalName = pandal?.name || item.pandal_name;
-                          const pandalSlug = pandal?.slug || item.pandal_id;
-                          const pandalImage = pandal?.featured_image || `/pandals/${item.pandal_id}.jpg`;
-                          const pandalLocality = pandal?.locality || `${station.name} Area`;
+                      {(() => {
+                        const totalCount = station.nearby_pandals.length;
+                        const isExpandedList = expandedStationPandals.has(station.id);
+                        const displayedPandals = isExpandedList ? station.nearby_pandals : station.nearby_pandals.slice(0, 6);
+                        const remainingCount = totalCount - 6;
 
-                          // If user selected a fromStation different from this station,
-                          // compute distance from that station to this pandal
-                          let displayWalkMins = item.walking_time_mins;
-                          let displayWalkDistance = item.walking_distance;
-                          let walkUrl = item.directions_url || `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${station.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
+                        return (
+                          <>
+                            <div className="grid grid-cols-2 gap-2 sm:gap-3.5 pt-1">
+                              {displayedPandals.map((item) => {
+                                const pandal = PANDALS_DATA.find((p) => p.id === item.pandal_id);
+                                const pandalName = pandal?.name || item.pandal_name;
+                                const pandalSlug = pandal?.slug || item.pandal_id;
+                                const pandalImage = pandal?.featured_image || `/pandals/${item.pandal_id}.jpg`;
+                                const pandalLocality = pandal?.locality || `${station.name} Area`;
 
-                          if (fromStation && fromStation.id !== station.id && pandal) {
-                            const distKm = calculateDistanceKm(
-                              fromStation.latitude, fromStation.longitude,
-                              pandal.latitude, pandal.longitude
-                            );
-                            // ~5 km/h walking speed
-                            displayWalkMins = Math.round(distKm / 5 * 60);
-                            displayWalkDistance = distKm < 1
-                              ? `${Math.round(distKm * 1000)}m`
-                              : `${distKm.toFixed(1)} km`;
-                            walkUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${fromStation.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
-                          }
+                                // If user selected a fromStation different from this station,
+                                // compute distance from that station to this pandal
+                                let displayWalkMins = item.walking_time_mins;
+                                let displayWalkDistance = item.walking_distance;
+                                let walkUrl = item.directions_url || `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${station.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
 
-                          const itemSteps = Math.round(displayWalkMins * 125);
+                                if (fromStation && fromStation.id !== station.id && pandal) {
+                                  const distKm = calculateDistanceKm(
+                                    fromStation.latitude, fromStation.longitude,
+                                    pandal.latitude, pandal.longitude
+                                  );
+                                  // ~5 km/h walking speed
+                                  displayWalkMins = Math.round(distKm / 5 * 60);
+                                  displayWalkDistance = distKm < 1
+                                    ? `${Math.round(distKm * 1000)}m`
+                                    : `${distKm.toFixed(1)} km`;
+                                  walkUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${fromStation.name} Metro Station, Kolkata`)}&destination=${encodeURIComponent(`${pandalName}, Kolkata`)}&travelmode=walking`;
+                                }
 
-                          return (
-                            <div
-                              key={item.pandal_id}
-                              className="p-2.5 sm:p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/80 border border-stone-200 dark:border-white/10 hover:border-[#D8261C]/50 transition-all flex flex-col justify-between gap-2 sm:gap-3 group"
-                            >
-                              <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
-                                <div className="w-full sm:w-14 aspect-[16/10] sm:aspect-square sm:h-14 rounded-xl overflow-hidden relative shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100">
-                                  <Image
-                                    src={pandalImage}
-                                    alt={pandalName}
-                                    fill
-                                    sizes="(max-width: 640px) 50vw, 56px"
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                  />
-                                </div>
-                                <div className="min-w-0 flex-1 w-full">
-                                  <Link
-                                    href={`/pandal/${pandalSlug}`}
-                                    className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white hover:text-[#D8261C] transition-colors line-clamp-1"
+                                return (
+                                  <div
+                                    key={item.pandal_id}
+                                    className="p-2.5 sm:p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900/80 border border-stone-200 dark:border-white/10 hover:border-[#D8261C]/50 transition-all flex flex-col justify-between gap-2 sm:gap-3 group"
                                   >
-                                    {pandalName}
-                                  </Link>
-                                  <p className="text-[10px] sm:text-[11px] text-stone-600 dark:text-stone-400 truncate mt-0.5 font-medium">
-                                    {pandalLocality}
-                                  </p>
-                                  
-                                  {/* Metric Pills: Time, Distance */}
-                                  <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 flex-wrap text-[9px] sm:text-[10px] font-bold">
-                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
-                                      <Clock className="w-2.5 h-2.5" />
-                                      <span>{displayWalkMins} min</span>
-                                    </span>
-                                    <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
-                                      <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
-                                      <span>{displayWalkDistance}</span>
-                                    </span>
-                                    {(displayWalkDistance.toLowerCase().includes('auto') || displayWalkMins >= 12) && (
-                                      <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/50 font-bold">
-                                        <span>🛺 Auto: ~{displayWalkDistance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(displayWalkMins / 3.5))} min</span>
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
+                                    <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
+                                      <div className="w-full sm:w-14 aspect-[16/10] sm:aspect-square sm:h-14 rounded-xl overflow-hidden relative shrink-0 border border-stone-200 dark:border-white/10 bg-stone-100">
+                                        <Image
+                                          src={pandalImage}
+                                          alt={pandalName}
+                                          fill
+                                          sizes="(max-width: 640px) 50vw, 56px"
+                                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                      </div>
+                                      <div className="min-w-0 flex-1 w-full">
+                                        <Link
+                                          href={`/pandal/${pandalSlug}`}
+                                          className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white hover:text-[#D8261C] transition-colors line-clamp-1"
+                                        >
+                                          {pandalName}
+                                        </Link>
+                                        <p className="text-[10px] sm:text-[11px] text-stone-600 dark:text-stone-400 truncate mt-0.5 font-medium">
+                                          {pandalLocality}
+                                        </p>
+                                        
+                                        {/* Metric Pills: Time, Distance */}
+                                        <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 flex-wrap text-[9px] sm:text-[10px] font-bold">
+                                          <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-950/40 text-[#D8261C] dark:text-red-300 border border-red-200/50 dark:border-red-900/40">
+                                            <Clock className="w-2.5 h-2.5" />
+                                            <span>{displayWalkMins} min</span>
+                                          </span>
+                                          <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-white/10">
+                                            <MapPin className="w-2.5 h-2.5 text-[#D8261C]" />
+                                            <span>{displayWalkDistance}</span>
+                                          </span>
+                                          {(displayWalkDistance.toLowerCase().includes('auto') || displayWalkMins >= 12) && (
+                                            <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/50 font-bold">
+                                              <span>🛺 Auto: ~{displayWalkDistance.match(/Auto(?:\/E-Rickshaw)?\s*(?:available)?\s*(\d+)\s*mins?/i)?.[1] || Math.max(3, Math.round(displayWalkMins / 3.5))} min</span>
+                                            </span>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
 
-                              <div className="flex items-center gap-1.5 sm:gap-2 pt-2 border-t border-stone-200/60 dark:border-white/10">
-                                <Link
-                                  href={`/pandal/${pandalSlug}`}
-                                  className="flex-1 py-1.5 rounded-lg bg-white dark:bg-stone-800 hover:bg-[#D8261C] text-stone-800 dark:text-stone-200 hover:text-white text-[10px] sm:text-[11px] font-bold text-center border border-stone-200 dark:border-white/10 transition-colors"
-                                >
-                                  Details
-                                </Link>
-                                <a
-                                  href={walkUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="py-1.5 px-2 sm:px-3 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white text-[10px] sm:text-[11px] font-bold flex items-center justify-center gap-1 shadow-2xs transition-colors shrink-0"
-                                >
-                                  <MapPin className="w-3 h-3 text-[#FDE047]" />
-                                  <span>Walk Path</span>
-                                </a>
-                              </div>
+                                    <div className="flex items-center gap-1.5 sm:gap-2 pt-2 border-t border-stone-200/60 dark:border-white/10">
+                                      <Link
+                                        href={`/pandal/${pandalSlug}`}
+                                        className="flex-1 py-1.5 rounded-lg bg-white dark:bg-stone-800 hover:bg-[#D8261C] text-stone-800 dark:text-stone-200 hover:text-white text-[10px] sm:text-[11px] font-bold text-center border border-stone-200 dark:border-white/10 transition-colors"
+                                      >
+                                        Details
+                                      </Link>
+                                      <a
+                                        href={walkUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="py-1.5 px-2 sm:px-3 rounded-lg bg-[#D8261C] hover:bg-[#B91C1C] text-white text-[10px] sm:text-[11px] font-bold flex items-center justify-center gap-1 shadow-2xs transition-colors shrink-0"
+                                      >
+                                        <MapPin className="w-3 h-3 text-[#FDE047]" />
+                                        <span>Walk Path</span>
+                                      </a>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
-                          );
-                        })}
-                      </div>
+
+                            {/* See More / Show Less Button if station has > 6 pandals */}
+                            {totalCount > 6 && (
+                              <div className="pt-2 flex justify-center">
+                                <button
+                                  type="button"
+                                  onClick={() => toggleShowAllStationPandals(station.id)}
+                                  className="px-4 py-2 rounded-xl bg-stone-100 hover:bg-[#D8261C] text-stone-700 hover:text-white dark:bg-stone-800 dark:text-stone-300 dark:hover:text-white text-xs font-bold transition-all duration-200 shadow-2xs hover:shadow-md flex items-center gap-1.5 active:scale-95 border border-stone-200 dark:border-white/10"
+                                >
+                                  <span>
+                                    {isExpandedList
+                                      ? (language === 'bn' ? 'কম দেখুন' : 'Show Less')
+                                      : (language === 'bn' ? `আরও ${remainingCount}টি দেখুন (See More)` : `See More (${remainingCount} more pandals)`)}
+                                  </span>
+                                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpandedList ? 'rotate-180' : ''}`} />
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   )}
                 </div>

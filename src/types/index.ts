@@ -4,6 +4,7 @@ export type ZoneArea =
   | 'Central Kolkata'
   | 'East Kolkata'
   | 'West Kolkata'
+  | 'Howrah'
   | 'Airport Corridor';
 
 

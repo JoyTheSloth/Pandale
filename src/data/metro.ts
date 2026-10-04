@@ -68,6 +68,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.7 km",
         "walking_time_mins": 20,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Baranagar%20Metro%20Station&destination=Forward%20Colony%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "rabindranagar-yubak-brinda-dunlop",
+        "pandal_name": "Rabindranagar Yubak Brinda (Dunlop)",
+        "pandal_slug": "rabindranagar-yubak-brinda-dunlop",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Baranagar+Metro+Station&destination=Rabindranagar+Yubak+Brinda+Dunlop+Durga+Puja&travelmode=walking"
       }
     ]
   },
@@ -138,6 +146,94 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.2 km",
         "walking_time_mins": 14,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum%20Dum%20Metro%20Station&destination=Forward%20Colony%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "masterda-smriti-sangha",
+        "pandal_name": "Masterda Smriti Sangha",
+        "pandal_slug": "masterda-smriti-sangha",
+        "walking_distance": "3.5 km",
+        "walking_time_mins": 42,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Masterda+Smriti+Sangha+Durga+Puja+Kestopur+Kolkata"
+      },
+      {
+        "pandal_id": "acharya-prafulla-kanan-adibasi-brinda",
+        "pandal_name": "Acharya Prafulla Kanan Adibasi Brinda",
+        "pandal_slug": "acharya-prafulla-kanan-adibasi-brinda",
+        "walking_distance": "3.4 km",
+        "walking_time_mins": 40,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Acharya+Prafulla+Kanan+Adibasi+Brinda+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "aswininagar-bandhumahal-club",
+        "pandal_name": "Aswininagar Bandhumahal Club",
+        "pandal_slug": "aswininagar-bandhumahal-club",
+        "walking_distance": "3.6 km",
+        "walking_time_mins": 43,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Aswininagar+Bandhumahal+Club+Durga+Puja+Baguihati+Kolkata"
+      },
+      {
+        "pandal_id": "nirvik-sangha",
+        "pandal_name": "Nirvik Sangha",
+        "pandal_slug": "nirvik-sangha",
+        "walking_distance": "3.5 km",
+        "walking_time_mins": 42,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Nirvik+Sangha+Durga+Puja+Baguihati+Kolkata"
+      },
+      {
+        "pandal_id": "shastri-bagan-sporting-club",
+        "pandal_name": "Shastri Bagan Sporting Club",
+        "pandal_slug": "shastri-bagan-sporting-club",
+        "walking_distance": "3.3 km",
+        "walking_time_mins": 39,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Shastri+Bagan+Sporting+Club+Durga+Puja+Baguihati+Kolkata"
+      },
+      {
+        "pandal_id": "railpukur-united-club",
+        "pandal_name": "Railpukur United Club",
+        "pandal_slug": "railpukur-united-club",
+        "walking_distance": "3.1 km",
+        "walking_time_mins": 37,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Railpukur+United+Club+Durga+Puja+Baguihati+Kolkata"
+      },
+      {
+        "pandal_id": "dakshinpara-durgotsab",
+        "pandal_name": "Dakshinpara Durgotsab",
+        "pandal_slug": "dakshinpara-durgotsab",
+        "walking_distance": "2.9 km",
+        "walking_time_mins": 35,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Dakshinpara+Durgotsab+Baguihati+Kolkata"
+      },
+      {
+        "pandal_id": "laha-colony-bibek-sangha",
+        "pandal_name": "Laha Colony Bibek Sangha",
+        "pandal_slug": "laha-colony-bibek-sangha",
+        "walking_distance": "2.2 km",
+        "walking_time_mins": 26,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Laha+Colony+Bibek+Sangha+Durga+Puja+Satgachi+Kolkata"
+      },
+      {
+        "pandal_id": "telipukur-yuva-sangha",
+        "pandal_name": "Telipukur Yuva Sangha",
+        "pandal_slug": "telipukur-yuva-sangha",
+        "walking_distance": "2.1 km",
+        "walking_time_mins": 25,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Telipukur+Yuva+Sangha+Durga+Puja+Satgachi+Kolkata"
+      },
+      {
+        "pandal_id": "nager-bazar-jessore-road-adibasi-brinda",
+        "pandal_name": "Nager Bazar Jessore Road Adibasi Brinda",
+        "pandal_slug": "nager-bazar-jessore-road-adibasi-brinda",
+        "walking_distance": "1.6 km",
+        "walking_time_mins": 19,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Nager+Bazar+Jessore+Road+Adibasi+Brinda+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "dum-dum-mall-palli-club",
+        "pandal_name": "Dum Dum Mall Palli Club",
+        "pandal_slug": "dum-dum-mall-palli-club",
+        "walking_distance": "1.3 km",
+        "walking_time_mins": 16,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Dum+Dum+Metro+Station&destination=Dum+Dum+Mall+Palli+Club+Durga+Puja+Kolkata"
       }
     ]
   },
@@ -157,6 +253,94 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.4 km (Auto 4 mins)",
         "walking_time_mins": 15,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Sree%20Bhumi%20Sporting%20Club%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "dakshindari-youth",
+        "pandal_name": "Dakshindari Youth",
+        "pandal_slug": "dakshindari-youth",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Dakshindari+Youth+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "golaghata-sammilani",
+        "pandal_name": "Golaghata Sammilani",
+        "pandal_slug": "golaghata-sammilani",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Golaghata+Sammilani+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "lake-town-adibasi-brinda",
+        "pandal_name": "Lake Town Adibasi Brinda",
+        "pandal_slug": "lake-town-adibasi-brinda",
+        "walking_distance": "1.6 km",
+        "walking_time_mins": 20,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Lake+Town+Adibasi+Brinda+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "laketown-nutan-palli-pradeep-sangha",
+        "pandal_name": "Laketown Nutan Palli Pradeep Sangha",
+        "pandal_slug": "laketown-nutan-palli-pradeep-sangha",
+        "walking_distance": "1.9 km",
+        "walking_time_mins": 23,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Laketown+Nutan+Palli+Pradeep+Sangha+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "patipukur-adi-sarbojonin",
+        "pandal_name": "Patipukur Adi Sarbojonin",
+        "pandal_slug": "patipukur-adi-sarbojonin",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 14,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Patipukur+Adi+Sarbojonin+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "basak-bagan",
+        "pandal_name": "Basak Bagan",
+        "pandal_slug": "basak-bagan",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Basak+Bagan+Durga+Puja+Patipukur+Kolkata"
+      },
+      {
+        "pandal_id": "tala-palli-sadharan",
+        "pandal_name": "Tala Palli Sadharan",
+        "pandal_slug": "tala-palli-sadharan",
+        "walking_distance": "900m",
+        "walking_time_mins": 11,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Tala+Palli+Sadharan+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "paikpara-31-pally-sadharan",
+        "pandal_name": "Paikpara 31 Pally Sadharan",
+        "pandal_slug": "paikpara-31-pally-sadharan",
+        "walking_distance": "850m",
+        "walking_time_mins": 10,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Paikpara+31+Pally+Sadharan+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "tala-park-15-pally",
+        "pandal_name": "Tala Park 15 Pally",
+        "pandal_slug": "tala-park-15-pally",
+        "walking_distance": "950m",
+        "walking_time_mins": 12,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Tala+Park+15+Pally+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "dumdum-park-sarbojonin",
+        "pandal_name": "Dumdum Park Sarbojonin",
+        "pandal_slug": "dumdum-park-sarbojonin",
+        "walking_distance": "2.8 km",
+        "walking_time_mins": 34,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Dumdum+Park+Sarbojonin+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "dumdum-park-yuvak-brinda",
+        "pandal_name": "Dumdum Park Yuvak Brinda",
+        "pandal_slug": "dumdum-park-yuvak-brinda",
+        "walking_distance": "3.0 km",
+        "walking_time_mins": 36,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Belgachia+Metro+Station&destination=Dumdum+Park+Yuvak+Brinda+Durga+Puja+Kolkata"
       }
     ]
   },
@@ -200,6 +384,46 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "650m",
         "walking_time_mins": 8,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Kashi+Bose+Lane+Durga+Puja&travelmode=walking"
+      },
+      {
+        "pandal_id": "hatibagan-nabinpally",
+        "pandal_name": "Hatibagan Nabinpally",
+        "pandal_slug": "hatibagan-nabinpally",
+        "walking_distance": "650m",
+        "walking_time_mins": 8,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Hatibagan+Nabinpally+Durga+Puja+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "telengabagan-sarbojanin",
+        "pandal_name": "Telengabagan",
+        "pandal_slug": "telengabagan-sarbojanin",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 14,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Telengabagan+Sarbojanin+Durgotsab+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "gouriberia-sarbojonin",
+        "pandal_name": "Gouriberia Sarbojonin",
+        "pandal_slug": "gouriberia-sarbojonin",
+        "walking_distance": "1.0 km",
+        "walking_time_mins": 13,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Gouriberia+Sarbojonin+Durga+Puja+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "kabiraj-bagan-sarbojanin",
+        "pandal_name": "Kabiraj Bagan",
+        "pandal_slug": "kabiraj-bagan-sarbojanin",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Kabiraj+Bagan+Durga+Puja+Ultadanga+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "ultadanga-bidhan-sangha",
+        "pandal_name": "Ultadanga Bidhan Sangha",
+        "pandal_slug": "ultadanga-bidhan-sangha",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Shyambazar+Metro+Station&destination=Ultadanga+Bidhan+Sangha+Durga+Puja+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -278,6 +502,30 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "664m",
         "walking_time_mins": 8,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Girish%20Park%20Metro%20Station&destination=Chaltabagan%20Sarbojanin%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "simla-byam-samiti",
+        "pandal_name": "Simla Byam Samiti",
+        "pandal_slug": "simla-byam-samiti",
+        "walking_distance": "550m",
+        "walking_time_mins": 7,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Simla+Byam+Samiti+Durga+Puja+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "jorashanko-saater-palli",
+        "pandal_name": "Jorashanko Saater Palli",
+        "pandal_slug": "jorashanko-saater-palli",
+        "walking_distance": "600m",
+        "walking_time_mins": 7,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Jorashanko+Saater+Palli+Durga+Puja+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "brindavan-matri-mandir",
+        "pandal_name": "Brindavan Matri Mandir",
+        "pandal_slug": "brindavan-matri-mandir",
+        "walking_distance": "850m",
+        "walking_time_mins": 10,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Brindavan+Matri+Mandir+Durga+Puja+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -324,6 +572,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "850m",
         "walking_time_mins": 10,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=Santosh%20Mitra%20Square%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "wellington-nagarik-kalyan-samity",
+        "pandal_name": "Wellington Nagarik Kalyan Samity",
+        "pandal_slug": "wellington-nagarik-kalyan-samity",
+        "walking_distance": "650m",
+        "walking_time_mins": 8,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Central+Metro+Station&destination=Wellington+Nagarik+Kalyan+Samity+Durga+Puja+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -639,6 +895,22 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "600m",
         "walking_time_mins": 7,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Mudiali%20Club%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "shyamapally-shyama-sangha",
+        "pandal_name": "Shyamapally Shyama Sangha",
+        "pandal_slug": "shyamapally-shyama-sangha",
+        "walking_distance": "3.2 km",
+        "walking_time_mins": 38,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Shyamapally+Shyama+Sangha+Durga+Puja+Jadavpur+Kolkata"
+      },
+      {
+        "pandal_id": "jadavpur-athletic-club",
+        "pandal_name": "Jadavpur Athletic Club",
+        "pandal_slug": "jadavpur-athletic-club",
+        "walking_distance": "2.8 km",
+        "walking_time_mins": 34,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Rabindra+Sarobar+Metro+Station&destination=Jadavpur+Athletic+Club+Durga+Puja+Kolkata"
       }
     ]
   },
@@ -709,6 +981,38 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.4 km",
         "walking_time_mins": 17,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Netaji%20(Kudghat)%20Metro%20Station&destination=Naktala%20Udayan%20Sangha%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "ajeya-sanghati",
+        "pandal_name": "Ajeya Sanghati",
+        "pandal_slug": "ajeya-sanghati",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Netaji+Metro+Station&destination=Ajeya+Sanghati+Durga+Puja+Haridevpur+Kolkata"
+      },
+      {
+        "pandal_id": "haridevpur-new-sporting-club",
+        "pandal_name": "Haridevpur New Sporting Club",
+        "pandal_slug": "haridevpur-new-sporting-club",
+        "walking_distance": "1.5 km",
+        "walking_time_mins": 18,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Netaji+Metro+Station&destination=Haridevpur+New+Sporting+Club+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "adarsha-samiti-club",
+        "pandal_name": "Adarsha Samiti Club",
+        "pandal_slug": "adarsha-samiti-club",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 13,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Netaji+Metro+Station&destination=Adarsha+Samiti+Club+Haridevpur+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "putiary-club",
+        "pandal_name": "Putiary Club",
+        "pandal_slug": "putiary-club",
+        "walking_distance": "650m",
+        "walking_time_mins": 8,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Netaji+Metro+Station&destination=Putiary+Club+Durga+Puja+Kolkata"
       }
     ]
   },
@@ -779,6 +1083,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "3.7 km",
         "walking_time_mins": 44,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Gitanjali%20(Naktala)%20Metro%20Station&destination=Santoshpur%20Lake%20Pally%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "kamdahari-purbapara-pancha-durga",
+        "pandal_name": "Kamdahari Purbapara (Pancha Durga)",
+        "pandal_slug": "kamdahari-purbapara-pancha-durga",
+        "walking_distance": "950m",
+        "walking_time_mins": 12,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Gitanjali+Metro+Station&destination=Kamdahari+Purbapara+Pancha+Durga+Garia+Kolkata"
       }
     ]
   },
@@ -814,6 +1126,38 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "4.0 km",
         "walking_time_mins": 48,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi%20Nazrul%20(Garia%20Bazar)%20Metro%20Station&destination=Santosh%20Pur%20Pally%20Mangal%20Samity%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "subhashpally-sarbojonin",
+        "pandal_name": "Subhashpally Sarbojonin",
+        "pandal_slug": "subhashpally-sarbojonin",
+        "walking_distance": "600m",
+        "walking_time_mins": 7,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Nazrul+Metro+Station&destination=Subhashpally+Sarbojonin+Durga+Puja+Garia+Kolkata"
+      },
+      {
+        "pandal_id": "naba-durga-garia-mitali-sangha",
+        "pandal_name": "Naba Durga (Garia Mitali Sangha)",
+        "pandal_slug": "naba-durga-garia-mitali-sangha",
+        "walking_distance": "550m",
+        "walking_time_mins": 7,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Nazrul+Metro+Station&destination=Garia+Mitali+Sangha+Naba+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "jatra-suru-sangha",
+        "pandal_name": "Jatra Suru Sangha",
+        "pandal_slug": "jatra-suru-sangha",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 14,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Nazrul+Metro+Station&destination=Jatra+Suru+Sangha+Durga+Puja+Green+View+Kolkata"
+      },
+      {
+        "pandal_id": "raipur-club",
+        "pandal_name": "Raipur Club",
+        "pandal_slug": "raipur-club",
+        "walking_distance": "850m",
+        "walking_time_mins": 11,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Nazrul+Metro+Station&destination=Raipur+Club+Durga+Puja+Garia+Kolkata"
       }
     ]
   },
@@ -884,6 +1228,22 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "3.4 km",
         "walking_time_mins": 41,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi%20Subhash%20(New%20Garia)%20Metro%20Station&destination=Santosh%20Pur%20Pally%20Mangal%20Samity%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "patuli-central-club",
+        "pandal_name": "Patuli Central Club",
+        "pandal_slug": "patuli-central-club",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Subhash+Metro+Station&destination=Patuli+Central+Club+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "patuli-sporting-club",
+        "pandal_name": "Patuli Sporting Club",
+        "pandal_slug": "patuli-sporting-club",
+        "walking_distance": "1.5 km",
+        "walking_time_mins": 18,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Kavi+Subhash+Metro+Station&destination=Patuli+Sporting+Club+Durga+Puja+Kolkata"
       }
     ]
   },
@@ -919,6 +1279,150 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "3.6 km",
         "walking_time_mins": 43,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah%20Maidan%20Metro%20Station&destination=Ahiritola%20Sarbojanin%20Durgotsav%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "howrah-bantra-nabin-sangha",
+        "pandal_name": "Howrah Bantra Nabin Sangha",
+        "pandal_slug": "howrah-bantra-nabin-sangha",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 14,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Bantra+Nabin+Sangha+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "jatiya-seva-dal-kadamtala",
+        "pandal_name": "Jatiya Seva Dal",
+        "pandal_slug": "jatiya-seva-dal-kadamtala",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Jatiya+Seva+Dal+Durga+Puja+Kadamtala+Howrah"
+      },
+      {
+        "pandal_id": "khirertala-baroari-bayam-samiti",
+        "pandal_name": "Khirertala Baroari Bayam Samiti",
+        "pandal_slug": "khirertala-baroari-bayam-samiti",
+        "walking_distance": "950m",
+        "walking_time_mins": 12,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Khirertala+Baroari+Bayam+Samiti+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "shanti-sangha-club-howrah",
+        "pandal_name": "Shanti Sangha Club",
+        "pandal_slug": "shanti-sangha-club-howrah",
+        "walking_distance": "1.0 km",
+        "walking_time_mins": 13,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Shanti+Sangha+Club+Durga+Puja+Tikiapara+Howrah"
+      },
+      {
+        "pandal_id": "howrah-annapurna-byayam-samity",
+        "pandal_name": "Howrah Annapurna Byayam Samity",
+        "pandal_slug": "howrah-annapurna-byayam-samity",
+        "walking_distance": "1.3 km",
+        "walking_time_mins": 16,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Annapurna+Byayam+Samity+Durga+Puja+Kadamtala+Howrah"
+      },
+      {
+        "pandal_id": "hazarath-kalitola-kadamtala",
+        "pandal_name": "Hazarath Kalitola (Kadamtala)",
+        "pandal_slug": "hazarath-kalitola-kadamtala",
+        "walking_distance": "1.5 km",
+        "walking_time_mins": 19,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Hazarath+Kalitola+Durga+Puja+Kadamtala+Howrah"
+      },
+      {
+        "pandal_id": "dharar-math-bhatri-sangha",
+        "pandal_name": "Dharar Math Bhatri Sangha",
+        "pandal_slug": "dharar-math-bhatri-sangha",
+        "walking_distance": "1.6 km",
+        "walking_time_mins": 20,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Dharar+Math+Bhatri+Sangha+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "bantra-mohila-sangha",
+        "pandal_name": "Bantra Mohila Sangha",
+        "pandal_slug": "bantra-mohila-sangha",
+        "walking_distance": "1.2 km",
+        "walking_time_mins": 15,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Bantra+Mohila+Sangha+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "halderpara-friends-association",
+        "pandal_name": "Halderpara Friends Association",
+        "pandal_slug": "halderpara-friends-association",
+        "walking_distance": "2.4 km",
+        "walking_time_mins": 29,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Halderpara+Friends+Association+Durga+Puja+Shibpur+Howrah"
+      },
+      {
+        "pandal_id": "torpedo-welfare-society",
+        "pandal_name": "Torpedo Welfare Society",
+        "pandal_slug": "torpedo-welfare-society",
+        "walking_distance": "2.8 km",
+        "walking_time_mins": 34,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Torpedo+Welfare+Society+Durga+Puja+Mandirtala+Howrah"
+      },
+      {
+        "pandal_id": "shibpur-sastitala-barowari",
+        "pandal_name": "Shibpur Sastitala Barowari",
+        "pandal_slug": "shibpur-sastitala-barowari",
+        "walking_distance": "2.2 km",
+        "walking_time_mins": 27,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Shibpur+Sastitala+Barowari+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "hazarath-kalitola-naora-shibpur",
+        "pandal_name": "Hazarath Kalitola (Naora / Shibpur)",
+        "pandal_slug": "hazarath-kalitola-naora-shibpur",
+        "walking_distance": "2.5 km",
+        "walking_time_mins": 31,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Hazarath+Kalitola+Durga+Puja+Naora+Shibpur+Howrah"
+      },
+      {
+        "pandal_id": "ichapur-mitali-sangha",
+        "pandal_name": "Ichapur Mitali Sangha",
+        "pandal_slug": "ichapur-mitali-sangha",
+        "walking_distance": "2.7 km",
+        "walking_time_mins": 33,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Ichapur+Mitali+Sangha+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "apg-memorial-association-club",
+        "pandal_name": "A.P.G. Memorial Association Club",
+        "pandal_slug": "apg-memorial-association-club",
+        "walking_distance": "2.5 km",
+        "walking_time_mins": 31,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=APG+Memorial+Association+Club+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "santragachi-kalpataru-sporting-club",
+        "pandal_name": "Santragachi Kalpataru Sporting Club Ground",
+        "pandal_slug": "santragachi-kalpataru-sporting-club",
+        "walking_distance": "3.5 km",
+        "walking_time_mins": 42,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Santragachi+Kalpataru+Sporting+Club+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "kamardanga-sitalatala-puja-committee",
+        "pandal_name": "Kamardanga Sitalatala Puja Committee",
+        "pandal_slug": "kamardanga-sitalatala-puja-committee",
+        "walking_distance": "2.4 km",
+        "walking_time_mins": 30,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Kamardanga+Sitalatala+Durga+Puja+Howrah"
+      },
+      {
+        "pandal_id": "milan-sangha-arudara-ramrajatala",
+        "pandal_name": "Milan Sangha (Arupara)",
+        "pandal_slug": "milan-sangha-arudara-ramrajatala",
+        "walking_distance": "3.8 km",
+        "walking_time_mins": 46,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Milan+Sangha+Durga+Puja+Arupara+Ramrajatala+Howrah"
+      },
+      {
+        "pandal_id": "arudara-milansangha-road",
+        "pandal_name": "Arupara Milansangha",
+        "pandal_slug": "arudara-milansangha-road",
+        "walking_distance": "3.9 km",
+        "walking_time_mins": 47,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Maidan+Metro+Station&destination=Arupara+Milansangha+Durga+Puja+Ramrajatala+Howrah"
       }
     ]
   },
@@ -954,6 +1458,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "2.2 km",
         "walking_time_mins": 27,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah%20Railway%20Station%20Metro%20Station&destination=Subodh%20Mullick%20Square%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "ghas-bagan-sporting-club",
+        "pandal_name": "Ghas Bagan Sporting Club",
+        "pandal_slug": "ghas-bagan-sporting-club",
+        "walking_distance": "1.5 km",
+        "walking_time_mins": 18,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Howrah+Railway+Station+Metro&destination=Ghas+Bagan+Sporting+Club+Durga+Puja+Howrah"
       }
     ]
   },
@@ -1067,6 +1579,30 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "600m (Auto available)",
         "walking_time_mins": 8,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=37%20Pally%20Sarbojanin%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "sealdah-railway-athletic-club",
+        "pandal_name": "Sealdah Railway Athletic Club",
+        "pandal_slug": "sealdah-railway-athletic-club",
+        "walking_distance": "350m",
+        "walking_time_mins": 4,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Sealdah+Railway+Athletic+Club+Durga+Puja&travelmode=walking"
+      },
+      {
+        "pandal_id": "14-pally-udayan-sangha-sealdah",
+        "pandal_name": "14 Pally Udayan Sangha",
+        "pandal_slug": "14-pally-udayan-sangha-sealdah",
+        "walking_distance": "1.1 km",
+        "walking_time_mins": 14,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=14+Pally+Udayan+Sangha+Durga+Puja+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "belighata-nabamilan",
+        "pandal_name": "Belighata Nabamilan",
+        "pandal_slug": "belighata-nabamilan",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Sealdah+Metro+Station&destination=Beleghata+Nabamilan+Durga+Puja+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -1102,6 +1638,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "496m",
         "walking_time_mins": 6,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Phoolbagan%20Metro%20Station&destination=Kakurgachi%20Yubak%20Brindra%2C%20Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "kankurgachi-chalantika-durgotsav",
+        "pandal_name": "Kankurgachi Chalantika Durgotsav",
+        "pandal_slug": "kankurgachi-chalantika-durgotsav",
+        "walking_distance": "850m",
+        "walking_time_mins": 10,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Phoolbagan+Metro+Station&destination=Chalantika+Durgotsav+Kankurgachi+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -1175,6 +1719,22 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "650m",
         "walking_time_mins": 8,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=City+Centre+Metro+Station&destination=Salt%20Lake%20FD%20Block%20Sarbojanin%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "salt-lake-ab-ac-block",
+        "pandal_name": "AB AC Block Durga Puja",
+        "pandal_slug": "salt-lake-ab-ac-block",
+        "walking_distance": "950m",
+        "walking_time_mins": 12,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=City+Centre+Metro+Station&destination=AB+AC+Block+Durga+Puja+Salt+Lake+Kolkata&travelmode=walking"
+      },
+      {
+        "pandal_id": "salt-lake-ec-block",
+        "pandal_name": "EC Block",
+        "pandal_slug": "salt-lake-ec-block",
+        "walking_distance": "750m",
+        "walking_time_mins": 9,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=City+Centre+Metro+Station&destination=EC+Block+Durga+Puja+Salt+Lake+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -1202,6 +1762,14 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.2 km (Auto 4 mins)",
         "walking_time_mins": 15,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=New%20Town%20Sarbojanin%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "salt-lake-labony-estate",
+        "pandal_name": "Labony",
+        "pandal_slug": "salt-lake-labony-estate",
+        "walking_distance": "850m",
+        "walking_time_mins": 10,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Central+Park+Metro+Station&destination=Labony+Estate+Durga+Puja+Salt+Lake+Kolkata&travelmode=walking"
       }
     ]
   },
@@ -1267,6 +1835,54 @@ export const METRO_STATIONS_DATA: MetroStation[] = [
         "walking_distance": "1.8 km (Auto 6 mins)",
         "walking_time_mins": 22,
         "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Santoshpur%20Lake%20Pally%2C%20Kolkata"
+      },
+      {
+        "pandal_id": "santoshpur-avenue-south",
+        "pandal_name": "Santoshpur Avenue South",
+        "pandal_slug": "santoshpur-avenue-south",
+        "walking_distance": "1.3 km",
+        "walking_time_mins": 16,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Santoshpur+Avenue+South+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "tarun-sathi",
+        "pandal_name": "Tarun Sathi",
+        "pandal_slug": "tarun-sathi",
+        "walking_distance": "1.9 km",
+        "walking_time_mins": 23,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Tarun+Sathi+Durga+Puja+Sulekha+Jadavpur+Kolkata"
+      },
+      {
+        "pandal_id": "baghajatin-b-and-c-block",
+        "pandal_name": "Baghajatin B & C",
+        "pandal_slug": "baghajatin-b-and-c-block",
+        "walking_distance": "1.5 km",
+        "walking_time_mins": 18,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Baghajatin+B+and+C+Block+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "baghajatin-tarun-sangha",
+        "pandal_name": "Baghajatin Tarun Sangha",
+        "pandal_slug": "baghajatin-tarun-sangha",
+        "walking_distance": "1.6 km",
+        "walking_time_mins": 19,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Baghajatin+Tarun+Sangha+Durga+Puja+Kolkata"
+      },
+      {
+        "pandal_id": "maitri-sansad",
+        "pandal_name": "Maitri Sansad",
+        "pandal_slug": "maitri-sansad",
+        "walking_distance": "1.4 km",
+        "walking_time_mins": 17,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Maitri+Sansad+Durga+Puja+Baghajatin+Kolkata"
+      },
+      {
+        "pandal_id": "vivekananda-milan-sangha",
+        "pandal_name": "Vivekananda Milan Sangha",
+        "pandal_slug": "vivekananda-milan-sangha",
+        "walking_distance": "1.6 km",
+        "walking_time_mins": 20,
+        "directions_url": "https://www.google.com/maps/dir/?api=1&origin=Satyajit+Ray+Metro+Station&destination=Vivekananda+Milan+Sangha+Durga+Puja+Baghajatin+Kolkata"
       }
     ]
   },
