@@ -248,7 +248,7 @@ function PandalsContent() {
         {filteredPandals.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
             {filteredPandals.map((pandal) => (
-              <PandalCard key={pandal.id} pandal={pandal} />
+              <PandalCard key={pandal.id} pandal={pandal} userLocation={userLocation} />
             ))}
           </div>
         ) : (

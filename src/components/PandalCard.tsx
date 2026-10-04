@@ -13,9 +13,11 @@ import {
   Clock, 
   ArrowRight, 
   Users, 
-  Flame
+  Flame,
+  Navigation
 } from 'lucide-react';
-import { buildGoogleMapsUrl } from '@/lib/geo';
+import { buildGoogleMapsUrl, calculateDistanceKm } from '@/lib/geo';
+import { useLocation } from '@/context/LocationContext';
 
 interface PandalCardProps {
   pandal: Pandal;
@@ -23,15 +25,38 @@ interface PandalCardProps {
   overrideMetroName?: string;
   overrideWalkMins?: number;
   overrideWalkDistance?: string;
+  userLocation?: { lat: number; lng: number } | null;
 }
 
-export default function PandalCard({ pandal, priority = false, overrideMetroName, overrideWalkMins, overrideWalkDistance }: PandalCardProps) {
+export default function PandalCard({ 
+  pandal, 
+  priority = false, 
+  overrideMetroName, 
+  overrideWalkMins, 
+  overrideWalkDistance,
+  userLocation: propUserLocation
+}: PandalCardProps) {
   const { isSaved, toggleWishlist } = useWishlist();
   const { isVisited } = useVisited();
   const { language } = useLanguage();
+  const { location: globalLocation } = useLocation();
   const isBn = language === 'bn';
   const saved = isSaved(pandal.id);
   const visited = isVisited(pandal.id);
+
+  // Active user coordinate from prop or global location context
+  const activeUserCoords = propUserLocation || globalLocation?.coords || null;
+
+  // Calculate direct distance from user to pandal if location is available
+  const directDistanceKm = activeUserCoords 
+    ? calculateDistanceKm(activeUserCoords.lat, activeUserCoords.lng, pandal.latitude, pandal.longitude)
+    : null;
+
+  const directDistanceText = directDistanceKm !== null
+    ? directDistanceKm < 1
+      ? `${Math.round(directDistanceKm * 1000)}m`
+      : `${directDistanceKm.toFixed(1)} km`
+    : null;
 
   const exactMapsUrl = buildGoogleMapsUrl(
     pandal.latitude,
@@ -164,23 +189,39 @@ export default function PandalCard({ pandal, priority = false, overrideMetroName
 
         </div>
 
-        {/* Metro Transit Pill (Compact Row) */}
-        <div className="p-1.5 sm:p-2 rounded-xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/60 dark:border-white/5 flex items-center gap-2">
-          <div className="w-5.5 h-5.5 rounded-md bg-[#0052FF] text-white font-bold flex items-center justify-center text-[10px] shadow-2xs shrink-0">
-            M
+        {/* Metro Transit Pill & Live Distance */}
+        <div className="p-1.5 sm:p-2 rounded-xl bg-[#F5F2EB] dark:bg-white/[0.04] border border-stone-200/60 dark:border-white/5 space-y-1">
+          {/* Main Metro Line */}
+          <div className="flex items-center gap-2">
+            <div className="w-5.5 h-5.5 rounded-md bg-[#0052FF] text-white font-bold flex items-center justify-center text-[10px] shadow-2xs shrink-0">
+              M
+            </div>
+
+            <div className="min-w-0 flex-1 flex items-center justify-between gap-1 text-[10.5px]">
+              <span className="font-bold text-stone-900 dark:text-white truncate">
+                {cleanMetroName}
+              </span>
+
+              <span className="flex items-center gap-0.5 text-[#D8261C] dark:text-red-400 font-bold shrink-0" title={`${displayWalkMins} min walk from ${cleanMetroName}`}>
+                <Clock className="w-2.5 h-2.5" />
+                <span>{displayWalkMins}m</span>
+                <span className="text-stone-400 font-normal hidden sm:inline">({cleanDistance.split(' ')[0]})</span>
+              </span>
+            </div>
           </div>
 
-          <div className="min-w-0 flex-1 flex items-center justify-between gap-1 text-[10.5px]">
-            <span className="font-bold text-stone-900 dark:text-white truncate">
-              {cleanMetroName}
-            </span>
-
-            <span className="flex items-center gap-0.5 text-[#D8261C] dark:text-red-400 font-bold shrink-0">
-              <Clock className="w-2.5 h-2.5" />
-              <span>{displayWalkMins}m</span>
-              <span className="text-stone-400 font-normal hidden sm:inline">({cleanDistance.split(' ')[0]})</span>
-            </span>
-          </div>
+          {/* User's Direct GPS Distance Badge (Shown when location is active) */}
+          {directDistanceText && (
+            <div className="flex items-center justify-between pt-1 border-t border-stone-200/40 dark:border-white/5 text-[9.5px]">
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1">
+                <Navigation className="w-2.5 h-2.5 fill-emerald-600 dark:fill-emerald-400" />
+                <span>{isBn ? 'আপনার থেকে:' : 'From you:'} <span className="font-extrabold">{directDistanceText}</span></span>
+              </span>
+              <span className="text-stone-400 dark:text-stone-400 font-medium text-[8.5px] truncate max-w-[120px]">
+                {isBn ? `মেট্রো থেকে ${displayWalkMins}মিঃ` : `${displayWalkMins}m from metro`}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Crowd Badge & Actions Row */}
