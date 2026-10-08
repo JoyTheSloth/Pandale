@@ -356,8 +356,8 @@ function ZoneHoppingContent() {
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
 
-              {/* Rich high-contrast scrim: darker at bottom to make white text crisp and legible */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/25 pointer-events-none group-hover:from-black group-hover:via-black/65 transition-colors duration-300" />
+              {/* Dark Gradient Vignette for overall depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none group-hover:from-black/95 transition-colors duration-300" />
 
               {/* TOP: Flames left, icons right */}
               <div className="relative z-10 flex items-start justify-between gap-2">
@@ -403,31 +403,31 @@ function ZoneHoppingContent() {
                 </div>
               </div>
 
-              {/* BOTTOM: index + name + metro with high readability */}
-              <div className="relative z-10 space-y-2 mt-auto">
-                {/* Index pill row */}
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-xs font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/30">
+              {/* BOTTOM: Frosted Dark Blur Panel for Maximum Text Visibility */}
+              <div className="relative z-10 mt-auto bg-black/75 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 border border-white/15 shadow-xl space-y-1.5">
+                {/* Index & Bengali Name Row */}
+                <div className="flex items-center gap-1.5">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-[10px] font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/30">
                     {index + 1}
                   </span>
                   {isBn && (
-                    <span className="text-[11px] text-amber-300 font-bold font-bengali truncate leading-none drop-shadow-md">
+                    <span className="text-[10.5px] text-amber-300 font-bold font-bengali truncate leading-none">
                       {pandal.bengaliName}
                     </span>
                   )}
                 </div>
 
-                {/* Pandal Name with prominent contrast drop shadow */}
-                <h3 className="text-base sm:text-lg font-black font-editorial text-white leading-tight tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] group-hover:text-amber-300 transition-colors line-clamp-2">
+                {/* Pandal Name */}
+                <h3 className="text-sm sm:text-base font-black font-editorial text-white leading-tight tracking-tight group-hover:text-amber-300 transition-colors line-clamp-1 drop-shadow-sm">
                   {isBn ? pandal.bengaliName : pandal.name}
                 </h3>
 
-                {/* Metro station pill with opaque dark background for 100% legibility */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 max-w-full overflow-hidden shadow-md">
+                {/* Metro Station Info */}
+                <div className="flex items-center gap-1.5 text-stone-200 text-[10.5px] font-mono font-medium overflow-hidden">
                   <Train className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                  <span className="text-[10.5px] font-mono font-bold text-white truncate">
-                    {pandal.nearestStation} · {pandal.walkTimeToStationMins}m walk
-                  </span>
+                  <span className="truncate">{pandal.nearestStation}</span>
+                  <span className="text-stone-400">•</span>
+                  <span className="shrink-0 text-amber-300 font-bold">{pandal.walkTimeToStationMins}m</span>
                 </div>
               </div>
             </Link>
