@@ -1,11 +1,13 @@
 import { MetadataRoute } from 'next';
 import { PANDALS_DATA } from '@/data/pandals';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
+const rawBaseUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith('http') ? process.env.NEXT_PUBLIC_SITE_URL : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
   : process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'https://pandalekolkata.vercel.app';
+
+const BASE_URL = rawBaseUrl.replace(/\/+$/, '');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString();
@@ -13,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static core routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${BASE_URL}/`,
+      url: `${BASE_URL}`,
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1.0,
