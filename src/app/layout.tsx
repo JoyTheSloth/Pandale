@@ -35,16 +35,28 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith('http') ? process.env.NEXT_PUBLIC_SITE_URL : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
+  : process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'https://pandalekolkata.vercel.app';
+
 export const metadata: Metadata = {
-  title: 'Pandalé | Kolkata Durga Puja Pandal & Metro Navigation Guide',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Pandalé | Kolkata Durga Puja Pandal & Metro Navigation Guide',
+    template: '%s | Pandalé',
+  },
   description:
-    'Discover Kolkata’s most iconic 2026 Durga Puja pandals, real-time metro walking routes, latest authorized Instagram photos, exact Google Maps locations, and personal Puja itinerary planner on Pandalé.',
+    'Discover Kolkata’s most iconic Durga Puja pandals, real-time metro walking routes, latest preview photos, exact Google Maps locations, and personal Puja itinerary planner on Pandalé.',
   keywords: [
     'Pandalé',
     'Pandalé 2026',
     'Kolkata Durga Puja 2026',
+    'Durga Puja Kolkata pandal guide',
     'Kolkata Metro pandal guide',
     'Durga Puja route planner',
+    'Kolkata Durga Puja metro timings',
     'Bagbazar Sarbojanin',
     'Sree Bhumi 2026',
     'Maddox Square',
@@ -54,6 +66,12 @@ export const metadata: Metadata = {
     'South Kolkata Pujo'
   ],
   authors: [{ name: 'Pandalé Kolkata' }],
+  creator: 'Pandalé',
+  publisher: 'Pandalé',
+  formatDetection: {
+    telephone: false,
+    address: true,
+  },
   icons: {
     icon: [
       { url: '/icons/icon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -66,15 +84,15 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   openGraph: {
     title: 'Pandalé — Kolkata Durga Puja & Metro Guide',
-    description: 'The definitive companion for exploring Kolkata Durga Puja 2026 by Metro with exact Google Maps coordinates.',
-    url: 'https://pandale.in',
+    description: 'The definitive companion for exploring Kolkata Durga Puja by Metro with exact Google Maps coordinates.',
+    url: siteUrl,
     siteName: 'Pandalé',
     images: [
       {
-        url: 'https://pandalekolkata.vercel.app/brand/og-image.jpg',
+        url: '/brand/og-image.jpg',
         width: 1280,
         height: 720,
-        alt: 'Pandalé — Kolkata Durga Puja & Metro Guide 2026'
+        alt: 'Pandalé — Kolkata Durga Puja & Metro Guide'
       }
     ],
     locale: 'en_IN',
@@ -82,9 +100,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pujo 2026 — Kolkata Durga Puja & Metro Guide',
-    description: 'Find iconic pandals, nearest Metro exits, latest photos, and open exact Google Maps navigation.'
-  }
+    title: 'Pandalé — Kolkata Durga Puja & Metro Guide',
+    description: 'Find iconic pandals, nearest Metro exits, latest photos, and open exact Google Maps navigation.',
+    images: ['/brand/og-image.jpg'],
+  },
+  verification: {
+    google: 'google1532855eff22c976',
+  },
+  other: {
+    'geo.region': 'IN-WB',
+    'geo.placename': 'Kolkata',
+    'geo.position': '22.5726;88.3639',
+    'ICBM': '22.5726, 88.3639',
+  },
 };
 
 export default function RootLayout({
@@ -125,6 +153,27 @@ export default function RootLayout({
             <WishlistProvider>
               <VisitedProvider>
                 <LocationProvider>
+                  {/* Google AI & Sitelinks Search Box Schema */}
+                  <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'WebSite',
+                        name: 'Pandalé',
+                        alternateName: ['Pujo 2026', 'Pandale Kolkata', 'প্যান্ডেলে'],
+                        url: siteUrl,
+                        potentialAction: {
+                          '@type': 'SearchAction',
+                          target: {
+                            '@type': 'EntryPoint',
+                            urlTemplate: `${siteUrl}/pandals?search={search_term_string}`,
+                          },
+                          'query-input': 'required name=search_term_string',
+                        },
+                      }),
+                    }}
+                  />
                   <div className="relative flex min-h-screen flex-col">
                     <Header />
                     <main className="flex-1 pb-16 md:pb-0">{children}</main>
