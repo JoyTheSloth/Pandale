@@ -1,20 +1,21 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, Suspense, useCallback } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { PANDALS_DATA } from '@/data/pandals';
 import PandalCard from '@/components/PandalCard';
 import SearchAndFilters from '@/components/SearchAndFilters';
 import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
-import { Sparkles, AlertCircle, Loader2, Flame, ArrowRight } from 'lucide-react';
-import { useLocation } from '@/context/LocationContext';
+import { Sparkles, AlertCircle, Loader2, Flame, ArrowRight, MapPin, X } from 'lucide-react';
+import { useLocation, KOLKATA_CENTROID } from '@/context/LocationContext';
 import { useLanguage } from '@/context/LanguageContext';
 import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
 
 function PandalsContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { wishlist } = useWishlist();
   const { language } = useLanguage();
@@ -47,22 +48,39 @@ function PandalsContent() {
   useEffect(() => {
     if (location.coords) {
       setUserLocation(location.coords);
-      setIsNearMeActive(true);
-      setSortBy('distance');
     }
   }, [location.coords]);
 
   // Sync URL search params if user navigated with parameters
   useEffect(() => {
     const z = searchParams.get('zone') as ZoneArea;
-    if (z) setSelectedZone(z);
+    if (z) {
+      setSelectedZone(z);
+    } else {
+      setSelectedZone('All');
+    }
     if (searchParams.get('nearMetro') === 'true') setNearMetroOnly(true);
     if (searchParams.get('mustVisit') === 'true') setMustVisitOnly(true);
     if (searchParams.get('trending') === 'true') setTrendingOnly(true);
   }, [searchParams]);
 
-  // Geolocation trigger
-  const handleNearMeToggle = () => {
+  // Reliable Zone switcher that toggles and keeps URL synchronized
+  const handleZoneChange = useCallback((zone: ZoneArea | 'All') => {
+    const nextZone = (selectedZone === zone && zone !== 'All') ? 'All' : zone;
+    setSelectedZone(nextZone);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (nextZone === 'All') {
+      params.delete('zone');
+    } else {
+      params.set('zone', nextZone);
+    }
+    const qs = params.toString();
+    router.replace(qs ? `/pandals?${qs}` : '/pandals', { scroll: false });
+  }, [selectedZone, searchParams, router]);
+
+  // Geolocation trigger: instantly activates cards with user or centroid coordinates
+  const handleNearMeToggle = useCallback(() => {
     if (isNearMeActive) {
       setIsNearMeActive(false);
       setUserLocation(null);
@@ -70,16 +88,17 @@ function PandalsContent() {
       return;
     }
 
+    setIsNearMeActive(true);
+    setSortBy('distance');
+
     if (location.coords) {
       setUserLocation(location.coords);
-      setIsNearMeActive(true);
-      setSortBy('distance');
     } else {
-      setIsNearMeActive(true);
-      setSortBy('distance');
+      // Immediately set reference coordinates so cards sort and distance badges appear INSTANTLY
+      setUserLocation(KOLKATA_CENTROID);
       fetchCurrentLocation();
     }
-  };
+  }, [isNearMeActive, location.coords, fetchCurrentLocation]);
 
   // Filtered & sorted Pandals
   const filteredPandals = useMemo(() => {
@@ -159,10 +178,11 @@ function PandalsContent() {
       result.sort((a, b) => a.walking_time_mins - b.walking_time_mins);
     } else if (sortBy === 'name') {
       result.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'distance' && userLocation) {
+    } else if (sortBy === 'distance') {
+      const activeCoords = userLocation || location.coords || KOLKATA_CENTROID;
       result.sort((a, b) => {
-        const dA = calculateDistanceKm(userLocation.lat, userLocation.lng, a.latitude, a.longitude);
-        const dB = calculateDistanceKm(userLocation.lat, userLocation.lng, b.latitude, b.longitude);
+        const dA = calculateDistanceKm(activeCoords.lat, activeCoords.lng, a.latitude, a.longitude);
+        const dB = calculateDistanceKm(activeCoords.lat, activeCoords.lng, b.latitude, b.longitude);
         return dA - dB;
       });
     }
@@ -180,6 +200,7 @@ function PandalsContent() {
     selectedDay,
     sortBy,
     userLocation,
+    location.coords,
     wishlist
   ]);
 
@@ -232,12 +253,12 @@ function PandalsContent() {
       </div>
 
       {/* Search and Filters component */}
-      <div className="mb-8">
+      <div className="mb-6">
         <SearchAndFilters
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           selectedZone={selectedZone}
-          onZoneChange={setSelectedZone}
+          onZoneChange={handleZoneChange}
           nearMetroOnly={nearMetroOnly}
           onNearMetroToggle={() => setNearMetroOnly(!nearMetroOnly)}
           mustVisitOnly={mustVisitOnly}
@@ -256,22 +277,62 @@ function PandalsContent() {
           onSortChange={setSortBy}
           isNearMeActive={isNearMeActive}
           onNearMeToggle={handleNearMeToggle}
+          isLocating={location.status === 'loading'}
           totalCount={filteredPandals.length}
         />
       </div>
+
+      {/* Near Me Active Status Bar */}
+      {isNearMeActive && (
+        <div className="mb-6 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-red-500/10 via-amber-500/10 to-transparent border border-red-500/20 flex items-center justify-between gap-3 text-xs shadow-xs">
+          <div className="flex items-center gap-2 text-stone-800 dark:text-stone-200 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
+            <MapPin className="w-4 h-4 text-[#D8261C] shrink-0" />
+            <p className="truncate font-medium">
+              {location.isLiveGps ? (
+                <>
+                  <span className="font-bold text-[#D8261C] dark:text-amber-400">
+                    {isBn ? 'লাইভ জিপিএস সক্রিয়:' : 'Live GPS active:'}
+                  </span>{' '}
+                  {isBn ? `আপনার অবস্থান (${location.areaName}) থেকে নিকটতম দূরত্বে সাজানো` : `Sorted nearest to you (${location.areaName})`}
+                </>
+              ) : (
+                <>
+                  <span className="font-bold text-[#D8261C] dark:text-amber-400">
+                    {isBn ? 'নিকটবর্তী মণ্ডপ:' : 'Near Me active:'}
+                  </span>{' '}
+                  {isBn ? 'সেন্ট্রাল কলকাতা কেন্দ্রবিন্দু থেকে দূরত্ব অনুসারে সাজানো' : 'Sorted from Central Kolkata reference point'}
+                </>
+              )}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleNearMeToggle}
+            className="flex items-center gap-1 text-[11px] font-bold text-[#D8261C] dark:text-red-400 hover:underline shrink-0 cursor-pointer"
+          >
+            <span>{isBn ? 'বন্ধ করুন' : 'Turn Off'}</span>
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Pandals List */}
       <div>
         {filteredPandals.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
             {filteredPandals.map((pandal) => (
-              <PandalCard key={pandal.id} pandal={pandal} userLocation={userLocation} />
+              <PandalCard
+                key={pandal.id}
+                pandal={pandal}
+                userLocation={userLocation || (isNearMeActive ? (location.coords || KOLKATA_CENTROID) : null)}
+              />
             ))}
           </div>
         ) : (
           <EmptyState onReset={() => {
             setSearchQuery('');
-            setSelectedZone('All');
+            handleZoneChange('All');
             setNearMetroOnly(false);
             setMustVisitOnly(false);
             setPopularOnly(false);
@@ -279,6 +340,7 @@ function PandalsContent() {
             setLessCrowdedOnly(false);
             setWishlistOnly(false);
             setSelectedDay('All');
+            if (isNearMeActive) handleNearMeToggle();
           }} />
         )}
       </div>

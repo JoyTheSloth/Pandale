@@ -13,7 +13,7 @@ import {
   Clock, 
   ArrowRight, 
   Users, 
-  Flame,
+  Sparkles,
   Navigation
 } from 'lucide-react';
 import { buildGoogleMapsUrl, calculateDistanceKm } from '@/lib/geo';
@@ -156,16 +156,15 @@ export default function PandalCard({
         </div>
 
 
-        {/* Bottom Floating Must-Visit Tag: 3 Fire Icons without written text */}
+        {/* Bottom Floating Must-Visit Tag: Clean Sparkles badge */}
         {(pandal.is_must_visit || pandal.tags?.includes('Must Visit')) && (
           <div className="absolute bottom-2 left-2 z-10">
             <span 
-              className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-black/70 dark:bg-black/80 backdrop-blur-md border border-orange-500/30 shadow-md"
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-black/75 dark:bg-black/85 backdrop-blur-md border border-amber-400/40 shadow-md text-amber-300 text-[10px] font-bold"
               title={isBn ? 'অবশ্য দর্শনীয়' : 'Must Visit'}
             >
-              <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
-              <Flame className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-              <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
+              <Sparkles className="w-3 h-3 text-amber-400 fill-amber-400" />
+              <span>{isBn ? 'অবশ্য দর্শনীয়' : 'Must Visit'}</span>
             </span>
           </div>
         )}

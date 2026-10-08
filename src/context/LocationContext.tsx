@@ -26,6 +26,11 @@ interface LocationContextType {
   setManualLocation: (area: string, suburb?: string, coords?: UserCoordinates) => void;
 }
 
+export const KOLKATA_CENTROID: UserCoordinates = {
+  lat: 22.5726,
+  lng: 88.3639,
+};
+
 const DEFAULT_LOCATION: UserLocationState = {
   coords: null,
   areaName: 'Kolkata',
@@ -49,7 +54,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed && parsed.areaName) {
+        if (parsed && parsed.areaName && parsed.coords) {
           setLocation({
             ...parsed,
             status: 'success',
@@ -84,11 +89,15 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     if (typeof window === 'undefined') return;
 
     if (!('geolocation' in navigator)) {
-      setLocation((prev) => ({
-        ...prev,
-        status: 'error',
+      setLocation({
+        coords: KOLKATA_CENTROID,
+        areaName: 'Central Kolkata',
+        suburb: 'Central Kolkata Hub · Default Reference',
+        fullAddress: 'Esplanade, Central Kolkata, West Bengal',
+        isLiveGps: false,
+        status: 'success',
         errorMessage: 'Geolocation is not supported by your browser.',
-      }));
+      });
       return;
     }
 
@@ -101,8 +110,8 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     try {
       const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, {
-          enableHighAccuracy: true,
-          timeout: 10000,
+          enableHighAccuracy: false,
+          timeout: 4500,
           maximumAge: 60000,
         });
       });
@@ -112,10 +121,10 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       let sub = 'Live GPS Location · Kolkata';
       let fullAddr = `Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`;
 
-      // Try reverse geocoding via OpenStreetMap Nominatim with a 3s timeout
+      // Try reverse geocoding via OpenStreetMap Nominatim with a 2.5s timeout
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
 
         const response = await fetch(
           `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`,
@@ -184,18 +193,24 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     } catch (err: any) {
       let message = 'Unable to retrieve location';
       if (err.code === 1) {
-        message = 'Location permission denied. Enable GPS in browser settings.';
+        message = 'Location permission denied. Using Central Kolkata reference.';
       } else if (err.code === 2) {
-        message = 'Position unavailable.';
+        message = 'Position unavailable. Using Central Kolkata reference.';
       } else if (err.code === 3) {
-        message = 'Location request timed out.';
+        message = 'Location request timed out. Using Central Kolkata reference.';
       }
 
-      setLocation((prev) => ({
-        ...prev,
-        status: 'error',
+      const fallbackState: UserLocationState = {
+        coords: KOLKATA_CENTROID,
+        areaName: 'Central Kolkata',
+        suburb: 'Central Kolkata Reference (Esplanade)',
+        fullAddress: 'Esplanade, Central Kolkata, West Bengal',
+        isLiveGps: false,
+        status: 'success',
         errorMessage: message,
-      }));
+      };
+
+      setLocation(fallbackState);
     }
   }, []);
 

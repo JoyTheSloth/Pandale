@@ -28,6 +28,7 @@ interface SearchAndFiltersProps {
   onSortChange: (sort: string) => void;
   isNearMeActive: boolean;
   onNearMeToggle: () => void;
+  isLocating?: boolean;
   totalCount: number;
 }
 
@@ -54,6 +55,7 @@ export default function SearchAndFilters({
   onSortChange,
   isNearMeActive,
   onNearMeToggle,
+  isLocating = false,
   totalCount
 }: SearchAndFiltersProps) {
   const [showMobileFilterModal, setShowMobileFilterModal] = useState(false);
@@ -100,6 +102,7 @@ export default function SearchAndFilters({
           />
           {searchQuery && (
             <button
+              type="button"
               onClick={() => onSearchChange('')}
               className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:scale-125 hover:rotate-90 active:scale-75 transition-all duration-200"
             >
@@ -115,11 +118,11 @@ export default function SearchAndFilters({
           title="Show pandals nearest to your current location"
           className={`px-3.5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all duration-200 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 shrink-0 border cursor-pointer group ${
             isNearMeActive
-              ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25'
+              ? 'bg-[#D8261C] text-white border-[#D8261C] shadow-md shadow-[#D8261C]/25 ring-2 ring-[#D8261C]/20'
               : 'bg-white dark:bg-[#1A1218] text-stone-800 dark:text-stone-200 border-stone-200 dark:border-white/10 hover:bg-stone-50 dark:hover:bg-stone-800 hover:border-[#D8261C]/50'
           }`}
         >
-          <LocateFixed className={`w-4 h-4 transition-transform group-hover:scale-110 ${isNearMeActive ? 'text-[#FDE047] animate-spin' : 'text-[#D8261C]'}`} />
+          <LocateFixed className={`w-4 h-4 transition-transform group-hover:scale-110 ${isLocating ? 'text-[#FDE047] animate-spin' : isNearMeActive ? 'text-[#FDE047]' : 'text-[#D8261C]'}`} />
           <span className="hidden sm:inline">Near Me</span>
         </button>
 
@@ -149,10 +152,11 @@ export default function SearchAndFilters({
           return (
             <button
               key={zone}
+              type="button"
               onClick={() => onZoneChange(zone)}
               className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 ${
                 isSelected
-                  ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25 border border-[#FDE047]/40'
+                  ? 'bg-[#D8261C] text-white shadow-md shadow-[#D8261C]/25 border border-[#FDE047]/40 ring-2 ring-[#D8261C]/30'
                   : 'bg-white dark:bg-[#1A1218] border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:border-[#D8261C] hover:shadow-xs'
               }`}
             >
@@ -357,6 +361,30 @@ export default function SearchAndFilters({
                     >
                       <span>{s.label}</span>
                       {sortBy === s.id && <Check className="w-3.5 h-3.5 text-amber-200" />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Zone Filter */}
+              <div>
+                <label className="text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-1.5">
+                  Select Pandal Zone
+                </label>
+                <div className="grid grid-cols-2 gap-1">
+                  {zones.map((z) => (
+                    <button
+                      key={z}
+                      type="button"
+                      onClick={() => onZoneChange(z)}
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold text-left flex items-center justify-between transition-colors cursor-pointer ${
+                        selectedZone === z
+                          ? 'bg-[#D8261C] text-white shadow-xs'
+                          : 'bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-[#251B24]'
+                      }`}
+                    >
+                      <span className="truncate">{z === 'All' ? 'All Zones' : z}</span>
+                      {selectedZone === z && <Check className="w-3.5 h-3.5 text-amber-200 shrink-0" />}
                     </button>
                   ))}
                 </div>
