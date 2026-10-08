@@ -25,7 +25,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useWishlist } from '@/context/WishlistContext';
 import SpotlightCarousel from '@/components/SpotlightCarousel';
 
-type ZoneKey = 'north' | 'south' | 'east' | 'central';
+type ZoneKey = 'bonedi' | 'north' | 'south' | 'east' | 'central';
 
 const ZONE_CARDS_META: {
   id: ZoneKey;
@@ -35,6 +35,14 @@ const ZONE_CARDS_META: {
   flames: number;
   image: string;
 }[] = [
+  {
+    id: 'bonedi',
+    titleEn: 'Bonedi Bari',
+    titleBn: 'বনেদি বাড়ি সার্কিট',
+    pandalsCount: '9 Aristocratic Pujas',
+    flames: 3,
+    image: '/pandals/sovabazar-rajbari.jpg',
+  },
   {
     id: 'north',
     titleEn: 'North Zone',
@@ -78,7 +86,7 @@ function ZoneHoppingContent() {
 
   // Zone selection defaults to 'north'
   const paramZone = searchParams.get('zone')?.toLowerCase() as ZoneKey;
-  const initialZone: ZoneKey = ['north', 'south', 'east', 'central'].includes(paramZone) 
+  const initialZone: ZoneKey = ['bonedi', 'north', 'south', 'east', 'central'].includes(paramZone) 
     ? paramZone 
     : 'north';
 
@@ -88,7 +96,7 @@ function ZoneHoppingContent() {
 
   // Sync state if query parameter changes externally
   useEffect(() => {
-    if (paramZone && ['north', 'south', 'east', 'central'].includes(paramZone)) {
+    if (paramZone && ['bonedi', 'north', 'south', 'east', 'central'].includes(paramZone)) {
       setActiveZone(paramZone);
       setFilterStation('all');
     }
@@ -175,14 +183,17 @@ function ZoneHoppingContent() {
       {/* 1.5 SPOTLIGHT CAROUSEL — top pandals for active zone */}
       {(() => {
         const ZONE_AREA_MAP: Record<ZoneKey, string> = {
+          bonedi: 'Bonedi Bari',
           north: 'North Kolkata',
           south: 'South Kolkata',
           east: 'East Kolkata',
           central: 'Central Kolkata',
         };
         const areaLabel = ZONE_AREA_MAP[activeZone];
-        const zonePandals = PANDALS_DATA
-          .filter((p) => p.area === areaLabel)
+        const zonePandals = (activeZone === 'bonedi'
+          ? PANDALS_DATA.filter((p) => p.tags.includes('Bonedi Bari'))
+          : PANDALS_DATA.filter((p) => p.area === areaLabel)
+        )
           .sort((a, b) => b.trending_score - a.trending_score)
           .slice(0, 8);
         if (zonePandals.length === 0) return null;
@@ -193,19 +204,19 @@ function ZoneHoppingContent() {
         );
       })()}
 
-      {/* 2. CARDS ABOVE: NORTH ZONE, SOUTH ZONE, EAST ZONE, CENTRAL ZONE */}
+      {/* 2. CARDS ABOVE: BONEDI BARI, NORTH ZONE, SOUTH ZONE, EAST ZONE, CENTRAL ZONE */}
       <div className="mb-10">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">
             {isBn ? 'অঞ্চল বেছে নিন (Zone Switcher)' : 'Select Pandal Zone'}
           </h2>
           <span className="text-xs font-mono text-stone-400">
-            {ZONE_CARDS_META.length} Zones Available
+            {ZONE_CARDS_META.length} Circuits Available
           </span>
         </div>
 
-        {/* 4 Zone Cards Above */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* 5 Zone Cards Above */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {ZONE_CARDS_META.map((zone) => {
             const isActive = activeZone === zone.id;
             return (

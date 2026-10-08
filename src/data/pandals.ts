@@ -3,6 +3,7 @@ import { ADDITIONAL_SOUTH_PANDALS } from './additional_south_pandals';
 import { ADDITIONAL_NORTH_PANDALS } from './additional_north_pandals';
 import { ADDITIONAL_HOWRAH_PANDALS } from './additional_howrah_pandals';
 import { ADDITIONAL_SUBURBS_PANDALS } from './additional_suburbs_pandals';
+import { BONEDI_BARI_PANDALS } from './bonediBari';
 
 export const PANDALS_DATA: Pandal[] = [
   {
@@ -4246,7 +4247,7 @@ export const PANDALS_DATA: Pandal[] = [
     slug: 'sovabazar-rajbari',
     description: 'The legendary aristocratic Rajbari (royal mansion) Durga Puja of Sovabazar — one of Kolkata\'s oldest and most historically significant pujas, dating back to the time of Maharaja Nabakrishna Deb.',
     heritage_note: 'One of Kolkata\'s oldest and most celebrated Rajbari pujas, founded by Maharaja Nabakrishna Deb in the 18th century.',
-    theme: 'Royal Aristocratic Heritage Puja — Shovabajar Rajbari',
+    theme: 'Aristocratic Heritage (Bonedi Bari) — Courtyard colonnades, traditional ekchala idol, Nat Mandap & Thakur Dalan',
     area: 'North Kolkata',
     locality: 'Sovabazar, North Kolkata',
     latitude: 22.5981,
@@ -6536,5 +6537,6 @@ export const PANDALS_DATA: Pandal[] = [
   ...ADDITIONAL_SOUTH_PANDALS,
   ...ADDITIONAL_NORTH_PANDALS,
   ...ADDITIONAL_HOWRAH_PANDALS,
-  ...ADDITIONAL_SUBURBS_PANDALS
+  ...ADDITIONAL_SUBURBS_PANDALS,
+  ...BONEDI_BARI_PANDALS.filter(b => b.id !== 'sovabazar-rajbari')
 ];

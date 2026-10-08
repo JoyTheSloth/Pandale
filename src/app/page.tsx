@@ -173,8 +173,17 @@ export default function HomePage() {
         </div>
 
         {/* Arched Dome Cards Grid & Horizontal Snap on Mobile */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 sm:px-0 pb-4">
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 sm:px-0 pb-4">
           {[
+            {
+              id: 'bonedi',
+              title: isBn ? 'বনেদি বাড়ি' : 'Bonedi Bari',
+              subtitle: isBn ? '৯টি ঐতিহাসিক পুজো • শোভাবাজার ও জোড়াসাঁকো' : '9 Historic Pujas • Centuries of Aristocratic Heritage',
+              metro: 'Blue Line (Sovabazar / Girish Park)',
+              pandalsCount: isBn ? '৯টি বনেদি পুজো' : '9 Aristocratic Pujas',
+              landmarks: 'Sovabazar • Daw Bari • Khelat Ghosh • Mitra Bari',
+              image: '/pandals/sovabazar-rajbari.jpg',
+            },
             {
               id: 'north',
               title: isBn ? 'উত্তর সার্কিট' : 'North Zone',

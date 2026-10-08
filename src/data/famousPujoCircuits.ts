@@ -21,7 +21,7 @@ export interface CircuitPandal {
 }
 
 export interface PujoZoneCircuit {
-  id: 'north' | 'central' | 'south' | 'east';
+  id: 'north' | 'central' | 'south' | 'east' | 'bonedi';
   name: string;
   shortName: string;
   bengaliName: string;
@@ -34,7 +34,156 @@ export interface PujoZoneCircuit {
   pandals: CircuitPandal[];
 }
 
-export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east', PujoZoneCircuit> = {
+export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east' | 'bonedi', PujoZoneCircuit> = {
+  bonedi: {
+    id: 'bonedi',
+    name: 'Bonedi Bari Circuit',
+    shortName: 'Bonedi Bari',
+    bengaliName: 'বনেদি বাড়ি সার্কিট',
+    tagline: 'Centuries of Aristocratic Heritage, Ekchala Idols & Courtyard Pujas',
+    captionText: 'Some Pujas are not just festivals; they are stories of several centuries of history and tradition! ❤️🏛️',
+    primaryStations: ['Sovabazar Sutanuti', 'Girish Park', 'MG Road', 'Esplanade', 'Netaji Bhavan'],
+    totalPandals: 9,
+    approxCircuitWalkKm: 'Aristocratic Heritage Trail',
+    image: '/pandals/sovabazar-rajbari.jpg',
+    pandals: [
+      {
+        id: 'sovabazar-rajbari',
+        slug: 'sovabazar-rajbari',
+        name: 'Sovabazar Rajbari',
+        bengaliName: 'শোভাবাজার রাজবাড়ি',
+        nearestStation: 'Sovabazar Sutanuti Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '400m',
+        walkTimeToStationMins: 5,
+        address: 'Sovabazar, North Kolkata',
+        coordinates: { lat: 22.5981, lng: 88.3638 },
+        highlight: 'Heritage Since 1757 · Majestic courtyard colonnades, traditional ekchala idol, historic Nat Mandap & Nilkantha bird ritual heritage.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Sovabazar+Rajbari+Durga+Puja+Kolkata&travelmode=walking',
+        image: '/pandals/sovabazar-rajbari.jpg'
+      },
+      {
+        id: 'shib-krishna-daw-bari',
+        slug: 'shib-krishna-daw-bari',
+        name: 'Shib Krishna Daw Bari',
+        bengaliName: 'শিবকৃষ্ণ দাঁ বাড়ি',
+        nearestStation: 'Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '450m',
+        walkTimeToStationMins: 6,
+        address: 'Jorasanko, North Kolkata',
+        coordinates: { lat: 22.5857, lng: 88.3582 },
+        highlight: 'Heritage Since 1840 · Goddess dressed in lavish imported Parisian/German jewellery; traditional white lion & decorated Nabapatrika umbrella.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Shib+Krishna+Daw+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'pathuriaghata-khelat-ghosh-bari',
+        slug: 'pathuriaghata-khelat-ghosh-bari',
+        name: 'Pathuriaghata Khelat Ghosh Bari',
+        bengaliName: 'পাথুরিয়াঘাটা খেলাত ঘোষ বাড়ি',
+        nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '650m',
+        walkTimeToStationMins: 8,
+        address: 'Pathuriaghata, North Kolkata',
+        coordinates: { lat: 22.5898, lng: 88.3562 },
+        highlight: 'Heritage Since 1846 · Spectacular 85-foot marble Thakur Dalan, blue-white ceramic elephants, Mata Chini sugar sacrifice & 13-river holy bath.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Khelat+Ghosh+Bari+Pathuriaghata+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'darjipara-mitra-bari',
+        slug: 'darjipara-mitra-bari',
+        name: 'Darjipara Mitra Bari',
+        bengaliName: 'দর্জিreader মিত্র বাড়ি',
+        nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '600m',
+        walkTimeToStationMins: 7,
+        address: 'Darjipara, North Kolkata',
+        coordinates: { lat: 22.5912, lng: 88.3661 },
+        highlight: 'Heritage Since Early 19th Century · 108 Aparajita flowers offered during Sandhi Puja, unique horse-faced Hayagriva lion, and shoulder-borne immersion tradition.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Darjipara+Mitra+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'chhatu-babu-latu-babu-bari',
+        slug: 'chhatu-babu-latu-babu-bari',
+        name: 'Chhatu Babu Latu Babu Bari',
+        bengaliName: 'ছাতুবাবু লাটুবাবু বাড়ি',
+        nearestStation: 'Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '400m',
+        walkTimeToStationMins: 5,
+        address: 'Beadon Street, North Kolkata',
+        coordinates: { lat: 22.5892, lng: 88.3672 },
+        highlight: 'Heritage Since 1770 · Idols flanked by companions Jaya & Vijaya, celebrated Naulakha heirloom necklace, and saltless offering tradition.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Chhatu+Babu+Latu+Babu+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'thanthania-dutta-bari',
+        slug: 'thanthania-dutta-bari',
+        name: 'Thanthania Dutta Bari',
+        bengaliName: 'ঠনঠনিয়া দত্ত বাড়ি',
+        nearestStation: 'MG Road / Central Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '500m',
+        walkTimeToStationMins: 6,
+        address: 'Thanthania, North Kolkata',
+        coordinates: { lat: 22.5815, lng: 88.3664 },
+        highlight: 'Heritage Since 1855 · Peaceful Hara-Gouri form with Shiva (no weapons), Nandi below, and the dramatic Dhuno Porano ritual.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=MG+Road+Metro+Station&destination=Thanthania+Dutta+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'rani-rashmoni-family-puja',
+        slug: 'rani-rashmoni-family-puja',
+        name: 'Rani Rashmoni Family Puja',
+        bengaliName: 'রানি রাসমণির বাড়ির পুজো',
+        nearestStation: 'Esplanade / Chandni Chowk Metro',
+        nearestStationLine: 'Blue & Green Line',
+        distanceToStation: '450m',
+        walkTimeToStationMins: 5,
+        address: 'Janbazar, Central Kolkata',
+        coordinates: { lat: 22.5638, lng: 88.3546 },
+        highlight: 'Heritage Late 18th Century · Tapta-kanchan molten gold complexion, fine shola ornamentation, and the sacred Sri Ramakrishna sakhi-besh heritage.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Esplanade+Metro+Station&destination=Rani+Rashmoni+Bari+Durga+Puja+Janbazar+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'malapara-adi-mallick-bari',
+        slug: 'malapara-adi-mallick-bari',
+        name: 'Malapara Adi Mallick Bari',
+        bengaliName: 'মালাপাড়া আদি মল্লিক বাড়ি',
+        nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '700m',
+        walkTimeToStationMins: 8,
+        address: 'Malapara / Jorabagan, North Kolkata',
+        coordinates: { lat: 22.5938, lng: 88.3598 },
+        highlight: 'Heritage ~260 Years Old · Peaceful Shiva-Durga iconography, changing painted chalchitra, Kartik Rammohan headgear & Chandani Kheer offerings.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Malapara+Adi+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'bhowanipore-mallick-bari',
+        slug: 'bhowanipore-mallick-bari',
+        name: 'Bhowanipore Mallick Bari',
+        bengaliName: 'ভবানীপুর মল্লিক বাড়ি',
+        nearestStation: 'Netaji Bhavan / Jatin Das Park Metro',
+        nearestStationLine: 'Blue Line',
+        distanceToStation: '350m',
+        walkTimeToStationMins: 4,
+        address: 'Bhowanipore, South Kolkata',
+        coordinates: { lat: 22.5328, lng: 88.3475 },
+        highlight: 'Kolkata Lineage Since 1925 · Vaishnav traditions with wheat bhog, women adorning jewels & men presenting weapons, and majestic Durga Dalan.',
+        googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Bhowanipore+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
+        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+      }
+    ]
+  },
   north: {
     id: 'north',
     name: 'North Zone Circuit',
