@@ -255,24 +255,24 @@ export default function SpotlightCarousel({ pandals }: SpotlightCarouselProps) {
                   {/* Center Card Over-Artwork Branding / Headline (matches poster feel) */}
                   <Link
                     href={`/pandal/${pandal.slug}`}
-                    className="absolute inset-0 flex flex-col justify-end p-5 z-10 cursor-pointer"
+                    className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 z-10 cursor-pointer"
                   >
-                    {/* Floating Theme Highlight Pill on card */}
+                    {/* Compact Theme Tag (max 1 line, subtle pill style) */}
                     {pandal.theme && (
-                      <div className="mb-1">
-                        <span className="inline-block text-[11px] font-mono uppercase tracking-wider text-[#FDE047] font-bold drop-shadow-md line-clamp-1">
-                          {pandal.theme}
+                      <div className="mb-1.5 flex items-center">
+                        <span className="inline-block max-w-[200px] sm:max-w-[240px] truncate text-[10px] font-mono uppercase tracking-wider text-[#FDE047] font-bold drop-shadow-md bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-md border border-yellow-400/20">
+                          {pandal.theme.split('—')[0].trim()}
                         </span>
                       </div>
                     )}
 
-                    <h4 className="text-lg sm:text-xl font-bold font-editorial text-white leading-tight drop-shadow-lg line-clamp-1">
+                    <h4 className="text-base sm:text-lg md:text-xl font-bold font-editorial text-white leading-tight drop-shadow-lg line-clamp-1">
                       {pandal.name}
                     </h4>
 
-                    <div className="flex items-center gap-2 mt-1.5 text-white/80 text-[11px] font-medium drop-shadow-sm">
-                      <Train className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                      <span className="truncate">{pandal.nearest_metro}</span>
+                    <div className="flex items-center gap-1.5 mt-1.5 text-white/80 text-[10.5px] font-medium drop-shadow-sm">
+                      <Train className="w-3 h-3 text-blue-400 shrink-0" />
+                      <span className="truncate max-w-[160px] sm:max-w-[200px]">{pandal.nearest_metro}</span>
                       <span>•</span>
                       <span className="shrink-0">{pandal.walking_time_mins}m</span>
                     </div>

@@ -261,7 +261,7 @@ export const BONEDI_BARI_PANDALS: Pandal[] = BONEDI_BARI_PUJAS.map((b) => ({
   slug: b.slug,
   description: `${b.significance} Heritage since ${b.heritageSince}. ${b.uniqueFeature}`,
   heritage_note: `Heritage since ${b.heritageSince}. Did you know: ${b.didYouKnow}`,
-  theme: `Aristocratic Heritage (Bonedi Bari) — ${b.lookOutFor.join(', ')}`,
+  theme: 'Aristocratic Heritage (Bonedi Bari)',
   area: b.area,
   locality: b.location,
   latitude: b.coordinates.lat,
