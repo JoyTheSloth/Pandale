@@ -75,7 +75,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Shib+Krishna+Daw+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Shib+Krishna+Daw+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5857, lng: 88.3582 },
-    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+    image: '/pandals/sabarna-roy-chowdhury-aatchala.jpg'
   },
   {
     id: 'pathuriaghata-khelat-ghosh-bari',
@@ -100,7 +100,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Khelat+Ghosh+Bari+Pathuriaghata+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Khelat+Ghosh+Bari+Pathuriaghata+Kolkata',
     coordinates: { lat: 22.5898, lng: 88.3562 },
-    image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+    image: '/pandals/bagbazar-sarbojanin.jpg'
   },
   {
     id: 'darjipara-mitra-bari',
@@ -125,7 +125,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Darjipara+Mitra+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Darjipara+Mitra+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5912, lng: 88.3661 },
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+    image: '/pandals/kumartuli-sarbojanin.jpg'
   },
   {
     id: 'chhatu-babu-latu-babu-bari',
@@ -150,7 +150,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Chhatu+Babu+Latu+Babu+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Chhatu+Babu+Latu+Babu+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5892, lng: 88.3672 },
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80'
+    image: '/brand/zone-north-durga.jpg'
   },
   {
     id: 'thanthania-dutta-bari',
@@ -175,7 +175,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=MG+Road+Metro+Station&destination=Thanthania+Dutta+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Thanthania+Dutta+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5815, lng: 88.3664 },
-    image: 'https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80'
+    image: '/pandals/shib-mandir.jpg'
   },
   {
     id: 'rani-rashmoni-family-puja',
@@ -200,7 +200,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Esplanade+Metro+Station&destination=Rani+Rashmoni+Bari+Durga+Puja+Janbazar+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Rani+Rashmoni+Bari+Durga+Puja+Janbazar+Kolkata',
     coordinates: { lat: 22.5638, lng: 88.3546 },
-    image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+    image: '/pandals/college-square.jpg'
   },
   {
     id: 'malapara-adi-mallick-bari',
@@ -225,7 +225,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Malapara+Adi+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Malapara+Adi+Mallick+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5938, lng: 88.3598 },
-    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+    image: '/brand/zone-north-durga.jpg'
   },
   {
     id: 'bhowanipore-mallick-bari',
@@ -250,7 +250,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Bhowanipore+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
     googleMapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Bhowanipore+Mallick+Bari+Durga+Puja+Kolkata',
     coordinates: { lat: 22.5328, lng: 88.3475 },
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+    image: '/brand/zone-south-durga.jpg'
   }
 ];
 

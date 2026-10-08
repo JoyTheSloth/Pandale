@@ -75,7 +75,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5857, lng: 88.3582 },
         highlight: 'Heritage Since 1840 · Goddess dressed in lavish imported Parisian/German jewellery; traditional white lion & decorated Nabapatrika umbrella.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Shib+Krishna+Daw+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+        image: '/pandals/sabarna-roy-chowdhury-aatchala.jpg'
       },
       {
         id: 'pathuriaghata-khelat-ghosh-bari',
@@ -90,7 +90,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5898, lng: 88.3562 },
         highlight: 'Heritage Since 1846 · Spectacular 85-foot marble Thakur Dalan, blue-white ceramic elephants, Mata Chini sugar sacrifice & 13-river holy bath.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Khelat+Ghosh+Bari+Pathuriaghata+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+        image: '/pandals/bagbazar-sarbojanin.jpg'
       },
       {
         id: 'darjipara-mitra-bari',
@@ -105,7 +105,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5912, lng: 88.3661 },
         highlight: 'Heritage Since Early 19th Century · 108 Aparajita flowers offered during Sandhi Puja, unique horse-faced Hayagriva lion, and shoulder-borne immersion tradition.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Sovabazar+Sutanuti+Metro+Station&destination=Darjipara+Mitra+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+        image: '/pandals/kumartuli-sarbojanin.jpg'
       },
       {
         id: 'chhatu-babu-latu-babu-bari',
@@ -120,7 +120,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5892, lng: 88.3672 },
         highlight: 'Heritage Since 1770 · Idols flanked by companions Jaya & Vijaya, celebrated Naulakha heirloom necklace, and saltless offering tradition.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Chhatu+Babu+Latu+Babu+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80'
+        image: '/brand/zone-north-durga.jpg'
       },
       {
         id: 'thanthania-dutta-bari',
@@ -135,7 +135,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5815, lng: 88.3664 },
         highlight: 'Heritage Since 1855 · Peaceful Hara-Gouri form with Shiva (no weapons), Nandi below, and the dramatic Dhuno Porano ritual.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=MG+Road+Metro+Station&destination=Thanthania+Dutta+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80'
+        image: '/pandals/shib-mandir.jpg'
       },
       {
         id: 'rani-rashmoni-family-puja',
@@ -150,7 +150,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5638, lng: 88.3546 },
         highlight: 'Heritage Late 18th Century · Tapta-kanchan molten gold complexion, fine shola ornamentation, and the sacred Sri Ramakrishna sakhi-besh heritage.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Esplanade+Metro+Station&destination=Rani+Rashmoni+Bari+Durga+Puja+Janbazar+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80'
+        image: '/pandals/college-square.jpg'
       },
       {
         id: 'malapara-adi-mallick-bari',
@@ -165,7 +165,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5938, lng: 88.3598 },
         highlight: 'Heritage ~260 Years Old · Peaceful Shiva-Durga iconography, changing painted chalchitra, Kartik Rammohan headgear & Chandani Kheer offerings.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Girish+Park+Metro+Station&destination=Malapara+Adi+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80'
+        image: '/brand/zone-north-durga.jpg'
       },
       {
         id: 'bhowanipore-mallick-bari',
@@ -180,7 +180,7 @@ export const FAMOUS_PUJO_CIRCUITS: Record<'north' | 'central' | 'south' | 'east'
         coordinates: { lat: 22.5328, lng: 88.3475 },
         highlight: 'Kolkata Lineage Since 1925 · Vaishnav traditions with wheat bhog, women adorning jewels & men presenting weapons, and majestic Durga Dalan.',
         googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station&destination=Bhowanipore+Mallick+Bari+Durga+Puja+Kolkata&travelmode=walking',
-        image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80'
+        image: '/brand/zone-south-durga.jpg'
       }
     ]
   },

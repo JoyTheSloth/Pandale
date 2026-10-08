@@ -356,8 +356,8 @@ function ZoneHoppingContent() {
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
 
-              {/* Richer vignette — heavier at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 group-hover:via-black/45 transition-colors duration-300" />
+              {/* Rich high-contrast scrim: darker at bottom to make white text crisp and legible */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/25 pointer-events-none group-hover:from-black group-hover:via-black/65 transition-colors duration-300" />
 
               {/* TOP: Flames left, icons right */}
               <div className="relative z-10 flex items-start justify-between gap-2">
@@ -367,7 +367,7 @@ function ZoneHoppingContent() {
                   const score = match?.trending_score ?? 70;
                   const flames = score >= 95 ? 3 : score >= 80 ? 2 : 1;
                   return (
-                    <div className="inline-flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-orange-500/30 shadow-sm">
+                    <div className="inline-flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/75 backdrop-blur-md border border-orange-500/40 shadow-sm">
                       {Array.from({ length: flames }).map((_, i) => (
                         <Flame key={i} className={`w-4 h-4 ${i === 0 ? 'text-orange-500 fill-orange-500' : 'text-amber-400 fill-amber-400'}`} />
                       ))}
@@ -383,7 +383,7 @@ function ZoneHoppingContent() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-200 cursor-pointer shrink-0 ${
                       isBookmarked
                         ? 'bg-red-600 text-white border-red-500 shadow-md'
-                        : 'bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border-white/20'
+                        : 'bg-black/65 text-white/90 hover:text-white hover:bg-black/85 border-white/25'
                     }`}
                     aria-label="Save to wishlist"
                   >
@@ -395,7 +395,7 @@ function ZoneHoppingContent() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/50 text-white/80 hover:text-white hover:bg-black/70 backdrop-blur-md border border-white/20 transition-all duration-200 shrink-0"
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/65 text-white/90 hover:text-white hover:bg-black/85 backdrop-blur-md border border-white/25 transition-all duration-200 shrink-0"
                     aria-label="Open in Google Maps"
                   >
                     <MapPin className="w-3.5 h-3.5" />
@@ -403,29 +403,29 @@ function ZoneHoppingContent() {
                 </div>
               </div>
 
-              {/* BOTTOM: index + name + metro */}
-              <div className="relative z-10 space-y-2">
+              {/* BOTTOM: index + name + metro with high readability */}
+              <div className="relative z-10 space-y-2 mt-auto">
                 {/* Index pill row */}
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-xs font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/20">
+                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-xs font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/30">
                     {index + 1}
                   </span>
                   {isBn && (
-                    <span className="text-[11px] text-amber-300/90 font-medium font-bengali truncate leading-none">
+                    <span className="text-[11px] text-amber-300 font-bold font-bengali truncate leading-none drop-shadow-md">
                       {pandal.bengaliName}
                     </span>
                   )}
                 </div>
 
-                {/* Pandal Name */}
-                <h3 className="text-base sm:text-lg font-black font-editorial text-white leading-tight tracking-tight drop-shadow-md group-hover:text-amber-300 transition-colors line-clamp-2">
+                {/* Pandal Name with prominent contrast drop shadow */}
+                <h3 className="text-base sm:text-lg font-black font-editorial text-white leading-tight tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] group-hover:text-amber-300 transition-colors line-clamp-2">
                   {isBn ? pandal.bengaliName : pandal.name}
                 </h3>
 
-                {/* Metro station compact pill */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 max-w-full overflow-hidden">
-                  <Train className="w-3 h-3 text-blue-300 shrink-0" />
-                  <span className="text-[10.5px] font-mono font-semibold text-white/85 truncate">
+                {/* Metro station pill with opaque dark background for 100% legibility */}
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 max-w-full overflow-hidden shadow-md">
+                  <Train className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span className="text-[10.5px] font-mono font-bold text-white truncate">
                     {pandal.nearestStation} · {pandal.walkTimeToStationMins}m walk
                   </span>
                 </div>
