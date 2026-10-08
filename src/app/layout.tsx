@@ -74,12 +74,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/icons/icon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/icons/apple-touch-icon.png',
-    shortcut: '/icons/icon-192x192.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
   },
   manifest: '/manifest.json',
   openGraph: {
@@ -153,24 +157,48 @@ export default function RootLayout({
             <WishlistProvider>
               <VisitedProvider>
                 <LocationProvider>
-                  {/* Google AI & Sitelinks Search Box Schema */}
+                  {/* Google AI & Sitelinks Search Box Schema with Brand Logo */}
                   <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
                         '@context': 'https://schema.org',
-                        '@type': 'WebSite',
-                        name: 'Pandalé',
-                        alternateName: ['Pujo 2026', 'Pandale Kolkata', 'প্যান্ডেলে'],
-                        url: siteUrl,
-                        potentialAction: {
-                          '@type': 'SearchAction',
-                          target: {
-                            '@type': 'EntryPoint',
-                            urlTemplate: `${siteUrl}/pandals?search={search_term_string}`,
+                        '@graph': [
+                          {
+                            '@type': 'WebSite',
+                            '@id': `${siteUrl}/#website`,
+                            name: 'Pandalé',
+                            alternateName: ['Pandale', 'Pandalé Kolkata', 'Pujo 2026', 'প্যান্ডেলে'],
+                            url: siteUrl,
+                            description: 'Kolkata Durga Puja Pandal & Metro Navigation Guide',
+                            publisher: {
+                              '@id': `${siteUrl}/#organization`,
+                            },
+                            potentialAction: {
+                              '@type': 'SearchAction',
+                              target: {
+                                '@type': 'EntryPoint',
+                                urlTemplate: `${siteUrl}/pandals?search={search_term_string}`,
+                              },
+                              'query-input': 'required name=search_term_string',
+                            },
                           },
-                          'query-input': 'required name=search_term_string',
-                        },
+                          {
+                            '@type': 'Organization',
+                            '@id': `${siteUrl}/#organization`,
+                            name: 'Pandalé',
+                            alternateName: ['Pandale Kolkata'],
+                            url: siteUrl,
+                            logo: {
+                              '@type': 'ImageObject',
+                              url: `${siteUrl}/icons/icon-512x512.png`,
+                              width: 512,
+                              height: 512,
+                              caption: 'Pandalé Kolkata Logo',
+                            },
+                            image: `${siteUrl}/icons/icon-512x512.png`,
+                          },
+                        ],
                       }),
                     }}
                   />
