@@ -70,7 +70,15 @@ function PandalsContent() {
       return;
     }
 
-    fetchCurrentLocation();
+    if (location.coords) {
+      setUserLocation(location.coords);
+      setIsNearMeActive(true);
+      setSortBy('distance');
+    } else {
+      setIsNearMeActive(true);
+      setSortBy('distance');
+      fetchCurrentLocation();
+    }
   };
 
   // Filtered & sorted Pandals
@@ -96,19 +104,28 @@ function PandalsContent() {
       result = result.filter((p) => p.area === selectedZone);
     }
 
-    // Near metro (< 10 mins walk)
+    // Near metro (< 12 mins walk or tagged Near Metro)
     if (nearMetroOnly) {
-      result = result.filter((p) => p.walking_time_mins <= 10);
+      result = result.filter(
+        (p) => (p.walking_time_mins && p.walking_time_mins <= 12) || p.tags.includes('Near Metro')
+      );
     }
 
     // Must visit
     if (mustVisitOnly) {
-      result = result.filter((p) => p.tags.includes('Must Visit'));
+      result = result.filter((p) => p.tags.includes('Must Visit') || p.is_must_visit);
     }
 
-    // Popular
+    // Most Famous (Popular / Highest saved / iconic pandals)
     if (popularOnly) {
-      result = result.filter((p) => p.tags.includes('Popular'));
+      result = result.filter(
+        (p) =>
+          p.tags.includes('Popular') ||
+          p.tags.includes('Must Visit') ||
+          p.tags.includes('Trending') ||
+          p.saves_count >= 1000 ||
+          p.trending_score >= 88
+      );
     }
 
     // Trending

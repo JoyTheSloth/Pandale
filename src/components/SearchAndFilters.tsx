@@ -217,7 +217,19 @@ export default function SearchAndFilters({
             }`}
           >
             <Train className="w-3.5 h-3.5 text-blue-600 group-hover:translate-x-0.5 transition-transform duration-200" />
-            <span>Near Metro (&lt;10m walk)</span>
+            <span>Near Metro (&lt;12m walk)</span>
+          </button>
+
+          <button
+            onClick={onPopularToggle}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs group ${
+              popularOnly
+                ? 'bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-600/25'
+                : 'bg-white dark:bg-[#1A1218] text-stone-700 dark:text-stone-300 border-stone-200 dark:border-white/10 hover:border-purple-500 hover:text-purple-600'
+            }`}
+          >
+            <span className="text-sm">👑</span>
+            <span>Most Famous</span>
           </button>
 
           <button
@@ -358,12 +370,24 @@ export default function SearchAndFilters({
                 <div className="space-y-1.5">
                   <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
                     <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
-                      <Train className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Near Metro (&lt;10m)
+                      <Train className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Near Metro (&lt;12m walk)
                     </span>
                     <input
                       type="checkbox"
                       checked={nearMetroOnly}
                       onChange={onNearMetroToggle}
+                      className="accent-[#D8261C] w-3.5 h-3.5 rounded"
+                    />
+                  </label>
+
+                  <label className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-[#1C141B] border border-stone-200 dark:border-white/10 text-xs cursor-pointer hover:bg-stone-50 dark:hover:bg-[#251B24] transition-colors">
+                    <span className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-medium">
+                      <span className="text-sm">👑</span> Most Famous
+                    </span>
+                    <input
+                      type="checkbox"
+                      checked={popularOnly}
+                      onChange={onPopularToggle}
                       className="accent-[#D8261C] w-3.5 h-3.5 rounded"
                     />
                   </label>
