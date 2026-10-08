@@ -334,8 +334,8 @@ function ZoneHoppingContent() {
         </div>
       </div>
 
-      {/* 4. SQUARE CARDS LIST: THREE IN A LINE WITH METRO STATION NAME */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+      {/* 4. CARDS LIST: THREE IN A LINE WITH DEDICATED IMAGE AND SOLID BACKGROUND INFO */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredPandals.map((pandal, index) => {
           const imageUrl = getPandalImage(pandal);
           const slug = getPandalSlug(pandal);
@@ -345,93 +345,116 @@ function ZoneHoppingContent() {
             <Link
               key={pandal.id}
               href={`/pandal/${slug}`}
-              className="relative aspect-square rounded-[2rem] overflow-hidden border border-stone-200 dark:border-white/10 bg-stone-900 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between p-5 select-none"
+              className="group flex flex-col rounded-[1.75rem] overflow-hidden bg-white dark:bg-[#181116] border border-stone-200/90 dark:border-white/10 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer"
             >
-              {/* Full Bleed Image with Dynamic Zoom on Hover */}
-              <Image
-                src={imageUrl}
-                alt={pandal.name}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
+              {/* TOP: Dedicated Photo Container (4:3 aspect ratio) */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-stone-900">
+                <Image
+                  src={imageUrl}
+                  alt={pandal.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                />
 
-              {/* Dark Gradient Vignette for overall depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none group-hover:from-black/95 transition-colors duration-300" />
+                {/* Subtle top/bottom vignette inside image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 pointer-events-none" />
 
-              {/* TOP: Flames left, icons right */}
-              <div className="relative z-10 flex items-start justify-between gap-2">
-                {/* Flame Icons */}
-                {(() => {
-                  const match = PANDALS_DATA.find(p => p.id === pandal.id || p.slug === pandal.slug);
-                  const score = match?.trending_score ?? 70;
-                  const flames = score >= 95 ? 3 : score >= 80 ? 2 : 1;
-                  return (
-                    <div className="inline-flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/75 backdrop-blur-md border border-orange-500/40 shadow-sm">
-                      {Array.from({ length: flames }).map((_, i) => (
-                        <Flame key={i} className={`w-4 h-4 ${i === 0 ? 'text-orange-500 fill-orange-500' : 'text-amber-400 fill-amber-400'}`} />
-                      ))}
-                    </div>
-                  );
-                })()}
+                {/* Top Badges: Flames on left, Wishlist + Maps on right */}
+                <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-auto">
+                  {/* Flame Icons */}
+                  {(() => {
+                    const match = PANDALS_DATA.find((p) => p.id === pandal.id || p.slug === pandal.slug);
+                    const score = match?.trending_score ?? 70;
+                    const flames = score >= 95 ? 3 : score >= 80 ? 2 : 1;
+                    return (
+                      <div className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-orange-500/40 shadow-sm">
+                        {Array.from({ length: flames }).map((_, i) => (
+                          <Flame key={i} className={`w-3.5 h-3.5 ${i === 0 ? 'text-orange-500 fill-orange-500' : 'text-amber-400 fill-amber-400'}`} />
+                        ))}
+                      </div>
+                    );
+                  })()}
 
-                {/* Wishlist + Location icons */}
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(pandal.id); }}
-                    className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-200 cursor-pointer shrink-0 ${
-                      isBookmarked
-                        ? 'bg-red-600 text-white border-red-500 shadow-md'
-                        : 'bg-black/65 text-white/90 hover:text-white hover:bg-black/85 border-white/25'
-                    }`}
-                    aria-label="Save to wishlist"
-                  >
-                    <Heart className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : ''}`} />
-                  </button>
+                  {/* Actions */}
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist(pandal.id);
+                      }}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-200 cursor-pointer shadow-sm ${
+                        isBookmarked
+                          ? 'bg-[#D8261C] text-white border-red-500'
+                          : 'bg-black/60 text-white/90 hover:text-white hover:bg-black/80 border-white/25'
+                      }`}
+                      aria-label="Save to wishlist"
+                    >
+                      <Heart className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : ''}`} />
+                    </button>
 
-                  <a
-                    href={pandal.googleMapsDirectionsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/65 text-white/90 hover:text-white hover:bg-black/85 backdrop-blur-md border border-white/25 transition-all duration-200 shrink-0"
-                    aria-label="Open in Google Maps"
-                  >
-                    <MapPin className="w-3.5 h-3.5" />
-                  </a>
+                    <a
+                      href={pandal.googleMapsDirectionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-8 h-8 rounded-full flex items-center justify-center bg-black/60 text-white/90 hover:text-white hover:bg-black/80 backdrop-blur-md border border-white/25 transition-all duration-200 shadow-sm"
+                      aria-label="Open in Google Maps"
+                    >
+                      <MapPin className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Bottom Left: Number Index Pill */}
+                <div className="absolute bottom-3 left-3 z-10">
+                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D8261C] to-amber-500 text-white font-mono text-xs font-black flex items-center justify-center shadow-md ring-1 ring-white/30">
+                    {index + 1}
+                  </span>
                 </div>
               </div>
 
-              {/* BOTTOM: Frosted Dark Blur Panel for Maximum Text Visibility */}
-              <div className="relative z-10 mt-auto bg-black/75 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 border border-white/15 shadow-xl space-y-1.5">
-                {/* Index & Bengali Name Row */}
-                <div className="flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-red-600 to-amber-500 text-white font-mono text-[10px] font-black flex items-center justify-center shadow-md shrink-0 ring-1 ring-white/30">
-                    {index + 1}
-                  </span>
-                  {isBn && (
-                    <span className="text-[10.5px] text-amber-300 font-bold font-bengali truncate leading-none">
+              {/* BOTTOM: Solid Background Info Container */}
+              <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white dark:bg-[#1A1218]">
+                <div>
+                  {/* Bengali Subtitle / Tagline */}
+                  {isBn && pandal.bengaliName && (
+                    <p className="text-xs font-bold text-[#D8261C] dark:text-amber-400 font-bengali mb-0.5 truncate">
                       {pandal.bengaliName}
-                    </span>
+                    </p>
+                  )}
+
+                  {/* Pandal Title */}
+                  <h3 className="text-base sm:text-lg font-bold font-editorial text-stone-900 dark:text-white leading-snug group-hover:text-[#D8261C] dark:group-hover:text-amber-400 transition-colors line-clamp-1">
+                    {isBn ? pandal.bengaliName : pandal.name}
+                  </h3>
+
+                  {/* Address / Location Line */}
+                  {pandal.address && (
+                    <p className="text-[11.5px] text-stone-500 dark:text-stone-400 flex items-center gap-1.5 mt-1 truncate font-medium">
+                      <MapPin className="w-3 h-3 text-stone-400 dark:text-stone-500 shrink-0" />
+                      <span className="truncate">{pandal.address}</span>
+                    </p>
                   )}
                 </div>
 
-                {/* Pandal Name */}
-                <h3 className="text-sm sm:text-base font-black font-editorial text-white leading-tight tracking-tight group-hover:text-amber-300 transition-colors line-clamp-1 drop-shadow-sm">
-                  {isBn ? pandal.bengaliName : pandal.name}
-                </h3>
+                {/* Metro Pill & Walking Duration */}
+                <div className="mt-3.5 pt-3 border-t border-stone-100 dark:border-white/8 flex items-center justify-between gap-2">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/60 dark:border-blue-800/40 text-blue-800 dark:text-blue-300 max-w-[80%] overflow-hidden">
+                    <Train className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                    <span className="text-[11px] font-mono font-bold truncate">
+                      {pandal.nearestStation}
+                    </span>
+                  </div>
 
-                {/* Metro Station Info */}
-                <div className="flex items-center gap-1.5 text-stone-200 text-[10.5px] font-mono font-medium overflow-hidden">
-                  <Train className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                  <span className="truncate">{pandal.nearestStation}</span>
-                  <span className="text-stone-400">•</span>
-                  <span className="shrink-0 text-amber-300 font-bold">{pandal.walkTimeToStationMins}m</span>
+                  <span className="text-[11px] font-mono font-bold text-stone-600 dark:text-stone-300 whitespace-nowrap shrink-0">
+                    {pandal.walkTimeToStationMins}m walk
+                  </span>
                 </div>
               </div>
             </Link>
-
           );
         })}
       </div>
