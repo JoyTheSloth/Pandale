@@ -3,6 +3,7 @@ import { ADDITIONAL_SOUTH_PANDALS } from './additional_south_pandals';
 import { ADDITIONAL_NORTH_PANDALS } from './additional_north_pandals';
 import { ADDITIONAL_HOWRAH_PANDALS } from './additional_howrah_pandals';
 import { ADDITIONAL_SUBURBS_PANDALS } from './additional_suburbs_pandals';
+import { ADDITIONAL_NEWTOWN_SALTLAKE_PANDALS } from './additional_newtown_saltlake_pandals';
 import { BONEDI_BARI_PANDALS } from './bonediBari';
 
 export const PANDALS_DATA: Pandal[] = [
@@ -6538,5 +6539,6 @@ export const PANDALS_DATA: Pandal[] = [
   ...ADDITIONAL_NORTH_PANDALS,
   ...ADDITIONAL_HOWRAH_PANDALS,
   ...ADDITIONAL_SUBURBS_PANDALS,
+  ...ADDITIONAL_NEWTOWN_SALTLAKE_PANDALS,
   ...BONEDI_BARI_PANDALS.filter(b => b.id !== 'sovabazar-rajbari')
 ];
