@@ -35,11 +35,13 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith('http') ? process.env.NEXT_PUBLIC_SITE_URL : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
   : process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'https://pandalekolkata.vercel.app';
+
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
