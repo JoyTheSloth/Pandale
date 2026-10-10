@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { PANDALS_DATA } from '@/data/pandals';
 import SpotlightCarousel from '@/components/SpotlightCarousel';
+import InstagramPostMockup from '@/components/InstagramPostMockup';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function HomePage() {
@@ -146,7 +147,7 @@ export default function HomePage() {
 
       <div className="w-full flex flex-col gap-16 md:gap-24 pt-10 md:pt-14">
         {/* 2. EXPLORE BY NEIGHBORHOODS (ARCHED DOME CARDS) */}
-      <section id="explore-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-mt-20">
+        <section id="explore-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-mt-20">
         {/* Centered Editorial Header with User Requested Caption */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           {/* Visible Caption Banner */}
@@ -298,6 +299,48 @@ export default function HomePage() {
 
         {/* The Automatic Moving Spotlight Carousel */}
         <SpotlightCarousel pandals={iconicPandals} />
+      </section>
+
+      {/* 4. OUR INSTAGRAM METRO GUIDE — CENTRALIZED (AFTER ICONIC PANDALS) */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center space-y-4 mb-20 sm:mb-28">
+        {/* Centralized Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#833AB4]/15 via-[#FD1D1D]/15 to-[#F77737]/15 border border-pink-500/30 text-stone-900 dark:text-white text-xs font-bold shadow-xs mx-auto">
+          <span>📸</span>
+          <span>{isBn ? 'আমাদের ইনস্টাগ্রাম মেট্রো গাইড • @flatzykolkata' : 'Our Instagram Metro Guide • @flatzykolkata'}</span>
+        </div>
+
+        {/* Centralized Headline */}
+        <h2 className="text-3xl sm:text-5xl font-bold font-editorial text-stone-900 dark:text-white tracking-tight leading-tight">
+          {isBn ? 'আমাদের ইনস্টাগ্রাম মেট্রো গাইড' : 'Our Instagram Metro Guide'} <br />
+          <span className="text-[#D8261C] dark:text-amber-400 italic font-normal text-2xl sm:text-4xl">
+            {isBn ? 'আইকনিক প্যান্ডেল ও সম্পূর্ণ ট্রানজিট রুট' : 'Iconic Pandals & Complete Transit Circuit'}
+          </span>
+        </h2>
+
+        {/* Centralized Description */}
+        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed max-w-xl mx-auto">
+          {isBn
+            ? 'শহরের ট্রাফিক এড়িয়ে কীভাবে মেট্রো ও হাঁটার মাধ্যমে কলকাতার সেরা মণ্ডপগুলোতে যাবেন? দেখুন আমাদের সম্পূর্ণ ইনস্টাগ্রাম মেট্রো গাইড।'
+            : 'Planning to pandal-hop across the city? Skip the traffic with our complete Instagram transit guide covering iconic pandals across North, Central, and South Kolkata.'}
+        </p>
+
+        {/* Centralized Single Action Button */}
+        <div className="flex items-center justify-center pt-1">
+          <a
+            href="https://www.instagram.com/p/DeUaJhwj7DJ/?exln=MWYxZ2wzdjdtc283NA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-lg shadow-pink-950/30 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <span>{isBn ? 'ইনস্টাগ্রাম মেট্রো গাইড দেখুন' : 'Open Instagram Metro Guide'}</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Centralized Instagram Post Mockup */}
+        <div className="pt-4 max-w-sm sm:max-w-[390px] mx-auto">
+          <InstagramPostMockup />
+        </div>
       </section>
 
       </div>

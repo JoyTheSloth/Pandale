@@ -9,10 +9,12 @@ import SearchAndFilters from '@/components/SearchAndFilters';
 import { ZoneArea } from '@/types';
 import { useWishlist } from '@/context/WishlistContext';
 import { calculateDistanceKm } from '@/lib/geo';
-import { Sparkles, AlertCircle, Loader2, Flame, ArrowRight, MapPin, X } from 'lucide-react';
+import { Sparkles, AlertCircle, Loader2, Flame, ArrowRight, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLocation, KOLKATA_CENTROID } from '@/context/LocationContext';
 import { useLanguage } from '@/context/LanguageContext';
 import PandalsPageSkeleton from '@/components/PandalsPageSkeleton';
+
+const ITEMS_PER_PAGE = 12;
 
 function PandalsContent() {
   const router = useRouter();
@@ -38,6 +40,7 @@ function PandalsContent() {
   const [wishlistOnly, setWishlistOnly] = useState(false);
   const [selectedDay, setSelectedDay] = useState('All');
   const [sortBy, setSortBy] = useState('trending');
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Geolocation from Global LocationContext
   const { location, fetchCurrentLocation } = useLocation();
@@ -169,21 +172,58 @@ function PandalsContent() {
       result = result.filter((p) => p.recommended_days.includes(selectedDay as any));
     }
 
-    // Sorting
-    if (sortBy === 'trending') {
-      result.sort((a, b) => b.trending_score - a.trending_score);
-    } else if (sortBy === 'popular') {
-      result.sort((a, b) => b.saves_count - a.saves_count);
-    } else if (sortBy === 'nearest-metro') {
-      result.sort((a, b) => a.walking_time_mins - b.walking_time_mins);
-    } else if (sortBy === 'name') {
-      result.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'distance') {
+    // Top-rated / Must-visit classification helper (e.g. Sree Bhumi Hawa Mahal, Md Ali Park, Maddox, Tala Prattay, etc.)
+    const isTopRatedPandal = (p: typeof result[0]) => {
+      return (
+        p.id === 'sree-bhumi' ||
+        p.tags.includes('Must Visit') ||
+        p.tags.includes('Popular') ||
+        p.is_must_visit === true ||
+        (p.trending_score && p.trending_score >= 95)
+      );
+    };
+
+    // Sorting: Always prioritize top-rated flagship pandals first, then continue with others
+    if (sortBy === 'distance') {
       const activeCoords = userLocation || location.coords || KOLKATA_CENTROID;
       result.sort((a, b) => {
+        const topA = isTopRatedPandal(a) ? 1 : 0;
+        const topB = isTopRatedPandal(b) ? 1 : 0;
+        if (topB !== topA) return topB - topA;
+
         const dA = calculateDistanceKm(activeCoords.lat, activeCoords.lng, a.latitude, a.longitude);
         const dB = calculateDistanceKm(activeCoords.lat, activeCoords.lng, b.latitude, b.longitude);
         return dA - dB;
+      });
+    } else if (sortBy === 'popular') {
+      result.sort((a, b) => {
+        const topA = isTopRatedPandal(a) ? 1 : 0;
+        const topB = isTopRatedPandal(b) ? 1 : 0;
+        if (topB !== topA) return topB - topA;
+        return (b.saves_count || 0) - (a.saves_count || 0);
+      });
+    } else if (sortBy === 'nearest-metro') {
+      result.sort((a, b) => {
+        const topA = isTopRatedPandal(a) ? 1 : 0;
+        const topB = isTopRatedPandal(b) ? 1 : 0;
+        if (topB !== topA) return topB - topA;
+        return (a.walking_time_mins || 99) - (b.walking_time_mins || 99);
+      });
+    } else if (sortBy === 'name') {
+      result.sort((a, b) => {
+        const topA = isTopRatedPandal(a) ? 1 : 0;
+        const topB = isTopRatedPandal(b) ? 1 : 0;
+        if (topB !== topA) return topB - topA;
+        return a.name.localeCompare(b.name);
+      });
+    } else {
+      // Default: 'trending' or any standard view
+      // Shows top-rated landmark pandals first (like Sree Bhumi Hawa Mahal, Maddox, Md Ali Park), then continues with others
+      result.sort((a, b) => {
+        const topA = isTopRatedPandal(a) ? 1 : 0;
+        const topB = isTopRatedPandal(b) ? 1 : 0;
+        if (topB !== topA) return topB - topA;
+        return (b.trending_score || 0) - (a.trending_score || 0);
       });
     }
 
@@ -204,6 +244,54 @@ function PandalsContent() {
     wishlist
   ]);
 
+  // Reset to page 1 whenever any filter or search term changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchQuery,
+    selectedZone,
+    nearMetroOnly,
+    mustVisitOnly,
+    popularOnly,
+    trendingOnly,
+    lessCrowdedOnly,
+    wishlistOnly,
+    selectedDay,
+    sortBy,
+    isNearMeActive
+  ]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredPandals.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedPandals = useMemo(() => {
+    return filteredPandals.slice(startIndex, endIndex);
+  }, [filteredPandals, startIndex, endIndex]);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages && newPage !== currentPage) {
+      setCurrentPage(newPage);
+      window.scrollTo({ top: 220, behavior: 'smooth' });
+    }
+  };
+
+  // Helper for generating page numbers array with ellipsis (e.g. [1, 2, '...', 7, 8])
+  const getPaginationNumbers = () => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages: (number | string)[] = [];
+    if (currentPage <= 3) {
+      pages.push(1, 2, 3, 4, '...', totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+    } else {
+      pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+    }
+    return pages;
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       
@@ -218,6 +306,11 @@ function PandalsContent() {
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-1 font-medium">
             {filteredPandals.length} pandals · Durga Puja 2026
+            {filteredPandals.length > ITEMS_PER_PAGE && (
+              <span className="ml-2 px-2 py-0.5 rounded-full bg-stone-100 dark:bg-white/10 text-stone-700 dark:text-stone-300 font-mono text-[11px]">
+                Showing {startIndex + 1}–{Math.min(endIndex, filteredPandals.length)}
+              </span>
+            )}
           </p>
         </div>
 
@@ -317,18 +410,93 @@ function PandalsContent() {
         </div>
       )}
 
-      {/* Pandals List */}
+      {/* Pandals List (Paginated: 12 per page) */}
       <div>
-        {filteredPandals.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-            {filteredPandals.map((pandal) => (
-              <PandalCard
-                key={pandal.id}
-                pandal={pandal}
-                userLocation={userLocation || (isNearMeActive ? (location.coords || KOLKATA_CENTROID) : null)}
-              />
-            ))}
-          </div>
+        {paginatedPandals.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              {paginatedPandals.map((pandal) => (
+                <PandalCard
+                  key={pandal.id}
+                  pandal={pandal}
+                  userLocation={userLocation || (isNearMeActive ? (location.coords || KOLKATA_CENTROID) : null)}
+                />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-10 pt-6 border-t border-stone-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                
+                {/* Page info badge */}
+                <span className="text-xs font-medium text-stone-500 dark:text-stone-400 font-mono">
+                  {isBn ? `পৃষ্ঠা ${currentPage} এর ${totalPages}` : `Page ${currentPage} of ${totalPages}`}
+                </span>
+
+                {/* Page Navigation Buttons */}
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  
+                  {/* Previous Button */}
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold flex items-center gap-1 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-white/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all active:scale-95 cursor-pointer shadow-xs"
+                    aria-label="Previous page"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">{isBn ? 'পূর্ববর্তী' : 'Prev'}</span>
+                  </button>
+
+                  {/* Page Numbers */}
+                  <div className="flex items-center gap-1">
+                    {getPaginationNumbers().map((pageNum, idx) => {
+                      if (typeof pageNum === 'string') {
+                        return (
+                          <span
+                            key={`ellipsis-${idx}`}
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-xs text-stone-400 dark:text-stone-500 font-mono"
+                          >
+                            ...
+                          </span>
+                        );
+                      }
+
+                      const isActive = pageNum === currentPage;
+                      return (
+                        <button
+                          key={pageNum}
+                          type="button"
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs font-bold transition-all flex items-center justify-center font-mono cursor-pointer shadow-xs ${
+                            isActive
+                              ? 'bg-[#D8261C] text-white shadow-md shadow-red-600/30 scale-105'
+                              : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-white/10 border border-stone-200/80 dark:border-white/10'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Next Button */}
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold flex items-center gap-1 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-white/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all active:scale-95 cursor-pointer shadow-xs"
+                    aria-label="Next page"
+                  >
+                    <span className="hidden sm:inline">{isBn ? 'পরবর্তী' : 'Next'}</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+
+                </div>
+
+              </div>
+            )}
+          </>
         ) : (
           <EmptyState onReset={() => {
             setSearchQuery('');
@@ -340,6 +508,7 @@ function PandalsContent() {
             setLessCrowdedOnly(false);
             setWishlistOnly(false);
             setSelectedDay('All');
+            setCurrentPage(1);
             if (isNearMeActive) handleNearMeToggle();
           }} />
         )}

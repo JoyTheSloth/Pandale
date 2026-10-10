@@ -821,7 +821,7 @@ export const ADDITIONAL_HOWRAH_PANDALS: Pandal[] = [
     latitude: 22.5975,
     longitude: 88.3412,
     google_maps_url: "https://www.google.com/maps/search/?api=1&query=Ghas+Bagan+Sporting+Club+Durga+Puja+Howrah",
-    nearest_metro: "Howrah Railway Station Metro",
+    nearest_metro: "Howrah Metro Station",
     walking_distance: "1.5 km",
     walking_time_mins: 18,
     metro_details: [

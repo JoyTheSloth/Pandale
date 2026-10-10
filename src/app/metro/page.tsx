@@ -526,7 +526,7 @@ export default function MetroGuidePage() {
           {/* Red Color Explore Map 5 Lines Button */}
           <div className="pt-1">
             <Link
-              href="/map"
+              href="/map?view=map"
               className="w-full sm:w-auto py-3 px-5 rounded-2xl bg-gradient-to-r from-[#D8261C] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white font-bold text-sm inline-flex items-center justify-center gap-2.5 shadow-lg shadow-red-600/25 hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer border border-white/20"
             >
               <MapIcon className="w-4 h-4 text-[#FDE047]" />

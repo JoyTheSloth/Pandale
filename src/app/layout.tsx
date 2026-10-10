@@ -128,7 +128,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${sansFont.variable} ${editorialFont.variable} scroll-smooth`}>
-      <body className="min-h-screen flex flex-col relative text-[#181513] dark:text-[#FAF8F5] selection:bg-[#D43827]/20 selection:text-[#D43827]">
+      <body suppressHydrationWarning className="min-h-screen flex flex-col relative text-[#181513] dark:text-[#FAF8F5] selection:bg-[#D43827]/20 selection:text-[#D43827]">
         {/* Fixed Festival Background Layer for all pages & rest of home page */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <Image

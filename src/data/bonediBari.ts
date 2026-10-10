@@ -68,7 +68,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'The traditional decorated Nabapatrika umbrella',
       'The distinctive white lion, associated with the family Vaishnav tradition'
     ],
-    nearestStation: 'Girish Park Metro',
+    nearestStation: 'Girish Park Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '450m',
     walkTimeToStationMins: 6,
@@ -93,7 +93,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'Distinctive blue-and-white ceramic elephants',
       'Extensive silver ritual objects and ornamentation'
     ],
-    nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+    nearestStation: 'Girish Park Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '650m',
     walkTimeToStationMins: 8,
@@ -118,7 +118,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'The grand antique throne',
       "Kartik and Asura's distinctive human-like facial features"
     ],
-    nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+    nearestStation: 'Sovabazar Sutanuti Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '600m',
     walkTimeToStationMins: 7,
@@ -143,7 +143,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'The old Ramdulal Nibas / Thakur Dalan',
       'The intimate, family-led Aarti and household rituals'
     ],
-    nearestStation: 'Girish Park Metro',
+    nearestStation: 'Girish Park Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '400m',
     walkTimeToStationMins: 5,
@@ -168,7 +168,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'Nandi seated beneath the central divine pair',
       'The traditional household Thakur Dalan and ritual setting'
     ],
-    nearestStation: 'MG Road / Central Metro',
+    nearestStation: 'Mahatma Gandhi Road Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '500m',
     walkTimeToStationMins: 6,
@@ -193,8 +193,8 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'Fine shola (pith) ornamentation',
       'The historic Janbazar Thakur Dalan'
     ],
-    nearestStation: 'Esplanade / Chandni Chowk Metro',
-    nearestStationLine: 'Blue & Green Line',
+    nearestStation: 'Chandni Chowk Metro Station',
+    nearestStationLine: 'Blue Line',
     distanceToStation: '450m',
     walkTimeToStationMins: 5,
     googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Esplanade+Metro+Station&destination=Rani+Rashmoni+Bari+Durga+Puja+Janbazar+Kolkata&travelmode=walking',
@@ -218,7 +218,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       'The family-painted chalchitra, whose imagery changes over time',
       'The unusual proportions and presentation of Lakshmi and Saraswati'
     ],
-    nearestStation: 'Sovabazar Sutanuti / Girish Park Metro',
+    nearestStation: 'Sovabazar Sutanuti Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '700m',
     walkTimeToStationMins: 8,
@@ -243,7 +243,7 @@ export const BONEDI_BARI_PUJAS: BonediBariItem[] = [
       "The household's Durga Dalan",
       'The adjoining Annapurna Dalan and old family architecture'
     ],
-    nearestStation: 'Netaji Bhavan / Jatin Das Park Metro',
+    nearestStation: 'Netaji Bhavan Metro Station',
     nearestStationLine: 'Blue Line',
     distanceToStation: '350m',
     walkTimeToStationMins: 4,

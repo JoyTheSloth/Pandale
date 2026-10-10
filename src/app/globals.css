@@ -343,6 +343,61 @@ html.dark .animate-shimmer::after {
   animation: periodic-jiggle 4s ease-in-out infinite;
 }
 
+@keyframes smooth-jiggle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  10% { transform: scale(1.04) rotate(-3deg); }
+  20% { transform: scale(1.05) rotate(3deg); }
+  30% { transform: scale(1.03) rotate(-2deg); }
+  40% { transform: scale(1.02) rotate(1.5deg); }
+  50% { transform: scale(1.01) rotate(-0.5deg); }
+  60%, 95% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes float-jiggle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-1.5deg); }
+  50% { transform: translateY(0px) rotate(1deg); }
+  75% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+/* Metro Map Micro-Interactions */
+@keyframes river-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -36; }
+}
+
+.animate-river-flow {
+  animation: river-flow 10s linear infinite;
+}
+
+@keyframes metro-beacon {
+  0% { r: 10px; opacity: 0.9; stroke-width: 2.5px; }
+  70% { r: 24px; opacity: 0.25; stroke-width: 1.5px; }
+  100% { r: 32px; opacity: 0; stroke-width: 0.5px; }
+}
+
+.animate-metro-beacon {
+  animation: metro-beacon 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes metro-glow-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.15); }
+}
+
+.animate-metro-pulse {
+  animation: metro-glow-pulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-smooth-jiggle {
+  animation: smooth-jiggle 3s ease-in-out infinite;
+}
+
+.animate-float-jiggle {
+  animation: float-jiggle 4s ease-in-out infinite;
+}
+
 /* Reusable class for buttons: tactile bounce + playful jiggle on hover */
 .btn-jiggle {
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;

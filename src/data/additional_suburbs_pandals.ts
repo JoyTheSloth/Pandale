@@ -1097,7 +1097,7 @@ export const ADDITIONAL_SUBURBS_PANDALS: Pandal[] = [
       level: "heavy",
       source: "Community reported",
       last_updated: "10 mins ago",
-      notes: "Just 7 mins walk from Girish Park Metro."
+      notes: "Just 7 mins walk from Girish Park Metro Station."
     },
     recommended_days: ["Shashti", "Saptami", "Ashtami", "Nabami", "Tonight"],
     featured_image: "/pandals/simla-byam-samiti.jpg",
@@ -1131,7 +1131,7 @@ export const ADDITIONAL_SUBURBS_PANDALS: Pandal[] = [
       level: "moderate",
       source: "Estimated",
       last_updated: "20 mins ago",
-      notes: "Walkable from Girish Park Metro."
+      notes: "Walkable from Girish Park Metro Station."
     },
     recommended_days: ["Saptami", "Ashtami", "Nabami"],
     featured_image: "/pandals/brindavan-matri-mandir.jpg",

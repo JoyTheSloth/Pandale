@@ -137,8 +137,9 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
       </div>
 
       {/* 1. HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-lg border border-[#E9E2D8] dark:border-white/10">
+      {/* 1. HERO SECTION (Compact & Ergonomic) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-1">
+        <div className="relative aspect-[16/9] sm:aspect-[24/9] max-h-[360px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-[#E9E2D8] dark:border-white/10">
           <Image
             src={pandal.featured_image}
             alt={pandal.name}
@@ -146,365 +147,236 @@ export default function PandalClientView({ pandal }: PandalClientViewProps) {
             priority
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
 
-          {/* Top Hero Badges */}
-          <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleBack}
-                aria-label="Go back"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-black/60 hover:bg-black/85 text-white backdrop-blur-md border border-white/20 shadow-md cursor-pointer transition-all hover:scale-105 active:scale-95 group"
-              >
-                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                <span>Back</span>
-              </button>
-              <span className="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-stone-900/90 text-[#181513] dark:text-stone-100 backdrop-blur-md shadow-sm border border-transparent dark:border-white/10">
+          {/* Top Hero Floating Badges & Action Buttons */}
+          <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 flex items-center justify-between z-10">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#D8261C] text-white shadow-xs">
                 {pandal.area}
               </span>
-              <span className="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-black/50 text-white backdrop-blur-md border border-white/20">
+              <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-black/60 text-stone-200 backdrop-blur-md border border-white/20">
                 {pandal.locality}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
-              {/* Visited Checkbox (stored in cookies) */}
-              <button
-                type="button"
-                onClick={() => toggleVisited(pandal.id)}
-                aria-label={visited ? 'Marked as visited' : 'Mark as visited'}
-                title={visited ? 'Visited (Saved in cookies)' : 'Mark as Visited (Saves to cookies)'}
-                className={`p-3 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer border ${
-                  visited
-                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-md'
-                    : 'bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-stone-400 hover:text-emerald-500 border-transparent dark:border-white/10'
-                }`}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Google Maps Location Button */}
+              <a
+                href={exactMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open in Google Maps"
+                title="Open location in Google Maps"
+                className="p-2.5 rounded-full bg-black/60 hover:bg-[#D8261C] text-white backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-90 shadow-sm cursor-pointer border border-white/20 flex items-center justify-center group"
               >
-                <Check className={`w-4 h-4 stroke-[3] transition-transform duration-150 ${visited ? 'text-white scale-110' : 'opacity-40'}`} />
-              </button>
-
-              {/* Share */}
-              <button
-                type="button"
-                onClick={handleShare}
-                aria-label="Share Pandal details"
-                className="p-3 rounded-full bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer border border-transparent dark:border-white/10 group"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Forward className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />}
-              </button>
+                <MapPin className="w-4 h-4 text-[#FDE047] group-hover:scale-110 transition-transform" />
+              </a>
 
               {/* Wishlist */}
               <button
                 onClick={() => toggleWishlist(pandal.id)}
                 aria-label={saved ? 'Saved in wishlist' : 'Save to wishlist'}
-                className={`p-3 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-85 shadow-sm hover:shadow-md cursor-pointer ${
+                className={`p-2.5 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-90 shadow-sm cursor-pointer border ${
                   saved
-                    ? 'bg-[#D43827] text-white shadow-md'
-                    : 'bg-white/90 hover:bg-white dark:bg-stone-900/90 dark:hover:bg-stone-900 text-[#181513] dark:text-stone-200 border border-transparent dark:border-white/10'
+                    ? 'bg-[#D43827] text-white border-red-500 shadow-md'
+                    : 'bg-black/60 hover:bg-black/80 text-white border-white/20'
                 }`}
               >
-                <Heart className={`w-4 h-4 transition-transform duration-150 active:scale-125 ${saved ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 ${saved ? 'fill-current text-white' : 'text-white'}`} />
               </button>
             </div>
           </div>
 
-          {/* Bottom Hero Info & Primary Action Overlay */}
-          <div className="absolute bottom-6 left-6 right-6 z-10 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2 max-w-2xl">
+          {/* Bottom Hero Info Bar */}
+          <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 z-10 text-white">
+            <div className="space-y-1 max-w-3xl">
               <div className="flex items-center gap-2 text-xs text-amber-300 font-medium">
-                <Sparkles className="w-4 h-4" />
-                <span>{pandal.puja_committee}</span>
+                <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">{pandal.puja_committee}</span>
               </div>
-              <h1 className="text-3xl sm:text-5xl font-bold font-editorial text-white tracking-tight">
+              <h1 className="text-2xl sm:text-4xl font-bold font-editorial text-white tracking-tight leading-tight">
                 {pandal.name}
               </h1>
-              <p className="text-xs sm:text-sm text-stone-200 line-clamp-2">
+              <p className="text-xs sm:text-sm text-stone-200 line-clamp-1 font-medium">
                 {pandal.theme}
               </p>
-            </div>
-
-            {/* Direct Google Maps Navigation Button */}
-            <div className="flex items-center gap-3 shrink-0">
-              <a
-                href={exactMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#D8261C]/40 hover:shadow-2xl hover:scale-[1.03] active:scale-95 transition-all duration-200 group"
-              >
-                <MapPin className="w-4 h-4 text-[#FDE047] group-hover:-translate-y-0.5 transition-transform duration-200" />
-                <span>Open in Google Maps</span>
-                <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. MAIN DETAIL GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="grid grid-cols-12 gap-8 items-start">
+      {/* 2. THREE COMPACT CARDS IN ONE ROW (Grid 1x3 on desktop) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-stretch">
           
-          {/* Left Column (8 cols): About, Theme, Gallery */}
-          <div className="col-span-12 lg:col-span-8 space-y-8">
-            
-            {/* About & History */}
-            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                Overview
+          {/* CARD 1: 2026 Theme & Overview */}
+          <div className="bg-white dark:bg-[#1A1218] rounded-2xl border border-[#E9E2D8] dark:border-white/10 p-5 shadow-xs flex flex-col justify-between gap-4">
+            <div className="space-y-3">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#D8261C] dark:text-rose-400 font-bold block">
+                2026 Theme & Story
               </span>
-              <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white">
-                About {pandal.name}
-              </h2>
-              <p className="text-sm sm:text-base text-[#5C554E] dark:text-stone-300 leading-relaxed">
+
+              {/* Theme badge */}
+              <div className="p-3 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#D8261C] dark:text-amber-400 font-bold block mb-0.5">
+                  Concept Theme
+                </span>
+                <p className="text-sm font-bold text-stone-900 dark:text-stone-100 leading-snug">
+                  {pandal.theme}
+                </p>
+              </div>
+
+              {/* Description */}
+              <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
                 {pandal.description}
               </p>
+
               {pandal.heritage_note && (
-                <div className="p-4 rounded-2xl bg-[#FAF8F5] dark:bg-white/[0.04] border border-[#EBE3D8] dark:border-white/10 text-xs text-[#5C554E] dark:text-stone-300 leading-relaxed">
-                  <span className="font-bold text-[#181513] dark:text-stone-100 block mb-1">Cultural Heritage:</span>
+                <p className="text-[11px] text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-white/5 italic">
+                  <span className="font-semibold text-stone-700 dark:text-stone-300 not-italic mr-1">Heritage:</span>
                   {pandal.heritage_note}
-                </div>
+                </p>
               )}
             </div>
 
-            {/* 2026 Theme */}
-            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                2026 Theme
-              </span>
-              <h2 className="text-xl font-bold font-editorial text-[#181513] dark:text-white">
-                {pandal.theme}
-              </h2>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {pandal.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="px-3 py-1 rounded-full bg-[#FFFBEB] dark:bg-amber-950/30 border border-[#FED7AA] dark:border-amber-900/40 text-xs font-bold text-[#B45309] dark:text-amber-400"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-stone-100 dark:border-white/5">
+              {pandal.tags.slice(0, 4).map((t) => (
+                <span
+                  key={t}
+                  className="px-2 py-0.5 rounded-md bg-stone-100 dark:bg-white/10 text-[10px] font-semibold text-stone-700 dark:text-stone-300"
+                >
+                  #{t}
+                </span>
+              ))}
             </div>
-
-            {/* PANDAL PHOTO GALLERY (Section 10) */}
-            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 sm:p-8 shadow-xs space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                    Visual Archive
-                  </span>
-                  <h2 className="text-2xl font-bold font-editorial text-[#181513] dark:text-white mt-0.5">
-                    Pandal Photo Gallery
-                  </h2>
-                </div>
-
-                {/* Gallery category tabs */}
-                <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-1">
-                  {[
-                    { id: 'all', label: 'All Photos' },
-                    { id: 'official', label: 'Official' },
-                    { id: 'latest', label: 'Latest' },
-                    { id: 'instagram', label: 'Instagram' },
-                    { id: 'community', label: 'Community' }
-                  ].map((tab) => {
-                    const isSelected = activeGalleryTab === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveGalleryTab(tab.id as any)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-150 hover:scale-105 active:scale-95 cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#D8261C] text-white shadow-xs'
-                            : 'bg-[#FFFDF9] dark:bg-white/[0.05] text-[#57534E] dark:text-stone-300 hover:text-[#D8261C] dark:hover:text-white hover:bg-[#FEF2F2] dark:hover:bg-white/10'
-                        }`}
-                      >
-                        {tab.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Gallery Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {filteredGalleryItems.map((item, idx) => (
-                  <div
-                    key={item.id || idx}
-                    onClick={() => {
-                      setLightboxIndex(idx);
-                      setLightboxOpen(true);
-                    }}
-                    className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-900 cursor-pointer border border-[#E9E2D8] dark:border-white/10 hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] transition-all duration-300"
-                  >
-                    <Image
-                      src={item.media_url || item.url}
-                      alt={item.caption || pandal.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-112"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2.5">
-                      <p className="text-[11px] text-white line-clamp-1 font-medium">
-                        {item.caption || pandal.name}
-                      </p>
-                    </div>
-                    {item.permalink && (
-                      <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white backdrop-blur-sm group-hover:scale-110 transition-transform duration-200">
-                        <InstagramIcon className="w-3 h-3" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
           </div>
 
-          {/* Right Column (4 cols): Sticky How to Reach, Crowd status, Timing, Best Time */}
-          <div className="col-span-12 lg:col-span-4 space-y-6">
-            
-            {/* HOW TO REACH (Section 5) */}
-            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 shadow-xs space-y-5">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                Transit Guide
-              </span>
-              <h3 className="text-xl font-bold font-editorial text-[#181513] dark:text-white">
-                How to Reach
-              </h3>
+          {/* CARD 2: Transit & Walking Route */}
+          <div className="bg-white dark:bg-[#1A1218] rounded-2xl border border-[#E9E2D8] dark:border-white/10 p-5 shadow-xs flex flex-col justify-between gap-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-bold">
+                  Transit & Metro
+                </span>
+                <span className="text-[11px] font-mono text-stone-500 dark:text-stone-400 truncate max-w-[140px]">
+                  {pandal.locality}
+                </span>
+              </div>
 
-              <div className="space-y-3">
-                <div className="p-3.5 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
-                      M
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase">
-                        Nearest Metro
-                      </span>
-                      <span className="text-xs font-bold text-[#1C1917] dark:text-stone-100">
-                        {pandal.nearest_metro}
-                      </span>
-                    </div>
+              {/* Metro Station Card */}
+              <div className="p-3.5 rounded-xl bg-blue-500/10 dark:bg-blue-400/10 border border-blue-500/20 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold text-xs shadow-xs">
+                    M
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] text-stone-500 dark:text-stone-400 block font-semibold uppercase">
+                      Nearest Station
+                    </span>
+                    <span className="text-xs font-bold text-stone-900 dark:text-stone-100 truncate block">
+                      {pandal.nearest_metro}
+                    </span>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
-                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
-                      Time
-                    </span>
-                    <span className="text-sm font-bold text-[#D8261C] dark:text-rose-400">
-                      {pandal.walking_time_mins} min
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
-                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
-                      Steps
-                    </span>
-                    <span className="text-sm font-bold text-amber-700 dark:text-amber-400">
-                      ~{Math.round(pandal.walking_time_mins * 125).toLocaleString()}
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-2xl bg-[#FFFBEB] dark:bg-white/[0.04] border border-[#FDE68A] dark:border-white/10 text-center">
-                    <span className="text-[10px] text-[#78716C] dark:text-stone-400 block font-semibold uppercase tracking-wider">
-                      Distance
-                    </span>
-                    <span className="text-sm font-bold text-[#1C1917] dark:text-stone-100">
-                      {pandal.walking_distance.split(' ')[0]}
-                    </span>
-                  </div>
+                <div className="text-right shrink-0">
+                  <span className="text-xs font-bold text-[#D8261C] dark:text-amber-400 block">
+                    {pandal.walking_time_mins} mins
+                  </span>
+                  <span className="text-[10px] text-stone-500 dark:text-stone-400 font-medium">
+                    {pandal.walking_distance}
+                  </span>
                 </div>
               </div>
 
-              {/* PROMINENT "CHECK OUT IN GOOGLE MAPS →" BUTTON (Section 5) */}
+              {/* Walking distance metrics */}
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div className="p-2.5 rounded-xl bg-stone-50 dark:bg-white/5 border border-stone-100 dark:border-white/5">
+                  <span className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase block">Walking Time</span>
+                  <span className="text-xs font-bold text-stone-900 dark:text-stone-100">~{pandal.walking_time_mins} minutes</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-stone-50 dark:bg-white/5 border border-stone-100 dark:border-white/5">
+                  <span className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase block">Distance</span>
+                  <span className="text-xs font-bold text-stone-900 dark:text-stone-100">{pandal.walking_distance}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Directions Actions */}
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-stone-100 dark:border-white/5">
               <a
                 href={exactMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-4 rounded-2xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 shadow-lg shadow-[#D8261C]/35 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer group"
+                className="py-2.5 px-3 rounded-xl bg-[#D8261C] hover:bg-[#B91C1C] text-white text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
               >
-                <span>CHECK OUT IN GOOGLE MAPS</span>
-                <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+                <MapPin className="w-3.5 h-3.5 text-[#FDE047]" />
+                <span>Google Maps</span>
               </a>
-
               <a
                 href={metroDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-3 rounded-xl border border-[#FED7AA] dark:border-white/10 bg-white dark:bg-white/[0.04] hover:bg-[#FFFBEB] dark:hover:bg-white/[0.08] hover:border-[#D8261C]/50 hover:scale-[1.02] active:scale-95 text-xs font-bold text-center flex items-center justify-center gap-1.5 text-[#1C1917] dark:text-stone-200 transition-all duration-200 cursor-pointer group"
+                className="py-2.5 px-3 rounded-xl border border-stone-200 dark:border-white/10 bg-stone-50 dark:bg-white/5 hover:bg-stone-100 dark:hover:bg-white/10 text-xs font-bold text-center flex items-center justify-center gap-1.5 text-stone-800 dark:text-stone-200 active:scale-95 transition-all cursor-pointer"
               >
-                <Footprints className="w-3.5 h-3.5 text-[#F59E0B] group-hover:scale-125 transition-transform duration-200" />
-                <span>Walking Route from Metro Station</span>
+                <Footprints className="w-3.5 h-3.5 text-amber-500" />
+                <span>Metro Route</span>
               </a>
-
             </div>
+          </div>
 
-            {/* CROWD STATUS & TIMING (Section 15) */}
-            <div className="bg-white dark:bg-[#1A1218] rounded-3xl border border-[#E9E2D8] dark:border-white/10 p-6 shadow-xs space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D43827] dark:text-rose-400 font-semibold">
-                Crowd & Best Time
+          {/* CARD 3: Visiting Advice, Crowd & Best Timing */}
+          <div className="bg-white dark:bg-[#1A1218] rounded-2xl border border-[#E9E2D8] dark:border-white/10 p-5 shadow-xs flex flex-col justify-between gap-4">
+            <div className="space-y-3">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold block">
+                Visiting Advice
               </span>
 
-              {/* Crowd Indicator */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#8E857B] dark:text-stone-400">Current Crowd Level:</span>
-                  <span className="text-[10px] font-mono text-[#8E857B] dark:text-stone-400">
-                    {pandal.crowd_status.last_updated}
-                  </span>
+              {/* Crowd status pill */}
+              <div className={`p-2.5 rounded-xl border flex items-center justify-between ${getCrowdBg(pandal.crowd_status.level)}`}>
+                <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                  <span>{pandal.crowd_status.level} Crowd</span>
                 </div>
-
-                <div className={`p-3 rounded-2xl border flex items-center justify-between ${getCrowdBg(pandal.crowd_status.level)}`}>
-                  <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider">
-                    <span className="w-2.5 h-2.5 rounded-full bg-current" />
-                    <span>{pandal.crowd_status.level} Crowd</span>
-                  </div>
-                  <span className="text-[10px] font-mono font-semibold">
-                    {pandal.crowd_status.source}
-                  </span>
-                </div>
-
-                {pandal.crowd_status.notes && (
-                  <p className="text-[11px] text-[#5C554E] dark:text-stone-300 italic pt-1">
-                    &ldquo;{pandal.crowd_status.notes}&rdquo;
-                  </p>
-                )}
+                <span className="text-[10px] font-mono opacity-80">
+                  {pandal.crowd_status.last_updated}
+                </span>
               </div>
 
-              {/* Best Visiting Time */}
-              <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
-                  Best Time
+              {/* Best Time row */}
+              <div className="p-3 rounded-xl bg-stone-50 dark:bg-white/5 border border-stone-100 dark:border-white/5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400 font-semibold block mb-1">
+                  Best Time to Visit
                 </span>
-                <p className="text-xs font-medium text-[#181513] dark:text-stone-100 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-[#C99726]" />
+                <p className="text-xs font-medium text-stone-800 dark:text-stone-200 flex items-start gap-1.5 leading-snug">
+                  <Clock className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                   <span>{pandal.best_time}</span>
                 </p>
               </div>
 
               {/* Recommended Days */}
-              <div className="pt-3 border-t border-[#EBE3D8] dark:border-white/10 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E857B] dark:text-stone-400 font-semibold">
-                  Days
+              <div className="p-3 rounded-xl bg-stone-50 dark:bg-white/5 border border-stone-100 dark:border-white/5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400 font-semibold block mb-1.5">
+                  Recommended Days
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {pandal.recommended_days.map((day) => (
                     <span
                       key={day}
-                      className="px-2.5 py-0.5 rounded-lg bg-[#FAF8F5] dark:bg-white/[0.04] border border-[#E2DAD0] dark:border-white/10 text-[11px] font-medium text-[#181513] dark:text-stone-200"
+                      className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white dark:bg-stone-800 border border-stone-200/80 dark:border-white/10 text-stone-800 dark:text-stone-200"
                     >
                       {day}
                     </span>
                   ))}
                 </div>
               </div>
-
             </div>
 
+            {/* Committee footer */}
+            <div className="pt-2 border-t border-stone-100 dark:border-white/5 text-[11px] text-stone-500 dark:text-stone-400 truncate">
+              Organized by <span className="font-semibold text-stone-700 dark:text-stone-300">{pandal.puja_committee}</span>
+            </div>
           </div>
 
         </div>

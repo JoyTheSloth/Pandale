@@ -373,11 +373,7 @@ export default function CreatorConnectModal() {
                   {/* 4 Sleek Option Cards */}
                   <div className="space-y-2">
                     {/* Option 1: Buy Me a Coffee */}
-                    <button
-                      type="button"
-                      onClick={() => setShowQr(true)}
-                      className="w-full p-2.5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs hover:scale-[1.01] active:scale-98 transition-all cursor-pointer group text-left"
-                    >
+                    <div className="w-full p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-stone-900 dark:text-white flex items-center justify-between shadow-2xs group text-left">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-amber-500 text-stone-950 flex items-center justify-center text-sm shadow-xs shrink-0 group-hover:rotate-12 transition-transform">
                           ☕
@@ -391,11 +387,30 @@ export default function CreatorConnectModal() {
                           </div>
                         </div>
                       </div>
-                      <div className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-950 text-[11px] font-bold shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shadow-2xs">
-                        <span>Donate</span>
-                        <ArrowRight className="w-3 h-3" />
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setShowQr(true)}
+                          className="px-2 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-700 dark:text-stone-200 text-[11px] font-semibold transition-colors cursor-pointer"
+                          title="Show QR Code"
+                        >
+                          QR
+                        </button>
+                        <a
+                          href="upi://pay?pa=joy.thesloth@okicici&pn=Joydeep%20Das&cu=INR&tn=Puja%20treat%20dedo&aid=uGICAgKCA0KWEbQ"
+                          onClick={() => {
+                            if (navigator.clipboard) {
+                              navigator.clipboard.writeText(upiId).catch(() => {});
+                            }
+                          }}
+                          className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-950 text-[11px] font-bold shrink-0 flex items-center gap-1 transition-transform hover:scale-105 active:scale-95 shadow-2xs cursor-pointer"
+                          title="Open UPI App (GPay, PhonePe, Paytm)"
+                        >
+                          <span>Pay with UPI</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </a>
                       </div>
-                    </button>
+                    </div>
 
                     {/* Option 2: Visit Flatzy */}
                     <a

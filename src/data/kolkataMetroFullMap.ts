@@ -279,3 +279,99 @@ export function calculateStationFare(from: FullMetroStation, to: FullMetroStatio
     lineNames: [fromLine.name, toLine.name]
   };
 }
+
+/**
+ * Intelligent fuzzy and alias-aware station recommendation search.
+ * Supports phonetic matches (e.g. "Dhamda" -> "Dum Dum"), aliases, and nearby puja hubs.
+ */
+export function getStationRecommendations(query: string, allStations: FullMetroStation[]): FullMetroStation[] {
+  if (!query || !query.trim()) return [];
+
+  const raw = query.trim().toLowerCase();
+  // Strip out transit filler words
+  const q = raw.replace(/\b(station|metro|line|স্টেশন|মেট্রো)\b/gi, '').trim() || raw;
+
+  // Custom phonetic & transliteration aliases
+  const aliases: Record<string, string[]> = {
+    'dum-dum': ['dhamda', 'damda', 'damdam', 'dumdum', 'dum dum', 'dum', 'dam da', 'dham da', 'দমদম'],
+    'esplanade': ['dharmatala', 'dharamtala', 'dharmatollah', 'esplande', 'new market'],
+    'howrah': ['howra', 'howrah station', 'howrah bridge'],
+    'howrah-maidan': ['howra maidan', 'maidan howrah'],
+    'shyambazar': ['shyam', 'shambazar', 'shyam bazar', 'bagbazar'],
+    'shobhabazar': ['sovabazar', 'shovabazar', 'sutanuti', 'kumartuli'],
+    'kalighat': ['kali', 'rashbehari', 'hazra'],
+    'salt-lake-sector-v': ['sector 5', 'sec 5', 'sector v', 'salt lake'],
+    'karunamoyee': ['salt lake', 'karunamoyi', 'central park'],
+    'mahanayak-uttam-kumar': ['tollygunge', 'tollyganj', 'uttam kumar'],
+    'sealdah': ['sealda', 'sealdah station', 'baithakkhana'],
+    'dakshineswar': ['dakshineswar temple', 'dakshineswer', 'dakhineswar'],
+    'kavi-subhash': ['new garia', 'garia'],
+    'kavi-nazrul': ['garia bazar', 'garia'],
+    'taratala': ['behala', 'taratolla', 'new alipore'],
+    'majherhat': ['alipore', 'majher hat'],
+    'joka': ['iim', 'thakurpukur']
+  };
+
+  const results: { station: FullMetroStation; score: number }[] = [];
+
+  for (const station of allStations) {
+    const sName = station.name.toLowerCase();
+    const bName = station.bengaliName.toLowerCase();
+    let score = 0;
+
+    // Exact matches
+    if (sName === q || bName === q) {
+      score = 100;
+    } else if (sName.startsWith(q) || bName.startsWith(q)) {
+      score = 80;
+    } else if (sName.includes(q) || bName.includes(q)) {
+      score = 60;
+    }
+
+    // Check alias list
+    const stAliases = aliases[station.id];
+    if (stAliases) {
+      for (const a of stAliases) {
+        if (a === q) {
+          score = Math.max(score, 95);
+        } else if (a.startsWith(q) || q.startsWith(a)) {
+          score = Math.max(score, 85);
+        } else if (a.includes(q) || q.includes(a)) {
+          score = Math.max(score, 75);
+        }
+      }
+    }
+
+    // Check if query matched word "station"
+    if (raw.includes('station') && score === 0) {
+      score = 30;
+    }
+
+    // Check nearby pandals in the station definition
+    if (station.nearbyPandals) {
+      for (const np of station.nearbyPandals) {
+        if (np.name.toLowerCase().includes(q) || np.slug.includes(q)) {
+          score = Math.max(score, 70);
+        }
+      }
+    }
+
+    // Fuzzy consonant matching (e.g. 'dhamda' -> 'dhmd' matches 'dumdum' -> 'dmdm')
+    if (score === 0) {
+      const qCons = q.replace(/[aeiou\s-]/g, '');
+      const sCons = sName.replace(/[aeiou\s-]/g, '');
+      if (qCons.length >= 3 && (sCons.includes(qCons) || qCons.includes(sCons))) {
+        score = 45;
+      }
+    }
+
+    if (score > 0) {
+      results.push({ station, score });
+    }
+  }
+
+  return results
+    .sort((a, b) => b.score - a.score || a.station.name.localeCompare(b.station.name))
+    .slice(0, 6)
+    .map(r => r.station);
+}

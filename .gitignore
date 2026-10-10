@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch / dumps
+temp_pandals_dump.cjs
+pandals_*.txt
+kolkata_pandals_directory.txt
+
